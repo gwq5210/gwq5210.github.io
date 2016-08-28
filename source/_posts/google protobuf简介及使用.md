@@ -166,22 +166,207 @@ optional int32 result_per_page = 3 [default = 10];
 如果没有显示指定默认值，ProtoBuf会为每个类型指定默认值：string类型指定为空串，bool指定为false，对于数值类型，指定为0，对于枚举类型，默认为列表中的第一个值。因此如果修改枚举定义，就需要注意兼容性问题了。
 
 ## 枚举
+protobuf同样提供了枚举类型，这种类型只能使用预定义列表中的值。例如你想为SearchResult添加corpus字段，它可以是：UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS or VIDEO。这利用枚举就可以很方便的实现。下边是一个例子：
+```
+message SearchRequest {
+	required string query = 1;
+	optional int32 page_number = 2;
+	optional int32 result_per_page = 3 [default = 10];
+	enum Corpus {
+		UNIVERSAL = 0;
+		WEB = 1;
+		IMAGES = 2;
+		LOCAL = 3;
+		NEWS = 4;
+		PRODUCTS = 5;
+		VIDEO = 6;
+	}
+	optional Corpus corpus = 4 [default = UNIVERSAL];
+}
+```
+枚举类型中，可以把两个不同的标识赋为相同的值，进而实现别名的功能。为了能够支持这个特性，你需要设置allow_alias为true，否则，将会编译错误。
+```
+enum EnumAllowingAlias {
+	option allow_alias = true;
+	UNKNOWN = 0;
+	STARTED = 1;
+ 	RUNNING = 1;
+}
+enum EnumNotAllowingAlias {
+	UNKNOWN = 0;
+	STARTED = 1;
+	// RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.
+}
+```
+枚举常量必须是32-bit的整数。枚举使用[varint encoding][4]编码，负数效率不高，因此不推荐使用负数。你可以将枚举定义在一个消息内或者整个proto文件中，此外，还可以通过MessageType.EnumType语法在一个消息中使用另一个消息中定义的枚举类型。
+
+当protobuf编译器生成enum类型时，生成的代码将会包含一个相应的枚举类型（Java和C++）或一个包含符号常量的特定的EnumDescriptor类（python）。可以参考[generated code guide][5]获取更多信息。
 
 ## 使用其他类型消息
+你可以将一个消息中的字段设置为其他消息类型。例如，你想在SearchResponse中包含一个Result类型：
+```
+message SearchResponse {
+	repeated Result result = 1;
+}
+
+message Result {
+	required string url = 1;
+	optional string title = 2;
+	repeated string snippets = 3;
+}
+```
 
 ### 导入定义
+上边的例子中，Result和SearchResponse定一在一个proto文件中，同样，也可以使用其他proto文件中定义的类型。这就需要在你的proto文件的开头加入类似的语句：
+```
+import "myproject/other_protos.proto";
+```
 
-### 嵌套类型
+一般来说，你直接使用import就可以满足要求了。但有时，你可能想将一个proto文件移动到新的位置。你可以不直接移动proto文件，在老的位置放一个dummy .proto文件使用import public来将所有的imports跳转到新的位置。import public的依赖可以通过导入任何包含了import public语句的proto文件来传递。
+```
+// new.proto
+// All definitions are moved here
+// old.proto
+// This is the proto that all clients are importing.
+```
+```
+import public "new.proto";
+import "other.proto";
+```
+```
+// client.proto
+import "old.proto";
+// You use definitions from old.proto and new.proto, but not other.proto
+```
+
+protobuf编译器通过命令行参数-I或--proto_path来指定导入文件的搜索目录，如果没有指定，则使用编译器被调用的目录，一般来说，应该在命令行指定这个参数，确保全部合法的名字是可以被真长导入的。
+
+### 使用proto3消息类型
+可以在proto2中导入[proto3][6]的消息类型，反之亦然。但是，proto2的枚举不能在proto3语法中使用。
+
+## 嵌套类型
+你可以将一个消息定义在另一个消息内。例如：
+```
+message SearchResponse {
+	message Result {
+		required string url = 1;
+		optional string title = 2;
+		repeated string snippets = 3;
+	}
+	repeated Result result = 1;
+}
+```
+可以在其他消息中用Parent.Type使用嵌套的消息类型：
+```
+message SomeOtherMessage {
+	optional SearchResponse.Result result = 1;
+}
+```
+同样的，可以支持多层嵌套：
+```
+message Outer {                  // Level 0
+	message MiddleAA {  // Level 1
+		message Inner {   // Level 2
+			required int64 ival = 1;
+			optional bool  booly = 2;
+		}
+	}
+	message MiddleBB {  // Level 1
+		message Inner {   // Level 2
+			required int32 ival = 1;
+			optional bool  booly = 2;
+		}
+    }
+}
+```
 
 ### 组
+这个特性已经被弃用，不应该使用其来创建新的类型，可以用嵌套消息类型代替。
 
 ## 更新一个消息类型
+如果一个已存在的消息类型已经不能满足你的需要——例如，你希望消息包含一些额外的字段，但是你仍然希望使用旧消息格式的代码，不必担心！！！protobuf不需要修改已有代码就可以非常简单的来更新一个消息类型。有如下规则：
+* 不要改变任何已存在字段的数字标签
+* 任何新加的字段都应该是optional或repeated。这意味着任何使用旧代码序列化后的消息可以使用新的代码解析，它不会缺失任何required字段。你应该为这些字段设置默认值，以便新的代码能够和老的代码进行交互。相应的，新的代码创建的消息也能够被老的代码解析：老的二进制简单的在解析的过程中忽略新的字段。但是，解析的过程中新的字段并不会被丢弃，如果重新被序列化，新的字段仍然会被序列化，因此，如果消息重新发送给新的程序，新的字段仍然能够被正确解析。
+* 非必须字段能够被移除——它的数字标签不能在你的新消息类型中重新使用。为了防止出现类似的情况，你可以重新命名这个字段，如添加前缀"OBSOLETE_"或者将这个数字标签保留。
+* 非必须字段可以转换成扩展，反之亦然——要保证类型和数字标签一样。
+* int32, uint32, int64, uint64和bool是兼容的——这意味着你能够将一个字段从其中一种类型转换到另一种类型，而不会破坏向前或向后兼容。如果一个数字从一个不一致的类型解析出来，将会出现类似C++中的问题（例如，一个64-bit数字按照32-bit数字读，其会截断成32-bit的数字）。
+* sint32和sint64是兼容的，但是与其他整数类型不兼容。
+* string和bytes（只要bytes是有效的UTF-8）是兼容的。
+* 嵌入消息和bytes（如果bytes包含一个消息版本的编码）是兼容的。
+* fixed32和sfixed32是兼容的，fixed64和sfixed64是兼容的。
+* optional和repeated是兼容的。Given serialized data of a repeated field as input, clients that expect this field to be optional will take the last input value if it's a primitive type field or merge all input elements if it's a message type field.
+* 更改默认值一般是可以的，但要记住，默认值不会通过网络发送，因此，如果程序收到一个特定字段没有设置的消息，这个程序会从程序的协议版本中读取默认值。它不会看到发送者代码中的默认值。
+* enum is compatible with int32, uint32, int64, and uint64 in terms of wire format (note that values will be truncated if they don't fit), but be aware that client code may treat them differently when the message is deserialized. Notably, unrecognized enum values are discarded when the message is deserialized, which makes the field's has.. accessor return false and its getter return the first value listed in the enum definition, or the default value if one is specified. In the case of repeated enum fields, any unrecognized values are stripped out of the list. However, an integer field will always preserve its value. Because of this, you need to be very careful when upgrading an integer to an enum in terms of receiving out of bounds enum values on the wire.
+* In the current Java and C++ implementations, when unrecognized enum values are stripped out, they are stored along with other unknown fields. Note that this can result in strange behavior if this data is serialized and then reparsed by a client that recognizes these values. In the case of optional fields, even if a new value was written after the original message was deserialized, the old value will be still read by clients that recognize it. In the case of repeated fields, the old values will appear after any recognized and newly-added values, which means that order will not be preserved.
 
 ## 扩展
+扩展让你能够在消息中声明一个第三方可用的数字标签范围。其他人可以使用这些数字标签在新的proto文件中为你的消息定义新的字段而不需要修改原始文件，如：
+```
+message Foo {
+	// ...
+	extensions 100 to 199;
+}
+```
+
+这是说在Foo中数字标签[100-199]是预留给扩展的。其他人现在导入你的proto文件后就能在他们自己的proto文件中使用特定的数字标签范围为Foo添加字段，如：
+```
+extend Foo {
+	optional int32 bar = 126;
+}
+```
+现在Foo有了一个名称为bar的optional字段。
+当Foo编码之后，其二进制表示与用户直接在Foo中定义一个新的字段编码之后的表示是一样的。然而，其访问扩展字段和访问普通字段的方式是不一样的。在C++中：
+```
+Foo foo;
+foo.SetExtension(bar, 15);
+```
+Foo类定义了一个模板化的访问器HasExtension(), ClearExtension(), GetExtension(), MutableExtension()和AddExtension()，All have semantics matching the corresponding generated accessors for a normal field. For more information about working with extensions, see the generated code reference for your chosen language.
+
+扩展可以是除了oneof或map的任何类型任何类型。
 
 ### 嵌套扩展
+你可以在其他消息中定义扩展：
+```
+message Baz {
+	extend Foo {
+		optional int32 bar = 126;
+	}
+	...
+}
+```
+相应的：
+```
+Foo foo;
+foo.SetExtension(Baz::bar, 15);
+```
+换句话说，bar定义在Baz的作用域中了。
+
+This is a common source of confusion: Declaring an extend block nested inside a message type does not imply any relationship between the outer type and the extended type. In particular, the above example does not mean that Baz is any sort of subclass of Foo. All it means is that the symbol bar is declared inside the scope of Baz; it's simply a static member.
+
+A common pattern is to define extensions inside the scope of the extension's field type – for example, here's an extension to Foo of type Baz, where the extension is defined as part of Baz:
+```
+message Baz {
+	extend Foo {
+		optional Baz foo_ext = 127;
+	}
+	...
+}
+```
+但是，在其他类型定义中定义扩展是不必要的：
+```
+message Baz {
+	...
+}
+
+// This can even be in a different file.
+extend Foo {
+	optional Baz foo_baz_ext = 127;
+}
+```
+实际上，这种语法可以避免混乱。如果不熟悉扩展，用户很可能会将扩展误会成子类。
 
 ### 选择扩展数字
+
 
 ## Oneof
 
@@ -225,3 +410,6 @@ optional int32 result_per_page = 3 [default = 10];
 [1]: https://developers.google.com/protocol-buffers
 [2]: https://www.ibm.com/developerworks/cn/linux/l-cn-gpb
 [3]: https://developers.google.com/protocol-buffers/docs/reference/overview
+[4]: https://developers.google.com/protocol-buffers/docs/encoding
+[5]: https://developers.google.com/protocol-buffers/docs/reference/overview
+[6]: https://developers.google.com/protocol-buffers/docs/proto3

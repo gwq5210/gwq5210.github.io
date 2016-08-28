@@ -127,5 +127,4 @@ int main(int argc, char *argv[])
 
   [1]: http://blog.csdn.net/wudishine/article/details/39025407
   [2]: https://github.com/BNUACM/bnuoj-vjudge.git
-  [3]: http://abloz.com/2011/09/07/c-language-the-url-to-the-code-submit-content-to-the-site.html
-  
+  [3]: http://abloz.com/2011/09/07/c-language-the-url-to-the-code-submit-content-to-the-site.html 
