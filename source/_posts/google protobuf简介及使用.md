@@ -76,6 +76,16 @@ protoc person.proto -cpp_out=.
 required string name = 1;
 ```
 
+### 字段的类型
+在上边的例子中，我们使用了两种类型：string和int32，除此之外你还可以声明其他的一些基本类型，如bool等，同时还可以是一些自定义的类型，如枚举和一个pb消息。
+
+### 分配标签
+每一个字段后，都分配了一个独一无二的数字标号，这个标号是用来在二进制格式中区分某一个字段用的。因此，一个标号只能使用一次，也就是说即使你将旧的字段删除，也不能再重用为之分配的标签了，需要重新指定一个没使用过得标签号。
+
+标签号的值在1-15之前的，编码后仅仅使用一个字节（包括标识号和字段类型）。标签号范围在16-2047占用2个字节，因此你应该将1-15分配给频率使用很高的字段，可以给使用频繁的字段预留1-15的标签号。
+
+标签号最小为1，最大为2^29-1（536870911），数字19000到19999 (FieldDescriptor::kFirstReservedNumber到FieldDescriptor::kLastReservedNumber)是预留给ProtoBuf实现的，因此你也不能使用这些标签号。
+
 ### 字段的规则
 ProtoBuf消息中的字段有如下三种规则：
 1、required：这个字段是必须的。
@@ -87,16 +97,6 @@ ProtoBuf消息中的字段有如下三种规则：
 repeated int32 samples = 4 [packed=true];
 ```
 对于required字段，一定要谨慎的使用，required如果更改为optional字段，新生成的消息在老版本的程序中就会拒绝解析，认为这是一个不完整的消息；但是对于optional和repeated字段就没有这个问题。
-
-### 字段的类型
-在上边的例子中，我们使用了两种类型：string和int32，除此之外你还可以声明其他的一些基本类型，如bool等，同时还可以是一些自定义的类型，如枚举和一个pb消息。
-
-### 分配标签
-每一个字段后，都分配了一个独一无二的数字标号，这个标号是用来在二进制格式中区分某一个字段用的。因此，一个标号只能使用一次，也就是说即使你将旧的字段删除，也不能再重用为之分配的标签了，需要重新指定一个没使用过得标签号。
-
-标签号的值在1-15之前的，编码后仅仅使用一个字节（包括标识号和字段类型）。标签号范围在16-2047占用2个字节，因此你应该将1-15分配给频率使用很高的字段，可以给使用频繁的字段预留1-15的标签号。
-
-标签号最小为1，最大为2^29-1（536870911），数字19000到19999 (FieldDescriptor::kFirstReservedNumber到FieldDescriptor::kLastReservedNumber)是预留给ProtoBuf实现的，因此你也不能使用这些标签号。
 
 ### 添加更多的消息
 可以再一个proto文件中定义多个message。当你需要定义多个有关联的消息时，这就十分有用。例如你想定义一个请求和回复的消息，在一个proto文件中定义就十分方便。
@@ -121,7 +121,6 @@ message SearchRequest {
 	optional int32 result_per_page = 3;// Number of results to return per page.
 }
 ```
-
 ### 保留字段
 在你更新你的消息时，你可能删除掉一些字段，当其他人更新时，可能会重新使用之前用到的标签号，这个使用你可以使用reversed关键字，当其他人使用到reversed中的标号时，ProtoBuf会给出警告。你不能将名字和标号在一个reserved语句中混用。
 ```
@@ -366,39 +365,244 @@ extend Foo {
 实际上，这种语法可以避免混乱。如果不熟悉扩展，用户很可能会将扩展误会成子类。
 
 ### 选择扩展数字
+确保两个用户不会使用同一个数字标签为消息添加不同的扩展是很重要的，将扩展意外的解析成错误的类型能够造成数据损坏。你可以在定义消息的时候指定扩展数字标签的范围。如果你想使用很大的数字，可以使用关键字max代替：
+```
+message Foo {
+	extensions 1000 to max;
+}
+```
+max最大是2^29-1或536870911。
 
+除此之外，你还要避免使用保留数字标签从19000到19999 (FieldDescriptor::kFirstReservedNumber到FieldDescriptor::kLastReservedNumber)，你能够在指定扩展数字范围时指定这些数字，但是编译器会阻止你真正使用这些保留的数字。
 
 ## Oneof
+如果你的消息有很多可选的字段，但是同一时间只能表现为一个消息，那么你可以使用oneof特性来实现。
+
+oneof像所有的可选字段使用共享的内存区域，同时只能有一个可选字段被设置。设置任一oneof的消息，会自动的清除其他消息，你可以使用case()或WhichOneof()检查那个消息被设置了。
 
 ### 使用Oneof
+使用oneof非常简单：
+```
+message SampleMessage {
+	oneof test_oneof {
+		string name = 4;
+		SubMessage sub_message = 9;
+	}
+}
+```
+你可以在oneof定义中添加任何类型的字段而不能使用required、optional或repeated关键字。
 
+在生成的代码中，oneof字段拥有和optional字段一样的getter和setter方法。另外还有检查哪一个字段被设置的api，可以参考[这里][7]。
 ### Oneof特性
+* 设置一个oneof字段，会自动将其他字段清空。因此，如果你设置了许多字段，只有最后一个设置的字段是有效的
+```
+SampleMessage message;
+message.set_name("name");
+CHECK(message.has_name());
+message.mutable_sub_message();   // Will clear name field.
+CHECK(!message.has_name());
+```
+* 如果解析器遇到了多个oneof成员，只有最后一个遇到的成员在解析的消息中有效
+* 扩展不支持oneof
+* oneof不能是repeated的
+* 反射API能够在oneof字段上使用
+* 如果你使用C++，确保你的代码不会崩溃。下面简单的代码因为使用了被set_name已经清除的sub_message，会导致崩溃
+```
+SampleMessage message;
+SubMessage* sub_message = message.mutable_sub_message();
+message.set_name("name");      // Will delete sub_message
+sub_message->set_...            // Crashes here
+```
+* 在C++中，如果你让oneof消息使用Swap函数，这两个消息会拥有对方的值，如下，msg1会有sub_message的值，msg2会有name的值
+```
+SampleMessage msg1;
+msg1.set_name("name");
+SampleMessage msg2;
+msg2.mutable_sub_message();
+msg1.swap(&msg2);
+CHECK(msg1.has_sub_message());
+CHECK(msg2.has_name());
+```
 
 ### 向后兼容问题
+在消息中添加或删除oneof字段时，要特别小心。如果检查到字段的结果是None或NOT_SET，可能意味着消息还没有被设置或者在不同版本的oneof消息中被设置了。没法知道一个不知道的字段是不是oneof消息的成员，这种情况就没有办法区分。
 
 ### 标签重用问题
+* 将可选字段移动到或者移出oneof：序列化或反序列化消息的时候可能会丢失一些信息（一些字段会被清空）。
+* 删除一个oneof字段并且将它加回来：序列化或反序列化消息的时候可能会清空你当前设置的字段。
+* 分割或合并oneof消息：这和移动optional字段类似。
 
 ## Maps
+如果你想在你数据定义中使用map，protobuf提供了一个简单的语法：
+```
+map<key_type, value_type> map_field = N;
+```
+key_type可以是整数或者string类型（因此除了浮点数的原生类型都可以），value_type可以是任何类型。
+
+例如，你想创建一个和字符串关联的Project变量projects，可以使用如下的语法：
+```
+map<string, Project> projects = 3;
+```
+更多的api可以参考[这里][7]。
 
 ### Map特性
+* 扩展不支持map
+* map不能是repeated、optional或required
+* 二进制格式的顺序或map迭代的顺序是未定义的，因此你不能依赖map的items以特定的顺序进行遍历
+* 当proto转换成text格式的时候，map会按照key排序，key是数字的时候按照数字大小排序
+* 当从二进制解析或合并的时候，如果map的key重复了，只有最后一个value会被用到。当从text格式解析的时候，遇到重复的键值，会解析失败
 
 ### 向后兼容问题
+map在二进制格式下与下边的语法一样，因此protobuf实现虽然不支持map，但仍然能后处理你的数据：
+```
+message MapFieldEntry {
+	key_type key = 1;
+	value_type value = 2;
+}
+
+repeated MapFieldEntry map_field = N;
+```
 
 ## 包
+你可以在proto文件中加入可选的package指定包名称，这样可以避免消息的名称出现冲突。
+```
+package foo.bar;
+message Open { ... }
+```
+
+为消息添加包名之后需要添加包名来取到特定的消息：
+```
+message Foo {
+	...
+	required foo.bar.Open open = 1;
+	...
+}
+```
+
+在不同的语言中使用不同的语法来拿到包中的消息：
+* 在C++中，包使用名称空间实现，例如Open在名称空间foo::bar中
+* 在Java中，可以像Java中的包一样使用，除非你在proto文件中额外指定了option java_package选项
+* 在Python中，包直接被忽略了，因为Python使用源代码在文件系统中的位置来组织模块
 
 ### 包和名称解析
+在protobuf中的类型名称解析和C++中类似，首先在最内层的作用域搜寻，然后是次内层，等等。每一个包是它父包的内一层。一个前导的点表示从最外边的作用域开始搜寻，如.foo.bar.Baz。
+
+protobuf编译器通过导入proto文件来解析所有的类型名。即使生成代码的语言有着不同的作用域规则，它也能引用到每一种类型。
 
 ## 定义服务
+如果你想在RPC（Remote Procedure Call）系统中使用你的消息，你可以在proto文件中定义一个RPC服务的接口，protobuf编译器会自动生成这些服务接口的代码。例如，你想定义一个接收SearchRequest和返回SearchResponse方法的RPC服务，你可以在proto文件中类似这样定义：
+```
+service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
+}
+```
+
+默认的，protobuf编译器会生成一个名为SearchService的抽象接口，并且有一个相应的“桩”实现。这个实现将所有的请求转发给一个必须实现抽象接口的RpcChannel。例如，你想实现一个将序列化消息通过HTTP发送给服务器的RpcChannel。换句话说，生成的代码提供了一个使用基于protobuf类型安全的RPC调用，而你不需要关注特定的RPC实现，因此，在C++中，你可以像这样写代码：
+```
+using google::protobuf;
+
+protobuf::RpcChannel* channel;
+protobuf::RpcController* controller;
+SearchService* service;
+SearchRequest request;
+SearchResponse response;
+
+void DoSearch()
+{
+	// You provide classes MyRpcChannel and MyRpcController, which implement
+	// the abstract interfaces protobuf::RpcChannel and protobuf::RpcController.
+	channel = new MyRpcChannel("somehost.example.com:1234");
+	controller = new MyRpcController;
+
+	// The protocol compiler generates the SearchService class based on the
+	// definition given above.
+	service = new SearchService::Stub(channel);
+
+	// Set up the request.
+	request.set_query("protocol buffers");
+
+	// Execute the RPC.
+	service->Search(controller, request, response, protobuf::NewCallback(&Done));
+}
+
+void Done()
+{
+	delete service;
+	delete channel;
+	delete controller;
+}
+```
+
+所有的服务类会实现一个服务的接口，它提供了一个不需要在编译时知道方法名或它的输入类型和输出类型而调用特定接口的方式。在服务端，这可以用来实现一个可以注册服务的RPC服务器。
+```
+using google::protobuf;
+
+class ExampleSearchService : public SearchService
+{
+public:
+	void Search(protobuf::RpcController* controller, const SearchRequest* request,
+			SearchResponse* response, protobuf::Closure* done)
+	{
+		if (request->query() == "google") {
+			response->add_result()->set_url("http://www.google.com");
+		} else if (request->query() == "protocol buffers") {
+			response->add_result()->set_url("http://protobuf.googlecode.com");
+      	}
+		done->Run();
+	}
+};
+
+int main(int argc, char argv[])
+{
+	// You provide class MyRpcServer.  It does not have to implement any
+	// particular interface; this is just an example.
+	MyRpcServer server;
+
+	protobuf::Service* service = new ExampleSearchService;
+	server.ExportOnPort(1234, service);
+	server.Run();
+
+	delete service;
+	return 0;
+}
+```
+
+除此之外，你可以使用[ gRPC][8]：一个谷歌开发的语言和平台无关的开源RPC系统。gRPC可以很好的和protobuf一起工作，通过一个特殊的protobuf编译器插件从proto文件生成相应的RPC代码。然而，因为客户端和服务器使用的proto2和proto3生成代码之间潜在的兼容性问题，推荐你使用proto3来定义RPC服务。你可以在[Proto3 Language Guide][9]这里找到更多关于proto3的语法。如果你想在gRPC中使用proto2，你需要使用version 3.0.0或更高版本的protobuf编译器和库。
+
+除了gRPC，有许多不断基于protobuf的正在开发中的第三方RPC项目。你可以在这里找到这些列表：[third-party add-ons wiki page][10]。
 
 ## 选项
+在一个单独的proto文件中可以声明一些选项。选项不会改变一些整体声明的含义，但是可能会影响一些它在特定上下文的处理。全部的选项在google/protobuf/descriptor.proto中。
+
+一些选项是文件级的选项，意味着你应该将这些选项写在top-level的作用域，而不是在任何消息，枚举或服务的定义中。一些选项是消息级别的定义，意味着应该写在消息定义里。一些选项是字段级别的选项，意味着它们应该写在字段定义中。选项也可以应用在枚举类型，枚举值，服务类型和服务方法，然而这些选项对它们没有用。
+
+这里是很多常用的选项：
+* java_package（文件选项）：你想在生成的java类中使用的包名。如果没有在proto文件中指定java_package选项，那么将会使用默认的proto包（在proto文件中使用package关键字指定）。然而，proto的包通常不用来代替Java包，因为proto的包不期望是一个反向域名。如果不生成Java代码，这个选项不起作用。
+```
+option java_package = "com.example.foo";
+```
+* java_outer_classname（文件选项）：这个类名是你生成的Java外部类的名字（也是文件名字）。如果不指定java_outer_classname，类名由proto文件的名字驼峰方式组成（如foo_bar.proto 的名字FooBar.java）。如果不生成Java代码，这个选项不起作用。
+```
+option java_outer_classname = "Ponycopter";
+```
+* optimize_for (文件选项): 可以设置为SPEED，CODE_SIZE或者LITE_RUNTIME。这个对C++和Java代码生成器（或其他第三方代码生成器）的起作用的方式如下：
+  * ​SPEED（默认）：protobuf编译器为序列化，解析和在消息类型上执行其他通用的操作而生成代码。这个代码性能是很高的。
+  * CODE_SIZE：
+
+CODE_SIZE: The protocol buffer compiler will generate minimal classes and will rely on shared, reflection-based code to implement serialialization, parsing, and various other operations. The generated code will thus be much smaller than with SPEED, but operations will be slower. Classes will still implement exactly the same public API as they do in SPEED mode. This mode is most useful in apps that contain a very large number .proto files and do not need all of them to be blindingly fast.
+LITE_RUNTIME: The protocol buffer compiler will generate classes that depend only on the "lite" runtime library (libprotobuf-lite instead of libprotobuf). The lite runtime is much smaller than the full library (around an order of magnitude smaller) but omits certain features like descriptors and reflection. This is particularly useful for apps running on constrained platforms like mobile phones. The compiler will still generate fast implementations of all methods as it does in SPEED mode. Generated classes will only implement the MessageLite interface in each language, which provides only a subset of the methods of the full Message interface.
 
 ### 自定义选项
 
+
 ## 生成你的消息类
+
 
 ### 如何使用？
 
+
 #### C++
+
 
 #### Python
 
@@ -413,3 +617,7 @@ extend Foo {
 [4]: https://developers.google.com/protocol-buffers/docs/encoding
 [5]: https://developers.google.com/protocol-buffers/docs/reference/overview
 [6]: https://developers.google.com/protocol-buffers/docs/proto3
+[7]: https://developers.google.com/protocol-buffers/docs/reference/overview
+[8]: https://github.com/grpc/grpc-common
+[9]: https://developers.google.com/protocol-buffers/docs/proto3
+[10]: https://github.com/google/protobuf/blob/master/docs/third_party.md
