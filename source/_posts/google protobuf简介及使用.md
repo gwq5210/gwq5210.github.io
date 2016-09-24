@@ -586,26 +586,171 @@ option java_package = "com.example.foo";
 option java_outer_classname = "Ponycopter";
 ```
 * optimize_for (文件选项): 可以设置为SPEED，CODE_SIZE或者LITE_RUNTIME。这个对C++和Java代码生成器（或其他第三方代码生成器）的起作用的方式如下：
-  * ​SPEED（默认）：protobuf编译器为序列化，解析和在消息类型上执行其他通用的操作而生成代码。这个代码性能是很高的。
-  * CODE_SIZE：
-
-CODE_SIZE: The protocol buffer compiler will generate minimal classes and will rely on shared, reflection-based code to implement serialialization, parsing, and various other operations. The generated code will thus be much smaller than with SPEED, but operations will be slower. Classes will still implement exactly the same public API as they do in SPEED mode. This mode is most useful in apps that contain a very large number .proto files and do not need all of them to be blindingly fast.
-LITE_RUNTIME: The protocol buffer compiler will generate classes that depend only on the "lite" runtime library (libprotobuf-lite instead of libprotobuf). The lite runtime is much smaller than the full library (around an order of magnitude smaller) but omits certain features like descriptors and reflection. This is particularly useful for apps running on constrained platforms like mobile phones. The compiler will still generate fast implementations of all methods as it does in SPEED mode. Generated classes will only implement the MessageLite interface in each language, which provides only a subset of the methods of the full Message interface.
+  * SPEED（默认）：protobuf编译器为序列化，解析和在消息类型上执行其他通用的操作而生成代码。这个代码性能是很高的。
+  * CODE_SIZE：在这个选项下protobuf编译器会生成较小的类，它们会依赖共享的，基于反射的代码来实现序列化、解析和变量的其他操作。生成的代码比SPEED小，但是操作的速度会变慢。类仍然会实现和SPEED模式下一样的公共API。这个模式比较适合那些包含了很多数量的proto文件，而又对它们的性能没有很高要求的场景。
+  * LITE_RUNTIME：protobuf编译器会生成在运行时依赖"lite"库（用libprotobuf-lite替代libprotobuf）的类。lite运行时库比全量的库小很多（大概小一个数量级），但是它去除了一些类似描述器和反射的特性。这对运行在特定平台如移动电话上的应用格外有用。编译器会生成与SPEED模式速度一样的方法。生成的类在每种语言中仅仅会实现MessageLite接口中的方法，它提供了Message全部方法的子集。
+```
+option optimize_for = CODE_SIZE;
+```
+* cc_generic_services, java_generic_services, py_generic_services (文件选项): 它们分别决定编译器在生成C++、Java和Python代码时是否基于服务定义生成抽象服务代码。因为历史原因，它们默认是true。然而，2.3.0版本（2010年1月）认为更好实现RPC系统的方法是提供代码生成插件去为每一个系统去生成代码，而不是依赖抽象服务。
+```
+// This file relies on plugins to generate service code.
+option cc_generic_services = false;
+option java_generic_services = false;
+option py_generic_services = false;
+```
+* cc_enable_arenas (文件选项)：Enables [arena allocation][11] for C++ generated code
+* message_set_wire_format (消息选项)：如果设置成true，这个消息使用一个不同的意图兼容以前在Google内部使用被叫做MessageSet的二进制格式。在Google之外的使用者或许永远也不会用到这个选项。消息必须被定义为如下形式：
+```
+message Foo {
+  option message_set_wire_format = true;
+  extensions 4 to max;
+}
+```
+* packed(字段选项)：如果设置为true，在基本数字类型的repeated字段上会使用更加紧凑的编码。使用这个选项没有缺点。2.3.0之前的版本遇到packed数据会忽略它，因此，改变一个存在的字段不可能不打破wire的兼容性。在2.3.0之后的版本，这个改变是安全的，因为解析器总是能接受这两种格式，但是要在使用老版本protobuf的程序中小心的处理这个字段。
+```
+repeated int32 samples = 4 [packed=true];
+```
+* deprecated (字段选项)：如果设置为true，表示这个字段是废弃的，不应该在新的代码中使用这个字段。在多数语言中这个选项没有实际的用处，在Java中，这会变成一个@Deprecated的注解。在未来，其他特定语言的生成器也许会生成在字段访问器上添加废弃符号，在真正编译代码的时候如果尝试使用这个字段，则发出一个警告。如果这个字段没有被任何人使用，而且希望新用户不会使用这个字段，可以考虑将其放置在保留语句中。
+```
+optional int32 old_field = 6 [deprecated=true];
+```
 
 ### 自定义选项
+Protobuf甚至可以允许你定义和使用你自己的选项。注意到这个高级特性大多数人并不需要用到。选项例如FileOptions或FieldOptions在google/protobuf/descriptor.proto文件中定义，因此，定义自己的选项可以简单的扩展这些消息。例如：
+```
+import "google/protobuf/descriptor.proto";
 
+extend google.protobuf.MessageOptions {
+  optional string my_option = 51234;
+}
+
+message MyMessage {
+  option (my_option) = "Hello world!";
+}
+```
+这里我们通过扩展MessageOptions定义了一个消息选项。当我们使用这个选项时，这个选项的名字必须使用括号括起来，表示这是一个扩展的选项。我们可以在C++中类似这样来读取my_option的值：
+```
+string value = MyMessage::descriptor()->options().GetExtension(my_option);
+```
+MyMessage::descriptor()->options()返回MyMessage类型的MessageOptions，读取自定义选项，就像读取其他扩展字段。
+相应的，在Java中可以写成这样：
+```
+String value = MyProtoFile.MyMessage.getDescriptor().getOptions()
+	.getExtension(MyProtoFile.myOption);
+```
+在Python类似：
+```
+value = my_proto_file_pb2.MyMessage.DESCRIPTOR.GetOptions()
+	.Extensions[my_proto_file_pb2.my_option]
+```
+自定义选项可以用在使用protobuf构造的任何结构中，下边是例子：
+```
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FileOptions {
+	optional string my_file_option = 50000;
+}
+extend google.protobuf.MessageOptions {
+	optional int32 my_message_option = 50001;
+}
+extend google.protobuf.FieldOptions {
+	optional float my_field_option = 50002;
+}
+extend google.protobuf.EnumOptions {
+	optional bool my_enum_option = 50003;
+}
+extend google.protobuf.EnumValueOptions {
+	optional uint32 my_enum_value_option = 50004;
+}
+extend google.protobuf.ServiceOptions {
+	optional MyEnum my_service_option = 50005;
+}
+extend google.protobuf.MethodOptions {
+	optional MyMessage my_method_option = 50006;
+}
+
+option (my_file_option) = "Hello world!";
+
+message MyMessage {
+	option (my_message_option) = 1234;
+
+	optional int32 foo = 1 [(my_field_option) = 4.5];
+	optional string bar = 2;
+}
+
+enum MyEnum {
+	option (my_enum_option) = true;
+
+	FOO = 1 [(my_enum_value_option) = 321];
+	BAR = 2;
+}
+
+message RequestType {}
+message ResponseType {}
+
+service MyService {
+	option (my_service_option) = FOO;
+
+	rpc MyMethod(RequestType) returns(ResponseType) {
+		// Note:  my_method_option has type MyMessage.  We can set each field
+		//   within it using a separate "option" line.
+		option (my_method_option).foo = 567;
+		option (my_method_option).bar = "Some string";
+  }
+}
+```
+注意如果你希望使用在一个package中定义的选项，你必须在选项名字前加上package名，就像使用类型那样：
+```
+// foo.proto
+import "google/protobuf/descriptor.proto";
+package foo;
+extend google.protobuf.MessageOptions {
+	optional string my_option = 51234;
+}
+
+// bar.proto
+import "foo.proto";
+package bar;
+message MyMessage {
+	option (foo.my_option) = "Hello world!";
+}
+```
+
+最后一点：因为自定义选项是扩展，他们必须像其他字段或扩展那样指定标签号。在上边的例子中，我们使用了范围为50000-99999的字段号，这个范围时预留给独立组织内部使用的，因此你可以自由的在你自己的应用中使用。如果你想使用自定义选项在公共的应用中，你必须确保你的字段数字是全局唯一的。你可以向protobuf-global-extension-registry@google.com发送申请来获取一个全局唯一的字段数字，只需要提供你的项目名称和网站（如果可用的话）。通常，你只需要一个扩展数字，你可以声明多个选项在一个扩展消息中。
+```
+message FooOptions {
+	optional int32 opt1 = 1;
+	optional string opt2 = 2;
+}
+
+extend google.protobuf.FieldOptions {
+	optional FooOptions foo_options = 1234;
+}
+
+// usage:
+message Bar {
+	optional int32 a = 1 [(foo_options).opt1 = 123, (foo_options).opt2 = "baz"];
+	// alternative aggregate syntax (uses TextFormat):
+	optional int32 b = 2 [(foo_options) = { opt1: 123 opt2: "baz" }];
+}
+```
+因为不同的选项级别有着不同的字段数字空间，因此，你可以在不同的选项级别中使用相同的扩展数字。
 
 ## 生成你的消息类
+为了生成与你定义的proto文件相应的Java，Python或C++代码，你需要运行protobuf编译器来作用在你的proto文件上。如果你还没有protobuf编译器，下载[安装包][12]，然后阅读README。
+可以像这样调用protobuf编译器：
+```
+protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_out=DST_DIR path/to/file.proto
+```
+* IMPORT_PATH：指定了当使用import指令时寻找proto文件的路径。如果省略，就会搜寻当前路径。可以通过指定多次--proto_path来指定多个搜寻路径，他们会按照顺序搜寻。-I=IMPORT_PATH是--proto_path的简写。
+* 你可以提供一个活多个输出目录：
+  * --cpp_out：生成C++代码的目录。了解更多可以参考[这里][13]。
+  * --java_out：生成Java代码的目录。了解更多可以参考[这里][14]。
+  * --python_out：生成Python代码的目录。了解更多可以参考[这里][15]。
 
-
-### 如何使用？
-
-
-#### C++
-
-
-#### Python
-
+作为便利，如果这个目录是以.zip或.jar结尾的，编译器将会把文件输出到给定名字的zip文件中，对于.jar还会加入Java JAR需要的manifest文件。如果文件已经存在，将会覆盖写入。
+* 你必须提供一个或多个proto文件作为输入。多个proto文件可以在一次提供，尽管名字是以当前目录的相对路径确定的，但是仍然需要的IMPORT_PATHs中包含，以确定它的位置。
 
 ## 参考
 1) [Google Protocol Buffer 的在线帮助][1]
@@ -621,3 +766,8 @@ LITE_RUNTIME: The protocol buffer compiler will generate classes that depend onl
 [8]: https://github.com/grpc/grpc-common
 [9]: https://developers.google.com/protocol-buffers/docs/proto3
 [10]: https://github.com/google/protobuf/blob/master/docs/third_party.md
+[11]: https://developers.google.com/protocol-buffers/docs/reference/arenas
+[12]: https://developers.google.com/protocol-buffers/docs/downloads.html
+[13]: https://developers.google.com/protocol-buffers/docs/reference/cpp-generated
+[14]: https://developers.google.com/protocol-buffers/docs/reference/java-generated
+[15]: https://developers.google.com/protocol-buffers/docs/reference/python-generated
