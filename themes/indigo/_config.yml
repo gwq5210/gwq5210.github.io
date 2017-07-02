@@ -20,9 +20,15 @@ menu:
   github:
     url: https://github.com/gwq5210
     target: _blank
+  #link:
+    #text: 寻找丢失儿童
+    #url: /404.html
+  book:
+    text: 读书计划
+    url: read
   link:
-    text: 寻找丢失儿童
-    url: /404.html
+    text: 关于
+    url: /about
 
 rss: /atom.xml
 
@@ -52,8 +58,8 @@ share: true
 #是否开启打赏，关闭 reward: false
 reward:
   title: 谢谢大爷~
-  wechat: false #/img/wechat.jpg     #微信，关闭设为 false
-  alipay: false #/img/alipay.jpg     #支付宝，关闭设为 false
+  wechat: /img/wechat.jpg     #微信，关闭设为 false
+  alipay: /img/alipay.jpg     #支付宝，关闭设为 false
 
 #是否开启搜索
 search: true
