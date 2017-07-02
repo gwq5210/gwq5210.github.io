@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>protobuf的编码 | Rhett&#39;s Blog | 命是弱者借口，运乃强者谦辞！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="protobuf,编码方式">
+  <meta name="description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
+<meta name="keywords" content="protobuf,编码方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="protobuf的编码">
+<meta property="og:url" content="http://gwq5210.github.io/2016/07/30/protobuf的编码/index.html">
+<meta property="og:site_name" content="Rhett&#39;s Blog">
+<meta property="og:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
+<meta property="og:updated_time" content="2017-07-02T03:28:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="protobuf的编码">
+<meta name="twitter:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
+  
+    <link rel="alternative" href="/atom.xml" title="Rhett&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。&lt;/p&gt;
+&lt;h2 id=&quot;一个简单的消息&quot;&gt;&lt;a href=&quot;#一个简单的消息&quot; class=&quot;headerlink&quot; title=&quot;一个简单的消息&quot;&gt;&lt;/a&gt;一个简单的消息&lt;/h2&gt;&lt;p&gt;比方说，你有一个非常简单的消息定义：&lt;br&gt;&lt;figure class=&quot;highlight protobuf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Test1&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;required&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;int32&lt;/span&gt; a = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后序列化到流中，如果你能看到序列化的消息，会看到三个字节：&lt;br&gt;&lt;figure class=&quot;highlight basic&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;symbol&quot;&gt;08 &lt;/span&gt;&lt;span class=&quot;number&quot;&gt;96&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;01&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这是什么意思呢？继续阅读。。。&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">rhettguo</h5>
+        <a href="mailto:457781132@qq.com" title="457781132@qq.com" class="mail">457781132@qq.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              文章
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/gwq5210" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/404.html"  >
+              <i class="icon icon-lg icon-link"></i>
+              寻找丢失儿童
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Rhett&#39;s Blog &copy; 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">protobuf的编码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">protobuf的编码</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-07-30T11:35:53.000Z" itemprop="datePublished" class="page-time">
+  2016-07-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-protobuf的编码" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protobuf/">protobuf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编码方式/">编码方式</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个简单的消息"><span class="post-toc-text">一个简单的消息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Base-128-Varints"><span class="post-toc-text">Base 128 Varints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消息结构"><span class="post-toc-text">消息结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更多值得类型"><span class="post-toc-text">更多值得类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有符号整数"><span class="post-toc-text">有符号整数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非varint数字"><span class="post-toc-text">非varint数字</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#strings"><span class="post-toc-text">strings</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#嵌套消息"><span class="post-toc-text">嵌套消息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可选和可重复元素"><span class="post-toc-text">可选和可重复元素</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#打包重复字段"><span class="post-toc-text">打包重复字段</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字段顺序"><span class="post-toc-text">字段顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-text">参考</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。</p>
+<h2 id="一个简单的消息"><a href="#一个简单的消息" class="headerlink" title="一个简单的消息"></a>一个简单的消息</h2><p>比方说，你有一个非常简单的消息定义：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test1</span> </span>&#123;</div><div class="line">	<span class="keyword">required</span> <span class="built_in">int32</span> a = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后序列化到流中，如果你能看到序列化的消息，会看到三个字节：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">08 </span><span class="number">96</span> <span class="number">01</span></div></pre></td></tr></table></figure></p>
+<p>这是什么意思呢？继续阅读。。。<br><a id="more"></a></p>
+<h2 id="Base-128-Varints"><a href="#Base-128-Varints" class="headerlink" title="Base 128 Varints"></a>Base 128 Varints</h2><p>为了理解这个简单的protobuf编码，你首先需要了解varints，varints是一个使用一个字节或多个字节编码整数的方法。较小的数字使用较少的字节。</p>
+<p>在varint中，除了最后一个字节，都会设置最高位（most significant bit，msb），这个最高位指示后边仍然有字节。低7bits用来存储数字补码表示，低的7bits组会优先存储。</p>
+<p>因此，这里是数字1的表示，它是单个字节的因此，msb不会被设置：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">0000 </span><span class="number">0001</span></div></pre></td></tr></table></figure></p>
+<p>下边是比较复杂的300：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">1010 </span><span class="number">1100</span> <span class="number">0000</span> <span class="number">0010</span></div></pre></td></tr></table></figure></p>
+<p>怎样才能得出这个是300呢？首先你丢弃每个字节的msb，它仅仅是用来告诉我们数字字节表示的结尾。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1010</span> <span class="number">1100</span> <span class="number">0000</span> <span class="number">0010</span></div><div class="line">→ <span class="number">010</span> <span class="number">1100</span>  <span class="number">000</span> <span class="number">0010</span></div></pre></td></tr></table></figure></p>
+<p>然后交换这两个7bits的组，因为varint先存储低7bits组，组合之后就能得到最终的数字：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">000</span> <span class="number">0010</span>  <span class="number">010</span> <span class="number">1100</span></div><div class="line">→  <span class="number">000</span> <span class="number">0010</span> ++ <span class="number">010</span> <span class="number">1100</span></div><div class="line">→  <span class="number">100101100</span></div><div class="line">→  <span class="number">256</span> + <span class="number">32</span> + <span class="number">8</span> + <span class="number">4</span> = <span class="number">300</span></div></pre></td></tr></table></figure></p>
+<h2 id="消息结构"><a href="#消息结构" class="headerlink" title="消息结构"></a>消息结构</h2><p>正如你了解到的，protobuf消息是一系列key-value的组合，二进制格式的消息，仅仅使用字段数字作为key，这个key的名称和声明的类型可以在解码时引用消息类型定义得到，如proto文件。</p>
+<p>当编码消息时，键和值会组合成字节流。解析的时候，解析器需要能够跳过不能解析的字段。这样的话，新的字段加入的时候，较老的程序就不必修改，它可以不使用这些字段。这样，每个键值对编码成二进制的时候就会有两个值，一个是proto文件中的字段数字，另一个是能够提供值长度的二进制类型。</p>
+<p>可用的二进制类型如下表：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>意义</th>
+<th>用于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Varint</td>
+<td>int32, int64, uint32, uint64, sint32, sint64, bool, enum</td>
+</tr>
+<tr>
+<td>1</td>
+<td>64-bit</td>
+<td>fixed64, sfixed64, double</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Length-delimited</td>
+<td>string, bytes, embedded messages, packed repeated fields</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Start group</td>
+<td>groups (deprecated)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>End group</td>
+<td>groups (deprecated)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>32-bit</td>
+<td>fixed32, sfixed32, float</td>
+</tr>
+</tbody>
+</table>
+<p>在序列化后的消息中，每一个key是类似这样的varint：(field_number &lt;&lt; 3) | wire_type，换句话说，低3位用来存储二进制类型。</p>
+<p>现在让我们来看看开始提到的那个例子，现在知道序列化后的消息中，第一个数字永远是varint，这里是08，丢弃msb之后：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">000 </span><span class="number">1000</span></div></pre></td></tr></table></figure></p>
+<p>取出低3位得到二进制类型0，右移3位后得到字段数字1。因此，我们知道了标签为1的值是varint，也就是说接下来的序列是varint，使用varint编码规则我们可以得到接下来的两个字节96 01存储的是150：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">96</span> <span class="number">01</span> = <span class="number">1001</span> <span class="number">0110</span>  <span class="number">0000</span> <span class="number">0001</span></div><div class="line">       → <span class="number">000</span> <span class="number">0001</span>  ++  <span class="number">001</span> <span class="number">0110</span> (drop the msb and reverse the groups of <span class="number">7</span> bits)</div><div class="line">       → <span class="number">10010110</span></div><div class="line">       → <span class="number">2</span> + <span class="number">4</span> + <span class="number">16</span> + <span class="number">128</span> = <span class="number">150</span></div></pre></td></tr></table></figure></p>
+<h2 id="更多值得类型"><a href="#更多值得类型" class="headerlink" title="更多值得类型"></a>更多值得类型</h2><h3 id="有符号整数"><a href="#有符号整数" class="headerlink" title="有符号整数"></a>有符号整数</h3><p>正如前面提到的，和wire类型0关联的值都被编码成varint。然而，对于有符号整数（sint32和sint64）与一般整数（int32和int64）的一个很重要的不同点是它们对负数编码的处理。如果你使用int32或int64表示负数，那么这个varint总是10个字节长——它被当做一个非常大的无符号数。如果你使用任意一个有符号数，那么varint将会使用ZigZag编码，它对负数编码更有效率。</p>
+<p>ZigZag编码将有符号整数映射到无符号整数，这样它的绝对值就很小，相应的varint编码长度也比较小。zig-zags在正数和负数之间来回交叉进行编码，-1编码是当做1,1在编码是当做2，-2编码成3，等等：</p>
+<table>
+<thead>
+<tr>
+<th>Signed Original</th>
+<th>Encoded As</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2147483647</td>
+<td>4294967294</td>
+</tr>
+<tr>
+<td>-2147483648</td>
+<td>4294967295</td>
+</tr>
+</tbody>
+</table>
+<p>换句话说，n在sint32的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 31)，在sint64的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 63)。</p>
+<p>运算的第二部分，(n&gt;&gt;31)是算术右移，也就是说，如果n是正数，右移补的位为0，否则是1。</p>
+<p>当sint32或sint64解析的时候，会解析成原来得数字。</p>
+<h3 id="非varint数字"><a href="#非varint数字" class="headerlink" title="非varint数字"></a>非varint数字</h3><p>这个数字类型很简单——double和fixed64的wire类型是1，这告诉解析器接下来是固定的64bits数据，相应的float和fixed32的wire类型时5，说明拥有32bits数据。这两种情况下的值都以小端字节序存储。</p>
+<h3 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h3><p>wire类型为2意味着值是一个varint编码的长度，接下来是指定字节长度的数据。<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test2</span> </span>&#123;</div><div class="line">	<span class="keyword">required</span> <span class="built_in">string</span> b = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将b设置成testing的编码为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">12 </span><span class="number">07</span> <span class="number">74</span> <span class="number">65</span> <span class="number">73</span> <span class="number">74</span> <span class="number">69</span> <span class="number">6e</span> <span class="number">67</span></div></pre></td></tr></table></figure></p>
+<p>后七个字节是UTF-8编码的testing，key是0x12，wire类型是2，tag是2，0x07表示值的长度是7，然后是7个字节的字符串。</p>
+<h2 id="嵌套消息"><a href="#嵌套消息" class="headerlink" title="嵌套消息"></a>嵌套消息</h2><p>现在定义一个消息，其字段是Test1类型的消息：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test3</span> </span>&#123;</div><div class="line">	<span class="keyword">required</span> Test1 c = <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们将a设置成150，下边是编码后的消息：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>a <span class="number">03</span> <span class="number">08</span> <span class="number">96</span> <span class="number">01</span></div></pre></td></tr></table></figure></p>
+<p>正如你看到的，最后三个字节和第一个例子是一样的，它前边有一个值为3的varint标识长度——嵌套消息被当做和字符串一样处理。</p>
+<h2 id="可选和可重复元素"><a href="#可选和可重复元素" class="headerlink" title="可选和可重复元素"></a>可选和可重复元素</h2><p>在proto2中定义的repeated字段（没有[packed=true]选项），编码后的消息是零个或多个拥有相同标签的键值对。这些重复的值不一定连续出现，可能会和其他字段交错出现。解析的时候，各个元素之间的顺序被保留，尽管其他字段的顺序是不确定的。在proto3中，repeated字段使用<a href="https://developers.google.com/protocol-buffers/docs/encoding#packed" target="_blank" rel="external">packed encoding</a>，下边将会介绍。</p>
+<p>在proto3中非repeated字段和proto2中的optional字段，编码后的消息中可能有也可能没有包含标签数字的key-value对。</p>
+<p>一般的，编码后的消息不会超过一个非repeated的字段，不过，我们期望解析器能够处理这种情况。对于数值类型和字符串类型，如果相同的数字标签出现了多次，那么解析器会保存最后一个出现的值。对于嵌套消息字段，解析器将多个相同数字标签的值合并，就像调用Message::MergeFrom一样——对于普通字段，用后边实例的值代替前边实例的值，对于嵌套消息字段进行合并，重复字段进行连接。这个规则使得解析连续两个编码后的消息一样和分别解析两个消息然后把它们合并的效果是一样的：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MyMessage <span class="keyword">message</span>;</div><div class="line"><span class="keyword">message</span>.ParseFromString(str1 + str2);</div></pre></td></tr></table></figure></p>
+<p>等价于：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">MyMessage message, message2<span class="comment">;</span></div><div class="line">message.ParseFromString(str1)<span class="comment">;</span></div><div class="line">message2.ParseFromString(str2)<span class="comment">;</span></div><div class="line">message.MergeFrom(message2)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>这个属性偶尔会用到，它允许在你不知道他们类型的情况下进行合并消息。</p>
+<h3 id="打包重复字段"><a href="#打包重复字段" class="headerlink" title="打包重复字段"></a>打包重复字段</h3><p>2.1.0版本引入了打包重复字段，在proto2中需要在重复字段中添加[packed=true]选项。在proto3中，重复字段默认就是打包的。它的功能和重复字段类似，但采取了不同的编码。当一个打包的重复字段不包含任何元素时，它不会出现在编码后的消息中。否则，这个字段的全部元素被打包成wrie类型为2的单个键值对。除了没有标签数字前缀外，每个元素被编码成它本来的样子。</p>
+<p>假设你又个消息<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test4</span> </span>&#123;</div><div class="line">	<span class="keyword">repeated</span> <span class="built_in">int32</span> d = <span class="number">4</span> [packed=<span class="literal">true</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>现在，你定义一个Test4变量，给重复字段d提供值3，170和86942，那么它的编码为：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">22 </span>       // tag (<span class="keyword">field</span> number <span class="number">4</span>, wire type <span class="number">2</span>)</div><div class="line"><span class="symbol">06 </span>       // payload size (<span class="number">6</span> bytes)</div><div class="line"><span class="symbol">03 </span>       // first element (varint <span class="number">3</span>)</div><div class="line"><span class="number">8E</span> <span class="number">02</span>     // second element (varint <span class="number">270</span>)</div><div class="line"><span class="number">9E</span> A7 <span class="number">05</span>  // third element (varint <span class="number">86942</span>)</div></pre></td></tr></table></figure></p>
+<p>仅仅原始数字类型（varint，32-bit或64-bit）的重复字段才能够声明为packed。</p>
+<p>需要注意的是，虽然有通常没有理由为打包重复字段编码多个键值对，但编码器必须要能够接受多个键值对。在这种情况下，有效数据应该串联起来。每个键值对必须包含全部的元素。</p>
+<p>编译器必须能够像它们没有packed一样解析packed的重复字段，反之亦然。为这样的字段添加[packed=true]是一种向前向后兼容的方式。</p>
+<h2 id="字段顺序"><a href="#字段顺序" class="headerlink" title="字段顺序"></a>字段顺序</h2><p>虽然你能够在proto文件中以任何顺序使用字段数字，当消息序列化的时候，它应该按照字段数字的顺序写入，就像C++，Java和Python序列化代码那样。这就允许解析代码依赖字段数字的顺序进行优化。然而，protobuf解析器必须能够以任何顺序解析它们，并不是所有的消息是通过简单序列化得到的——举例来说，一个合并两个消息的简单方法是将它们序列化后的消息串联。</p>
+<p>如果一个消息中包含未知的字段，母线的Java和C++实现会将它们以任意的顺序写入已知字段的后边。当前的Python实现并不追踪未知字段。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1) <a href="https://developers.google.com/protocol-buffers/docs/encoding#packed" target="_blank" rel="external">Google Protocol Buffer Encoding</a></p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://gwq5210.github.io/2016/07/30/protobuf的编码/" target="_blank" rel="external">http://gwq5210.github.io/2016/07/30/protobuf的编码/</a>
+                </p>
+                <footer><cite><a href="http://gwq5210.github.io">@Rhett's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/07/30/google protobuf简介/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">google protobuf简介及使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="protobuf的编码" data-title="protobuf的编码" data-url="http://gwq5210.github.io/2016/07/30/protobuf的编码/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"rhettguo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "protobuf的编码",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://gwq5210.github.io/2016/07/30/protobuf的编码/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046"></script>
+
+
+
+
+
+</body>
+</html>
