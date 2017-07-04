@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Cpp Primer Plus读书笔记 | Rhett&#39;s Blog | 命是弱者借口，运乃强者谦辞！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="">
+  <meta name="description" content="第一章 预备知识 C++融合了三种不同的编程方式：   C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程   面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C++是C的超集，尽管有一些细微差别，但这种差别很小。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp Primer Plus读书笔记">
+<meta property="og:url" content="http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记/index.html">
+<meta property="og:site_name" content="Rhett&#39;s Blog">
+<meta property="og:description" content="第一章 预备知识 C++融合了三种不同的编程方式：   C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程   面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C++是C的超集，尽管有一些细微差别，但这种差别很小。">
+<meta property="og:updated_time" content="2017-07-04T16:41:16.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cpp Primer Plus读书笔记">
+<meta name="twitter:description" content="第一章 预备知识 C++融合了三种不同的编程方式：   C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程   面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C++是C的超集，尽管有一些细微差别，但这种差别很小。">
+  
+    <link rel="alternative" href="/atom.xml" title="Rhett&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;h1 id=&quot;第一章-预备知识&quot;&gt;&lt;a href=&quot;#第一章-预备知识&quot; class=&quot;headerlink&quot; title=&quot;第一章 预备知识&quot;&gt;&lt;/a&gt;第一章 预备知识&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;C++融合了三种不同的编程方式：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;C语言代表的过程性语言&lt;/li&gt;
+&lt;li&gt;以类为代表的面向对象于艳&lt;/li&gt;
+&lt;li&gt;模板支持的泛型编程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。&lt;/li&gt;
+&lt;li&gt;泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。&lt;/li&gt;
+&lt;li&gt;C++是C的超集，尽管有一些细微差别，但这种差别很小。&lt;/li&gt;
+&lt;/ol&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">rhettguo</h5>
+        <a href="mailto:457781132@qq.com" title="457781132@qq.com" class="mail">457781132@qq.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              文章
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/gwq5210" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/read"  >
+              <i class="icon icon-lg icon-book"></i>
+              读书计划
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about"  >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Rhett&#39;s Blog &copy; 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Cpp Primer Plus读书笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Cpp Primer Plus读书笔记</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2017-07-02T13:25:04.000Z" itemprop="datePublished" class="page-time">
+  2017-07-02
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-Cpp-Primer-Plus读书笔记" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第一章-预备知识"><span class="post-toc-text">第一章 预备知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二章-开始学习C"><span class="post-toc-text">第二章 开始学习C++</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第三章-处理数据"><span class="post-toc-text">第三章 处理数据</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="第一章-预备知识"><a href="#第一章-预备知识" class="headerlink" title="第一章 预备知识"></a>第一章 预备知识</h1><ol>
+<li>C++融合了三种不同的编程方式：</li>
+</ol>
+<ul>
+<li>C语言代表的过程性语言</li>
+<li>以类为代表的面向对象于艳</li>
+<li>模板支持的泛型编程</li>
+</ul>
+<ol>
+<li>面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。</li>
+<li>泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。</li>
+<li>C++是C的超集，尽管有一些细微差别，但这种差别很小。</li>
+</ol>
+<a id="more"></a>
+<h1 id="第二章-开始学习C"><a href="#第二章-开始学习C" class="headerlink" title="第二章 开始学习C++"></a>第二章 开始学习C++</h1><ol>
+<li>C++提供了不同于C的输入输出工具，内置的cin和cout对象，使用它们需要包含头文件iostream。</li>
+<li>main函数通常被启动代码调用，启动代码是编译程序加入到程序当中的。</li>
+<li>如果main函数没有指明返回语句，则认为return 0;是返回语句。</li>
+<li>C++提供两种注释的方式//(C++)或/**/(C)。C99标准在C语言中加入了//注释。</li>
+<li>#include编译指令会让预处理器添加指定文件内容到程序中。</li>
+<li>不同的头文件名可被不同的程序使用。<br>| 头文件类型   | 约定          | 示例         | 说明                                  |<br>| ——- | ———– | ———- | ———————————– |<br>| C++旧式风格 | 以.h结尾       | iostream.h | C++程序可以使用                           |<br>| C旧式风格   | 以.h结尾       | math.h     | C,C++程序可以使用                         |<br>| C++新式风格 | 没有扩展名       | iostream   | C++程序可以使用，使用namespace std           |<br>| 转换后的C   | 加上前缀c，没有扩展名 | cmath      | C++程序可以使用，可以使用不是C的特性，如namespace std |</li>
+<li><p>C++中可以使用命名空间来避免名字冲突。可以使用using编译指令来使用命名空间中的函数或类对象。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>cout中，可以使用endl和”\n”表示换行符。不同的是endl确保程序继续运行前刷新输出，使用”\n”不能提供这样的保证。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!\n"</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world!"</span> &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>尽量遵循好的C++代码风格，程序会便于阅读。</p>
+</li>
+<li>变量在使用前必须进行声明，通常是为了指出要存储的类型和程序对存储在这里的数据使用的名称。</li>
+<li>对于声明变量，C++的做法是尽可能在首次使用变量前声明它。</li>
+<li><p>cout可以根据变量的类型相应的调整行为。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="number">12</span> &lt;&lt; <span class="string">"12"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d %s\n"</span>, <span class="number">12</span>, <span class="string">"12"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>类描述了一种数据类型的全部属性(包括可使用它执行的操作)，对象是根据这些描述创建的实体。</p>
+</li>
+<li>C++程序应当为程序中使用的每个函数提供原型。</li>
+<li><p>不要混淆函数原型和函数定义。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int <span class="function"><span class="keyword">fun</span>();</span></div><div class="line"><span class="title">int</span> <span class="function"><span class="keyword">fun</span>()</span></div><div class="line">&#123;</div><div class="line">  <span class="title">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数可以有返回值和无返回值。无返回值的函数用void来标识。</p>
+</li>
+<li>函数的格式为：<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> functionname(argumentlist)</div><div class="line">&#123;</div><div class="line">  statements</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="第三章-处理数据"><a href="#第三章-处理数据" class="headerlink" title="第三章 处理数据"></a>第三章 处理数据</h1><ol>
+<li>在程序中，为了存储信息，必须记录三个基本属性：</li>
+</ol>
+<ul>
+<li>信息将存储在哪里</li>
+<li>要存储什么值</li>
+<li>存储何种类型的信息<br>声明变量恰好记录了这些信息。</li>
+</ul>
+<ol>
+<li>C++变量名必须遵循如下规则，并尽量使用有意义的变量名：</li>
+</ol>
+<ul>
+<li>在名称中只能使用字母字符，数字和下划线(_)</li>
+<li>名称的第一个字符不能是数字</li>
+<li>区分大写字符与小写字符</li>
+<li>不能将C++关键字用作名称</li>
+<li>一两个下划线或下划线和大写字母打头的名称被保留给实现(编译器及其使用的资源)使用。以一个下划线开头的名称被保留给实现，用作全局标识符。违反这一点并不会导致编译器错误，但可能会导致行为的不确定性。</li>
+<li>C++对名称没有长度限制，名称中的所有字符都有意义，但有些平台有长度限制。C99标准只保证名称中的前63个字符有意义</li>
+</ul>
+<ol>
+<li>语言只能表示所有整数的子集。C++提供多种不同的整型，以便根据程序具体要求选择最合适的整型</li>
+<li>C++的基本整型分别是char、short、int、long和C++ 11新增的long long，其中每种类型都有有符号版本和无符号版本</li>
+<li>C++对整型提供了灵活的标准，确保整型的最小长度</li>
+</ol>
+<ul>
+<li>short至少16位</li>
+<li>int至少与short一样长</li>
+<li>long至少32位，且至少与int一样长</li>
+<li>long long至少64位，且至少与long一样长</li>
+</ul>
+<ol>
+<li>实际上，short是short int的简称，long是long int的简称</li>
+<li><p>sizeof运算符返回类型或变量的长度，单位为字节</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span> a &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 变量可以这样写，类型必须加括号</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(<span class="keyword">int</span>) &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>头文件climits(limits.h)定义了符号常量来表示类型的限制<br>| 符号常量       | 表示                     |<br>| ———- | ———————- |<br>| CHAR_BIT   | char的位数                |<br>| CHAR_MAX   | char的最大值               |<br>| CHAR_MIN   | char的最小值               |<br>| SCHAR_MAX  | signed char的最大值        |<br>| SCHAR_MIN  | signed char的最小值        |<br>| UCHAR_MAX  | unsigned char的最大值      |<br>| SHRT_MAX   | short的最大值              |<br>| SHRT_MIN   | short的最小值              |<br>| USHRT_MAX  | unsigned short的最大值     |<br>| INT_MAX    | int的最大值                |<br>| INT_MIN    | int的最小值                |<br>| UINT_MAX   | unsigned int的最大值       |<br>| LONG_MAX   | long的最大值               |<br>| LONG_MIN   | long的最小值               |<br>| ULONG_MAX  | unsigned long的最大值      |<br>| LLONG_MAX  | long long的最大值          |<br>| LLONG_MIN  | long long的最小值          |<br>| ULLONG_MAX | unsigned long long的最大值 |</p>
+</li>
+<li>C++支持类似C的符号常量，其进行简单的字符串替换。C++还提供了const来定义符号常量</li>
+<li><p>C++提供了不同于C的初始化方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">b</span><span class="params">(<span class="number">1</span>)</span></span>;</div><div class="line"><span class="keyword">int</span> c&#123;<span class="number">2</span>&#125;;		<span class="comment">// C++ 11</span></div><div class="line"><span class="keyword">int</span> d = &#123;<span class="number">3</span>&#125;;	<span class="comment">// C++ 11</span></div><div class="line"><span class="keyword">int</span> e = &#123;&#125;;		<span class="comment">// set to 0</span></div><div class="line"><span class="keyword">int</span> f&#123;&#125;;		<span class="comment">// set to 0</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>无符号类型整数不能存储负数，但可以增大变量能够存储的整数的最大值</p>
+</li>
+<li>C++确保无符号整数溢出时会取范围另一端的值，但并不保证有符号整数超越限制(上溢和下溢出)时不出错，而这正是当前实现中最为常见的行为</li>
+<li>通常int被设置为对目标计算机而言最“自然”的长度，自然长度是只计算机处理起来效率最高的长度，如果没有非常有说服力的理由选择其他类型，则应使用int。其他根据具体取值范围来选择整数类型</li>
+<li>整型字面值(常量)是显式书写的常量。C++同C一样能以三种不同的方式来书写整数：基数为10，基数为8，基数为16。C++使用前一(两)位来标识数字常量的基数。如果第一位为1-9，则基数为10；如果第一位为0，第二位为1-7，则基数为8；如果前两位为0x或0X，则基数为16</li>
+<li>C++通过后缀，长度来确定常量的类型。除非有理由(使用了后缀或值超出int存储范围)存储为其他类型，否则C++就将整数常量存储为int。</li>
+<li>后缀是放在数字常量后的字母，用于表示类型。l或L表示long，u或U表示unsigned int，ul(可以采用任何一种顺序，大小写均可)表示unsigned long(由于l看起来像1，推荐使用大写L后缀)。C++提供了用于表示long long的后缀ll或LL，还提供了用于表示unsigned long long的后缀ull，Ull，uLL，ULL</li>
+<li>对于长度，C++中，对10进制整数采用的规则与16进制和8进制稍有不同。对于不带后缀的十进制整数，将使用下面几种类型中能够存储的最小类型来表示：int、long或long long。对于不带后缀的16进制或8进制整数，将使用下面几种类型中能够存储的最小类型来表示：int、unsigned int、long、unsigned long、long long或unsigned long long</li>
+<li>char类型是专为存储字符而设计的，编程语言将字符存储为数值，实际上char类型是一种整型，可以当做比short更小的整型</li>
+<li>char字面值有两种表示方式：直接单引号括起来的单个字符，如’a’；使用转义字符表示的特殊字符，如’\n’</li>
+<li>与int类型不同，char在默认情况下既不是没有符号，也不是有符号。是否有符号由C++的实现来决定，但可以显式的指定char为有符号或无符号，这在把char当做数值类型是就十分重要</li>
+<li>bool类型的值可以为true或false，分别表示真假。字面值true和false都可以通过提升转化为int类型。任何数字值或指针值都可以被隐式转换为bool值</li>
+<li><p>C++中可以使用const来修改变量声明和初始化，创建一个符号常量。其被初始化后，编译器就不允许修改该常量的值。如果在定义常量是没有初始化值，则该常量的值是不确定的，且无法修改</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const<span class="built_in"> type </span>name = value;</div></pre></td></tr></table></figure>
+</li>
+<li><p>浮点数可以用来表示小数，浮点数有两种表示：一是常用的标准小数点表示，如8.2等；二是E表示法，如3.45E6表示3.45与1000000相乘的结果，指数为负表示除以10的乘方。E表示法确保数字以浮点格式存储。</p>
+</li>
+<li>有三种浮点类型：float、double和long double。C和C++对有效位数(数字中有意义的位数)的要求分别是：至少32位，至少48位且不少于float，long double至少和double一样多。可以从cfloat头文件获取这些类型的相关限制。</li>
+<li>默认情况下的浮点常量存储为double，如果想使用float存储，请加f或F后缀</li>
+<li>浮点数由于精度有限，在计算时可能会出现错误</li>
+<li>signed char，short，int和long统称为符号整型；它们的无符号版本统称为无符号整型；C++ 11新增了long long。bool、char、wchar_t、符号整型和无符号整型统称为整型；C++ 11新增了char16_t和char32_t。float，double和long double统称为浮点型。整型和浮点型统称为算术类型</li>
+<li>C++提供了5中基本算术运算：+、-、*、/、%</li>
+<li>对于除法，如果两个操作数都是整数，则结果为商的整数部分</li>
+<li>对于取模，两个操作数必须是整数，如果其中一个是负数，结果符合如下规则：(a/b)*b+a%b=a</li>
+<li>为了完成复杂的运算，需要规定运算符的优先级和结合性。<em>和/的优先级高于+和-。+，-，</em>，/都是从做到右结合的。从左到右的结合性意味着如果优先级相同的操作符被同时作用于同一个操作数，则首先计算左侧的操作符。从右到左亦然。</li>
+<li>对于如下表达式：<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">20</span>*<span class="number">5</span>+<span class="number">24</span>*<span class="number">6</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>程序必须在做加法前计算乘法，但并没有指出先计算哪个乘法，这取决于实现。结合性在这里不起作用，因为两个乘号没有作用到同一个操作数</p>
+<ol>
+<li>C++自动执行多种类型转化：</li>
+</ol>
+<ul>
+<li>将一种算术类型的值赋给另一种算术类型的变量时，C++将对值进行转换</li>
+<li>表达式中包含不同类型的类型时，C++将对值进行转换</li>
+<li>将参数传递给函数时，C++将对值进行转换</li>
+</ul>
+<ol>
+<li>初始化和赋值进行的转换有可能会丢失数值或损失精度</li>
+<li>以{}方式进行的初始化，不允许缩窄</li>
+<li>在表达式中，有两种转换：一些类型在出现时就会自动转换，有些类型在与其他类型同时出现在表达式中时将被自动转换</li>
+<li>在计算表达式时，C++将bool，char，unsigned char，signed char和short值转换为int</li>
+<li>如果short比int短，则unsigned short类型被转换成int，如果两种类型长度相同，则unsigned short转换为unsigned int，这确保转换时不会丢失数据，同样wchar_t被提升为下列类型中第一个宽度足够的类型：int，unsigned int，long或unsigned long</li>
+<li>不同类型进行计算时也会进行转化：</li>
+</ol>
+<ul>
+<li>如果有一个操作数类型为long double，则将另一个操作数转换为long double</li>
+<li>否则，如果有一个操作数类型为double，则将另一个操作数转换为double</li>
+<li>否则，如果有一个操作数类型为float，则将另一个操作数转换为float</li>
+<li>否则，说明操作数都是整型，则执行整型提升</li>
+<li>在这种情况下，如果两个操作数都是有符号或无符号的，且其中一个操作数级别比另一个低，则转换为较高的类型</li>
+<li>如果一个操作数为有符号的，另一个操作数为无符号的，且无符号数的级别比有符号数的级别高，则将有符号数转换为无符号操作数对应的类型</li>
+<li>否则，如果有符号类型可表示无符号类型的所有可能值，则将无符号操作数转换为有符号操作数的类型</li>
+<li>否则，将两个操作数都转换为有符号类型的无符号版本<br>注：传统C总是将float提升为double，即使两个操作数都是float</li>
+</ul>
+<ol>
+<li>传递参数时的类型转换通常由C++函数原型控制，然而也可以取消原型对参数传递的控制，尽管这样做并不明智。在这种情况下，C++将对char和short(signed和unsigned)应用整型提升。另外为保持传统C语言中大量代码的兼容性，在将参数传递给取消原型对参数传递控制的函数时，C++将float参数提升为double</li>
+<li><p>C++允许强制类型转换：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(type_name)value <span class="comment">// C</span></div><div class="line"><span class="function"><span class="title">type_name</span><span class="params">(value)</span></span> <span class="comment">// C++</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在初始化声明中，如果使用关键字auto，而不指定变量的类型，编译器把变量的类型设置成与初始值相同</p>
+</li>
+</ol>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记/" target="_blank" rel="external">http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记/</a>
+                </p>
+                <footer><cite><a href="http://gwq5210.github.io">@Rhett's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2017/07/02/cpp必读书籍推荐/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cpp必读书籍推荐</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Cpp-Primer-Plus读书笔记" data-title="Cpp Primer Plus读书笔记" data-url="http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"rhettguo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "Cpp Primer Plus读书笔记",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046"></script>
+
+
+
+
+
+</body>
+</html>
