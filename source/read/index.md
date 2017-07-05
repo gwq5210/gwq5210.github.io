@@ -4,11 +4,14 @@ date: 2017-07-02 13:50:53
 
 # 计算机相关
 1. linux相关
-* 私房菜
+	* 私房菜
 2. 数据库相关
-* mysql
+	* mysql
 3. 分布式存储相关
-* gfs
+	* gfs
+4. C++
+	* C++ Primer
+	* C++ Primer Plus
 
 # 小说
 1. 白鹿原
@@ -20,6 +23,6 @@ date: 2017-07-02 13:50:53
 # 财经类
 暂无
 
-[阅读历史][1]
+[读书历史][1]
 
-[1]: read_history.html
+[1]: ./read_history.html
