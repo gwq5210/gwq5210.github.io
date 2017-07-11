@@ -16,14 +16,25 @@
 <meta property="og:url" content="http://gwq5210.github.io/2017/07/09/Cpp-Primer-Plus读书笔记（二）/index.html">
 <meta property="og:site_name" content="Rhett&#39;s Blog">
 <meta property="og:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
-<meta property="og:updated_time" content="2017-07-09T09:04:32.245Z">
+<meta property="og:updated_time" content="2017-07-11T15:56:46.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta name="twitter:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
   
     <link rel="alternative" href="/atom.xml" title="Rhett&#39;s Blog" type="application/atom+xml">
   
-  <meta name="summary" content="null">
+  <meta name="summary" content="&lt;h1 id=&quot;循环和关系表达式&quot;&gt;&lt;a href=&quot;#循环和关系表达式&quot; class=&quot;headerlink&quot; title=&quot;循环和关系表达式&quot;&gt;&lt;/a&gt;循环和关系表达式&lt;/h1&gt;&lt;p&gt;for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置初始值&lt;/li&gt;
+&lt;li&gt;执行测试，看看循环是否应该继续执行&lt;/li&gt;
+&lt;li&gt;执行循环操作&lt;/li&gt;
+&lt;li&gt;更新用于测试的值&lt;figure class=&quot;highlight mel&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (initialization; test-&lt;span class=&quot;keyword&quot;&gt;expression&lt;/span&gt;; update-&lt;span class=&quot;keyword&quot;&gt;expression&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	body&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一次初始化，测试表达式决定循环体是否被执行，通常，这个表达式是关系表达式，即对两个值进行比较。这里可以使用任何表达式，C++将把结果强制转换为bool类型。&lt;/p&gt;
+&lt;p&gt;for循环是入口条件循环，这意味着在每轮循环之前，都将计算测试表达式得值，当测试表达式为false时，将不会执行循环体。&lt;/p&gt;
+&lt;p&gt;更新表达式在每轮循环结束时执行，此时循环体已经执行完毕。通常，它用来对跟踪循环次数的变量的值进行递增。&lt;/p&gt;
+&lt;p&gt;for循环的控制部分使用了3个表达式，任何值或任何有效的值和运算符的组合都是表达式。赋值也是一个表达式，C++将赋值表达式的值定义为左侧成员的值。&lt;/p&gt;">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -194,7 +205,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支语句和逻辑运算符"><span class="post-toc-text">分支语句和逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数——C-的编程模块"><span class="post-toc-text">函数——C++的编程模块</span></a></li></ol>
             </nav>
             
         </aside>
@@ -214,6 +225,7 @@
 <p>for循环是入口条件循环，这意味着在每轮循环之前，都将计算测试表达式得值，当测试表达式为false时，将不会执行循环体。</p>
 <p>更新表达式在每轮循环结束时执行，此时循环体已经执行完毕。通常，它用来对跟踪循环次数的变量的值进行递增。</p>
 <p>for循环的控制部分使用了3个表达式，任何值或任何有效的值和运算符的组合都是表达式。赋值也是一个表达式，C++将赋值表达式的值定义为左侧成员的值。</p>
+<a id="more"></a>
 <p>当判定表达式的值这种操作改变了内存中数据的值时，我们说表达式有副作用。判定赋值表达式的值会修改被赋值者的值。</p>
 <p>从表达式到语句的转变很容易，只需要加分号即可。因此a=100是表达式，a=100;是语句。更准确的说，这是一条表达式语句。只要加上分号，所有的表达式都可以成为语句，但不一定有编程意义。如a+6;是合法的语句，但它没完成任何有用的工作，智能编译器甚至可能跳过这条语句</p>
 <p>对任何表达式加上分号都可以成为语句，但是这句话反过来说就不对了。也就是说，从语句中删除分号并不一定能将它转换为表达式。对于返回语句，声明语句和for语句都不满足这种情况</p>
@@ -322,7 +334,97 @@
 <p>可以使用文件尾条件（EOF）来表示输入的结束。检测到EOF后，cin将两位（eofbit和failbit）都设置为1，可以通过成员函数eof()来查看eofbit，如果eofbit或failbit被设置，fail函数返回true。eof和fail方法报告最近读取的结果，也就是说它们在事后报告，而不是预先报告。因此应将这两个测试放在读取后</p>
 <p>istream提供了一个可以将istream转换为bool的函数，当cin出现在bool需要的地方时，该转换函数将被调用。如果最后一次读取成功，则转换得到的bool值为true；否则为false。因此输入可以如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (cin.<span class="builtin-name">get</span>(ch))</div><div class="line">&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>二维数组更像是一个表格——既有数据行又有数据列。</p>
-
+<h1 id="分支语句和逻辑运算符"><a href="#分支语句和逻辑运算符" class="headerlink" title="分支语句和逻辑运算符"></a>分支语句和逻辑运算符</h1><p>if语句让程序能够决定是否执行特定的语句块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="built_in">test</span>-condition)</div><div class="line">	statement</div></pre></td></tr></table></figure></p>
+<p>if else语句让程序决定执行两条语句中的哪一个<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="comment">(test-condition)</span></div><div class="line">	stateme<span class="symbol">nt1</span></div><div class="line">else</div><div class="line">	stateme<span class="symbol">nt2</span></div></pre></td></tr></table></figure></p>
+<p>if else中的两个操作必须都是一条语句，如果需要多条语句，则需要使用大括号将它们括起来，组成一个语句块</p>
+<p>if else语句可以互相嵌套，组成多种选择</p>
+<p>可以将variable == value转换成value == variable，以此来捕获将相等运算符误写为赋值运算符的错误</p>
+<p>逻辑运算符分为逻辑或，逻辑与，逻辑非</p>
+<p>C++可以采用逻辑或运算符(||)，将两个表达式组合起来。如果原来表达式中的任何一个或全部都为true，则得到的表达式的值为true；否则，表达式的值为false</p>
+<p>||运算符的优先级低于算术运算符</p>
+<p>C++规定，||是一个顺序点，也就是说先修改左边的值，再对右侧的值进行判定。当能够确定整个表达式的值时，就不再往下运算了，也就是说||运算符有短路特性</p>
+<p>对于逻辑与，仅当所有的表达式都为true时，得到的表达式才为true</p>
+<p>&amp;&amp;运算符的优先级低于算术运算符</p>
+<p>和||运算符一样，&amp;&amp;运算符也是顺序点，同样&amp;&amp;也有短路特性</p>
+<p>对于取值范围，不要写成3&lt;a&lt;5，这样不能正确表示范围，编译器不会捕获这种错误，因为它仍然是合法的C++语句</p>
+<p>逻辑非(!)对它后边的表达式取反</p>
+<p>C++逻辑与和逻辑或运算符的优先级低于算术运算符，!运算符的优先级高于所有的关系运算符和算术运算符。因此如果对表达式取反，必须使用括号将其括起来</p>
+<p>编写复杂的逻辑表达式，还是加上括号，降低出现错误的可能性</p>
+<p>C++确保程序从左到右进行计算逻辑表达式，并在知道答案后立刻停止</p>
+<p>并不是所有键盘都提供了用作逻辑运算符的符号，因此C++标准提供了另一种表示方式。标识符and，or，not都是C++保留字，这意味着不能将它们用作变量名等。它们不是关键字，因为它们都是已有语言特性的另一种表示方式。另外它们不是C的保留字。但C语言可以将它们用作运算符，只要包含了iso646.h头文件，C++并不要求头文件</p>
+<p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，可以简化确定字母，数字等的工作。函数原型在cctype中。使用这些函数更加通用，例如在有的系统上，可能字母并不是连续编码的</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isalum()</td>
+<td>如果参数是字母或数字，返回true</td>
+</tr>
+<tr>
+<td>isalpha()</td>
+<td>如果参数是字母，返回true</td>
+</tr>
+<tr>
+<td>iscntrl()</td>
+<td>如果参数是控制字符，返回true</td>
+</tr>
+<tr>
+<td>isdigit()</td>
+<td>如果参数是数字，返回true</td>
+</tr>
+<tr>
+<td>isgraph()</td>
+<td>如果参数是除空格外的打印字符，该函数返回true</td>
+</tr>
+<tr>
+<td>islower()</td>
+<td>如果参数是小写字母，返回true</td>
+</tr>
+<tr>
+<td>isprint()</td>
+<td>如果参数是打印字符(包括空格)，该函数返回true</td>
+</tr>
+<tr>
+<td>ispunct()</td>
+<td>如果参数是标点符号，返回true</td>
+</tr>
+<tr>
+<td>isspace()</td>
+<td>如果参数是标准空白符，如空格，进纸，换行符，回车，水平制表符，或者垂直制表符，返回true</td>
+</tr>
+<tr>
+<td>issupper()</td>
+<td>如果参数是大写字母，返回true</td>
+</tr>
+<tr>
+<td>isxdigit()</td>
+<td>如果参数是16进制数字，0-9，a-f,A-F，返回true</td>
+</tr>
+<tr>
+<td>tolower()</td>
+<td>如果参数是大写字母，则返回小写，否则返回该参数</td>
+</tr>
+<tr>
+<td>toupper()</td>
+<td>如果参数是小写字母，则返回大写，否则返回该参数</td>
+</tr>
+</tbody>
+</table>
+<p>C++有一个常被用来代替if else语句的运算符，这个运算符被称为条件运算符(?:)，它是C++中唯一一个需要3个操作数的运算符<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expressio<span class="symbol">n1</span>?expressio<span class="symbol">n2</span>:expressio<span class="symbol">n3</span>;</div></pre></td></tr></table></figure></p>
+<p>如果expression1为true，则整个表达式的值为expression2，否则，表达式的值为expression3</p>
+<p>switch语句提供了分支选择的另一种方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span>(integer expression)</div><div class="line">&#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  ...</div><div class="line"><span class="symbol">  defaule:</span> statement(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序将跳到integer expression的值标记的那一行。integer expression必须是结果值为整数的表达式，每个标签必须是整数常量表达式。如果不匹配任何标签，则程序跳转到default的那一行。default是可选的，如果被省略，有没有匹配的标签，则程序直接跳转到switch后边的语句执行</p>
+<p>跳转到switch语句中的标签后，将会依次执行后边的代码，除非有明确的其他指示，如break指令</p>
+<p>如果既可以使用switch和if else，选项不少于3项时，则可以考虑使用switch</p>
+<p>break和continue语句都能使程序跳过部分代码。可以在switch语句中使用break，使程序跳转到switch后执行语句。continue和break都可以用到循环中。break使程序跳出循环，continue使程序跳过本次循环，开始一个新的循环，其不会跳过更新表达式</p>
+<p>C++使得将读取屏幕输入输出的技巧应用于文件输入输出中。</p>
+<p>可以使用ifstream和ofstream类创建对象，关联到相应的文件，对文件进行读取和写入。类似于使用cin和cout对象</p>
+<h1 id="函数——C-的编程模块"><a href="#函数——C-的编程模块" class="headerlink" title="函数——C++的编程模块"></a>函数——C++的编程模块</h1>
 
             
             <div class="post-reward">
