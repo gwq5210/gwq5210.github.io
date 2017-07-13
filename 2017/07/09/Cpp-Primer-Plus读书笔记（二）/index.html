@@ -16,7 +16,7 @@
 <meta property="og:url" content="http://gwq5210.github.io/2017/07/09/Cpp-Primer-Plus读书笔记（二）/index.html">
 <meta property="og:site_name" content="Rhett&#39;s Blog">
 <meta property="og:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
-<meta property="og:updated_time" content="2017-07-11T15:56:46.363Z">
+<meta property="og:updated_time" content="2017-07-13T16:38:40.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta name="twitter:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
@@ -205,7 +205,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支语句和逻辑运算符"><span class="post-toc-text">分支语句和逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数——C-的编程模块"><span class="post-toc-text">函数——C++的编程模块</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支语句和逻辑运算符"><span class="post-toc-text">分支语句和逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数——C-的编程模块"><span class="post-toc-text">函数——C++的编程模块</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数探幽"><span class="post-toc-text">函数探幽</span></a></li></ol>
             </nav>
             
         </aside>
@@ -424,7 +424,43 @@
 <p>break和continue语句都能使程序跳过部分代码。可以在switch语句中使用break，使程序跳转到switch后执行语句。continue和break都可以用到循环中。break使程序跳出循环，continue使程序跳过本次循环，开始一个新的循环，其不会跳过更新表达式</p>
 <p>C++使得将读取屏幕输入输出的技巧应用于文件输入输出中。</p>
 <p>可以使用ifstream和ofstream类创建对象，关联到相应的文件，对文件进行读取和写入。类似于使用cin和cout对象</p>
-<h1 id="函数——C-的编程模块"><a href="#函数——C-的编程模块" class="headerlink" title="函数——C++的编程模块"></a>函数——C++的编程模块</h1>
+<h1 id="函数——C-的编程模块"><a href="#函数——C-的编程模块" class="headerlink" title="函数——C++的编程模块"></a>函数——C++的编程模块</h1><p>使用函数，必须完成如下工作：</p>
+<ul>
+<li>提供函数定义</li>
+<li>提供函数原型</li>
+<li>调用函数</li>
+</ul>
+<p>函数可以分为有返回值的函数和没有返回值的函数<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">void func_name(parameter_list)</div><div class="line">&#123;</div><div class="line">  statement(s);</div><div class="line">  <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line">type_name func_name(parameter_list)</div><div class="line">&#123;</div><div class="line">  statement</div><div class="line">  <span class="keyword">return</span> value;	// value <span class="keyword">is</span> <span class="keyword">type</span> <span class="type">cast </span>to <span class="keyword">type</span> <span class="type">type_name</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于有返回值的函数，必须使用返回语句，以便将值返回给调用函数。结果的类型必须是type_name类型或者可以被转换成type_name类型。C++的函数返回值不能是数组。</p>
+<p>通常函数通过将返回值复制到指定的CPU寄存器或内存单元中来将其返回。</p>
+<p>函数原型描述了函数到编译器的接口，也就是说，它将函数返回值的类型以及参数的类型和数量告诉编译器。通常在函数原型的参数列表中，可以包括变量名，也可以不包括。原型中的变量名相当于占位符，因此不必与函数定义中的变量名相同。</p>
+<p>在C++中，括号为空与在括号中使用关键字void是等效的，但是在C中，括号意味着不指出参数——这意味着将在后边定义参数列表。但在C++中不指定参数列表时应使用省略号。</p>
+<p>原型有以下几点作用：</p>
+<ul>
+<li>编译器正确的处理函数返回值</li>
+<li>编译器检查使用的参数数目是否正确</li>
+<li>编译器检查使用的参数类型是否正确，如果不正确，则转换成正确的类型(如果可能的话)</li>
+</ul>
+<p>C++通常按值传递参数。在函数中声明的变量(包括参数)是该函数私有的。C++标准用参数(argument)表示实参，使用参量(parameter)来表示形参。</p>
+<p>在C++中当且仅当用于函数头或函数原型中，int *arr和int arr[]的含义才是相同的。</p>
+<p>可以用const来声明一个指针常量，让指针指向一个常量对象，这样可以防止使用指针来修改所指向的值。但是指针本身是可以修改的，即指向另外的常量对象。如果只涉及一级间接关系，则可以将非const指针赋值给const指针，但是进入两级间接关系时，这种方式是不允许的。<br>在指针参数中，尽可能使用const，可以避免无意对数据的修改，使得能够处理const和非const参数<br>另一种是声明一个常量指针，即指针本身的指向是不能修改的。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">int</span> * <span class="keyword">const</span> p = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> **pp;</div><div class="line"><span class="keyword">int</span> *p;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line">pp = &amp;p; 不允许，假设允许</div><div class="line">*pp = &amp;a; 合法，都是<span class="keyword">const</span>，但是将p设置为a的地址</div><div class="line">*p = <span class="number">1</span>; 合法，但是修改了<span class="keyword">const</span> a</div></pre></td></tr></table></figure></p>
+<p>对于在参数中的二维数组或多维数组，必须指出除第一维的数组长度。否则，函数将无法处理。因为整个数组的指针是需要指定数组长度的</p>
+<p>可以通过三种方式将C-风格字符串传递给函数：</p>
+<ul>
+<li>char数组</li>
+<li>用引号括起来的字符串常量</li>
+<li>被设置为字符串地址的char指针</li>
+</ul>
+<p>对于string字符串和模板类array，可以像使用基本类型一样使用。</p>
+<p>使用结构作为参数时，可以像处理基本类型一样处理结构。然而，这种默认的按值传递结构的方式有一个缺点，如果结构比较大，则复制结构将增加内存消耗，我们可以通过传递结构指针来减少消耗。</p>
+<p>C++函数可以调用自己(然而，与C语言不同的是C++不允许main函数调用自己)，这种功能被称为递归。递归需要在合适的条件下终止，否则函数将一直递归下去，直到耗尽内存。</p>
+<p>与数据项相似，函数也有地址，函数的地址是存储其机器语言代码的内存的开始地址。</p>
+<p>函数名就是函数的地址。</p>
+<p>通常，如果要声明函数指针，可以首先编写这种函数的原型，然后使用(*pf)替换函数名，这样pf就是这类函数的指针。优先级要求使用括号，才能定义正确的函数指针。</p>
+<p>如果pf是函数指针，可以有两种方式调用该函数(*pf)()和pf()，其实其中存在着逻辑冲突。但是C++允许这两种语法同时存在。</p>
+<p>函数指针数组：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int f()<span class="comment">;</span></div><div class="line">int (<span class="name">*pf</span>)()<span class="comment">;</span></div><div class="line">int (<span class="name">*pf_arr</span>[<span class="number">10</span>])()<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>可以使用typedef简化函数指针的定义<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> *(*pf)();</div><div class="line"><span class="function"><span class="keyword">int</span> *<span class="title">f</span><span class="params">()</span></span>;</div><div class="line">pf func = f;</div></pre></td></tr></table></figure></p>
+<h1 id="函数探幽"><a href="#函数探幽" class="headerlink" title="函数探幽"></a>函数探幽</h1>
 
             
             <div class="post-reward">
