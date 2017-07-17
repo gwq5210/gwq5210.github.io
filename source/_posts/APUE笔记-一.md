@@ -141,28 +141,268 @@ for (int i = 0; i < NOFILE; ++i)
 
 头文件sys/types.h中定义了某些与实现有关的数据类型，它们被称为基本系统数据类型(primitive system data type)，它们使用C语言的typedef定义，大多使用\_t结尾，用这种方式定义了这些数据类型时，就不需要考虑因系统不同而变化的程序实现细节。
 
-|类型|说明|
-|----|----|
-|clock_t|时钟滴答计数器|
-|comp_t|压缩的时钟滴答|
-|dev_t|设备号，主和次|
-|fd_set|文件描述符集|
-|fpos_t|文件位置|
-|gid_t|数值组ID|
-|ino_t|i节点编号|
-|mode_t|文件类型，文件创建模式|
-|nlink_t|目录项的链接计数|
-|off_t|文件长度和偏移量，带符号的|
-|pid_t|进程ID和进程组ID，带符号的|
-|pthread_t|线程ID|
-|ptrdiff_t|两个指针相减的结果|
-|rlim_t|资源限制|
-|sig_atomic_t|能原子性访问的数据类型|
-|sigset_t|信号集|
-|size_t|对象长度，如字符串，不带符号的|
-|ssize_t|返回字节计数器的函数，带符号的|
-|time_t|日历时间的秒计数器|
-|uid_t|数值用户ID|
-|wchar_t|能表示所有不同的字符码|
+| 类型           | 说明              |
+| ------------ | --------------- |
+| clock_t      | 时钟滴答计数器         |
+| comp_t       | 压缩的时钟滴答         |
+| dev_t        | 设备号，主和次         |
+| fd_set       | 文件描述符集          |
+| fpos_t       | 文件位置            |
+| gid_t        | 数值组ID           |
+| ino_t        | i节点编号           |
+| mode_t       | 文件类型，文件创建模式     |
+| nlink_t      | 目录项的链接计数        |
+| off_t        | 文件长度和偏移量，带符号的   |
+| pid_t        | 进程ID和进程组ID，带符号的 |
+| pthread_t    | 线程ID            |
+| ptrdiff_t    | 两个指针相减的结果       |
+| rlim_t       | 资源限制            |
+| sig_atomic_t | 能原子性访问的数据类型     |
+| sigset_t     | 信号集             |
+| size_t       | 对象长度，如字符串，不带符号的 |
+| ssize_t      | 返回字节计数器的函数，带符号的 |
+| time_t       | 日历时间的秒计数器       |
+| uid_t        | 数值用户ID          |
+| wchar_t      | 能表示所有不同的字符码     |
 
 # 文件IO
+UNIX系统大多数的文件IO只需要5个函数：open，read，write，lseek，close。对于read和write不同缓冲区对读取性能有一定影响。这些函数常被称为不带缓冲的IO。属于不带缓冲指的是每个read和write都调用内核中的一个系统调用。如果在多个进程之间共享资源，我们需要了解原子操作。
+
+对内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。
+
+## open函数
+调用open或openat可以打开或创建一个文件：
+```
+#include <fcntl.h>
+
+int open(const char *path, int oflag, ... /* mode_t mode */);
+int openat(int fd, const char *path, int oflag, ... /* mode_t mode */);
+```
+path参数时要打开或创建的文件的名字。oflag参数可用来说明此函数的多个选项。用下面一个或多个常量进行或来构成oflag参数。
+* O_RDONLY，只读打开
+* O_WRONLY，只写打开
+* O_RDWR，读写打开
+* O_EXEC，只执行打开
+* O_SEARCH，只搜索打开(应用于目录)
+
+以上5个常量中必须指定一个且只能指定一个。下列常量是可选的：
+* O_APPEND，每次写都追加到文件的结尾
+* O_CLOEXEC，把FD_CLOEXEC常量设置为文件描述符标志。
+* O_CREAT，若此文件不存在则创建它。使用此选项open或openat函数需同时说明mode参数，用mode指定该新文件的访问权限位。
+* O_DIRECTORY，如果path引用的不是目录，则出错。
+* O_EXCL，如果同时指定了O_CREAT，而文件已经存在，则出错。用此可以测试一个文件是否存在，如果不存在则创建文件，这使得测试和创建两者成为一个原子操作。
+* O_NOCTTY，如果path引用的是终端设备，则不将该设备分配作为此进程的控制终端。
+* O_NOFOLLOW，如果path引用的是一个符号链接，则出错。
+* O_NOBLOCK，如果path引用的是一个FIFO，一个块特殊文件或一个字符特殊文件，则此选项为文件的本次打开操作和后续的IO操作设置非阻塞方式。
+* O_SYNC，使每次write等待物理IO操作完成，包括由该write操作引起的文件属性更新所需的IO。
+* O_TRUNC，如果此文件存在，而且为只写或读写成功打开文件，则将其长度截断为0。
+* O_TTY_INIT，如果打开一个还未打开的终端设备，设置非标准的termios参数值，使其符合single UNIX Specification。
+* O_DSYNC，使每次write要等待物理IO操作完成，但是如果该写操作并不影响读取刚写的数据，则不需要等待文件属性被更新。文件属性包括文件大小等信息。
+* O_RSYNC，使每一个以文件描述符作为参数进行的read操作等待，直至所有对文件同一部分挂起的写操作都完成。
+
+对于每一个选项，具体可以阅读man手册。
+
+由open或openat函数返回的文件描述符一定是最小的未被使用的描述符的值。
+
+fd参数把open和openat参数区分开：
+* path参数指定的是绝对路径名，在这种情况下，fd参数被忽略，openat函数相当于open函数。
+* path参数指定的是相对路径名，fd参数指出了相对路径名在文件系统中的开始地址。fd参数时通过打开相对路径名所在的目录来获取。
+* path参数指定了相对路径名，fd参数具有特殊值AT_FDCWD。在这种情况下，路径名在当前工作目录获取，open函数在操作上与open函数类似。
+
+openat函数希望解决两个问题，一是让线程可以使用相对路径名打开目录中的文件，而不再只能打开当前工作目录。二是可以避免time-of-check-to-time-of-use(TOCTTOU)错误，其基本思想是，如果有两个基于文件的函数调用，其中第二个调用依赖于第一个调用的结果，那么程序是脆弱的，因为两个调用并不是原子操作，在两个函数调用之间的文件可能改变了，这样也就造成了第一个调用的结果不再有效，使得最终程序的结果是错误的。
+
+使用open需要注意文件名截断。现在大多数系统支持的文件名长度可以为255。
+
+## creat函数
+另外，creat函数也可以创建一个文件：
+```
+#include <fcntl.h>
+
+int creat(const char *path, mode_t mode);
+// 等效于
+open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);
+```
+它只以写的方式打开所创建的文件
+
+## close函数
+函数close关闭一个打开的文件：
+```
+#include <unistd.h>
+
+int close(fd);
+```
+关闭一个文件时，还会释放该进程加在该文件上的所有记录锁。当一个进程终止，内核自动关闭它所有的打开文件。
+
+## lseek函数
+每个打开的文件都有一个与其相关联的当前文件偏移量(current file offset)。它通常是一个非负整数，用于度量从文件开始处计算的字节数。通常读写操作都从当前文件便宜量开始，并使偏移量增加所读写的字节数。按照系统默认情况，当打开一个文件时，除非指定O_APPEND选项，否则该偏移量被设置为0。
+
+lseek可以显式的设置偏移量：
+```
+#include <unistd.h>
+
+off_t lseek(int fd, off_t offset, int whence);
+```
+对offset参数的解释与whence的值有关：
+* 若whence是SEEK_SET，则将该文件的偏移量设置为距文件开始处offset个字节
+* 若whence是SEEK_CUR，则将该文件偏移量设置为其当前值加上offset，offset可正可负
+* 若whence是SEEK_END，则该文件偏移量设置为文件长度加上offset，offset可正可负
+
+lseek成功执行返回新的文件偏移量：
+```
+off_t curr_pos;
+curr_pos = lseek(fd, 0, SEEK_CUR);
+```
+这种方法可以确定打开文件的当前偏移量，也可以来确定涉及的文件是否可以设置偏移量。如果文件描述符指向的是一个管道，FIFO，或网络套接字，则lseek返回-1，并将errno设置为ESPIPE。
+
+通常文件的当前偏移量应该是一个非负整数，但是某些设备也可能允许负的偏移量，但对于普通文件，必须是非负值。在比较lseek返回值时应该注意，不要测试它是否小于0，而要测试它是否等于-1。
+
+lseek仅将当前的文件偏移量记录在内核中，它并不引起任何IO操作，该偏移量用于下一次读或写。
+
+文件的偏移量可以大于当前文件大小，这种情况下，将会引起文件空洞，没被写过的字节都被读为0，文件中的空洞并不要求在磁盘上占用存储区，具体与实现有关。
+
+lseek使用的偏移量用off_t类型表示，允许具体实现根据各自的平台自行选择合适的数据类型。
+
+## read函数
+read函数从打开的文件中读取数据：
+```
+#include <unistd.h>
+
+ssize_t read(int fd, void *buf, size_t nbytes);
+```
+如果read成功，返回读取到的字节数。如已到达文件末端，返回0。
+多种情况使得实际读取到的字节数少于要求读取的字节数：
+* 读取普通文件时，在读到要求字节数之前已经达到了文件尾端。
+* 当从终端设备读时，通常依次最多读取一行。
+* 当从网络读时，网络中的缓冲机制可能造成返回值小于所要求读的字节数。
+* 当从管道或FIFO读时，如果管道包含的字节少于所需的数量，那么read将返回实际可用的字节数。
+* 当从某些面向记录的设备(如磁带)读时，一次最多返回一个记录
+* 当一信号造成中断，而已经读了部分数量时。
+
+读操作从当前文件偏移量开始，在成功返回之前，该偏移量将增加实际读到的字节数。
+
+## write函数
+write函数向打开的文件写入数据。
+```
+#include <unistd.h>
+
+ssize_t write(int fd, const void *buf, size_t nbytes);
+```
+返回值通常与nbytes相同，否则表示出错，write出错的一个常见错误是磁盘已经写满，或者超过了一个给定进程的文件长度限制。
+
+对于普通文件，写操作从文件的当前偏移量处开始。如果在打开文件时指定了O_APPEND选项，则在每次写操作前，将文件的偏移量设置在文件的结尾处，因此这种方式不能写中间的某个部分。在一次写成功后，文件偏移量增加实际写入的字节数。
+
+## IO的效率
+read函数和write的函数选出合适的buf大小是很重要的。一般来说在4096字节(磁盘块长度)效率比较高。大多数文件系统为改善性能都采取某种预读技术。检测到正在顺序读取时，系统就试图读取比应用所要求更多的数据，并假想应用很快就会读这些数据。
+
+## 文件共享
+UNIX支持在不同进程间共享打开文件。
+
+内核使用三种数据结构表示打开文件，它们之间的关系决定了在文件共享方面一个进程对另一个进程可能产生的影响。
+* 每个进程在进程表项中都有一个记录项，记录项包含一张打开文件描述符表，可将其视为一个矢量，每个描述符占用一项。与文件描述符相关联的是文件描述符标志(close_on_exec)和指向一个文件表项的指针。
+* 内核为所有打开文件维持一张文件表。每个文件表项包含：文件状态标志(读，写，添写，同步和非阻塞等)、当前文件偏移量、指向该文件的v节点指针。
+* 每个打开文件(或设备)都有一个v节点结构。v节点包含了文件类型和对此文件进行各种操作的函数指针。对于大多数文件，v节点还包含了该文件的i节点(索引节点)。这些信息是在打开文件时从磁盘读入内存的。对于不同的实现可能不同，例如linux不包含v节点，而是使用了通用的i节点。
+
+不同实现可能有不同，但是是有必要保存这些信息。
+![打开文件的内核数据结构](http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz)
+
+文件描述符标志和文件状态标志在作用范围方面有区别，前者只用于一个进程的某一个描述符，而后者则应用于指向该给定文件表项的任何进程中所有的描述符。
+
+## 原子操作
+一般而言，原子操作(atomic operation)是由多步操作组成的一个操作。如果该操作原子地执行，则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。
+
+多个进程对同一个文件追加数据，可以在打开文件时指定O_APPEND标志。这使得每次写操作之前内核都将进程的当前文件偏移量设置到该文件的末尾。对于对于这种write操作在不同进程间是不是原子的，后续有文章来验证。
+
+pread和pwrite允许原子性的定位并执行IO。
+```
+#include <unistd.h>
+
+ssize_t pread(int fd, void *buf, size_t nbytes, off_t offset);
+size_t pwrite(int fd, const void *buf, size_t nbytes, off_t offset);
+```
+调用pread相当于调用lseek后调用read，但是pread又与这种顺序调用有如下重要区别：
+* 调用pread时，无法中断其定位和读操作
+* 不更新当前文件偏移量
+
+pwrite也有类似的问题
+
+## 函数dup和dup2
+这两个函数可用来复制一个现有的文件描述符：
+ ```
+ #include <unistd.h>
+
+ int dup(int fd);
+ int dup2(int fd, int fd2);
+ ```
+ 由dup返回的新文件描述符一定是当前可用文件描述符中的最小数值。对于dup2，可以用fd2参数指定新描述符的值，如果fd2已经打开，则先将其关闭。如若fd等于fd2，则dup2返回fd2而不关闭它。否则，fd2的FD_CLOEXEC文件描述符就被清除，这样fd2在进程调用exec时是打开状态。
+
+ 这些函数返回的新描述符与参数fd共享同一个文件表项。
+ ![dup后的内核数据结构](http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz)
+ 
+ 赋值描述符的另一个方法是使用fcntl函数
+ ```
+ dup(fd);	// fcntl(fd, F_DUPFD, 0);
+ dup2(fd, fd2);	// close(fd2); fcntl(fd, F_DUPFD, fd2);
+ ```
+ 后一种情况，dup2并不完全等同于close加上fcntl
+ * dup2是一个原子操作
+ * dup2和fcntl有一些不同的errno
+
+## 函数sync，fsync和fdatasync
+传统的UNIX系统实现在内核中设有高速缓冲区高速缓存或页高速缓存，大多数磁盘IO都通过缓冲区进行。当我们向文件写入数据时，内核通常先将数据复制到缓冲中，然后排入队列，晚些时候再写入磁盘。这种方式被称为延迟写
+
+通常，当内核需要重用缓冲区来存放其他磁盘块数据时，它会把所有延迟写数据块写入磁盘。为了保证磁盘实际文件与缓冲区中内容的一致性，UNIX提供了sync，fsync和fdatasync三个函数：
+```
+#include <unistd.h>
+
+int fsync(int fd);
+int fdatasync(int fd);
+
+void sync(void);
+```
+sync只是将所有修改过的缓冲块排入写队列，然后就返回，它并不等待实际写磁盘结束。通常称为update的系统守护进程周期性的调用(一般30s)sync函数。这就保证了定期冲洗内核的块缓冲区。sync命令也调用sync函数
+
+fsync函数只对由文件描述符fd指定的一个文件起作用，并且等待磁盘操作结束才返回。fdatasync函数类似于fsync，但它只影响文件的数据部分。fsync还会同时更新文件属性的更新。
+
+## 函数fcntl
+fcntl可以改变已经打开文件的属性：
+```
+#include <unistd.h>
+
+int fcntl(int fd, int cmd, ... /* int arg */);
+```
+fcntl函数有如下5个功能：
+* 复制一个已有的文件描述符(F_DUPFD或F_DUPFD_CLOEXEC)
+* 获取或设置文件描述符标志(F_GETFD或F_SETFD)
+* 获取或设置文件状态标志(F_GETFL或F_SETFL)
+* 获取或设置异步IO所有权(F_GETOWN或F_SETOWN)
+* 获取或设置记录锁(F_GETLK，F_SETLK或F_SETLKW)
+
+F_DUPFD，复制文件描述符fd。新的描述符作为函数返回值返回。它是尚未打开的各描述符中大于或等于第三个参数值中各值得最小值。
+F_DUPFD_CLOEXEC，复制文件描述符，设置文件描述符关联的FD_CLOEXEC文件描述符的值，返回新文件描述符。
+F_GETFD，对应于fd的文件描述符标志作为函数值返回，当前只定义了一个文件描述符标志FD_CLOEXEC
+F_SETFD，对于fd设置文件描述符标志
+F_GETFL，对应于fd的文件状态标志作为函数值返回。5个访问方式标志(O_RDONLY，O_WRONLY，O_RDWR，O_EXEC以及O_SEARCH)并不各占一位，这5个值互斥。因此首先必须使用屏蔽字O_ACCMODE取得访问方式，然后再进行比较。
+F_SETFL，将文件状态标志设置为第三个参数的值，可以更改的标志是：O_APPEND，O_NONBLOCK，O_SYNC，O_DSYNC，O_RSYNC，O_FSYNC和O_ASYNC。
+F_GETOWN，获取当前接收SIGIO和SIGURG信号的进程ID或进程组ID。
+F_SETOWN，设置接收SIGIO和SIGURG信号的进程ID或进程组ID。正的arg指定一个进程ID，负的arg表示等于arg绝对值的一个进程组ID。
+
+fcntl如果出错返回-1，如果成功返回相应的值。
+
+我们必须小心的使用设置标志，我们需要先取出现有的，设置想要设置的标志，然后再进行设置。
+
+## 函数ioctl
+ioctl函数一直是IO操作的杂物箱。终端IO是使用ioctl最多的地方。
+```
+#include <unistd.h>
+// #include <sys/ioctl.h>
+
+int ioctl(int fd, int request, ...);
+```
+不能用本章其他io函数表示的IO操作通常都能用ioctl表示。
+
+## /dev/fd
+较新的系统都提供名为/dev/fd的目录，打开文件/dev/fd/n等效于复制描述符n。
+
+在linux系统中，它把文件描述符映射成指向物理底层文件的符号链接。
+
+# 文件和目录
