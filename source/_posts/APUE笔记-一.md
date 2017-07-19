@@ -337,15 +337,15 @@ pwrite也有类似的问题
 
  这些函数返回的新描述符与参数fd共享同一个文件表项。
  ![dup后的内核数据结构](http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz)
- 
+
  赋值描述符的另一个方法是使用fcntl函数
  ```
  dup(fd);	// fcntl(fd, F_DUPFD, 0);
  dup2(fd, fd2);	// close(fd2); fcntl(fd, F_DUPFD, fd2);
  ```
  后一种情况，dup2并不完全等同于close加上fcntl
- * dup2是一个原子操作
- * dup2和fcntl有一些不同的errno
+ * dup2是一个原子操作
+ * dup2和fcntl有一些不同的errno
 
 ## 函数sync，fsync和fdatasync
 传统的UNIX系统实现在内核中设有高速缓冲区高速缓存或页高速缓存，大多数磁盘IO都通过缓冲区进行。当我们向文件写入数据时，内核通常先将数据复制到缓冲中，然后排入队列，晚些时候再写入磁盘。这种方式被称为延迟写
@@ -406,3 +406,142 @@ int ioctl(int fd, int request, ...);
 在linux系统中，它把文件描述符映射成指向物理底层文件的符号链接。
 
 # 文件和目录
+对于文件除了文件本身，还有和文件相关的其他属性。另外还有函数能够修改这些属性
+
+## 函数stat，fstat，fstatat和lstat
+```
+#include <sys/stat.h>
+
+int stat(const char *restrict pathname, staruct stat *restrict buf);
+int fstat(int fd, struct stat *buf);
+int lstat(const char *restrict pathname, struct stat *restrict buf);
+int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, int flag);
+```
+stat将返回与文件pathname有关的信息结构。fstat函数获得已在描述符fd上打开文件的有关信息。lstat函数类似stat，但是当命名文件是一个符号链接时，lstat返回符号链接本身的有关信息，而不是由符号链接引用的文件的信息。fstatat函数为一个相对于当前打开目录（由fd参数指向）的路径名返回文件统计信息。flag参数控制着是否跟随着符号链接。当AT_SYMLINK_NOFOLLOW标志被设置时，fstatat函数不会跟随符号链接，而是返回符号链接本身的信息。否则，在默认情况下，返回的是符号链接所指向的文件的信息。如果fd参数的值是AT_FDCWD，并且pathname参数是一个相对路径名，fstatat会计算相对于当前目录的pathname参数。如果pathname是一个绝对路径名，fd参数就会被忽略。这两种情况下，根据flag的取值，fstatat函数的作用就跟stat或lstat函数一样。
+
+第二个参数buf是一个指针，它指向一个我们必须提供的结构。函数来填充buf指向的结构。结构的实际定义可能随系统具体实现不同，但其基本形式是：
+```
+struct stat
+{
+  mode_t		st_mode;	// file type & mode (permissions)
+  ino_t			  st_ino;		// i-node number (serial number)
+  dev_t			 st_dev;		// device number (file system)
+  dev_t			 st_rdev;		// device number for special files
+  nlink_t		   st_nlink;		// number of links
+  uid_t			  st_uid;		// user ID of owner
+  gid_t			 st_gid;		// group ID of owner
+  off_t			  st_size;		// size in bytes, for regular files
+  struct timespec	st_atime;	// time of last access
+  struct timespec	st_mtime;	// time of last modification
+  struct timespec	st_ctime;	// time of last file status change
+  blksize_t			st_blksize;	// best IO block size
+  blkcnt_t			st_blocks;	// number of disk blocks allocated
+};
+// timespec按照秒和纳秒定义了时间
+struct timespec
+{
+  time_t tv_sec;
+  long tv_nsec;
+};
+```
+
+stat结构中的大部分成员都是基本系统数据类型。我们将说明此结构的每个成员以了解文件属性。ls命令使用stat函数。
+
+## 文件类型
+文件类型包括
+* 普通文件（regular file）。这是最常用的文件类型。UNIX系统并不区分文本文件和二进制文件。但是对于可执行文件，内核必须理解其格式，以便能够确定程序文本和数据的加载位置。
+* 目录文件（direcory file）。这种文件包含了其他文件的名字与指向这些文件的有关信息。通常只有内核可以直接写目录文件。
+* 块特殊文件（block special file）。这种类型的文件提供对设备的带缓冲的访问，每次访问以固定的长度为单位进行。
+* 字符特殊文件（character special file）。这种类型的文件提供对设备不带缓冲的访问，每次访问长度可变。系统中的设备要么是字符特殊文件，要么是块特殊文件。
+* FIFO。可用于进程间通信，又被称作命名管道（named pipe）。
+* 套接字（socket）。这种类型的文件用用于进程间的网络通信。也可以用于在一台宿主机上进程间的非网络通信。
+* 符号链接（symbolic link）。这种类型的文件指向另一个文件。
+
+文件类型信息包含在stat结构的st_mode成员中。可以使用宏来确定文件类型。
+
+|宏|文件类型|
+|---|--------|
+|S_ISREG()|普通文件|
+|S_ISDIR()|目录文件|
+|S_ISCHR()|字符特殊文件|
+|S_ISBLK()|块特殊文件|
+|S_ISFIFO()|管道或FIFO|
+|S_ISLNK()|符号链接|
+|s_ISSOCK()|套接字|
+
+POSIX.1允许将进程间通信的对象说明为文件。例如消息队列，信号量，共享内存对象。
+
+对于宏的实现，一般是将st_mode与屏蔽字S_IFMT进行&运算，然后与对应常量比较，判断是否为特定文件类型。
+```
+#define S_ISDIR(mode) (((mode) & SIFMT) == SIFDIR)
+```
+
+## 设置用户ID和设置组ID
+与一个进程相关的ID有6个或更多：
+* 实际用户ID、实际组ID——我们实际上是谁，在登录时取自口令文件。在一个登录会话期间并不会改变，但是超级用户进程可以改变它们。
+* 有效用户ID、有效组ID、附属组ID——用于文件访问权限检查
+* 保存的设置用户ID、保存的设置组ID——由exec函数保存
+
+每个文件有一个所有者和组所有者，分别由st_uid和st_gid指出。
+
+执行一个程序文件时，进程的有效用户ID通常就是实际用户ID，有效组ID通常就是实际组ID。但是可以st_mode中设置一个特殊标志，含义为当执行此文件时，将进程的有效用户ID设置为文件所有者的用户ID。同样还有类似的设置组ID。分别被称为设置用户ID位和设置组ID位。
+
+例如passwd修改登录口令，是一个设置用户ID程序。因为口令文件只有超级用户才有写入权限。这种程序会获得额外权限，需要谨慎处理。
+
+设置用户ID和设置组ID可以使用S_ISUID和S_ISGID测试。
+
+## 文件访问权限
+st_mode也包含了对文件的文件权限位。这里的文件是前面提到的任何类型的文件。所有文件类型都有访问权限。
+
+每个文件有9个访问权限位，可以分为三组
+
+|st_mode屏蔽|含义|
+|S_IRUSR|用户读|
+|S_IWUSR|用户写|
+|S_IXUSR|用户执行|
+|S_IRGRP|组读|
+|S_IWGRP|组写|
+|S_IXGRP|组执行|
+|S_IROTH|其他读|
+|S_IWOTH|其他写|
+|S_IXOTH|其他执行|
+
+前三行用户指的是文件的所有者。我们可以使用chmod来修改文件的访问权限。
+
+对于访问权限以各种方式由不同函数使用。
+* 第一个规则是我们用名字打开任一类型的文件时，对该名字包含中的每一个目录，包括它可能隐含的当前工作目录都应具有执行权限。这也是为什么对于目录其执行权限位常被称为搜索位的原因。
+* 对于一个文件的读权限决定了我们是否能够打开现有文件进行读操作，对应了open函数的o_RDONLY和O_RDWR标志
+* 对于一个文件的写权限决定了我们是否能够打开现有文件进行写操作，对应了open函数的O_WRONLY和O_RDWR标志
+* 为了在open函数中对一个文件指定O_TRUNC标志，必须对该文件具有写权限
+* 为了在一个目录中创建一个新文件，必须对该目录具有写权限和执行权限
+* 为了删除一个现有文件，必须对包含该文件的目录具有写权限和执行权限。对该文件本身则不需要有读写权限
+* 如果7个exec函数中的任何一个执行某个文件，都必须对该文件具有执行权限，该文件必须是一个普通文件
+
+进程每次打开，创建或删除一个文件，内核就进行文件访问权限测试，这种测试可能涉及文件的所有者，进程的有效ID及进程的附属组ID。
+* 若进程的有效ID是0（超级用户），则允许访问。
+* 若进程的有效用户ID等于文件的所有者ID，那么如果所有者适当的访问权限位被设置，则允许访问，否则拒绝访问。
+* 若进程的有效组ID或进程的附属组ID之一等于文件的组ID，那么如果组适当的访问权限位被设置，则允许访问，否则拒绝访问。
+* 若其他用户适当的访问权限位被设置，则允许访问；否则拒绝访问。
+
+## 新文件和目录的所有权
+进程创建的新文件的用户ID设置为进程的有效用户ID。对于组ID，POSIX.1允许实现选择以下之一作为新文件的组ID：
+* 新文件的组ID可以是进程的有效组ID
+* 新文件的组ID可以是它所在目录的组ID
+
+有些实现默认使用第二种方式，例如Mac OS 10.6.8。linux 3.2.0默认情况下新文件的组ID取决于它所在目录的设置组ID位是否被设置，如果设置，则使用第二种方式，否则使用第一种方式。
+
+## 函数access和faccessat
+当打开一个文件时，内核使用进程的有效用户ID和有效组ID为基础执行权限访问测试。进程有时候也希望按照实际用户ID和实际组ID来测试其访问能力。access和faccessat函数按照实际用户ID和实际组ID进行访问权限测试。
+```
+#include <unistd.h>
+
+int access(const char *pathname, int mode);
+int faccess(int fd, const char *pathname, int mode, int flag);
+```
+如果mode设置为F_OK，则测试文件是否存在。否则是三个常量的按位或：R_OK，W_OK、X_OK。
+
+faccessat函数在下列情况的作用于access函数相同：一种是pathname参数为绝对路径，另一种是fd参数的取值为AT_FDCWD且参数pathname为相对路径。否则，faccessat计算相对于打开目录（fd指定）的pathname。
+
+flag参数可以改变faccessat的行为，如果flag设置为AT_EACCESS，访问检查用的是调用进程的有效用户ID和有效组ID。
+
+## 函数umask
