@@ -344,8 +344,8 @@ pwrite也有类似的问题
  dup2(fd, fd2);	// close(fd2); fcntl(fd, F_DUPFD, fd2);
  ```
  后一种情况，dup2并不完全等同于close加上fcntl
- * dup2是一个原子操作
- * dup2和fcntl有一些不同的errno
+* dup2是一个原子操作
+* dup2和fcntl有一些不同的errno
 
 ## 函数sync，fsync和fdatasync
 传统的UNIX系统实现在内核中设有高速缓冲区高速缓存或页高速缓存，大多数磁盘IO都通过缓冲区进行。当我们向文件写入数据时，内核通常先将数据复制到缓冲中，然后排入队列，晚些时候再写入磁盘。这种方式被称为延迟写
@@ -459,15 +459,15 @@ stat结构中的大部分成员都是基本系统数据类型。我们将说明�
 
 文件类型信息包含在stat结构的st_mode成员中。可以使用宏来确定文件类型。
 
-|宏|文件类型|
-|---|--------|
-|S_ISREG()|普通文件|
-|S_ISDIR()|目录文件|
-|S_ISCHR()|字符特殊文件|
-|S_ISBLK()|块特殊文件|
-|S_ISFIFO()|管道或FIFO|
-|S_ISLNK()|符号链接|
-|s_ISSOCK()|套接字|
+| 宏          | 文件类型    |
+| ---------- | ------- |
+| S_ISREG()  | 普通文件    |
+| S_ISDIR()  | 目录文件    |
+| S_ISCHR()  | 字符特殊文件  |
+| S_ISBLK()  | 块特殊文件   |
+| S_ISFIFO() | 管道或FIFO |
+| S_ISLNK()  | 符号链接    |
+| s_ISSOCK() | 套接字     |
 
 POSIX.1允许将进程间通信的对象说明为文件。例如消息队列，信号量，共享内存对象。
 
@@ -545,3 +545,105 @@ faccessat函数在下列情况的作用于access函数相同：一种是pathname
 flag参数可以改变faccessat的行为，如果flag设置为AT_EACCESS，访问检查用的是调用进程的有效用户ID和有效组ID。
 
 ## 函数umask
+每个进程都有一个相关联的文件模式创建屏蔽字，umask函数可以为进程设置文件模式创建屏蔽字，返回之前的值
+```
+#include <sys/stat.h>
+
+mode_t umaks(mode_t mode);
+```
+进程创建一个文件或目录时就一定会使用文件模式创建屏蔽字，在其中为1的位，在文件mode中相应的位一定会被关闭。
+
+在shell中，我们可以使用umask命令来修改这个值。以便修改创建文件的默认权限。
+
+## 函数chmod、fchmod和fchmodat
+这三个函数用来修改现有文件的访问权限
+```
+#include <sys/stat.h>
+
+int chmod(const char *pathname, mode_t mode);
+int fchmod(int fd, mode_t mode);
+int fchmodat(int fd, const char *pathname, mode_t mode, int flag);
+```
+fchmodat函数在两种情况下与chmod函数一样：一种是pathname参数为绝对路径；另一种是fd参数取值为AT_FDCWD且pathname参数为相对路径。否则fchmodat相对于fd打开的目录来计算pathname。flag参数可以改变fchmodat的行为，当设置了AT_SYMLINK_NOFOLLOW时，fchmodat不跟随符号链接。
+
+为了改变一个文件的权限位，进程的有效用户ID必须等于文件所有者ID，或者该进程具有超级用户权限
+
+参数mode由以下值按位或
+
+|mode|说明|
+|S_ISUID|执行时设置用户ID|
+|S_ISGID|执行时设置组ID|
+|S_ISVTX|保存正文（粘着位）|
+|S_IRWXU|用户读写执行|
+|S_IRUSR|用户读|
+|S_IWUSR|用户写|
+|S_IXUSR|用户执行|
+|S_IRWXG|组读写执行|
+|S_IRGRP|组读|
+|S_IWGRP|组写|
+|S_IXGRP|组执行|
+|S_IRWXO|其他读写执行|
+|S_IROTH|其他读|
+|S_IWOTH|其他写|
+|S_IXOTH|其他执行|
+
+chmod函数在下列条件下自动清除两个权限位：
+* Solaris等系统对于普通文件的粘着位赋予了特殊含义在这些系统上，如果我们尝试设置普通文件的粘着位(S_ISVTX)，而且又没有超级用户权限，那么mode中的粘着位自动被关闭。这意味着只有超级用户才能设置普通文件的粘着位。这样做是防止恶意用户设置粘着位，影响系统性能。
+* 新创建文件的组ID可能不是调用进程所属的组。新文件的组ID可能是父目录的组ID，特别的如果新文件的组ID不等于进程的有效组ID或附属组ID中的一个，而且进程没有超级用户权限，那么设置组ID位会被自动关闭。这就防止了用户创建了一个设置组ID文件，而该文件是并非该用户所属的组拥有的。
+
+有的系统，如Linux 3.2.0等增加了另一个安全性功能试图阻止误用某些保护位。如果没有超级用户权限的进程写一个文件，则设置用户ID位和设置组ID位会被自动清除。如果恶意用户找到一个它们可以写的设置用户ID位和设置组ID位文件，即使它们可以修改此文件，它们也失去了特殊的授权。
+
+## 粘着位
+粘着位（S_ISVTX，sticky bit）有着有趣的历史，在早期版本的UNIX中，如果一个可执行程序的这一位被设置了，那么当程序第一次执行，在其终止时，程序正文部分的一个副本仍然保存在交换区中，正文指指令部分。这样程序下次执行就能较快的载入内存。原因是：通常的UNIX文件系统中，文件的各数据块可能是随机存放的，相比较而言，交换区是被作为一个连续文件来存放的。后来的UNIX系统将其称为保存正文位(saved-text bit)。现在的系统大多数都配置了虚拟存储系统以及快速文件系统，所以不再需要此技术。
+
+现在，我们扩展了粘着位的使用范围。如果对一个目录设置了粘着位，只有对该目录具有写权限的用户并且满足下列条件之一，才能删除或重命名该目录下的文件：
+* 拥有此文件
+* 拥有此目录
+* 是超级用户
+
+例如目录/tmp就是这种目录，这样，一个用户就无法删除或重命名其他用户的文件。
+
+## chown、fchown、fchownat和lchown
+下列函数用来修改文件的用户ID和组ID，如果参数中任意一个是-1，则对应ID不变：
+```
+#include <unistd.h>
+
+int chown(const char *pathname, uid_t owner, gid_t group);
+int fchown(int fd, uid_t owner, gid_t group);
+int fchownat(int fd, const char *pathname, uid_t owner, gid_t group, int flag);
+int lchown(const char *pathname, uid_t owner, gid_t group);
+```
+除了引用的文件时符号链接外，4个函数都类似。在符号链接的情况下，lchown和fchownat(设置了AT_SYMLINK_NOFOLLOW)更改符号链接本身的所有者，而不是符号链接指向的文件的所有者。
+
+fchown用于改变fd参数指向的打开文件的所有者，它在一个已打开的文件上操作，因此它不能用于改变符号链接的所有者。
+
+fchownat函数与chown或和lchown函数在下列情况下相同：一种是pathname是绝对路径，另一种是fd参数值取值为AT_FDCWD且pathname参数为相对路径。在这两种情况下，如果flag参数设置了AT_SYMLINK_NOFOLLOW，fchownat与lchown函数相同，否则与chown函数相同。其他情况下，fchownat函数计算相对于打开目录的pathname。
+
+一般来说，只有超级用户或文件所有者才能更改一个文件的所有者。POSIX.1允许两种操作中选择一种。可以使用_POSIX_CHOWN_RESTRICTED常量来确定是否有限制，我们可以根据pathconf或fpathconf查询。此选项与文件有关，对于不同的文件可能值不一样。
+
+如果其对指定的文件生效：
+* 只有超级用户才能更改此文件的用户ID
+* 如果进程拥有此文件，参数owner等于-1或文件的用户ID，并且参数group等于进程的有效组ID或进程的附属组ID之一，那么一个非超级用户进程可以更改此文件的组ID。
+
+如果这些函数由非超级用户进程调用，那么在成功返回时，该文件的设置用户ID位和设置组ID位都被清除。
+
+## 文件长度
+stat结构成员st_size表示以字节为单位的长度。此字段只对普通文件、目录文件和符号链接有意义。
+
+对于普通文件，长度可以是0，在开始读这种文件时，将得到文件结束指示。对于目录，文件长度通常是一个数的整数倍。对于符号链接，文件长度是在文件名中的实际字节数。
+
+现今大多数现在的UNIX系统提供字段st_blksize和st_blocks，其中，第一个是对文件IO比较适合的块长度，第二个是所分配的实际512字节(不同系统单位可能不同)的块数。标准IO库一次也尝试读写st_blksize个字节。
+
+我们可以在文件中建立空洞，这些空洞并不占用磁盘空间，读取空洞导致读取到的内容为0。
+
+## 文件截断
+有时我们需要在文件尾端处截去一些数据以缩短文件。将一个文件长度截断为0是一个特例，在打开文件时使用O_TRUNC标志可以做到这一点。为了截断文件可以调用函数truncate和ftruncate函数。
+```
+#include <unistd.h>
+
+int truncate(const char *pathname, off_t length);
+int ftruncate(int fd, off_t length);
+```
+这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。
+
+## 文件系统
