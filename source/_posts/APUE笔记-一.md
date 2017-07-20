@@ -495,16 +495,17 @@ st_mode也包含了对文件的文件权限位。这里的文件是前面提到�
 
 每个文件有9个访问权限位，可以分为三组
 
-|st_mode屏蔽|含义|
-|S_IRUSR|用户读|
-|S_IWUSR|用户写|
-|S_IXUSR|用户执行|
-|S_IRGRP|组读|
-|S_IWGRP|组写|
-|S_IXGRP|组执行|
-|S_IROTH|其他读|
-|S_IWOTH|其他写|
-|S_IXOTH|其他执行|
+| st_mode屏蔽 | 含义   |
+| --------- | ---- |
+| S_IRUSR   | 用户读  |
+| S_IWUSR   | 用户写  |
+| S_IXUSR   | 用户执行 |
+| S_IRGRP   | 组读   |
+| S_IWGRP   | 组写   |
+| S_IXGRP   | 组执行  |
+| S_IROTH   | 其他读  |
+| S_IWOTH   | 其他写  |
+| S_IXOTH   | 其他执行 |
 
 前三行用户指的是文件的所有者。我们可以使用chmod来修改文件的访问权限。
 
@@ -570,22 +571,23 @@ fchmodat函数在两种情况下与chmod函数一样：一种是pathname参数�
 
 参数mode由以下值按位或
 
-|mode|说明|
-|S_ISUID|执行时设置用户ID|
-|S_ISGID|执行时设置组ID|
-|S_ISVTX|保存正文（粘着位）|
-|S_IRWXU|用户读写执行|
-|S_IRUSR|用户读|
-|S_IWUSR|用户写|
-|S_IXUSR|用户执行|
-|S_IRWXG|组读写执行|
-|S_IRGRP|组读|
-|S_IWGRP|组写|
-|S_IXGRP|组执行|
-|S_IRWXO|其他读写执行|
-|S_IROTH|其他读|
-|S_IWOTH|其他写|
-|S_IXOTH|其他执行|
+| mode    | 说明        |
+| ------- | --------- |
+| S_ISUID | 执行时设置用户ID |
+| S_ISGID | 执行时设置组ID  |
+| S_ISVTX | 保存正文（粘着位） |
+| S_IRWXU | 用户读写执行    |
+| S_IRUSR | 用户读       |
+| S_IWUSR | 用户写       |
+| S_IXUSR | 用户执行      |
+| S_IRWXG | 组读写执行     |
+| S_IRGRP | 组读        |
+| S_IWGRP | 组写        |
+| S_IXGRP | 组执行       |
+| S_IRWXO | 其他读写执行    |
+| S_IROTH | 其他读       |
+| S_IWOTH | 其他写       |
+| S_IXOTH | 其他执行      |
 
 chmod函数在下列条件下自动清除两个权限位：
 * Solaris等系统对于普通文件的粘着位赋予了特殊含义在这些系统上，如果我们尝试设置普通文件的粘着位(S_ISVTX)，而且又没有超级用户权限，那么mode中的粘着位自动被关闭。这意味着只有超级用户才能设置普通文件的粘着位。这样做是防止恶意用户设置粘着位，影响系统性能。
@@ -647,3 +649,12 @@ int ftruncate(int fd, off_t length);
 这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。
 
 ## 文件系统
+UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。
+
+我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。
+![磁盘、分区和文件系统](http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=)
+
+下面是比较详细的i节点和数据块图
+![详细图](http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz)
+在图中，我们注意到：
+* 
