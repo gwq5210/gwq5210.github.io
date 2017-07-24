@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gwq5210.github.io/"/>
-  <updated>2017-07-19T16:15:45.439Z</updated>
+  <updated>2017-07-24T13:05:43.000Z</updated>
   <id>http://gwq5210.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://gwq5210.github.io/2017/07/12/APUE%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
     <id>http://gwq5210.github.io/2017/07/12/APUE笔记-一/</id>
     <published>2017-07-11T17:22:08.000Z</published>
-    <updated>2017-07-19T16:15:45.439Z</updated>
+    <updated>2017-07-24T13:05:43.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><p>所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。</p>
 <p>从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。</p>
@@ -396,7 +396,52 @@
 <p>设置用户ID和设置组ID可以使用S_ISUID和S_ISGID测试。</p>
 <h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><p>st_mode也包含了对文件的文件权限位。这里的文件是前面提到的任何类型的文件。所有文件类型都有访问权限。</p>
 <p>每个文件有9个访问权限位，可以分为三组</p>
-<p>|st_mode屏蔽|含义|<br>|S_IRUSR|用户读|<br>|S_IWUSR|用户写|<br>|S_IXUSR|用户执行|<br>|S_IRGRP|组读|<br>|S_IWGRP|组写|<br>|S_IXGRP|组执行|<br>|S_IROTH|其他读|<br>|S_IWOTH|其他写|<br>|S_IXOTH|其他执行|</p>
+<table>
+<thead>
+<tr>
+<th>st_mode屏蔽</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRUSR</td>
+<td>用户读</td>
+</tr>
+<tr>
+<td>S_IWUSR</td>
+<td>用户写</td>
+</tr>
+<tr>
+<td>S_IXUSR</td>
+<td>用户执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>组执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IWOTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IXOTH</td>
+<td>其他执行</td>
+</tr>
+</tbody>
+</table>
 <p>前三行用户指的是文件的所有者。我们可以使用chmod来修改文件的访问权限。</p>
 <p>对于访问权限以各种方式由不同函数使用。</p>
 <ul>
@@ -432,7 +477,76 @@
 <p>fchmodat函数在两种情况下与chmod函数一样：一种是pathname参数为绝对路径；另一种是fd参数取值为AT_FDCWD且pathname参数为相对路径。否则fchmodat相对于fd打开的目录来计算pathname。flag参数可以改变fchmodat的行为，当设置了AT_SYMLINK_NOFOLLOW时，fchmodat不跟随符号链接。</p>
 <p>为了改变一个文件的权限位，进程的有效用户ID必须等于文件所有者ID，或者该进程具有超级用户权限</p>
 <p>参数mode由以下值按位或</p>
-<p>|mode|说明|<br>|S_ISUID|执行时设置用户ID|<br>|S_ISGID|执行时设置组ID|<br>|S_ISVTX|保存正文（粘着位）|<br>|S_IRWXU|用户读写执行|<br>|S_IRUSR|用户读|<br>|S_IWUSR|用户写|<br>|S_IXUSR|用户执行|<br>|S_IRWXG|组读写执行|<br>|S_IRGRP|组读|<br>|S_IWGRP|组写|<br>|S_IXGRP|组执行|<br>|S_IRWXO|其他读写执行|<br>|S_IROTH|其他读|<br>|S_IWOTH|其他写|<br>|S_IXOTH|其他执行|</p>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户ID</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置组ID</td>
+</tr>
+<tr>
+<td>S_ISVTX</td>
+<td>保存正文（粘着位）</td>
+</tr>
+<tr>
+<td>S_IRWXU</td>
+<td>用户读写执行</td>
+</tr>
+<tr>
+<td>S_IRUSR</td>
+<td>用户读</td>
+</tr>
+<tr>
+<td>S_IWUSR</td>
+<td>用户写</td>
+</tr>
+<tr>
+<td>S_IXUSR</td>
+<td>用户执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>组读写执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>组执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他读写执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IWOTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IXOTH</td>
+<td>其他执行</td>
+</tr>
+</tbody>
+</table>
 <p>chmod函数在下列条件下自动清除两个权限位：</p>
 <ul>
 <li>Solaris等系统对于普通文件的粘着位赋予了特殊含义在这些系统上，如果我们尝试设置普通文件的粘着位(S_ISVTX)，而且又没有超级用户权限，那么mode中的粘着位自动被关闭。这意味着只有超级用户才能设置普通文件的粘着位。这样做是防止恶意用户设置粘着位，影响系统性能。</li>
@@ -464,7 +578,10 @@
 <p>我们可以在文件中建立空洞，这些空洞并不占用磁盘空间，读取空洞导致读取到的内容为0。</p>
 <h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><p>有时我们需要在文件尾端处截去一些数据以缩短文件。将一个文件长度截断为0是一个特例，在打开文件时使用O_TRUNC标志可以做到这一点。为了截断文件可以调用函数truncate和ftruncate函数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> length)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> length)</span></span>;</div></pre></td></tr></table></figure></p>
 <p>这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。</p>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2>]]></content>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。</p>
+<p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统"></p>
+<p>下面是比较详细的i节点和数据块图<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图"><br>在图中，我们注意到：<br>* </p>
+]]></content>
     
     <summary type="html">
     
@@ -485,7 +602,7 @@
     <link href="http://gwq5210.github.io/2017/07/09/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>http://gwq5210.github.io/2017/07/09/Cpp-Primer-Plus读书笔记（二）/</id>
     <published>2017-07-09T06:47:52.000Z</published>
-    <updated>2017-07-17T17:13:49.002Z</updated>
+    <updated>2017-07-17T17:13:49.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="循环和关系表达式"><a href="#循环和关系表达式" class="headerlink" title="循环和关系表达式"></a>循环和关系表达式</h1><p>for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：</p>
 <ul>
@@ -906,7 +1023,7 @@
     <link href="http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://gwq5210.github.io/2017/07/02/Cpp-Primer-Plus读书笔记（一）/</id>
     <published>2017-07-02T13:25:04.000Z</published>
-    <updated>2017-07-09T06:46:33.437Z</updated>
+    <updated>2017-07-09T06:46:33.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="第一章-预备知识"><a href="#第一章-预备知识" class="headerlink" title="第一章 预备知识"></a>第一章 预备知识</h1><h2 id="C-简介"><a href="#C-简介" class="headerlink" title="C++简介"></a>C++简介</h2><p>C++融合了三种不同的编程方式：</p>
 <ul>
