@@ -20,7 +20,9 @@
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz">
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=">
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz">
-<meta property="og:updated_time" content="2017-07-24T13:05:43.000Z">
+<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz">
+<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz">
+<meta property="og:updated_time" content="2017-07-24T16:45:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
@@ -204,7 +206,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX基础知识"><span class="post-toc-text">UNIX基础知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX标准及实现"><span class="post-toc-text">UNIX标准及实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件IO"><span class="post-toc-text">文件IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#open函数"><span class="post-toc-text">open函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#creat函数"><span class="post-toc-text">creat函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#close函数"><span class="post-toc-text">close函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lseek函数"><span class="post-toc-text">lseek函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#read函数"><span class="post-toc-text">read函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#write函数"><span class="post-toc-text">write函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO的效率"><span class="post-toc-text">IO的效率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件共享"><span class="post-toc-text">文件共享</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子操作"><span class="post-toc-text">原子操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数dup和dup2"><span class="post-toc-text">函数dup和dup2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数sync，fsync和fdatasync"><span class="post-toc-text">函数sync，fsync和fdatasync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fcntl"><span class="post-toc-text">函数fcntl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数ioctl"><span class="post-toc-text">函数ioctl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dev-fd"><span class="post-toc-text">/dev/fd</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件和目录"><span class="post-toc-text">文件和目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数stat，fstat，fstatat和lstat"><span class="post-toc-text">函数stat，fstat，fstatat和lstat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件类型"><span class="post-toc-text">文件类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置用户ID和设置组ID"><span class="post-toc-text">设置用户ID和设置组ID</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限"><span class="post-toc-text">文件访问权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新文件和目录的所有权"><span class="post-toc-text">新文件和目录的所有权</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数access和faccessat"><span class="post-toc-text">函数access和faccessat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数umask"><span class="post-toc-text">函数umask</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chmod、fchmod和fchmodat"><span class="post-toc-text">函数chmod、fchmod和fchmodat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#粘着位"><span class="post-toc-text">粘着位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chown、fchown、fchownat和lchown"><span class="post-toc-text">chown、fchown、fchownat和lchown</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件长度"><span class="post-toc-text">文件长度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件截断"><span class="post-toc-text">文件截断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统"><span class="post-toc-text">文件系统</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX基础知识"><span class="post-toc-text">UNIX基础知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX标准及实现"><span class="post-toc-text">UNIX标准及实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件IO"><span class="post-toc-text">文件IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#open函数"><span class="post-toc-text">open函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#creat函数"><span class="post-toc-text">creat函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#close函数"><span class="post-toc-text">close函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lseek函数"><span class="post-toc-text">lseek函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#read函数"><span class="post-toc-text">read函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#write函数"><span class="post-toc-text">write函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO的效率"><span class="post-toc-text">IO的效率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件共享"><span class="post-toc-text">文件共享</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子操作"><span class="post-toc-text">原子操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数dup和dup2"><span class="post-toc-text">函数dup和dup2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数sync，fsync和fdatasync"><span class="post-toc-text">函数sync，fsync和fdatasync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fcntl"><span class="post-toc-text">函数fcntl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数ioctl"><span class="post-toc-text">函数ioctl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dev-fd"><span class="post-toc-text">/dev/fd</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件和目录"><span class="post-toc-text">文件和目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数stat，fstat，fstatat和lstat"><span class="post-toc-text">函数stat，fstat，fstatat和lstat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件类型"><span class="post-toc-text">文件类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置用户ID和设置组ID"><span class="post-toc-text">设置用户ID和设置组ID</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限"><span class="post-toc-text">文件访问权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新文件和目录的所有权"><span class="post-toc-text">新文件和目录的所有权</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数access和faccessat"><span class="post-toc-text">函数access和faccessat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数umask"><span class="post-toc-text">函数umask</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chmod、fchmod和fchmodat"><span class="post-toc-text">函数chmod、fchmod和fchmodat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#粘着位"><span class="post-toc-text">粘着位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chown、fchown、fchownat和lchown"><span class="post-toc-text">chown、fchown、fchownat和lchown</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件长度"><span class="post-toc-text">文件长度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件截断"><span class="post-toc-text">文件截断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统"><span class="post-toc-text">文件系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数link，linkat，unlink，unlinkat和remove"><span class="post-toc-text">函数link，linkat，unlink，unlinkat和remove</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数rename和renameat"><span class="post-toc-text">函数rename和renameat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#符号链接"><span class="post-toc-text">符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建和读取符号链接"><span class="post-toc-text">创建和读取符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的时间"><span class="post-toc-text">文件的时间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数futimens，utimensat和utimes"><span class="post-toc-text">函数futimens，utimensat和utimes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数mkdir，mkdirat和rmdir"><span class="post-toc-text">函数mkdir，mkdirat和rmdir</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#读目录"><span class="post-toc-text">读目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chdir，fchdir和getcwd"><span class="post-toc-text">函数chdir，fchdir和getcwd</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设备特殊文件"><span class="post-toc-text">设备特殊文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限位小结"><span class="post-toc-text">文件访问权限位小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#标准IO库"><span class="post-toc-text">标准IO库</span></a></li></ol>
             </nav>
             
         </aside>
@@ -770,8 +772,201 @@
 <p>这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。</p>
 <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。</p>
 <p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统"></p>
-<p>下面是比较详细的i节点和数据块图<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图"><br>在图中，我们注意到：<br>* </p>
-
+<p>下面是比较详细的i节点和数据块图<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图"><br>在图中，我们注意到：</p>
+<ul>
+<li>有两个目录项指向同一个i节点，每个i节点中都有一个链接计数，其值是指向该i节点的目录项数。只有当链接计数减少到0时，才可删除该文件。这就是为什么解除一个文件的链接操作并不总是意味着释放该文件占用的磁盘块的原因。在stat结构中，链接计数包含在st_nlink成员中，其基本系统数据类型是nlink_t。这种链接类型称为硬链接。LINK_MAX指定了一个文件链接数的最大值。</li>
+<li>另外一种类型链接称为符号链接（symbolic link）。符号链接的实际内容包含了该符号链接所指向的文件的名字。</li>
+<li>i节点包含了文件有关的所有信息：文件类型，文件访问权限位，文件长度和指向文件数据块的指针。stat结构中的大多数信息都取自i节点。只有两项重要数据存放在目录中：文件名和i节点编号。还有其他记录项，我们并不关心，如文件名长度等</li>
+<li>因为目录项中的i节点编号指向同一个文件系统中相应的i节点，一个目录项不能指向另一个文件系统的i节点。这就是为什么ln命令构造一个现有文件的新目录项不能跨越文件系统的原因。</li>
+<li>当在不更换文件系统的情况下为一个文件重命名时，该文件的实际内容并未移动，只需要构造一个指向现有i节点的目录项，并删除老的目录项。链接计数不会改变。这一般是mv命令的通常操作方式。</li>
+</ul>
+<p>任何一个不包含任何其他目录的目录的链接计数总是2。即.和..。</p>
+<h2 id="函数link，linkat，unlink，unlinkat和remove"><a href="#函数link，linkat，unlink，unlinkat和remove" class="headerlink" title="函数link，linkat，unlink，unlinkat和remove"></a>函数link，linkat，unlink，unlinkat和remove</h2><p>创建一个指向现有文件的链接的方法是使用link或linkat函数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *existingpath, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">linkat</span><span class="params">(<span class="keyword">int</span> efd, <span class="keyword">const</span> <span class="keyword">char</span> *existingpath, <span class="keyword">int</span> nfd, <span class="keyword">const</span> <span class="keyword">char</span> *newpath, <span class="keyword">int</span> flag)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>这两个函数创建一个新目录项newpath，它引用现有文件existingpath，如果newpath已经存在，则返回出错。只创建newpath中的最后一个分量，路径中的其他部分应该已经存在。</p>
+<p>对于linkat函数，现有文件是通过efd和existingpath参数指定的，新的路径名是通过nfd和newpath指定的。默认情况下，如果两个路径名中的任意一个是相对路径，那么他需要通过相对于对应的文件描述符进行计算，如果两个文件描述符中的任一个设置为AT_FDCWD，那么相应的路径名就通过相对于当前目录计算。如果任一路径名是绝对路径，相应的文件描述符参数就会被忽略。</p>
+<p>当现有文件名是符号链接时，由参数flag来控制linkat函数是创建指向现有符号链接的链接还是创建指向现有符号链接指向的文件的链接。如果在flag中设置了AT_SYMLINK_FOLLOW标志，就创建指向符号链接目标的链接。如果这个标志被清除了，则创建一个指向符号链接本身的链接。创建新目录项和增加链接计数应当是一个原子操作。</p>
+<p>虽然POSIX.1允许实现支持跨越文件系统的链接，但是大多数现有系统要求现有的和新建的两个文件路径名在同一个文件系统中。只有超级用户才能够创建指向一个目录的硬链接。这样可能在系统中形成循环。</p>
+<p>为了删除一个现有的目录项，可以调用unlink函数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">int</span> flag)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>这两个函数删除目录项，并将由pathname所引用文件的链接计数减1，如果该文件还有其他链接，则仍可通过其他链接访问该文件的数据。如果出错，则不对文件进行任何修改。</p>
+<p>当链接计数为0时，该文件的内容才可被删除。另一个条件也会阻止删除文件的内容——只要有进程打开了文件。关闭一个文件时，内核首先检查打开该文件的进程个数；如果这个计数达到0，内核再去检查其链接计数，如果计数也是0，那么就删除该文件的内容。</p>
+<p>unlinkat使用fd作为相对路径起点。或者设置为AT_FDCWD，则相对于当前路径。</p>
+<p>当flag为AT_REMOVEDIR时，unlinkat可以类似于rmdir一样删除目录，如果这个标志被清除，unlinkat与link执行相同的操作。</p>
+<p>如果pathname是符号链接，那么unlink函数删除该符号链接，而不是删除由符号链接所引用的文件，给出符号链接名的情况下，没有一个函数能够删除由该符号链接引用的文件。</p>
+<p>我们也可以使用remove函数接触一个函数或目录的链接。对于文件remove的功能与unlink相同，对于目录，remove的功能与rmdir相同：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div></pre></td></tr></table></figure></p>
+<h2 id="函数rename和renameat"><a href="#函数rename和renameat" class="headerlink" title="函数rename和renameat"></a>函数rename和renameat</h2><p>文件或目录可以使用rename或renameat函数进行重命名。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rename</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldname, <span class="keyword">const</span> <span class="keyword">char</span> *newname)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">renameat</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">const</span> <span class="keyword">char</span> *oldname, <span class="keyword">int</span> newfd, <span class="keyword">const</span> <span class="keyword">char</span> *newname)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>根据对oldname是指文件，目录还是符号链接或者newname已经存在我们需要说明：</p>
+<ul>
+<li>如果oldname指的是文件而不是目录，那么为该文件或符号链接重命名。在这种情况下，如果newname已经存在，则它不能引用一个目录。如果newname已经存在，而且不是一个目录，则先将该目录项删除然后将oldname重命名为newname。对包含oldname的目录以及包含newname的目录，调用进程必须具有写权限，因为将更改这两个目录。</li>
+<li>如果oldname是一个目录，那么为该目录重命名。如果newname已经存在，则它必须引用一个目录，而且该目录应当是空目录(只有.和..)。如果newname存在而且是一个空目录，则先将其删除，然后将oldname重命名为newname。newname不能包含oldname的前缀。</li>
+<li>如果oldname或newname引用符号链接，则处理的是符号链接本身，而不是它引用的文件。</li>
+<li>不能对.和..重命名。</li>
+<li>作为一个特例，如果oldname和newname引用同一个文件，则函数不做任何修改而成功返回。</li>
+</ul>
+<p>除了当oldname或newname指向相对路径时，其他情况renameat和rename函数功能相同。</p>
+<h2 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h2><p>符号链接是对一个文件的间接指针。引入符号链接是为了避开硬链接的一些限制。</p>
+<ul>
+<li>硬链接通常要求链接和文件在同一个文件系统上</li>
+<li>只有超级用户才能创建指向目录的硬链接</li>
+</ul>
+<p>对符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可以创建指向目录的符号链接。</p>
+<p>当使用以名字引用文件的函数时，应当了解函数是否处理符号链接。也就是是否跟随符号链接到达它所链接的文件。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>是否跟随符号链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access</td>
+<td>是</td>
+</tr>
+<tr>
+<td>chdir</td>
+<td>是</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td>是</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>是</td>
+</tr>
+<tr>
+<td>creat</td>
+<td>是</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>是</td>
+</tr>
+<tr>
+<td>lchown</td>
+<td>否</td>
+</tr>
+<tr>
+<td>link</td>
+<td>是</td>
+</tr>
+<tr>
+<td>lstat</td>
+<td>否</td>
+</tr>
+<tr>
+<td>open</td>
+<td>是</td>
+</tr>
+<tr>
+<td>opendir</td>
+<td>是</td>
+</tr>
+<tr>
+<td>pathconf</td>
+<td>是</td>
+</tr>
+<tr>
+<td>readlink</td>
+<td>否</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>否</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>否</td>
+</tr>
+<tr>
+<td>stat</td>
+<td>是</td>
+</tr>
+<tr>
+<td>truncate</td>
+<td>是</td>
+</tr>
+<tr>
+<td>unlink</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>open的一个例外是，如果同时用O_CREAT和O_EXCL两个标志，如果路径引用符号链接，open函数将出错，errno设置为EEXIST，这种处理是意图堵塞一个安全漏洞，以防止具有特权的进程被诱骗编写错误的文件</p>
+<h2 id="创建和读取符号链接"><a href="#创建和读取符号链接" class="headerlink" title="创建和读取符号链接"></a>创建和读取符号链接</h2><p>可以使用symlink或symlinkat函数创建一个符号链接<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>函数创建了一个指向actualpath的新目录项sympath，在创建符号链接时，并不要求actualpath存在，也不需要在同一个文件系统中。</p>
+<p>symlinkat函数类似，sympath根据fd作为相对路径进行计算。</p>
+<p>open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> readlink(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize);</div><div class="line"><span class="keyword">ssize_t</span> readlinkat(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, size bufsize);</div></pre></td></tr></table></figure></p>
+<p>两个函数组合了open，read，close的所有操作。readlinkat以fd作为相对路径。</p>
+<h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><p>对于每个文件维护三个时间</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>例子</th>
+<th>ls选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>st_atim</td>
+<td>文件数据的最后访问时间</td>
+<td>read</td>
+<td>-u</td>
+</tr>
+<tr>
+<td>st_mtim</td>
+<td>文件数据的最后修改时间</td>
+<td>write</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>st_ctim</td>
+<td>i节点状态的最后更改时间</td>
+<td>chmod，chown</td>
+<td>-c</td>
+</tr>
+</tbody>
+</table>
+<p>注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的</p>
+<p><img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响"></p>
+<h2 id="函数futimens，utimensat和utimes"><a href="#函数futimens，utimensat和utimes" class="headerlink" title="函数futimens，utimensat和utimes"></a>函数futimens，utimensat和utimes</h2><p>一个文件的访问和修改时间可以通过一下几个函数修改。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">futimens</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimensat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>], <span class="keyword">int</span> flag)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>times数组参数的第一个元素包含访问时间，第二个元素包含修改时间，这两个值是日历时间。</p>
+<p>时间戳可以按下列4中方式之一指定</p>
+<ul>
+<li>如果times是空指针，则访问时间和修改时间两者都设置为当前时间</li>
+<li>如果times参数指向两个timespec结构的数组，任一数组元素的tv_nsec字段的值为UTIME_NOW，则相应的时间戳就设置为当前时间，忽略相应的tv_sec字段</li>
+<li>如果times参数指向两个timespec结构的数组，任意数组元素的tv_nsec字段的值为UTIME_OMIT，相应的时间戳保持不变，忽略相应的tv_sec字段</li>
+<li>如果times参数执行两个timespec结构的数组，且tv_nsec字段的值不是上述两者，这种情况下，设置为对应的值</li>
+</ul>
+<p>执行函数的所需的权限取决于times的值，如果不修改时间戳，则不进行权限检查；如果修改，则除了对文件有写权限，进程的有效用户ID必须等于文件的所有者ID</p>
+<p>utimesns提供了使用文件名来设置时间的功能，flag可以决定是否跟随符号链接(是否设置了AT_SYMLINK_NOFOLLOW标志)，默认行为是跟随符号链接。</p>
+<p>前两个函数都包含在POSIX.1中，第3个函数包含在Single UNIX Specsification的XSI扩展选项中<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimes</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> struct timeval times[<span class="number">2</span>])</span></span>;</div></pre></td></tr></table></figure></p>
+<p>utimes函数对路径名进行操作。结构timeval包含两个时间戳，用秒和微妙来表示<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">time_t</span> tv_sec;</div><div class="line">  <span class="keyword">long</span> tv_usec;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们不能对状态更改时间指定一个值，这在调用utimes函数时自动被更新。</p>
+<h2 id="函数mkdir，mkdirat和rmdir"><a href="#函数mkdir，mkdirat和rmdir" class="headerlink" title="函数mkdir，mkdirat和rmdir"></a>函数mkdir，mkdirat和rmdir</h2><p>我们用mkdir、mkdirat创建目录，用rmdir来删除目录<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkdirat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>这两个函数创建一个空目录。mode指定访问权限。通常我们需要目录的执行权限。</p>
+<p>可以使用rmdir函数删除一个空目录<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rmdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>如果调用此函数使得目录的链接计数为0，并且也没有其他进程打开目录，则释放由此目录占用的空间。如果在链接计数达到0时，有一个或多个进程打开此目录，则此函数返回前删除最后一个链接及.和..项。此目录中不能再创建任何文件，但是在最后一个进程关闭它之前并不释放此目录，即使另一些进程打开该目录，它在此目录下也不能执行其他操作。因为rmdir执行成功的前提是目录是空的。</p>
+<h2 id="读目录"><a href="#读目录" class="headerlink" title="读目录"></a>读目录</h2><p>对某个目录具有读访问权限的任一用户都能读该目录，但是为了防止文件系统混乱，只有内核才能够写目录。</p>
+<p>目录的实际格式依赖实现。我们使用下边的函数来屏蔽这种实现细节<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirnet.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">DIR *<span class="title">opendir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="function">DIR *<span class="title">fdopendir</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</div><div class="line"></div><div class="line"><span class="function">struct dirent *<span class="title">readdir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">rewinddir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">closedir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">telldir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">seekdir</span><span class="params">(DIR *dp, <span class="keyword">long</span> loc)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>dirent结构与实现有关，但是至少包含i节点编号和目录名字。</p>
+<p>DIR是一个内部结构，用来维护正在读的目录的有关信息。</p>
+<p>ftw和nftw实现了目录的遍历</p>
+<h2 id="函数chdir，fchdir和getcwd"><a href="#函数chdir，fchdir和getcwd" class="headerlink" title="函数chdir，fchdir和getcwd"></a>函数chdir，fchdir和getcwd</h2><p>进程都有一个当前工作目录，调用chdir或fchdir可以更改当前工作目录<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">chdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchdir</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>当前工作目录与进程相关，在shell中，cd命令是内建的命令，因为需要shell本身来调用chdir。</p>
+<p>我们可以通过chdir一直转到上级目录来获取当前工作路径，getcwd提供了类似的功能<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getcwd</span><span class="params">(<span class="keyword">char</span> *buf, <span class="keyword">size_t</span> size)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>chdir跟随符号链接。</p>
+<h2 id="设备特殊文件"><a href="#设备特殊文件" class="headerlink" title="设备特殊文件"></a>设备特殊文件</h2><p>st_dev和st_rdev经常混淆，有关规则很简单</p>
+<ul>
+<li>每个文件系统所在的存储设备都由其主次设备号表示。其系统基本数据类型是dev_t，主设备号标识设备驱动程序，有时编码为与其通信的外设板，次设备号标识特定的子设备。</li>
+<li>我们使用major和minor来访问主、次设备号。大多数系统都定义了这两个宏。</li>
+<li>系统中与每个文件名关联的st_dev是文件系统的设备号，该文件系统包含了这一文件名以及与其对应的i节点</li>
+<li>只有字符特殊文件和块特殊文件才有st_rdev值，此值包含实际设备的设备号。</li>
+</ul>
+<h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><p><img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结"></p>
+<h1 id="标准IO库"><a href="#标准IO库" class="headerlink" title="标准IO库"></a>标准IO库</h1>
 
             
             <div class="post-reward">
