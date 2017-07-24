@@ -666,3 +666,234 @@ UNIX文件系统有多种不同的实现。每一种文件系统都有它各自�
 任何一个不包含任何其他目录的目录的链接计数总是2。即.和..。
 
 ## 函数link，linkat，unlink，unlinkat和remove
+创建一个指向现有文件的链接的方法是使用link或linkat函数：
+```
+#include <unistd.h>
+
+int link(const char *existingpath, const char *newpath);
+int linkat(int efd, const char *existingpath, int nfd, const char *newpath, int flag);
+```
+这两个函数创建一个新目录项newpath，它引用现有文件existingpath，如果newpath已经存在，则返回出错。只创建newpath中的最后一个分量，路径中的其他部分应该已经存在。
+
+对于linkat函数，现有文件是通过efd和existingpath参数指定的，新的路径名是通过nfd和newpath指定的。默认情况下，如果两个路径名中的任意一个是相对路径，那么他需要通过相对于对应的文件描述符进行计算，如果两个文件描述符中的任一个设置为AT_FDCWD，那么相应的路径名就通过相对于当前目录计算。如果任一路径名是绝对路径，相应的文件描述符参数就会被忽略。
+
+当现有文件名是符号链接时，由参数flag来控制linkat函数是创建指向现有符号链接的链接还是创建指向现有符号链接指向的文件的链接。如果在flag中设置了AT_SYMLINK_FOLLOW标志，就创建指向符号链接目标的链接。如果这个标志被清除了，则创建一个指向符号链接本身的链接。创建新目录项和增加链接计数应当是一个原子操作。
+
+虽然POSIX.1允许实现支持跨越文件系统的链接，但是大多数现有系统要求现有的和新建的两个文件路径名在同一个文件系统中。只有超级用户才能够创建指向一个目录的硬链接。这样可能在系统中形成循环。
+
+为了删除一个现有的目录项，可以调用unlink函数：
+```
+#include <unistd.h>
+
+int unlink(const char *pathname);
+int unlinkat(int fd, const char *path, int flag);
+```
+这两个函数删除目录项，并将由pathname所引用文件的链接计数减1，如果该文件还有其他链接，则仍可通过其他链接访问该文件的数据。如果出错，则不对文件进行任何修改。
+
+当链接计数为0时，该文件的内容才可被删除。另一个条件也会阻止删除文件的内容——只要有进程打开了文件。关闭一个文件时，内核首先检查打开该文件的进程个数；如果这个计数达到0，内核再去检查其链接计数，如果计数也是0，那么就删除该文件的内容。
+
+unlinkat使用fd作为相对路径起点。或者设置为AT_FDCWD，则相对于当前路径。
+
+当flag为AT_REMOVEDIR时，unlinkat可以类似于rmdir一样删除目录，如果这个标志被清除，unlinkat与link执行相同的操作。
+
+如果pathname是符号链接，那么unlink函数删除该符号链接，而不是删除由符号链接所引用的文件，给出符号链接名的情况下，没有一个函数能够删除由该符号链接引用的文件。
+
+我们也可以使用remove函数接触一个函数或目录的链接。对于文件remove的功能与unlink相同，对于目录，remove的功能与rmdir相同：
+```
+#include <stdio.h>
+
+int remove(const char *pathname);
+```
+
+## 函数rename和renameat
+文件或目录可以使用rename或renameat函数进行重命名。
+```
+#include <stdio.h>
+
+int rename(const char *oldname, const char *newname);
+int renameat(int oldfd, const char *oldname, int newfd, const char *newname);
+```
+根据对oldname是指文件，目录还是符号链接或者newname已经存在我们需要说明：
+* 如果oldname指的是文件而不是目录，那么为该文件或符号链接重命名。在这种情况下，如果newname已经存在，则它不能引用一个目录。如果newname已经存在，而且不是一个目录，则先将该目录项删除然后将oldname重命名为newname。对包含oldname的目录以及包含newname的目录，调用进程必须具有写权限，因为将更改这两个目录。
+* 如果oldname是一个目录，那么为该目录重命名。如果newname已经存在，则它必须引用一个目录，而且该目录应当是空目录(只有.和..)。如果newname存在而且是一个空目录，则先将其删除，然后将oldname重命名为newname。newname不能包含oldname的前缀。
+* 如果oldname或newname引用符号链接，则处理的是符号链接本身，而不是它引用的文件。
+* 不能对.和..重命名。
+* 作为一个特例，如果oldname和newname引用同一个文件，则函数不做任何修改而成功返回。
+
+除了当oldname或newname指向相对路径时，其他情况renameat和rename函数功能相同。
+
+## 符号链接
+符号链接是对一个文件的间接指针。引入符号链接是为了避开硬链接的一些限制。
+* 硬链接通常要求链接和文件在同一个文件系统上
+* 只有超级用户才能创建指向目录的硬链接
+
+对符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可以创建指向目录的符号链接。
+
+当使用以名字引用文件的函数时，应当了解函数是否处理符号链接。也就是是否跟随符号链接到达它所链接的文件。
+
+| 函数       | 是否跟随符号链接 |
+| -------- | -------- |
+| access   | 是        |
+| chdir    | 是        |
+| chmod    | 是        |
+| chown    | 是        |
+| creat    | 是        |
+| exec     | 是        |
+| lchown   | 否        |
+| link     | 是        |
+| lstat    | 否        |
+| open     | 是        |
+| opendir  | 是        |
+| pathconf | 是        |
+| readlink | 否        |
+| remove   | 否        |
+| rename   | 否        |
+| stat     | 是        |
+| truncate | 是        |
+| unlink   | 否        |
+
+open的一个例外是，如果同时用O_CREAT和O_EXCL两个标志，如果路径引用符号链接，open函数将出错，errno设置为EEXIST，这种处理是意图堵塞一个安全漏洞，以防止具有特权的进程被诱骗编写错误的文件
+
+## 创建和读取符号链接
+可以使用symlink或symlinkat函数创建一个符号链接
+```
+#include <unistd.h>
+
+int symlink(const char *actualpath, const char *sympath);
+int symlink(const char *actualpath, int fd, const char *sympath);
+```
+函数创建了一个指向actualpath的新目录项sympath，在创建符号链接时，并不要求actualpath存在，也不需要在同一个文件系统中。
+
+symlinkat函数类似，sympath根据fd作为相对路径进行计算。
+
+open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身
+```
+#include <unistd.h>
+
+ssize_t readlink(const char *restrict pathname, char *restrict buf, size_t bufsize);
+ssize_t readlinkat(int fd, const char *restrict pathname, char *restrict buf, size bufsize);
+```
+两个函数组合了open，read，close的所有操作。readlinkat以fd作为相对路径。
+
+## 文件的时间
+对于每个文件维护三个时间
+
+| 字段      | 说明           | 例子          | ls选项 |
+| ------- | ------------ | ----------- | ---- |
+| st_atim | 文件数据的最后访问时间  | read        | -u   |
+| st_mtim | 文件数据的最后修改时间  | write       | 默认   |
+| st_ctim | i节点状态的最后更改时间 | chmod，chown | -c   |
+
+注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的
+
+![各种函数对三种时间的影响](http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz)
+
+## 函数futimens，utimensat和utimes
+一个文件的访问和修改时间可以通过一下几个函数修改。
+```
+#include <sys/stat.h>
+
+int futimens(int fd, const struct timespec times[2]);
+int utimensat(int fd, const char *path, const struct timespec times[2], int flag);
+```
+times数组参数的第一个元素包含访问时间，第二个元素包含修改时间，这两个值是日历时间。
+
+时间戳可以按下列4中方式之一指定
+* 如果times是空指针，则访问时间和修改时间两者都设置为当前时间
+* 如果times参数指向两个timespec结构的数组，任一数组元素的tv_nsec字段的值为UTIME_NOW，则相应的时间戳就设置为当前时间，忽略相应的tv_sec字段
+* 如果times参数指向两个timespec结构的数组，任意数组元素的tv_nsec字段的值为UTIME_OMIT，相应的时间戳保持不变，忽略相应的tv_sec字段
+* 如果times参数执行两个timespec结构的数组，且tv_nsec字段的值不是上述两者，这种情况下，设置为对应的值
+
+执行函数的所需的权限取决于times的值，如果不修改时间戳，则不进行权限检查；如果修改，则除了对文件有写权限，进程的有效用户ID必须等于文件的所有者ID
+
+utimesns提供了使用文件名来设置时间的功能，flag可以决定是否跟随符号链接(是否设置了AT_SYMLINK_NOFOLLOW标志)，默认行为是跟随符号链接。
+
+前两个函数都包含在POSIX.1中，第3个函数包含在Single UNIX Specsification的XSI扩展选项中
+```
+#include <sys/time.h>
+
+int utimes(const char *pathname, const struct timeval times[2]);
+```
+utimes函数对路径名进行操作。结构timeval包含两个时间戳，用秒和微妙来表示
+```
+struct timeval
+{
+  time_t tv_sec;
+  long tv_usec;
+}
+```
+我们不能对状态更改时间指定一个值，这在调用utimes函数时自动被更新。
+
+## 函数mkdir，mkdirat和rmdir
+我们用mkdir、mkdirat创建目录，用rmdir来删除目录
+```
+#include <sys/stat.h>
+
+int mkdir(const char *pathname, mode_t mode);
+int mkdirat(int fd, const char *pathname, mode_t mode);
+```
+这两个函数创建一个空目录。mode指定访问权限。通常我们需要目录的执行权限。
+
+可以使用rmdir函数删除一个空目录
+```
+#include <unistd.h>
+
+int rmdir(const char *pathname);
+```
+如果调用此函数使得目录的链接计数为0，并且也没有其他进程打开目录，则释放由此目录占用的空间。如果在链接计数达到0时，有一个或多个进程打开此目录，则此函数返回前删除最后一个链接及.和..项。此目录中不能再创建任何文件，但是在最后一个进程关闭它之前并不释放此目录，即使另一些进程打开该目录，它在此目录下也不能执行其他操作。因为rmdir执行成功的前提是目录是空的。
+
+## 读目录
+对某个目录具有读访问权限的任一用户都能读该目录，但是为了防止文件系统混乱，只有内核才能够写目录。
+
+目录的实际格式依赖实现。我们使用下边的函数来屏蔽这种实现细节
+```
+#include <dirnet.h>
+
+DIR *opendir(const char *pathname);
+DIR *fdopendir(int fd);
+
+struct dirent *readdir(DIR *dp);
+
+void rewinddir(DIR *dp);
+int closedir(DIR *dp);
+
+long telldir(DIR *dp);
+
+void seekdir(DIR *dp, long loc);
+```
+dirent结构与实现有关，但是至少包含i节点编号和目录名字。
+
+DIR是一个内部结构，用来维护正在读的目录的有关信息。
+
+ftw和nftw实现了目录的遍历
+
+## 函数chdir，fchdir和getcwd
+进程都有一个当前工作目录，调用chdir或fchdir可以更改当前工作目录
+```
+#include <unistd.h>
+
+int chdir(const char *pathname);
+int fchdir(int fd);
+```
+当前工作目录与进程相关，在shell中，cd命令是内建的命令，因为需要shell本身来调用chdir。
+
+我们可以通过chdir一直转到上级目录来获取当前工作路径，getcwd提供了类似的功能
+```
+#include <unistd.h>
+
+char *getcwd(char *buf, size_t size);
+```
+
+chdir跟随符号链接。
+
+## 设备特殊文件
+st_dev和st_rdev经常混淆，有关规则很简单
+* 每个文件系统所在的存储设备都由其主次设备号表示。其系统基本数据类型是dev_t，主设备号标识设备驱动程序，有时编码为与其通信的外设板，次设备号标识特定的子设备。
+* 我们使用major和minor来访问主、次设备号。大多数系统都定义了这两个宏。
+* 系统中与每个文件名关联的st_dev是文件系统的设备号，该文件系统包含了这一文件名以及与其对应的i节点
+* 只有字符特殊文件和块特殊文件才有st_rdev值，此值包含实际设备的设备号。
+
+## 文件访问权限位小结
+![文件访问权限位小结](http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz)
+
+# 标准IO库
