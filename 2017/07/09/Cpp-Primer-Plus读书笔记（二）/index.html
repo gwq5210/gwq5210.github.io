@@ -16,7 +16,7 @@
 <meta property="og:url" content="http://gwq5210.github.io/2017/07/09/Cpp-Primer-Plus读书笔记（二）/index.html">
 <meta property="og:site_name" content="Rhett&#39;s Blog">
 <meta property="og:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
-<meta property="og:updated_time" content="2017-07-17T17:13:49.000Z">
+<meta property="og:updated_time" content="2017-07-26T17:40:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta name="twitter:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
@@ -205,7 +205,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支语句和逻辑运算符"><span class="post-toc-text">分支语句和逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数——C-的编程模块"><span class="post-toc-text">函数——C++的编程模块</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数探幽"><span class="post-toc-text">函数探幽</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内联函数"><span class="post-toc-text">内联函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用变量"><span class="post-toc-text">引用变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#默认参数"><span class="post-toc-text">默认参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数重载"><span class="post-toc-text">函数重载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数模板"><span class="post-toc-text">函数模板</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内存模型和名称空间"><span class="post-toc-text">内存模型和名称空间</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#循环和关系表达式"><span class="post-toc-text">循环和关系表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分支语句和逻辑运算符"><span class="post-toc-text">分支语句和逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数——C-的编程模块"><span class="post-toc-text">函数——C++的编程模块</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#函数探幽"><span class="post-toc-text">函数探幽</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内联函数"><span class="post-toc-text">内联函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用变量"><span class="post-toc-text">引用变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#默认参数"><span class="post-toc-text">默认参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数重载"><span class="post-toc-text">函数重载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数模板"><span class="post-toc-text">函数模板</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内存模型和名称空间"><span class="post-toc-text">内存模型和名称空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单独编译"><span class="post-toc-text">单独编译</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储持续性、作用域和链接性"><span class="post-toc-text">存储持续性、作用域和链接性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动存储持续性"><span class="post-toc-text">自动存储持续性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态存储变量"><span class="post-toc-text">静态存储变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态持续性、外部链接性"><span class="post-toc-text">静态持续性、外部链接性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态持续性、内部链接性"><span class="post-toc-text">静态持续性、内部链接性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态存储持续性、无链接性"><span class="post-toc-text">静态存储持续性、无链接性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明符和限定符"><span class="post-toc-text">说明符和限定符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数和链接性"><span class="post-toc-text">函数和链接性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语言链接性"><span class="post-toc-text">语言链接性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储方案和动态分配"><span class="post-toc-text">存储方案和动态分配</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#名称空间"><span class="post-toc-text">名称空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传统的C-名称空间"><span class="post-toc-text">传统的C++名称空间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#指导原则"><span class="post-toc-text">指导原则</span></a></li></ol></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -605,7 +605,140 @@
 <p>可以结合typedef和decltype<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">type decltype(a + b)<span class="built_in"> type;</span></div><div class="line">type c;</div></pre></td></tr></table></figure></p>
 <p>另一中函数声明语法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2</div><div class="line">? f(T1 a, T2 b)</div><div class="line"><span class="comment">// auto f(T1 a, T2 b) -&gt; decltype(a + b)</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> a + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这种情况，并不能使用decltype解决，x，y并不在作用域内。<br>新增的语法可以用作声明和定义：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> f(<span class="keyword">int</span> a, <span class="keyword">double</span> b) - &gt; <span class="keyword">double</span>;</div><div class="line"><span class="keyword">auto</span> func(<span class="keyword">double</span> a) -&gt; <span class="keyword">double</span></div><div class="line">&#123;</div><div class="line">  <span class="built_in">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="内存模型和名称空间"><a href="#内存模型和名称空间" class="headerlink" title="内存模型和名称空间"></a>内存模型和名称空间</h1>
+<h1 id="内存模型和名称空间"><a href="#内存模型和名称空间" class="headerlink" title="内存模型和名称空间"></a>内存模型和名称空间</h1><p>C++为在内存中存储数据方面提供了多种选择</p>
+<h2 id="单独编译"><a href="#单独编译" class="headerlink" title="单独编译"></a>单独编译</h2><p>和C语言一样，C++也允许甚至鼓励程序员将组件函数放在独立的文件中。我们可以单独编译这些文件，然后将这些文件链接起来。</p>
+<p>我们一般可以将程序分为三部分：</p>
+<ul>
+<li>头文件：包含结构声明和使用这些结构的函数的原型</li>
+<li>源代码文件：包含与结构有关的函数的代码</li>
+<li>源代码文件：包含调用与结构相关的函数的代码</li>
+</ul>
+<p>在头文件中，我们一般包含如下内容：</p>
+<ul>
+<li>函数原型</li>
+<li>使用#define或const定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+<p>通常我们需要保证一个头文件只包含一次。</p>
+<h2 id="存储持续性、作用域和链接性"><a href="#存储持续性、作用域和链接性" class="headerlink" title="存储持续性、作用域和链接性"></a>存储持续性、作用域和链接性</h2><p>C++使用3种(在C++11中是4种)不同的方案来存储数据，这些方案的区别在于数据保留在内存中的时间：</p>
+<ul>
+<li>自动存储持续性：在函数定义中声明的包括参数的存储持续性为自动的</li>
+<li>静态存储持续性：在函数定义外定义的变量和使用关键字static定义的变量的存储持续性都为静态。</li>
+<li>线程存储持续性(C++11)：我们使用关键字thread_local声明这种变量，其生命周期与所属的线程一样长</li>
+<li>动态存储持续性：用new来分配，和delete来释放。也被称为堆或自由存储</li>
+</ul>
+<p>作用域描述了名称在文件中的多大范围可见。链接性描述了名称如何在不同单元间共享。链接性为外部的名称可以在文件间共享，链接性为内部的名称只能由一个文件中的函数共享。</p>
+<p>C++变量的作用于有多种，作用域为局部的变量只在定义它的代码块中可用。作用域为全局的变量在定义位置到文件结束之间都可用。在函数原型作用域中使用的名称只在包含参数列表的括号中可用。在类中声明的成员的作用域为整个类。在名称空间中声明的变量的作用域为整个名称空间。全局作用域是名称空间作用域的特例。</p>
+<p>C++函数的作用域可以是整个类或整个名称空间(包括全局的)，但不能是局部的。不同的C++存储方式是通过存储持续性、作用域和链接性来描述的。</p>
+<h3 id="自动存储持续性"><a href="#自动存储持续性" class="headerlink" title="自动存储持续性"></a>自动存储持续性</h3><p>默认情况下，在函数中声明的函数参数和变量的存储持续性为自动，作用域为局部，没有链接性。如果代码块中定义了变量，则该变量的存在时间和作用域将被限制在该代码块中。如果存在同名变量，则较小作用域的变量会覆盖较大作用域的变量。</p>
+<p>C++11中的auto关键字用于自动类型推断。和之前的含义截然不同。C++11中的register关键字替代了之前的auto关键字，来指出变量是自动的，不再建议编译器使用CPU寄存器来存储自动变量。</p>
+<p>自动变量一般存储在栈中，栈是LIFO。这种设计简化了参数传递，参数一般从右往左进入栈中，这样也实现了可变参数。</p>
+<h3 id="静态存储变量"><a href="#静态存储变量" class="headerlink" title="静态存储变量"></a>静态存储变量</h3><p>静态存储变量有三种链接性：</p>
+<ul>
+<li>外部链接性，可在其他文件中访问，在代码块的外边声明它</li>
+<li>内部链接性，只能在当前文件中访问，在代码块的外边声明它，并使用static限定符</li>
+<li>无链接性，只能在当前函数或代码块中访问，在代码块中声明它，并使用static限定符</li>
+</ul>
+<p>这三种链接性都在整个程序执行期间存在。编译器分配固定的内存块来存储所有的静态变量。如果静态变量没有显示的初始化，编译器将把它设置为0。</p>
+<p>所有的静态持续变量都有下述初始化特征：未被初始化的静态变量的所有位都被设置为0，这种变量被称为零初始化的。</p>
+<table>
+<thead>
+<tr>
+<th>存储描述</th>
+<th>持续性</th>
+<th>作用域</th>
+<th>链接性</th>
+<th>如何声明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自动</td>
+<td>自动</td>
+<td>代码块</td>
+<td>无</td>
+<td>在代码块中</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>自动</td>
+<td>代码块</td>
+<td>无</td>
+<td>在代码块中，使用关键字register</td>
+</tr>
+<tr>
+<td>静态，无连接性</td>
+<td>静态</td>
+<td>代码块</td>
+<td>无</td>
+<td>在代码块中，使用关键字static</td>
+</tr>
+<tr>
+<td>静态，外部链接性</td>
+<td>静态</td>
+<td>文件</td>
+<td>外部</td>
+<td>不在任何函数中</td>
+</tr>
+<tr>
+<td>静态，内部链接性</td>
+<td>静态</td>
+<td>文件</td>
+<td>内部</td>
+<td>不再任何函数中，使用关键字static</td>
+</tr>
+</tbody>
+</table>
+<p>除了默认的零初始化外，还可对静态变量进行常量表达式初始化和动态初始化。零初始化和常量表达式初始化被统称为静态初始化。这意味着在编译器处理文件时初始化变量。动态初始化意味着变量在编译后初始化。</p>
+<p>C++11新增了关键字constexpr，这增加了创建常量表达式的方式。</p>
+<h3 id="静态持续性、外部链接性"><a href="#静态持续性、外部链接性" class="headerlink" title="静态持续性、外部链接性"></a>静态持续性、外部链接性</h3><p>链接性为外部的变量通常简称为外部变量，它们的存储持续性为静态，作用域为整个文件。外部变量是在函数外定义的，因此对所有函数而言都是外部的。</p>
+<p>单定义规则指出变量只能定义一次，C++提供了两种变量声明。一种是定义声明，简称定义，它给变量分配存储空间，另一种是引用声明，简称声明，它不给变量分配存储空间，它引用已有的变量；引用声明使用关键字extern，且不进行初始化，否则为定义。</p>
+<p>单定义规则并不意味这不能定义相同名字的变量。因为定义可以被覆盖。</p>
+<h3 id="静态持续性、内部链接性"><a href="#静态持续性、内部链接性" class="headerlink" title="静态持续性、内部链接性"></a>静态持续性、内部链接性</h3><p>将static限定符用于作用域为整个文件的变量时，该变量的链接性定义为内部的。我们不能在两个文件中分别定义同名的变量，这违反了单定义规则；但是一个内部静态变量能够隐藏在另一个文件中定义的外部静态变量。</p>
+<h2 id="静态存储持续性、无链接性"><a href="#静态存储持续性、无链接性" class="headerlink" title="静态存储持续性、无链接性"></a>静态存储持续性、无链接性</h2><p>静态局部变量的值在程序运行期间一直存在，初始化只初始化一次。</p>
+<h3 id="说明符和限定符"><a href="#说明符和限定符" class="headerlink" title="说明符和限定符"></a>说明符和限定符</h3><p>有些称为存储说明符或cv限定符的关键字提供了其他有关存储的信息。下边是存储说明符：</p>
+<ul>
+<li>auto，C++11中不再是说明符</li>
+<li>register</li>
+<li>static</li>
+<li>extern</li>
+<li>thread_local</li>
+<li>mutable</li>
+</ul>
+<p>关键字mutable的含义将根据const来解释。cv限定符包含const和volatile。const我们已经介绍过了。volatile表明即使一个程序代码没有对内存单元进行修改，其值也可能发生变化，例如访问某些硬件。这样编译器就不会对这个变量进行特殊优化。</p>
+<p>mutable指出即使结构或类为const，某个成员也可以被修改。</p>
+<p>在C++中，但不是在C语言中，const限定符对默认存储类型稍有影响。在默认情况下，全局变量的链接性为外部的，但const全局变量的链接性为内部的。对于const变量，我们需要使用extern指出其链接性为外部的。</p>
+<h3 id="函数和链接性"><a href="#函数和链接性" class="headerlink" title="函数和链接性"></a>函数和链接性</h3><p>函数的链接性可选的范围比变量小。默认情况下，函数的链接性为外部的，可以在文件间共享。对于函数来说extern关键字是可选的。使用关键字static来指出函数链接性为内部的，只能在当前文件中使用，必须同时在原型和函数定义中使用该关键字。</p>
+<p>单定义规则也适用于非内联函数。内联函数不受这个规则的约束，我们允许将内联函数定义在头文件中。要求所有内联函数的定义都必须相同。</p>
+<h3 id="语言链接性"><a href="#语言链接性" class="headerlink" title="语言链接性"></a>语言链接性</h3><p>语言链接性对函数也有影响。链接程序要求每个不同的函数都有不同的符号名。C语言中，一个名称只对应一个函数，因此这很容易实现，编译器可能将func这样的函数翻译为_func。这被称为C语言链接性。但在C++中，函数重载导致一个名称对应多个函数，我们需要为这些函数生成不同的名称，例如加上参数列表的类型信息，这被称为C++语言链接性。这就导致了链接程序寻找函数时的方法不同。如果要在C++中使用C库中预编译的函数，我们可以使用函数原型来指出希望的约定：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span></span>; <span class="comment">// c</span></div><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span></span>;	<span class="comment">// c++</span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C++"</span> func(<span class="keyword">int</span>);  <span class="comment">// c++</span></div></pre></td></tr></table></figure></p>
+<h3 id="存储方案和动态分配"><a href="#存储方案和动态分配" class="headerlink" title="存储方案和动态分配"></a>存储方案和动态分配</h3><p>对于new或malloc分配的内存，我们有自己控制这些内存生存周期的能力。</p>
+<p>new和delete将被转换为对应的函数，我们可以提供自己的函数来替换现有的new函数</p>
+<p>new还提供一种变体，被称为定位new运算符。我们能够指定存放的位置。我们必须包含new头文件。<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> <span class="built_in">buffer</span>[<span class="number">1024</span>];</div><div class="line"><span class="keyword">int</span> *p3 = <span class="keyword">new</span> (<span class="built_in">buffer</span>)<span class="keyword">int</span>[<span class="number">10</span>];</div></pre></td></tr></table></figure></p>
+<p>定位new运算符并不跟踪哪些内存已经被使用，两次使用将返回相同的地址，先前的数据将被覆盖。我们不能使用delete来释放这些内存。</p>
+<p>对于定位new函数，我们不可以替换，但可以进行重载。</p>
+<h2 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a>名称空间</h2><p>C++提供的名称空间工具，可以更好的控制名称的作用域。</p>
+<h3 id="传统的C-名称空间"><a href="#传统的C-名称空间" class="headerlink" title="传统的C++名称空间"></a>传统的C++名称空间</h3><p>声明区域是可以进行声明的区域。潜在作用域从声明点开始，到其声明区域的结尾。变量在潜在作用域内并不一定都是可见的。</p>
+<p>C++可以通过定义一种新的声明区域来创建命名的名称空间，提供一个声明名称的区域。名称空间可以是全局的，也可以位于另一个名称空间中，但不能位于代码块中。在默认情况下，名称空间中声明的名称的链接性是外部的，除非它引用了常量。存在一个全局名称空间，它对应于文件声明区域，全局变量在这个名称空间中。</p>
+<p>任何名称空间中的名称不会与其他名称空间中的名称发生冲突。我们使用作用域解析运算符::来使用名称空间中的名称。</p>
+<p>同样我们也可以使用using声明或using编译指令来简化对名称空间的使用。前者是特定标识符可用，后者使整个名称空间可用。</p>
+<p>using声明将特定的名称添加到它所属的声明区域中。</p>
+<p>using声明和using编译指令是不一样的，使用using声明就好像是声明了相应的名称一样，如果一个名称已经在函数中声明了，则不能再使用using声明导入相同的名称。然而使用using编译指令将进行名称解析，局部变量将隐藏名称空间版本的同名变量。</p>
+<p>名称空间可以进行嵌套，也可以在名称空间中使用using声明和using编译指令。using编译指令是可传递的。还可以对名称空间创建别名：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">test</span> = other_namespace;</div></pre></td></tr></table></figure></p>
+<p>我们可以创建未命名的名称空间，其中的名称的潜在作用域为从声明点到该声明区域末尾。这提供了链接性为内部的静态变量的替代品。</p>
+<h3 id="指导原则"><a href="#指导原则" class="headerlink" title="指导原则"></a>指导原则</h3><p>对于名称空间，下面是指导原则：</p>
+<ul>
+<li>使用在已命名的名称空间中声明的变量，而不是使用外部全局变量</li>
+<li>使用在已命名的名称空间中声明的变量，而不是使用静态全局变量</li>
+<li>如果开发了一个函数库，将其放在一个名称空间中</li>
+<li>谨慎使用using编译指令</li>
+<li>不要在头文件使用using编译指令</li>
+<li>导入名称时，首先使用作用域解析运算符或using声明的方法</li>
+<li>对于using声明，首选将其作用域设置为局部而不是全局</li>
+</ul>
+
 
             
             <div class="post-reward">
