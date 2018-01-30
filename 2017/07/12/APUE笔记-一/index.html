@@ -9,8 +9,9 @@
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="">
+  <meta name="keywords" content="读书笔记,unix,linux,APUE">
   <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
+<meta name="keywords" content="读书笔记,unix,linux,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
 <meta property="og:url" content="http://gwq5210.github.io/2017/07/12/APUE笔记-一/index.html">
@@ -22,7 +23,7 @@
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz">
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz">
 <meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz">
-<meta property="og:updated_time" content="2017-07-24T16:45:39.000Z">
+<meta property="og:updated_time" content="2018-01-30T15:51:28.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
@@ -106,7 +107,7 @@
 
     <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Rhett&#39;s Blog &copy; 2017</p>
+  <p>Rhett&#39;s Blog &copy; 2018</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
@@ -161,6 +162,8 @@
   class="article article-type-post" itemprop="blogPost">
     <div class="post-meta flex-row">
         
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APUE/">APUE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/">unix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
     </div>
     <div class="post-body">
         <aside class="post-widget" id="post-widget">
@@ -984,6 +987,13 @@
             </div>
             
 <nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2017/08/02/Cpp-Primer-Plus读书笔记（三）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Cpp-Primer-Plus读书笔记（三）</h4>
+      </a>
+    </div>
   
 
   
