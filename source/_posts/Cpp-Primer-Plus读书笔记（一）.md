@@ -1,6 +1,6 @@
 title: Cpp Primer Plus读书笔记（一）
 date: 2017-07-02 21:25:04
-tags:
+tags: [c++, Cpp Primer Plus, 读书笔记]
 ---
 # 第一章 预备知识
 ## C++简介
