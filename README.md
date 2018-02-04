@@ -32,6 +32,9 @@ rhettguo' blog
 	hexo s
 ```
 
+* 使用mathjax的问题
+参考[这里][http://blog.csdn.net/u014630987/article/details/78670258]
+
 # 参考
 1) [使用GitHub和Hexo搭建免费静态Blog][https://wsgzao.github.io/post/hexo-guide/]
 2) [hexo官网][https://hexo.io/zh-cn/docs/]
