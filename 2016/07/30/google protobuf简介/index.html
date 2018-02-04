@@ -230,6 +230,7 @@
 <h3 id="保留字段"><a href="#保留字段" class="headerlink" title="保留字段"></a>保留字段</h3><p>在你更新你的消息时，你可能删除掉一些字段，当其他人更新时，可能会重新使用之前用到的标签号，这个使用你可以使用reversed关键字，当其他人使用到reversed中的标号时，ProtoBuf会给出警告。你不能将名字和标号在一个reserved语句中混用。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">message Foo &#123;</div><div class="line">	reserved <span class="number">2</span>, <span class="number">15</span>, <span class="number">9</span> to <span class="number">11</span>;</div><div class="line">	reserved <span class="string">"foo"</span>, <span class="string">"bar"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="ProtoBuf从proto文件中生成了什么？"><a href="#ProtoBuf从proto文件中生成了什么？" class="headerlink" title="ProtoBuf从proto文件中生成了什么？"></a>ProtoBuf从proto文件中生成了什么？</h3><p>ProtoBuf编译器会将proto文件编译成你选择语言的相应代码，这些代码中包括了获取和设置字段的方法，序列化到输出流和从输入流解析的方法。<br>对于C++，编译器对每一个proto文件生成相应的h和cc文件，其中包括了每个消息对应的类。<br>对于Java，编译器为每一个消息生成一个对应的java文件。<br>对于生成代码的API的详细介绍，可以在<a href="https://developers.google.com/protocol-buffers/docs/reference/overview" target="_blank" rel="external">API reference</a>找到。</p>
 <h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p>一个只使用基本类型的消息，可以选择的类型在如下的表格中，包括proto中可以选择的类型和生成类的相应类型：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -348,6 +349,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="可选字段和默认值"><a href="#可选字段和默认值" class="headerlink" title="可选字段和默认值"></a>可选字段和默认值</h2><p>一个消息中的字段可以定义为optional，即可选的，一个合法的消息可以包括也可以不包括这个可选的字段。当解析消息时，如果不包括可选字段，那么可选字段就会被设置为默认值，这个默认值可以指定。例如：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">optional int32 result_per_page = <span class="number">3</span> [<span class="section">default</span> = <span class="number">10</span>];</div></pre></td></tr></table></figure></p>
 <p>如果没有显示指定默认值，ProtoBuf会为每个类型指定默认值：string类型指定为空串，bool指定为false，对于数值类型，指定为0，对于枚举类型，默认为列表中的第一个值。因此如果修改枚举定义，就需要注意兼容性问题了。</p>
 <h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>protobuf同样提供了枚举类型，这种类型只能使用预定义列表中的值。例如你想为SearchResult添加corpus字段，它可以是：UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS or VIDEO。这利用枚举就可以很方便的实现。下边是一个例子：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SearchRequest</span> </span>&#123;</div><div class="line">	<span class="keyword">required</span> <span class="built_in">string</span> query = <span class="number">1</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int32</span> page_number = <span class="number">2</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int32</span> result_per_page = <span class="number">3</span> [default = <span class="number">10</span>];</div><div class="line">	<span class="class"><span class="keyword">enum</span> <span class="title">Corpus</span> </span>&#123;</div><div class="line">		UNIVERSAL = <span class="number">0</span>;</div><div class="line">		WEB = <span class="number">1</span>;</div><div class="line">		IMAGES = <span class="number">2</span>;</div><div class="line">		LOCAL = <span class="number">3</span>;</div><div class="line">		NEWS = <span class="number">4</span>;</div><div class="line">		PRODUCTS = <span class="number">5</span>;</div><div class="line">		VIDEO = <span class="number">6</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">optional</span> Corpus corpus = <span class="number">4</span> [default = UNIVERSAL];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -359,7 +361,7 @@
 <p>一般来说，你直接使用import就可以满足要求了。但有时，你可能想将一个proto文件移动到新的位置。你可以不直接移动proto文件，在老的位置放一个dummy .proto文件使用import public来将所有的imports跳转到新的位置。import public的依赖可以通过导入任何包含了import public语句的proto文件来传递。<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// new.proto</span></div><div class="line"><span class="comment">// All definitions are moved here</span></div><div class="line"><span class="comment">// old.proto</span></div><div class="line"><span class="comment">// This is the proto that all clients are importing.</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> public <span class="string">"new.proto"</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">"other.proto"</span>;</div></pre></td></tr></table></figure>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> client.proto</div><div class="line"><span class="keyword">import</span> <span class="string">"old.proto"</span>;</div><div class="line"><span class="regexp">//</span> You use definitions <span class="keyword">from</span> old.proto <span class="keyword">and</span> <span class="keyword">new</span>.proto, but <span class="keyword">not</span> other.proto</div></pre></td></tr></table></figure>
-<p>protobuf编译器通过命令行参数-I或–proto_path来指定导入文件的搜索目录，如果没有指定，则使用编译器被调用的目录，一般来说，应该在命令行指定这个参数，确保全部合法的名字是可以被真长导入的。</p>
+<p>protobuf编译器通过命令行参数-I或—proto_path来指定导入文件的搜索目录，如果没有指定，则使用编译器被调用的目录，一般来说，应该在命令行指定这个参数，确保全部合法的名字是可以被真长导入的。</p>
 <h3 id="使用proto3消息类型"><a href="#使用proto3消息类型" class="headerlink" title="使用proto3消息类型"></a>使用proto3消息类型</h3><p>可以在proto2中导入<a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="external">proto3</a>的消息类型，反之亦然。但是，proto2的枚举不能在proto3语法中使用。</p>
 <h2 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h2><p>你可以将一个消息定义在另一个消息内。例如：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SearchResponse</span> </span>&#123;</div><div class="line">	<span class="class"><span class="keyword">message</span> <span class="title">Result</span> </span>&#123;</div><div class="line">		<span class="keyword">required</span> <span class="built_in">string</span> url = <span class="number">1</span>;</div><div class="line">		<span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">2</span>;</div><div class="line">		<span class="keyword">repeated</span> <span class="built_in">string</span> snippets = <span class="number">3</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">repeated</span> Result result = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>可以在其他消息中用Parent.Type使用嵌套的消息类型：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SomeOtherMessage</span> </span>&#123;</div><div class="line">	<span class="keyword">optional</span> SearchResponse.Result result = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -493,11 +495,11 @@
 <p>因为不同的选项级别有着不同的字段数字空间，因此，你可以在不同的选项级别中使用相同的扩展数字。</p>
 <h2 id="生成你的消息类"><a href="#生成你的消息类" class="headerlink" title="生成你的消息类"></a>生成你的消息类</h2><p>为了生成与你定义的proto文件相应的Java，Python或C++代码，你需要运行protobuf编译器来作用在你的proto文件上。如果你还没有protobuf编译器，下载<a href="https://developers.google.com/protocol-buffers/docs/downloads.html" target="_blank" rel="external">安装包</a>，然后阅读README。<br>可以像这样调用protobuf编译器：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc <span class="attribute">--proto_path</span>=IMPORT_PATH <span class="attribute">--cpp_out</span>=DST_DIR <span class="attribute">--java_out</span>=DST_DIR <span class="attribute">--python_out</span>=DST_DIR path/<span class="keyword">to</span>/file.proto</div></pre></td></tr></table></figure></p>
 <ul>
-<li>IMPORT_PATH：指定了当使用import指令时寻找proto文件的路径。如果省略，就会搜寻当前路径。可以通过指定多次–proto_path来指定多个搜寻路径，他们会按照顺序搜寻。-I=IMPORT_PATH是–proto_path的简写。</li>
+<li>IMPORT_PATH：指定了当使用import指令时寻找proto文件的路径。如果省略，就会搜寻当前路径。可以通过指定多次—proto_path来指定多个搜寻路径，他们会按照顺序搜寻。-I=IMPORT_PATH是—proto_path的简写。</li>
 <li>你可以提供一个活多个输出目录：<ul>
-<li>–cpp_out：生成C++代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated" target="_blank" rel="external">这里</a>。</li>
-<li>–java_out：生成Java代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/java-generated" target="_blank" rel="external">这里</a>。</li>
-<li>–python_out：生成Python代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/python-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—cpp_out：生成C++代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—java_out：生成Java代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/java-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—python_out：生成Python代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/python-generated" target="_blank" rel="external">这里</a>。</li>
 </ul>
 </li>
 </ul>
@@ -705,5 +707,20 @@ MathJax.Hub.Queue(function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

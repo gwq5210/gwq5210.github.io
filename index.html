@@ -140,6 +140,138 @@
       <ul class="post-list">
   
     <li class="post-list-item">
+        <article id="post-mathjax简单教程（翻译）"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/02/04/mathjax简单教程（翻译）/">mathjax简单教程（翻译）</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2018-02-03T16:36:22.000Z" itemprop="datePublished" class="post-time">
+  2018-02-04
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+     
+        <h1 id="mathjax简单教程（翻译）"><a href="#mathjax简单教程（翻译）" class="headerlink" title="mathjax简单教程（翻译）"></a>mathjax简单教程（翻译）</h1><p>原文地址：<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">mathjax basic tutorial and quick reference</a></p>
+<ol>
+<li>在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。</li>
+<li>使用\$…\$来产生行内公式，使用\$\$…\$\$来产生多行公式。公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$（行内）和公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\tag{displayed}$是不一样的。</li>
+<li>使用\alpha,\beta,…,\omega来产生希腊字母：$\alpha$,$\beta$,$\omega$。使用\Gamma,\Delta,…,\Omega来产生大写的：$\Gamma$,$\Delta$,…,$\Omega$。</li>
+<li>使用^和_来产生下标和上标。如x_i^2产生：$x_i^2$。</li>
+</ol>
+    
+    
+        <a href="/2018/02/04/mathjax简单教程（翻译）/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LaTeX/">LaTeX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mathjax教程/">mathjax教程</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-Redis中的geo功能"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/02/03/Redis中的geo功能/">Redis中的geo功能</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2018-02-03T09:37:12.000Z" itemprop="datePublished" class="post-time">
+  2018-02-03
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+     
+        <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1>
+    
+    
+        <a href="/2018/02/03/Redis中的geo功能/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis地理位置功能/">Redis地理位置功能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geohash/">geohash</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-geohash简介"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/02/03/geohash简介/">geohash简介</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2018-02-03T09:35:38.000Z" itemprop="datePublished" class="post-time">
+  2018-02-03
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+     
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。</p>
+<h1 id="geohash介绍"><a href="#geohash介绍" class="headerlink" title="geohash介绍"></a>geohash介绍</h1><p>geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geohash的字符串当做key，来存储所有的地理位置坐标。</p>
+<p>上边提到字符串越长，表示的区域越小，也就是位置越精确。我们可以从geohash字符串的后边移除字符串来增大矩形区域的位置，当然也降低了经度。</p>
+<p>geohash字符串相近的地点其距离也越近，相似前缀越长，两个地点越近。但也有特殊情况，地理位置近但其geohash字符串差别很大，这种情况在下边介绍。</p>
+    
+    
+        <a href="/2018/02/03/geohash简介/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geohash/">geohash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/地理位置hash/"> 地理位置hash</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
         <article id="post-hiredis的使用"
   class="article article-type-post" itemprop="blogPost">
      
@@ -470,138 +602,6 @@
 
     </li>
   
-    <li class="post-list-item">
-        <article id="post-google protobuf简介"
-  class="article article-type-post" itemprop="blogPost">
-     
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/30/google protobuf简介/">google protobuf简介及使用</a>
-    </h3>
-  
-
-
-
-    <div class="post-meta">
-        <time datetime="2016-07-30T06:17:10.000Z" itemprop="datePublished" class="post-time">
-  2016-07-30
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-     
-        <h2 id="什么是Google-ProtoBuf？"><a href="#什么是Google-ProtoBuf？" class="headerlink" title="什么是Google ProtoBuf？"></a>什么是Google ProtoBuf？</h2><p>ProtoBuf是一种灵活高效的结构化数据存储机制，像XML一样，但是其更加轻巧、快速、简单。<br>使用ProtoBuf十分简单，只需要在.proto文件中定义数据就好了，然后你可以利用ProtoBuf提供的工具生成不同语言的序列化和反序列化的代码，目前提供C++、Java、Python、C#、GO等语言版本。</p>
-<h2 id="ProtoBuf的优点"><a href="#ProtoBuf的优点" class="headerlink" title="ProtoBuf的优点"></a>ProtoBuf的优点</h2><p>同XML数据相比，ProboBuf有这许多优点：<br>1：简单<br>2：小3-10倍<br>3：快20-100倍<br>4：更少的二义性<br>5：生成的数据访问类更加容易编程</p>
-    
-    
-        <a href="/2016/07/30/google protobuf简介/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protobuf/">protobuf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-
-</article>
-
-    </li>
-  
-    <li class="post-list-item">
-        <article id="post-c语言中使用数据库"
-  class="article article-type-post" itemprop="blogPost">
-     
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/01/23/c语言中使用数据库/">c语言中使用数据库</a>
-    </h3>
-  
-
-
-
-    <div class="post-meta">
-        <time datetime="2016-01-23T12:21:40.000Z" itemprop="datePublished" class="post-time">
-  2016-01-23
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/mysql/">mysql</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-     
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先，要安装mysql数据库，安装好后，可能还不能使用mysql的c语言库，还要安装mysql的库，命令如下：sudo apt-get install libmysql++-dev。<br>安装好后，就可以包含<mysql mysql.h="">头文件，然后使用mysql的c语言api了。</mysql></p>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>1）MYSQL<br>这个结构体代表一个数据库连接的句柄，它被大多数的mysql函数使用。不要尝试拷贝MYSQL结构体，不保证这样的拷贝是可以使用的。<br>MYSQL的定义如下：</p>
-    
-    
-        <a href="/2016/01/23/c语言中使用数据库/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-</article>
-
-    </li>
-  
-    <li class="post-list-item">
-        <article id="post-c语言中的可变参数"
-  class="article article-type-post" itemprop="blogPost">
-     
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/01/22/c语言中的可变参数/">c语言中的可变参数</a>
-    </h3>
-  
-
-
-
-    <div class="post-meta">
-        <time datetime="2016-01-22T14:54:30.000Z" itemprop="datePublished" class="post-time">
-  2016-01-22
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-     
-        <p>c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。<br>使用方法稍微复杂一些，必须按照如下步骤进行：<br>1.在函数原型中使用省略号。<br>2.在函数定义中创建一个va_list类型的变量。<br>3.用宏将该变量初始化为一个参数列表。<br>4.用宏访问这个参数列表。<br>5.用宏完成清理工作。</p>
-<p>下面详细介绍这些步骤，函数原型中的参数列表中至少有一个后跟省略号的参数，这个参数成为parmN，如：</p>
-    
-    
-        <a href="/2016/01/22/c语言中的可变参数/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/可变参数/">可变参数</a></li></ul>
-
-</article>
-
-    </li>
-  
 </ul>
 
 <nav id="page-nav">
@@ -719,5 +719,20 @@ MathJax.Hub.Queue(function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

@@ -131,8 +131,8 @@
     <h1 class="author">Rhett&#39;s Blog</h1>
     <h5 class="subtitle">
         
-            <time datetime="2017-07-23T20:59:57.000Z" itemprop="datePublished" class="page-time">
-  2017-07-24
+            <time datetime="2018-02-02T17:03:51.719Z" itemprop="datePublished" class="page-time">
+  2018-02-03
 </time>
 
 
@@ -371,5 +371,20 @@ MathJax.Hub.Queue(function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gwq5210.github.io/"/>
-  <updated>2018-01-30T15:53:00.293Z</updated>
+  <updated>2018-02-03T16:58:51.200Z</updated>
   <id>http://gwq5210.github.io/</id>
   
   <author>
@@ -14,6 +14,591 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mathjax简单教程（翻译）</title>
+    <link href="http://gwq5210.github.io/2018/02/04/mathjax%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/"/>
+    <id>http://gwq5210.github.io/2018/02/04/mathjax简单教程（翻译）/</id>
+    <published>2018-02-03T16:36:22.000Z</published>
+    <updated>2018-02-03T16:58:51.200Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mathjax简单教程（翻译）"><a href="#mathjax简单教程（翻译）" class="headerlink" title="mathjax简单教程（翻译）"></a>mathjax简单教程（翻译）</h1><p>原文地址：<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">mathjax basic tutorial and quick reference</a></p>
+<ol>
+<li>在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。</li>
+<li>使用\$…\$来产生行内公式，使用\$\$…\$\$来产生多行公式。公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$（行内）和公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\tag{displayed}$是不一样的。</li>
+<li>使用\alpha,\beta,…,\omega来产生希腊字母：$\alpha$,$\beta$,$\omega$。使用\Gamma,\Delta,…,\Omega来产生大写的：$\Gamma$,$\Delta$,…,$\Omega$。</li>
+<li>使用^和_来产生下标和上标。如x_i^2产生：$x_i^2$。</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li>组。下标，上标和其他运算符只能应用到下一个”组”。单个符号或者被大括号{…}包含起来的公式被视为一个组。如10^10产生$10^10$，而不是$10^{10}$，这样写可以得到预期的结果：10^{10}。使用大括号可以界定公式中那些是上标或者下标：x^5^6是错误的，{x^y}^z是${x^y}^z$，x^{y^z}是$x^{y^z}$。显然x_i^2：$x_i^2$和x_{i^2}：$x_{i^2}$是不同的。</li>
+<li>符号()[]产生对应的符号，如(3+4)[4+4]产生：$(3+4)[4+4]$。但使用\{和\}来产生大括号：$\{\}$。<br>但上边的不会自动适应公式的大小，所以如果你写下(\frac12)，那么括号会很小：$(\frac12)$，使用\left(…\right)来使括号自动适应公式的大小：\left(\frac12\right)产生$\left(\frac12\right)$。<br>\left和\right可以作用于下边种类的括号：(和)：$\left(x\right)$，[和]：$\left[x\right]$，\{和\} ：$\left\{x\right\}$，|：$\left|x\right|$，\langle和 rangle：$\left\langle{x}\right\rangle$，\lceil和\rceil：$\left\lceil{x}\right\rceil$，\lfloor和\rfloor：$\left\lfloor{x}\right\rfloor$。还有一种不可见的括号，用.来指代：\left.\frac12\right\}表示$\left.\frac12\right\}$。</li>
+<li>使用\sum和\int来代表求和，积分。下标表示下限，上标表示上限，所以\sum_1^n表示$\sum_1^n$。上限和下限超过一个符号不要忘记加上{…}。如\sum_{i=0}^\infty i^2表示$\sum_{i=0}^\infty{i^2}$。类似的还有：\prod$表示\prod$，\int表示$\int$，\bigcup表示$\bigcup$，\bigcap表示$\bigcap$，\iint表示$\iint$。</li>
+<li>分数有两种产生方式。\frac作用于下边紧邻的两个组；如\frac ab产生$\frac ab$。可以使用{…}来产生更复杂的表达式；如\frac{a+1}{b+1}产生$\frac{a+1}{b+1}$。如果分子和分母很复杂，你可能更喜欢\over，它分割一个组内的两部分产生分数；如{a+1 \over b+1}产生${a+1 \over b+1}$。</li>
+<li>字体。<ul>
+<li>使用\mathbb或\Bbb产生”blackboard bold”：$\mathbb{CHNQRZ}$</li>
+<li>使用\mathface产生blodface：$\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathbf{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathtt产生”typewriter”字体：$\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathtt{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mattrm产生roman字体：$\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathrm{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathcal产生”calligraphic”字母：<br>$\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathcal{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathsrc产生script字母：<br>$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathscr{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathfrak产生”Fraktur”(老式德国风格)字母：<br>$\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathfrak{abcdefghijklmnopqrstuvwxyz}$</li>
+</ul>
+</li>
+<li>使用\sqrt产生根号，它会自动适应公式的大小。如\sqrt{x^3}产生$\sqrt{x^3}$；\sqrt[3]{\frac xy}产生$\sqrt[3]{\frac xy}$。对于复杂的表达式可以使用{…}^{1/2}。</li>
+<li>一些如lim，sin，max，ln的特殊函数可以使用\lim，\sin等产生。如\sin x产生$\sin x$，而不是sin x产生$sin x$。\lim使用下标产生趋近符号：\lim_{x\to 0}产生$\lim_{x\to 0}$。</li>
+<li>有大量的特殊符号和记号，可以参考<a href="http://pic.plover.com/MISC/symbols.pdf" target="_blank" rel="external">this shorter listing</a>或<a href="http://mirror.math.ku.edu/tex-archive/info/symbols/comprehensive/symbols-a4.pdf" target="_blank" rel="external">this exhaustive listing</a>。一些常用的列在下边：<ul>
+<li>\lt,\gt,\le,\ge,\neq分别表示$\lt$,$\gt$,$\le$,$\ge$,$\neq$。你可以使用\not来在大多数符号上画上斜线，但通常看起来很差劲，如\not\lt表示$\not\lt$。</li>
+<li>\times,\div,\pm,\mp分别表示$\times$,$\div$,$\pm$,$\mp$。\cdot表示一个居中的点：$x\cdot y$。</li>
+<li>\cup,\cap,\setminus,\subset,\subseteq,\subsetneq,\supset,\in,\notin,\emptyset,\varnothing分别表示$\cup\, \cap\, \setminus\, \subset\, \subseteq \,\subsetneq \,\supset\, \in\, \notin\, \emptyset\, \varnothing$。</li>
+<li>{n+1 \choose 2k}或者\binom{n+1}{2k}表示${n+1 \choose 2k}$。</li>
+<li>\to,\rightarrow,\leftarrow,\Rightarrow,\Leftarrow,\mapsto分别表示$\to\, \rightarrow\, \leftarrow\, \Rightarrow\, \Leftarrow\, \mapsto$。</li>
+<li>\land,\lor,\lnot,\forall,\exists,\top,\bot,\vdash,\vDash分别表示$\land\, \lor\, \lnot\, \forall\, \exists\, \top\, \bot\, \vdash\, \vDash$。</li>
+<li>\star\, \ast\, \oplus\, \circ\, \bullet分别表示$\star\, \ast\, \oplus\, \circ\, \bullet$。</li>
+<li>\approx\, \sim \, \simeq\, \cong\, \equiv\, \prec分别表示$\approx\, \sim \, \simeq\, \cong\, \equiv\, \prec$。</li>
+<li>\infty\, \aleph_0, \nabla\, \partial, \Im\, \Re分别表示$\infty\, \aleph_0, \nabla\, \partial, \Im\, \Re$。</li>
+<li>可以使用\pmod来产生同余式，如a\equiv b\pmod n产生$a\equiv b\pmod n$。</li>
+<li>\ldots可以产生这里的点：$a_1, a_2, \ldots ,a_n$；\cdots产生这里的点：$a_1+a_2+\cdots+a_n$。</li>
+<li>一些希腊字母具有不同的形式：\epsilon\, \varepsilon分别表示$\epsilon\, \varepsilon$，\phi\, \varphi分别表示$\phi\, \varphi$，\ell表示$\ell$等。</li>
+</ul>
+</li>
+<li>在mathjax的公式中加入空格，不会改变公式中空格的数量。如a␣b和a␣␣␣␣b都产生$a b$。可以使用\,加入一个空格$a\,b$，使用\;加入一个宽空格$a\;b$，使用\quad和\qquad产生大量的空格$a\quad b,a\qquad b$。<br>可以使用\text{…}在公式中加入普通文本：$\{x\in s\mid x\text{ is extra large}\}$。还可以在\text{…}中嵌套\$…\$。</li>
+<li>强调和区别标志。\hat用于单个符号：$\hat x$,\widehat用于一个公式：$\widehat{xy}$。如果将它弄的特别宽，看起来就十分丑。类似的，\bar产生$\bar x$，\overline产生$\overline{xyz}$，\vec产生$\vec x$，\overrightarrow产生$\overrightarrow{xy}$。可以使用\dot和\ddot产生点和双点，如\frac d{dx}x\dot x =  \dot x^2 +  x\ddot x产生$\frac d{dx}x\dot x =  \dot x^2 +  x\ddot x$。</li>
+<li>使用\来转义mathjax中使用的特殊字符，如\$表示$\$$，\{表示$\{$，_表示$_$等等。<br>教程到此结束。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;mathjax简单教程（翻译）&quot;&gt;&lt;a href=&quot;#mathjax简单教程（翻译）&quot; class=&quot;headerlink&quot; title=&quot;mathjax简单教程（翻译）&quot;&gt;&lt;/a&gt;mathjax简单教程（翻译）&lt;/h1&gt;&lt;p&gt;原文地址：&lt;a href=&quot;http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;mathjax basic tutorial and quick reference&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &amp;gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。&lt;/li&gt;
+&lt;li&gt;使用\$…\$来产生行内公式，使用\$\$…\$\$来产生多行公式。公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$（行内）和公式$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\tag{displayed}$是不一样的。&lt;/li&gt;
+&lt;li&gt;使用\alpha,\beta,…,\omega来产生希腊字母：$\alpha$,$\beta$,$\omega$。使用\Gamma,\Delta,…,\Omega来产生大写的：$\Gamma$,$\Delta$,…,$\Omega$。&lt;/li&gt;
+&lt;li&gt;使用^和_来产生下标和上标。如x_i^2产生：$x_i^2$。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="mathjax教程" scheme="http://gwq5210.github.io/tags/mathjax%E6%95%99%E7%A8%8B/"/>
+    
+      <category term="LaTeX" scheme="http://gwq5210.github.io/tags/LaTeX/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis中的geo功能</title>
+    <link href="http://gwq5210.github.io/2018/02/03/Redis%E4%B8%AD%E7%9A%84geo%E5%8A%9F%E8%83%BD/"/>
+    <id>http://gwq5210.github.io/2018/02/03/Redis中的geo功能/</id>
+    <published>2018-02-03T09:37:12.000Z</published>
+    <updated>2018-02-04T10:55:01.105Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><a id="more"></a>
+<h1 id="Redis中的geo功能"><a href="#Redis中的geo功能" class="headerlink" title="Redis中的geo功能"></a>Redis中的geo功能</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="http://redisdoc.com/" target="_blank" rel="external">Redis 命令参考</a><br>2) <a href="http://blog.huangz.me/diary/2015/redis-geo.html" target="_blank" rel="external">Redis GEO 特性简介</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Redis简介&quot;&gt;&lt;a href=&quot;#Redis简介&quot; class=&quot;headerlink&quot; title=&quot;Redis简介&quot;&gt;&lt;/a&gt;Redis简介&lt;/h1&gt;
+    
+    </summary>
+    
+    
+      <category term="Redis" scheme="http://gwq5210.github.io/tags/Redis/"/>
+    
+      <category term="geohash" scheme="http://gwq5210.github.io/tags/geohash/"/>
+    
+      <category term="Redis地理位置功能" scheme="http://gwq5210.github.io/tags/Redis%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%8A%9F%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>geohash简介</title>
+    <link href="http://gwq5210.github.io/2018/02/03/geohash%E7%AE%80%E4%BB%8B/"/>
+    <id>http://gwq5210.github.io/2018/02/03/geohash简介/</id>
+    <published>2018-02-03T09:35:38.000Z</published>
+    <updated>2018-02-04T10:48:43.024Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。</p>
+<h1 id="geohash介绍"><a href="#geohash介绍" class="headerlink" title="geohash介绍"></a>geohash介绍</h1><p>geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geohash的字符串当做key，来存储所有的地理位置坐标。</p>
+<p>上边提到字符串越长，表示的区域越小，也就是位置越精确。我们可以从geohash字符串的后边移除字符串来增大矩形区域的位置，当然也降低了经度。</p>
+<p>geohash字符串相近的地点其距离也越近，相似前缀越长，两个地点越近。但也有特殊情况，地理位置近但其geohash字符串差别很大，这种情况在下边介绍。</p>
+<a id="more"></a>
+<h1 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h1><p>geohash主要用在如下两个场景：</p>
+<ol>
+<li>将geohash字符串当做一个唯一的标识</li>
+<li>用来表示地点数据，将其存储到数据库中</li>
+</ol>
+<p>geohash也经常用于地理标记。</p>
+<p>使用geohash有两个优点：一是用geohash索引的数据表示的是一个矩形区域中所有的点，在数据库中单个索引的效率也比多个索引高；二是我们可以使用geohash来进行快速但不精确的查询：geohash相近的字符串也有相近的距离。</p>
+<h1 id="算法和例子"><a href="#算法和例子" class="headerlink" title="算法和例子"></a>算法和例子</h1><p>geohash的字符串其实是<a href="https://en.wikipedia.org/wiki/Base32" target="_blank" rel="external">base32</a>的结果。<br>我们用ws104来作为例子说明如何从geohash解析成经纬度。</p>
+<p>先使用base32对字符串ws104进行解码。<br>下面是base32的字符表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>十进制</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base32</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>十进制</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+</tr>
+<tr>
+<td>base32</td>
+<td>8</td>
+<td>9</td>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+<td>e</td>
+<td>f</td>
+<td>g</td>
+</tr>
+<tr>
+<td>十进制</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+</tr>
+<tr>
+<td>base32</td>
+<td>h</td>
+<td>j</td>
+<td>k</td>
+<td>m</td>
+<td>n</td>
+<td>p</td>
+<td>q</td>
+<td>r</td>
+</tr>
+<tr>
+<td>十进制</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+</tr>
+<tr>
+<td>base32</td>
+<td>s</td>
+<td>t</td>
+<td>u</td>
+<td>v</td>
+<td>w</td>
+<td>x</td>
+<td>y</td>
+<td>z</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由此可以得到ws104对应的二进制串是：11100 11000 00001 00000 00100</p>
+<p>从左边开始数从0开始，偶数位是经度(1101 0001 0001 0)，奇数位是维度(1010 0000 0000)</p>
+<p>这些二进制数从左到右对经纬度进行一系列分解，对于维度其范围在-90到90度，对于经度其范围在-180到180度。0表示较小的部分，1表示较大的部分。经度第一位是1，因此经度的范围在0到180度的范围内。我们依次进行此操作，对于维度的操作一样。</p>
+<p>这样我们也可以理解为什么geohash字符串长度越长，表示的数据越准确。</p>
+<p>下面是对维度进行分解的数据：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>二进制值</th>
+<th>最小值</th>
+<th>中间值</th>
+<th>最大值</th>
+<th>平均值</th>
+<th>最大误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>-90.000</td>
+<td>0</td>
+<td>90.000</td>
+<td>45.000</td>
+<td>45.000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>45.000</td>
+<td>90.000</td>
+<td>22.500</td>
+<td>22.500</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>22.500</td>
+<td>45.000</td>
+<td>33.750</td>
+<td>11.250</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>22.500</td>
+<td>33.750</td>
+<td>45.000</td>
+<td>28.125</td>
+<td>5.625</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0</td>
+<td>22.500</td>
+<td>28.125</td>
+<td>33.750</td>
+<td>25.3125</td>
+<td>2.8125</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0</td>
+<td>22.500</td>
+<td>25.3125</td>
+<td>28.125</td>
+<td>23.90625</td>
+<td>1.40625</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+<td>22.500</td>
+<td>23.90625</td>
+<td>25.3125</td>
+<td>23.203125</td>
+<td>0.703125</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0</td>
+<td>22.500</td>
+<td>23.203125</td>
+<td>23.90625</td>
+<td>22.8515625</td>
+<td>0.3515625</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0</td>
+<td>22.500</td>
+<td>22.8515625</td>
+<td>23.203125</td>
+<td>22.67578125</td>
+<td>0.17578125</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0</td>
+<td>22.500</td>
+<td>22.67578125</td>
+<td>22.8515625</td>
+<td>22.587890625</td>
+<td>0.087890625</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0</td>
+<td>22.500</td>
+<td>22.587890625</td>
+<td>22.67578125</td>
+<td>22.5439453125</td>
+<td>0.0439453125</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0</td>
+<td>22.500</td>
+<td>22.5439453125</td>
+<td>22.587890625</td>
+<td>22.52197265625</td>
+<td>0.02197265625</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>因此这个位置的维度在范围22.500到22.5439453125之间，误差为0.02197265625。</p>
+<p>同理可以算出经度范围在113.994140625到114.0380859375之间，误差为0.02197265625。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>二进制值</th>
+<th>最小值</th>
+<th>中间值</th>
+<th>最大值</th>
+<th>平均值</th>
+<th>最大误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>-180.000</td>
+<td>0</td>
+<td>180.000</td>
+<td>90.000</td>
+<td>90.000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>90.000</td>
+<td>180.000</td>
+<td>135.000</td>
+<td>45.000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>90.000</td>
+<td>135.000</td>
+<td>180.000</td>
+<td>112.500</td>
+<td>22.500</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>90.000</td>
+<td>112.500</td>
+<td>135.000</td>
+<td>123.750</td>
+<td>11.250</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0</td>
+<td>112.500</td>
+<td>123.750</td>
+<td>135.000</td>
+<td>118.125</td>
+<td>5.625</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0</td>
+<td>112.500</td>
+<td>118.125</td>
+<td>123.750</td>
+<td>115.3125</td>
+<td>2.8125</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+<td>112.500</td>
+<td>115.3125</td>
+<td>118.125</td>
+<td>113.90625</td>
+<td>1.40625</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1</td>
+<td>112.500</td>
+<td>113.90625</td>
+<td>115.3125</td>
+<td>114.609375</td>
+<td>0.703125</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0</td>
+<td>113.90625</td>
+<td>114.609375</td>
+<td>115.3125</td>
+<td>114.2578125</td>
+<td>0.3515625</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0</td>
+<td>113.90625</td>
+<td>114.2578125</td>
+<td>114.609375</td>
+<td>114.08203125</td>
+<td>0.17578125</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0</td>
+<td>113.90625</td>
+<td>114.08203125</td>
+<td>114.2578125</td>
+<td>113.994140625</td>
+<td>0.087890625</td>
+</tr>
+<tr>
+<td>11</td>
+<td>1</td>
+<td>113.90625</td>
+<td>113.994140625</td>
+<td>114.08203125</td>
+<td>114.0380859375</td>
+<td>0.0439453125</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0</td>
+<td>113.994140625</td>
+<td>114.0380859375</td>
+<td>114.08203125</td>
+<td>114.01611328125</td>
+<td>0.02197265625</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面我们给出geohash字符串长度跟精度的关系</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>geohash长度</th>
+<th>维度位数</th>
+<th>经度位数</th>
+<th>维度误差</th>
+<th>经度误差</th>
+<th>距离误差（km）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>$\pm$23</td>
+<td>$\pm$23</td>
+<td>$\pm$2500</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5</td>
+<td>5</td>
+<td>$\pm$2.8</td>
+<td>$\pm$5.6</td>
+<td>$\pm$630</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7</td>
+<td>8</td>
+<td>$\pm$0.70</td>
+<td>$\pm$0.70</td>
+<td>$\pm$78</td>
+</tr>
+<tr>
+<td>4</td>
+<td>10</td>
+<td>10</td>
+<td>$\pm$0.087</td>
+<td>$\pm$0.18</td>
+<td>$\pm$20</td>
+</tr>
+<tr>
+<td>5</td>
+<td>12</td>
+<td>13</td>
+<td>$\pm$0.022</td>
+<td>$\pm$0.022</td>
+<td>$\pm$2.4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>15</td>
+<td>15</td>
+<td>$\pm$0.0027</td>
+<td>$\pm$0.0055</td>
+<td>$\pm$0.61</td>
+</tr>
+<tr>
+<td>7</td>
+<td>17</td>
+<td>18</td>
+<td>$\pm$0.00068</td>
+<td>$\pm$0.00068</td>
+<td>$\pm$0.076</td>
+</tr>
+<tr>
+<td>8</td>
+<td>20</td>
+<td>20</td>
+<td>$\pm$0.000085</td>
+<td>$\pm$0.00017</td>
+<td>$\pm$0.019</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="使用上的限制"><a href="#使用上的限制" class="headerlink" title="使用上的限制"></a>使用上的限制</h1><h2 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h2><p>前面提到我们可以通过前缀匹配来大致的寻找附近的点。但是，这不是总能够成立的。</p>
+<p>南极和北极的地点相近但是它们的经度差别很大，没有相同的前缀；在180度子午线(经线)两侧的地点，距离很近，但是在不同的区域内，也不会有相同的前缀。同样的，划分的区域边界，也存在类似的情况。</p>
+<h2 id="非线性的距离"><a href="#非线性的距离" class="headerlink" title="非线性的距离"></a>非线性的距离</h2><p>由于geohash是基于经纬度坐标的距离进行计算，两个geohash点映射出来的距离并不是真实的距离。这是因为我们很难将球体上的坐标映射到一个均匀的二维空间。</p>
+<p>尽管存在许多问题，但仍有可能的解决办法，这些算法已经成功的在Elasticsearch，MongoDB，HBase中实现用于近似查找。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="http://www.cnblogs.com/LBSer/p/3310455.html" target="_blank" rel="external">GeoHash核心原理解析</a><br>2) <a href="https://en.wikipedia.org/wiki/Geohash" target="_blank" rel="external">Geohash-Wikipedia</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。&lt;/p&gt;
+&lt;h1 id=&quot;geohash介绍&quot;&gt;&lt;a href=&quot;#geohash介绍&quot; class=&quot;headerlink&quot; title=&quot;geohash介绍&quot;&gt;&lt;/a&gt;geohash介绍&lt;/h1&gt;&lt;p&gt;geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geohash的字符串当做key，来存储所有的地理位置坐标。&lt;/p&gt;
+&lt;p&gt;上边提到字符串越长，表示的区域越小，也就是位置越精确。我们可以从geohash字符串的后边移除字符串来增大矩形区域的位置，当然也降低了经度。&lt;/p&gt;
+&lt;p&gt;geohash字符串相近的地点其距离也越近，相似前缀越长，两个地点越近。但也有特殊情况，地理位置近但其geohash字符串差别很大，这种情况在下边介绍。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="geohash" scheme="http://gwq5210.github.io/tags/geohash/"/>
+    
+      <category term=" 地理位置hash" scheme="http://gwq5210.github.io/tags/%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AEhash/"/>
+    
+  </entry>
   
   <entry>
     <title>hiredis的使用</title>
@@ -136,11 +721,11 @@
     </summary>
     
     
+      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="c++" scheme="http://gwq5210.github.io/tags/c/"/>
     
       <category term="Cpp Primer Plus" scheme="http://gwq5210.github.io/tags/Cpp-Primer-Plus/"/>
-    
-      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -246,6 +831,7 @@
 </ul>
 <p>如果在编译程序时，希望它只与POSIX的定义有关，而不与任何实现定义的常量冲突，那么需要定义常量_POSIX_C_SOURCE，一旦定义了该常量，所有POSIX.1的头文件都是用此常量来排除任何实现专有的定义。可以在编译时指定该常量</p>
 <p>头文件sys/types.h中定义了某些与实现有关的数据类型，它们被称为基本系统数据类型(primitive system data type)，它们使用C语言的typedef定义，大多使用_t结尾，用这种方式定义了这些数据类型时，就不需要考虑因系统不同而变化的程序实现细节。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -340,6 +926,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h1><p>UNIX系统大多数的文件IO只需要5个函数：open，read，write，lseek，close。对于read和write不同缓冲区对读取性能有一定影响。这些函数常被称为不带缓冲的IO。属于不带缓冲指的是每个read和write都调用内核中的一个系统调用。如果在多个进程之间共享资源，我们需要了解原子操作。</p>
 <p>对内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。</p>
 <h2 id="open函数"><a href="#open函数" class="headerlink" title="open函数"></a>open函数</h2><p>调用open或openat可以打开或创建一个文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode */</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">openat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode */</span>)</span></span>;</div></pre></td></tr></table></figure></p>
@@ -473,6 +1060,7 @@
 <li>符号链接（symbolic link）。这种类型的文件指向另一个文件。</li>
 </ul>
 <p>文件类型信息包含在stat结构的st_mode成员中。可以使用宏来确定文件类型。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -511,6 +1099,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>POSIX.1允许将进程间通信的对象说明为文件。例如消息队列，信号量，共享内存对象。</p>
 <p>对于宏的实现，一般是将st_mode与屏蔽字S_IFMT进行&amp;运算，然后与对应常量比较，判断是否为特定文件类型。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define S_ISDIR(<span class="name">mode</span>) (((<span class="name">mode</span>) &amp; SIFMT) == SIFDIR)</div></pre></td></tr></table></figure></p>
 <h2 id="设置用户ID和设置组ID"><a href="#设置用户ID和设置组ID" class="headerlink" title="设置用户ID和设置组ID"></a>设置用户ID和设置组ID</h2><p>与一个进程相关的ID有6个或更多：</p>
@@ -525,6 +1114,7 @@
 <p>设置用户ID和设置组ID可以使用S_ISUID和S_ISGID测试。</p>
 <h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><p>st_mode也包含了对文件的文件权限位。这里的文件是前面提到的任何类型的文件。所有文件类型都有访问权限。</p>
 <p>每个文件有9个访问权限位，可以分为三组</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -571,6 +1161,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>前三行用户指的是文件的所有者。我们可以使用chmod来修改文件的访问权限。</p>
 <p>对于访问权限以各种方式由不同函数使用。</p>
 <ul>
@@ -606,6 +1197,7 @@
 <p>fchmodat函数在两种情况下与chmod函数一样：一种是pathname参数为绝对路径；另一种是fd参数取值为AT_FDCWD且pathname参数为相对路径。否则fchmodat相对于fd打开的目录来计算pathname。flag参数可以改变fchmodat的行为，当设置了AT_SYMLINK_NOFOLLOW时，fchmodat不跟随符号链接。</p>
 <p>为了改变一个文件的权限位，进程的有效用户ID必须等于文件所有者ID，或者该进程具有超级用户权限</p>
 <p>参数mode由以下值按位或</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -676,6 +1268,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>chmod函数在下列条件下自动清除两个权限位：</p>
 <ul>
 <li>Solaris等系统对于普通文件的粘着位赋予了特殊含义在这些系统上，如果我们尝试设置普通文件的粘着位(S_ISVTX)，而且又没有超级用户权限，那么mode中的粘着位自动被关闭。这意味着只有超级用户才能设置普通文件的粘着位。这样做是防止恶意用户设置粘着位，影响系统性能。</li>
@@ -747,6 +1340,7 @@
 </ul>
 <p>对符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可以创建指向目录的符号链接。</p>
 <p>当使用以名字引用文件的函数时，应当了解函数是否处理符号链接。也就是是否跟随符号链接到达它所链接的文件。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -829,6 +1423,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>open的一个例外是，如果同时用O_CREAT和O_EXCL两个标志，如果路径引用符号链接，open函数将出错，errno设置为EEXIST，这种处理是意图堵塞一个安全漏洞，以防止具有特权的进程被诱骗编写错误的文件</p>
 <h2 id="创建和读取符号链接"><a href="#创建和读取符号链接" class="headerlink" title="创建和读取符号链接"></a>创建和读取符号链接</h2><p>可以使用symlink或symlinkat函数创建一个符号链接<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</div></pre></td></tr></table></figure></p>
 <p>函数创建了一个指向actualpath的新目录项sympath，在创建符号链接时，并不要求actualpath存在，也不需要在同一个文件系统中。</p>
@@ -836,6 +1431,7 @@
 <p>open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> readlink(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize);</div><div class="line"><span class="keyword">ssize_t</span> readlinkat(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, size bufsize);</div></pre></td></tr></table></figure></p>
 <p>两个函数组合了open，read，close的所有操作。readlinkat以fd作为相对路径。</p>
 <h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><p>对于每个文件维护三个时间</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -866,6 +1462,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的</p>
 <p><img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响"></p>
 <h2 id="函数futimens，utimensat和utimes"><a href="#函数futimens，utimensat和utimes" class="headerlink" title="函数futimens，utimensat和utimes"></a>函数futimens，utimensat和utimes</h2><p>一个文件的访问和修改时间可以通过一下几个函数修改。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">futimens</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimensat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>], <span class="keyword">int</span> flag)</span></span>;</div></pre></td></tr></table></figure></p>
@@ -917,11 +1514,11 @@
     </summary>
     
     
-      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="unix" scheme="http://gwq5210.github.io/tags/unix/"/>
     
       <category term="linux" scheme="http://gwq5210.github.io/tags/linux/"/>
+    
+      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="APUE" scheme="http://gwq5210.github.io/tags/APUE/"/>
     
@@ -954,13 +1551,14 @@
 <p>但是C++的for循环允许这样做：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</div><div class="line">	<span class="keyword">printf</span>(<span class="string">"%d\n"</span>, i);</div></pre></td></tr></table></figure></p>
 <p>这很方便，但是不符合原来的语法，因为声明不是表达式。现在则使用下边的语句：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">for</span>-init-statement <span class="keyword">condition</span>; <span class="keyword">expression</span>)</div><div class="line">	statement</div></pre></td></tr></table></figure></p>
 <p>在for-init-statement中声明变量其实还有有用的一面，这也是该知道的。这种变量只存在与for循环中，当程序离开循环，这种变量将消失</p>
-<p>在循环中经常使用递增运算符（++）和递减运算符（–）。这两种运算符执行两种极其常用的循环操作：将循环计数器加1或减1。这两个运算符都有两种变体。前缀版本位于操作数前面，如++x；后缀版本位于操作数后面，如x++。两个版本对操作数的影响是一样的，但是影响的时间不同。粗略的讲a++意味着使用a的当前值计算表达式，然后将a的值加1；而++b的意思是先将b的值加1，然后使用新的值来计算表达式。</p>
+<p>在循环中经常使用递增运算符（++）和递减运算符（—）。这两种运算符执行两种极其常用的循环操作：将循环计数器加1或减1。这两个运算符都有两种变体。前缀版本位于操作数前面，如++x；后缀版本位于操作数后面，如x++。两个版本对操作数的影响是一样的，但是影响的时间不同。粗略的讲a++意味着使用a的当前值计算表达式，然后将a的值加1；而++b的意思是先将b的值加1，然后使用新的值来计算表达式。</p>
 <p>递增运算符和递减运算符都是漂亮的小型运算符，不过千万不要失去控制，在同一条语句对同一个值递增或递减多次。问题在于规则使用后修改和修改后使用可能会变得模糊不清。也就是说，下面这条语句在不同的系统上将生成不同的结果：<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">x</span> = <span class="number">2</span> * <span class="keyword">x</span>++ * (<span class="number">3</span> - ++<span class="keyword">x</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
 <p>对于这种语句，C++没有定义正确的行为</p>
 <p>副作用是指在计算表达式时对某些东西进行了修改；顺序点是程序执行过程中的一个点，在这里，进入下一步之前将确保所有的副作用都进行了评估。在C++中语句中的分号就是一个顺序点，这意味着程序在处理下一条语句之前，赋值运算符、递增运算符和递减运算符执行的所有修改都必须完成。本章后边将讨论的有些操作也有顺序点。另外任何完整的表达式末尾都是一个顺序点。完整表达式是这样一个表达式：不是另一个更大表达式的子表达式</p>
 <p>前缀格式和后缀格式的执行速度可能存在细微的差别，对于内置类型和当代的编译器而言，这看似不是什么问题。然而C++允许你针对类定义这些运算符，这种情况下，前缀格式的效率更高</p>
 <p>可以将递增或递减运算符用于指针和基本变量。也可以结合使用这些运算符和*运算符来修改指针指向的值。前缀递增、前缀递减和解除引用运算符的优先级相同，以从右到左的方式结合。后缀递增和后缀递减的优先级相同，但比前缀运算符的优先级高，这两个运算符以从左到右的方式进行结合。*++p的含义如下：先将++应用于pt，然后将*应用于被递增后的pt，另一方面++*pt意味着先取得pt指向的值，然后将这个值加1。(*p)++，圆括号指出首先对指针解除引用，然后再进行递增。*pt++后缀运算符++的优先级更高，这意味着将运算符应用于pt而不是*pt。</p>
 <p>可以使用组合赋值运算符来进行赋值：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -991,6 +1589,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>C++使用花括号来构造一条复合语句（代码块）。代码块由一对花括号和它们包含的语句组成，被视为一条语句，从而满足句法的要求</p>
 <p>复合语句还有一个有趣的特性，如果在语句块中定义一个新的变量，则仅当程序执行该语句块中的语句时，该变量才存在。执行完毕该语句块后，变量将被释放。</p>
 <p>在外部语句块中定义的变量在内部语句块中也是被定义了的。</p>
@@ -998,6 +1597,7 @@
 <p>逗号表达式允许将两个表达式放到C++句法只允许放一个表达式的地方。逗号并不总是逗号运算符，在声明中的逗号是分隔符</p>
 <p>逗号表达式还有其他特性。首先，它确保先计算第一个表达式，然后计算第二个表达式，即逗号运算符是一个顺序点；其次，C++规定逗号表达式的值是第二部分的值</p>
 <p>C++提供了6种关系运算符来对数字进行比较：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1032,6 +1632,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>关系运算符的优先级比算符运算符低</p>
 <p>不要混淆等于运算符（==）与赋值运算符（=）</p>
 <p>C风格字符串比较，不能直接使用等于运算符进行比较，这样比较的是两个字符串的地址。对于string类字符串，可以直接使用等于运算符进行比较</p>
@@ -1074,6 +1675,7 @@
 <p>C++确保程序从左到右进行计算逻辑表达式，并在知道答案后立刻停止</p>
 <p>并不是所有键盘都提供了用作逻辑运算符的符号，因此C++标准提供了另一种表示方式。标识符and，or，not都是C++保留字，这意味着不能将它们用作变量名等。它们不是关键字，因为它们都是已有语言特性的另一种表示方式。另外它们不是C的保留字。但C语言可以将它们用作运算符，只要包含了iso646.h头文件，C++并不要求头文件</p>
 <p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，可以简化确定字母，数字等的工作。函数原型在cctype中。使用这些函数更加通用，例如在有的系统上，可能字母并不是连续编码的</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1136,6 +1738,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>C++有一个常被用来代替if else语句的运算符，这个运算符被称为条件运算符(?:)，它是C++中唯一一个需要3个操作数的运算符<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expressio<span class="symbol">n1</span>?expressio<span class="symbol">n2</span>:expressio<span class="symbol">n3</span>;</div></pre></td></tr></table></figure></p>
 <p>如果expression1为true，则整个表达式的值为expression2，否则，表达式的值为expression3</p>
 <p>switch语句提供了分支选择的另一种方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span>(integer expression)</div><div class="line">&#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</div><div class="line">  ...</div><div class="line"><span class="symbol">  defaule:</span> statement(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -1263,6 +1866,7 @@
 <li>用户定义的转换，如类声明中定义的转换</li>
 </ul>
 <p>进行完全匹配时，C++允许某些无关紧要的转换。Type本身可以是char &amp;这样的类型。Type(argument-list)意味着用作实参的函数名与用作形参的函数指针只要返回类型和参数列表相同，就是匹配的</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1305,6 +1909,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">f(a);</div><div class="line"><span class="comment">// 下面都是完全匹配的</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> &amp;)</span></span>;</div><div class="line"><span class="keyword">void</span> (<span class="keyword">const</span> <span class="keyword">int</span> &amp;);</div></pre></td></tr></table></figure></p>
 <p>有的时候即使两个函数都完全匹配，仍可以完成重载解析。首先，指向非const数据的指针和引用优先与非const指针和引用参数匹配。在上面示例中，如果只定义了函数3和4，则使用函数3。这种区别只适用于指针和引用指向的数据，如果只定义了函数1和2，将出现二义性错误。</p>
 <p>另一种情况是其中一个是非模板函数，而另一个不是。这种情况下非模板函数优先于模板函数(包括显式具体化)。如果两个完全匹配的函数都是模板函数，则较具体的模板函数优先。例如：显式具体化将优于使用模板隐式生成的具体化。</p>
@@ -1365,6 +1970,7 @@
 </ul>
 <p>这三种链接性都在整个程序执行期间存在。编译器分配固定的内存块来存储所有的静态变量。如果静态变量没有显示的初始化，编译器将把它设置为0。</p>
 <p>所有的静态持续变量都有下述初始化特征：未被初始化的静态变量的所有位都被设置为0，这种变量被称为零初始化的。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1413,6 +2019,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>除了默认的零初始化外，还可对静态变量进行常量表达式初始化和动态初始化。零初始化和常量表达式初始化被统称为静态初始化。这意味着在编译器处理文件时初始化变量。动态初始化意味着变量在编译后初始化。</p>
 <p>C++11新增了关键字constexpr，这增加了创建常量表达式的方式。</p>
 <h3 id="静态持续性、外部链接性"><a href="#静态持续性、外部链接性" class="headerlink" title="静态持续性、外部链接性"></a>静态持续性、外部链接性</h3><p>链接性为外部的变量通常简称为外部变量，它们的存储持续性为静态，作用域为整个文件。外部变量是在函数外定义的，因此对所有函数而言都是外部的。</p>
@@ -1479,11 +2086,11 @@
     </summary>
     
     
+      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="c++" scheme="http://gwq5210.github.io/tags/c/"/>
     
       <category term="Cpp Primer Plus" scheme="http://gwq5210.github.io/tags/Cpp-Primer-Plus/"/>
-    
-      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -1510,6 +2117,7 @@
 <p>C++提供两种注释的方式//(C++)或/**/(C)。C99标准在C语言中加入了//注释。</p>
 <p>#include编译指令会让预处理器添加指定文件内容到程序中。</p>
 <p>不同的头文件名可被不同的程序使用。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1546,6 +2154,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>C++中可以使用命名空间来避免名字冲突。可以使用using编译指令来使用命名空间中的函数或类对象。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
 <p>cout中，可以使用endl和”\n”表示换行符。不同的是endl确保程序继续运行前刷新输出，使用”\n”不能提供这样的保证。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!\n"</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world!"</span> &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
 <p>尽量遵循好的C++代码风格，程序会便于阅读。</p>
@@ -1585,6 +2194,7 @@
 <p>实际上，short是short int的简称，long是long int的简称</p>
 <p>sizeof运算符返回类型或变量的长度，单位为字节<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span> a &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 变量可以这样写，类型必须加括号</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(<span class="keyword">int</span>) &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
 <p>头文件climits(limits.h)定义了符号常量来表示类型的限制</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1667,6 +2277,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>C++支持类似C的符号常量，其进行简单的字符串替换。C++还提供了const来定义符号常量</p>
 <p>C++提供了不同于C的初始化方式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">b</span><span class="params">(<span class="number">1</span>)</span></span>;</div><div class="line"><span class="keyword">int</span> c&#123;<span class="number">2</span>&#125;;		<span class="comment">// C++ 11</span></div><div class="line"><span class="keyword">int</span> d = &#123;<span class="number">3</span>&#125;;	<span class="comment">// C++ 11</span></div><div class="line"><span class="keyword">int</span> e = &#123;&#125;;		<span class="comment">// set to 0</span></div><div class="line"><span class="keyword">int</span> f&#123;&#125;;		<span class="comment">// set to 0</span></div></pre></td></tr></table></figure></p>
 <p>无符号类型整数不能存储负数，但可以增大变量能够存储的整数的最大值</p>
@@ -1824,11 +2435,11 @@
     </summary>
     
     
+      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="c++" scheme="http://gwq5210.github.io/tags/c/"/>
     
       <category term="Cpp Primer Plus" scheme="http://gwq5210.github.io/tags/Cpp-Primer-Plus/"/>
-    
-      <category term="读书笔记" scheme="http://gwq5210.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -1916,6 +2527,7 @@
 <h2 id="消息结构"><a href="#消息结构" class="headerlink" title="消息结构"></a>消息结构</h2><p>正如你了解到的，protobuf消息是一系列key-value的组合，二进制格式的消息，仅仅使用字段数字作为key，这个key的名称和声明的类型可以在解码时引用消息类型定义得到，如proto文件。</p>
 <p>当编码消息时，键和值会组合成字节流。解析的时候，解析器需要能够跳过不能解析的字段。这样的话，新的字段加入的时候，较老的程序就不必修改，它可以不使用这些字段。这样，每个键值对编码成二进制的时候就会有两个值，一个是proto文件中的字段数字，另一个是能够提供值长度的二进制类型。</p>
 <p>可用的二进制类型如下表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1957,11 +2569,13 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>在序列化后的消息中，每一个key是类似这样的varint：(field_number &lt;&lt; 3) | wire_type，换句话说，低3位用来存储二进制类型。</p>
 <p>现在让我们来看看开始提到的那个例子，现在知道序列化后的消息中，第一个数字永远是varint，这里是08，丢弃msb之后：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">000 </span><span class="number">1000</span></div></pre></td></tr></table></figure></p>
 <p>取出低3位得到二进制类型0，右移3位后得到字段数字1。因此，我们知道了标签为1的值是varint，也就是说接下来的序列是varint，使用varint编码规则我们可以得到接下来的两个字节96 01存储的是150：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">96</span> <span class="number">01</span> = <span class="number">1001</span> <span class="number">0110</span>  <span class="number">0000</span> <span class="number">0001</span></div><div class="line">       → <span class="number">000</span> <span class="number">0001</span>  ++  <span class="number">001</span> <span class="number">0110</span> (drop the msb and reverse the groups of <span class="number">7</span> bits)</div><div class="line">       → <span class="number">10010110</span></div><div class="line">       → <span class="number">2</span> + <span class="number">4</span> + <span class="number">16</span> + <span class="number">128</span> = <span class="number">150</span></div></pre></td></tr></table></figure></p>
 <h2 id="更多值得类型"><a href="#更多值得类型" class="headerlink" title="更多值得类型"></a>更多值得类型</h2><h3 id="有符号整数"><a href="#有符号整数" class="headerlink" title="有符号整数"></a>有符号整数</h3><p>正如前面提到的，和wire类型0关联的值都被编码成varint。然而，对于有符号整数（sint32和sint64）与一般整数（int32和int64）的一个很重要的不同点是它们对负数编码的处理。如果你使用int32或int64表示负数，那么这个varint总是10个字节长——它被当做一个非常大的无符号数。如果你使用任意一个有符号数，那么varint将会使用ZigZag编码，它对负数编码更有效率。</p>
 <p>ZigZag编码将有符号整数映射到无符号整数，这样它的绝对值就很小，相应的varint编码长度也比较小。zig-zags在正数和负数之间来回交叉进行编码，-1编码是当做1,1在编码是当做2，-2编码成3，等等：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1996,6 +2610,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>换句话说，n在sint32的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 31)，在sint64的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 63)。</p>
 <p>运算的第二部分，(n&gt;&gt;31)是算术右移，也就是说，如果n是正数，右移补的位为0，否则是1。</p>
 <p>当sint32或sint64解析的时候，会解析成原来得数字。</p>
@@ -2069,6 +2684,7 @@
 <h3 id="保留字段"><a href="#保留字段" class="headerlink" title="保留字段"></a>保留字段</h3><p>在你更新你的消息时，你可能删除掉一些字段，当其他人更新时，可能会重新使用之前用到的标签号，这个使用你可以使用reversed关键字，当其他人使用到reversed中的标号时，ProtoBuf会给出警告。你不能将名字和标号在一个reserved语句中混用。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">message Foo &#123;</div><div class="line">	reserved <span class="number">2</span>, <span class="number">15</span>, <span class="number">9</span> to <span class="number">11</span>;</div><div class="line">	reserved <span class="string">"foo"</span>, <span class="string">"bar"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="ProtoBuf从proto文件中生成了什么？"><a href="#ProtoBuf从proto文件中生成了什么？" class="headerlink" title="ProtoBuf从proto文件中生成了什么？"></a>ProtoBuf从proto文件中生成了什么？</h3><p>ProtoBuf编译器会将proto文件编译成你选择语言的相应代码，这些代码中包括了获取和设置字段的方法，序列化到输出流和从输入流解析的方法。<br>对于C++，编译器对每一个proto文件生成相应的h和cc文件，其中包括了每个消息对应的类。<br>对于Java，编译器为每一个消息生成一个对应的java文件。<br>对于生成代码的API的详细介绍，可以在<a href="https://developers.google.com/protocol-buffers/docs/reference/overview" target="_blank" rel="external">API reference</a>找到。</p>
 <h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p>一个只使用基本类型的消息，可以选择的类型在如下的表格中，包括proto中可以选择的类型和生成类的相应类型：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2187,6 +2803,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="可选字段和默认值"><a href="#可选字段和默认值" class="headerlink" title="可选字段和默认值"></a>可选字段和默认值</h2><p>一个消息中的字段可以定义为optional，即可选的，一个合法的消息可以包括也可以不包括这个可选的字段。当解析消息时，如果不包括可选字段，那么可选字段就会被设置为默认值，这个默认值可以指定。例如：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">optional int32 result_per_page = <span class="number">3</span> [<span class="section">default</span> = <span class="number">10</span>];</div></pre></td></tr></table></figure></p>
 <p>如果没有显示指定默认值，ProtoBuf会为每个类型指定默认值：string类型指定为空串，bool指定为false，对于数值类型，指定为0，对于枚举类型，默认为列表中的第一个值。因此如果修改枚举定义，就需要注意兼容性问题了。</p>
 <h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>protobuf同样提供了枚举类型，这种类型只能使用预定义列表中的值。例如你想为SearchResult添加corpus字段，它可以是：UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS or VIDEO。这利用枚举就可以很方便的实现。下边是一个例子：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SearchRequest</span> </span>&#123;</div><div class="line">	<span class="keyword">required</span> <span class="built_in">string</span> query = <span class="number">1</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int32</span> page_number = <span class="number">2</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int32</span> result_per_page = <span class="number">3</span> [default = <span class="number">10</span>];</div><div class="line">	<span class="class"><span class="keyword">enum</span> <span class="title">Corpus</span> </span>&#123;</div><div class="line">		UNIVERSAL = <span class="number">0</span>;</div><div class="line">		WEB = <span class="number">1</span>;</div><div class="line">		IMAGES = <span class="number">2</span>;</div><div class="line">		LOCAL = <span class="number">3</span>;</div><div class="line">		NEWS = <span class="number">4</span>;</div><div class="line">		PRODUCTS = <span class="number">5</span>;</div><div class="line">		VIDEO = <span class="number">6</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">optional</span> Corpus corpus = <span class="number">4</span> [default = UNIVERSAL];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -2198,7 +2815,7 @@
 <p>一般来说，你直接使用import就可以满足要求了。但有时，你可能想将一个proto文件移动到新的位置。你可以不直接移动proto文件，在老的位置放一个dummy .proto文件使用import public来将所有的imports跳转到新的位置。import public的依赖可以通过导入任何包含了import public语句的proto文件来传递。<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// new.proto</span></div><div class="line"><span class="comment">// All definitions are moved here</span></div><div class="line"><span class="comment">// old.proto</span></div><div class="line"><span class="comment">// This is the proto that all clients are importing.</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> public <span class="string">"new.proto"</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">"other.proto"</span>;</div></pre></td></tr></table></figure>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> client.proto</div><div class="line"><span class="keyword">import</span> <span class="string">"old.proto"</span>;</div><div class="line"><span class="regexp">//</span> You use definitions <span class="keyword">from</span> old.proto <span class="keyword">and</span> <span class="keyword">new</span>.proto, but <span class="keyword">not</span> other.proto</div></pre></td></tr></table></figure>
-<p>protobuf编译器通过命令行参数-I或–proto_path来指定导入文件的搜索目录，如果没有指定，则使用编译器被调用的目录，一般来说，应该在命令行指定这个参数，确保全部合法的名字是可以被真长导入的。</p>
+<p>protobuf编译器通过命令行参数-I或—proto_path来指定导入文件的搜索目录，如果没有指定，则使用编译器被调用的目录，一般来说，应该在命令行指定这个参数，确保全部合法的名字是可以被真长导入的。</p>
 <h3 id="使用proto3消息类型"><a href="#使用proto3消息类型" class="headerlink" title="使用proto3消息类型"></a>使用proto3消息类型</h3><p>可以在proto2中导入<a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="external">proto3</a>的消息类型，反之亦然。但是，proto2的枚举不能在proto3语法中使用。</p>
 <h2 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h2><p>你可以将一个消息定义在另一个消息内。例如：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SearchResponse</span> </span>&#123;</div><div class="line">	<span class="class"><span class="keyword">message</span> <span class="title">Result</span> </span>&#123;</div><div class="line">		<span class="keyword">required</span> <span class="built_in">string</span> url = <span class="number">1</span>;</div><div class="line">		<span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">2</span>;</div><div class="line">		<span class="keyword">repeated</span> <span class="built_in">string</span> snippets = <span class="number">3</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">repeated</span> Result result = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>可以在其他消息中用Parent.Type使用嵌套的消息类型：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SomeOtherMessage</span> </span>&#123;</div><div class="line">	<span class="keyword">optional</span> SearchResponse.Result result = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -2332,11 +2949,11 @@
 <p>因为不同的选项级别有着不同的字段数字空间，因此，你可以在不同的选项级别中使用相同的扩展数字。</p>
 <h2 id="生成你的消息类"><a href="#生成你的消息类" class="headerlink" title="生成你的消息类"></a>生成你的消息类</h2><p>为了生成与你定义的proto文件相应的Java，Python或C++代码，你需要运行protobuf编译器来作用在你的proto文件上。如果你还没有protobuf编译器，下载<a href="https://developers.google.com/protocol-buffers/docs/downloads.html" target="_blank" rel="external">安装包</a>，然后阅读README。<br>可以像这样调用protobuf编译器：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc <span class="attribute">--proto_path</span>=IMPORT_PATH <span class="attribute">--cpp_out</span>=DST_DIR <span class="attribute">--java_out</span>=DST_DIR <span class="attribute">--python_out</span>=DST_DIR path/<span class="keyword">to</span>/file.proto</div></pre></td></tr></table></figure></p>
 <ul>
-<li>IMPORT_PATH：指定了当使用import指令时寻找proto文件的路径。如果省略，就会搜寻当前路径。可以通过指定多次–proto_path来指定多个搜寻路径，他们会按照顺序搜寻。-I=IMPORT_PATH是–proto_path的简写。</li>
+<li>IMPORT_PATH：指定了当使用import指令时寻找proto文件的路径。如果省略，就会搜寻当前路径。可以通过指定多次—proto_path来指定多个搜寻路径，他们会按照顺序搜寻。-I=IMPORT_PATH是—proto_path的简写。</li>
 <li>你可以提供一个活多个输出目录：<ul>
-<li>–cpp_out：生成C++代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated" target="_blank" rel="external">这里</a>。</li>
-<li>–java_out：生成Java代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/java-generated" target="_blank" rel="external">这里</a>。</li>
-<li>–python_out：生成Python代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/python-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—cpp_out：生成C++代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—java_out：生成Java代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/java-generated" target="_blank" rel="external">这里</a>。</li>
+<li>—python_out：生成Python代码的目录。了解更多可以参考<a href="https://developers.google.com/protocol-buffers/docs/reference/python-generated" target="_blank" rel="external">这里</a>。</li>
 </ul>
 </li>
 </ul>
