@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>url转码解码-c语言实现 | Rhett&#39;s Blog | 命是弱者借口，运乃强者谦辞！</title>
+  <title>url转码解码-c语言实现 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
@@ -14,25 +14,26 @@
 <meta name="keywords" content="c语言,url转码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="url转码解码-c语言实现">
-<meta property="og:url" content="http://gwq5210.github.io/2016/01/22/url转码解码-c语言实现/index.html">
-<meta property="og:site_name" content="Rhett&#39;s Blog">
+<meta property="og:url" content="https://blog.gwq5210.cn/2016/01/22/url转码解码-c语言实现/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。 好像C语言里面没有现成的转码函数。参考这里，从php的转码中引出两个函数，进行转码。 字符’a’-‘z’,’A’-‘Z’,’0’-‘9’,’.’,’-">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-02T03:28:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="url转码解码-c语言实现">
 <meta name="twitter:description" content="url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。 好像C语言里面没有现成的转码函数。参考这里，从php的转码中引出两个函数，进行转码。 字符’a’-‘z’,’A’-‘Z’,’0’-‘9’,’.’,’-">
   
-    <link rel="alternative" href="/atom.xml" title="Rhett&#39;s Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="gwq5210&#39;s Blog" type="application/atom+xml">
   
   <meta name="summary" content="&lt;p&gt;url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。&lt;/p&gt;
-&lt;p&gt;好像C语言里面没有现成的转码函数。参考&lt;a href=&quot;http://blog.csdn.net/wudishine/article/details/39025407&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;，从php的转码中引出两个函数，进行转码。&lt;/p&gt;
+&lt;p&gt;好像C语言里面没有现成的转码函数。参考&lt;a href=&quot;http://blog.csdn.net/wudishine/article/details/39025407&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;这里&lt;/a&gt;，从php的转码中引出两个函数，进行转码。&lt;/p&gt;
 &lt;p&gt;字符’a’-‘z’,’A’-‘Z’,’0’-‘9’,’.’,’-‘,’*’和’_’ 都不被编码，维持原值；&lt;/p&gt;
 &lt;p&gt;空格’ ‘被转换为加号’+’。&lt;/p&gt;
 &lt;p&gt;其他每个字节都被表示成”%XY”的格式，X和Y分别代表一个十六进制位。编码为UTF-8。&lt;/p&gt;">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="loading" class="active"></div>
 
@@ -45,7 +46,7 @@
     <div class="brand">
       <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
-        <h5 class="nickname">rhettguo</h5>
+        <h5 class="nickname">gwq5210</h5>
         <a href="mailto:457781132@qq.com" title="457781132@qq.com" class="mail">457781132@qq.com</a>
       </hgroup>
     </div>
@@ -54,42 +55,42 @@
     <ul class="nav">
       
           <li class="waves-block waves-effect">
-            <a href="/"  >
+            <a href="/">
               <i class="icon icon-lg icon-home"></i>
               主页
             </a>
           </li>
       
           <li class="waves-block waves-effect">
-            <a href="/archives"  >
+            <a href="/archives">
               <i class="icon icon-lg icon-archives"></i>
               文章
             </a>
           </li>
       
           <li class="waves-block waves-effect">
-            <a href="/tags"  >
+            <a href="/tags">
               <i class="icon icon-lg icon-tags"></i>
               标签
             </a>
           </li>
       
           <li class="waves-block waves-effect">
-            <a href="https://github.com/gwq5210" target="_blank" >
+            <a href="https://github.com/gwq5210" target="_blank">
               <i class="icon icon-lg icon-github"></i>
               Github
             </a>
           </li>
       
           <li class="waves-block waves-effect">
-            <a href="/read"  >
+            <a href="/read">
               <i class="icon icon-lg icon-book"></i>
               读书计划
             </a>
           </li>
       
           <li class="waves-block waves-effect">
-            <a href="/about"  >
+            <a href="/about">
               <i class="icon icon-lg icon-link"></i>
               关于
             </a>
@@ -98,8 +99,8 @@
     </ul>
 
     <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Rhett&#39;s Blog &copy; 2018</p>
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC"></a></p>
+  <p>gwq5210&#39;s Blog &copy; 2019</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
@@ -152,8 +153,7 @@
 </header>
 
     <div class="container body-wrap">
-      <article id="post-url转码解码-c语言实现" 
-  class="article article-type-post" itemprop="blogPost">
+      <article id="post-url转码解码-c语言实现" class="article article-type-post" itemprop="blogPost">
     <div class="post-meta flex-row">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/url转码/">url转码</a></li></ul>
@@ -212,13 +212,13 @@
 
             <div class="post-content" id="post-content" itemprop="postContent">
             <p>url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。</p>
-<p>好像C语言里面没有现成的转码函数。参考<a href="http://blog.csdn.net/wudishine/article/details/39025407" target="_blank" rel="external">这里</a>，从php的转码中引出两个函数，进行转码。</p>
+<p>好像C语言里面没有现成的转码函数。参考<a href="http://blog.csdn.net/wudishine/article/details/39025407" target="_blank" rel="noopener">这里</a>，从php的转码中引出两个函数，进行转码。</p>
 <p>字符’a’-‘z’,’A’-‘Z’,’0’-‘9’,’.’,’-‘,’*’和’_’ 都不被编码，维持原值；</p>
 <p>空格’ ‘被转换为加号’+’。</p>
 <p>其他每个字节都被表示成”%XY”的格式，X和Y分别代表一个十六进制位。编码为UTF-8。</p>
 <a id="more"></a>
-<p>下面是代码实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: url.c</div><div class="line">	&gt; Author: gwq</div><div class="line">	&gt; Mail: gwq5210@qq.com </div><div class="line">	&gt; Created Time: 2014年12月19日 星期五 14时05分41秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BURSIZE 1024</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hex2dec</span><span class="params">(<span class="keyword">char</span> c)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> c - <span class="string">'0'</span>;</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'a'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'f'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> c - <span class="string">'a'</span> + <span class="number">10</span>;</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'A'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'F'</span>) &#123;</div><div class="line">		<span class="keyword">return</span> c - <span class="string">'A'</span> + <span class="number">10</span>;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">char</span> <span class="title">dec2hex</span><span class="params">(<span class="keyword">short</span> <span class="keyword">int</span> c)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="number">0</span> &lt;= c &amp;&amp; c &lt;= <span class="number">9</span>) &#123;</div><div class="line">		<span class="keyword">return</span> c + <span class="string">'0'</span>;</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">10</span> &lt;= c &amp;&amp; c &lt;= <span class="number">15</span>) &#123;</div><div class="line">		<span class="keyword">return</span> c + <span class="string">'A'</span> - <span class="number">10</span>;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 编码一个url</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">urlencode</span><span class="params">(<span class="keyword">char</span> url[])</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(url);</div><div class="line">	<span class="keyword">int</span> res_len = <span class="number">0</span>;</div><div class="line">	<span class="keyword">char</span> res[BURSIZE];</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; ++i) &#123;</div><div class="line">		<span class="keyword">char</span> c = url[i];</div><div class="line">		<span class="keyword">if</span> ((<span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>) ||</div><div class="line">				(<span class="string">'a'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'z'</span>) ||</div><div class="line">				(<span class="string">'A'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'Z'</span>) || c == <span class="string">'/'</span> || c == <span class="string">'.'</span>) &#123;</div><div class="line">			res[res_len++] = c;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">int</span> j = (<span class="keyword">short</span> <span class="keyword">int</span>)c;</div><div class="line">			<span class="keyword">if</span> (j &lt; <span class="number">0</span>)</div><div class="line">				j += <span class="number">256</span>;</div><div class="line">			<span class="keyword">int</span> i1, i0;</div><div class="line">			i1 = j / <span class="number">16</span>;</div><div class="line">			i0 = j - i1 * <span class="number">16</span>;</div><div class="line">			res[res_len++] = <span class="string">'%'</span>;</div><div class="line">			res[res_len++] = dec2hex(i1);</div><div class="line">			res[res_len++] = dec2hex(i0);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	res[res_len] = <span class="string">'\0'</span>;</div><div class="line">	<span class="built_in">strcpy</span>(url, res);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 解码url</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">urldecode</span><span class="params">(<span class="keyword">char</span> url[])</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(url);</div><div class="line">	<span class="keyword">int</span> res_len = <span class="number">0</span>;</div><div class="line">	<span class="keyword">char</span> res[BURSIZE];</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; ++i) &#123;</div><div class="line">		<span class="keyword">char</span> c = url[i];</div><div class="line">		<span class="keyword">if</span> (c != <span class="string">'%'</span>) &#123;</div><div class="line">			res[res_len++] = c;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">char</span> c1 = url[++i];</div><div class="line">			<span class="keyword">char</span> c0 = url[++i];</div><div class="line">			<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">			num = hex2dec(c1) * <span class="number">16</span> + hex2dec(c0);</div><div class="line">			res[res_len++] = num;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	res[res_len] = <span class="string">'\0'</span>;</div><div class="line">	<span class="built_in">strcpy</span>(url, res);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> url[BURSIZE] = <span class="string">"http://'www.baidu.com/a b"</span>;</div><div class="line">	urlencode(url);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, url);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1) <a href="https://github.com/BNUACM/bnuoj-vjudge.git" target="_blank" rel="external">bnuoj vjudge</a><br>2) <a href="http://abloz.com/2011/09/07/c-language-the-url-to-the-code-submit-content-to-the-site.html" target="_blank" rel="external">wudishine的专栏</a></p>
+<p>下面是代码实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">	&gt; File Name: url.c</span></span><br><span class="line"><span class="comment">	&gt; Author: gwq</span></span><br><span class="line"><span class="comment">	&gt; Mail: gwq5210@qq.com </span></span><br><span class="line"><span class="comment">	&gt; Created Time: 2014年12月19日 星期五 14时05分41秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BURSIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hex2dec</span><span class="params">(<span class="keyword">char</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> c - <span class="string">'0'</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'a'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'f'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> c - <span class="string">'a'</span> + <span class="number">10</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'A'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'F'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> c - <span class="string">'A'</span> + <span class="number">10</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">dec2hex</span><span class="params">(<span class="keyword">short</span> <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="number">0</span> &lt;= c &amp;&amp; c &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> c + <span class="string">'0'</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">10</span> &lt;= c &amp;&amp; c &lt;= <span class="number">15</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> c + <span class="string">'A'</span> - <span class="number">10</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 编码一个url</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">urlencode</span><span class="params">(<span class="keyword">char</span> url[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(url);</span><br><span class="line">	<span class="keyword">int</span> res_len = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> res[BURSIZE];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">		<span class="keyword">char</span> c = url[i];</span><br><span class="line">		<span class="keyword">if</span> ((<span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>) ||</span><br><span class="line">				(<span class="string">'a'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'z'</span>) ||</span><br><span class="line">				(<span class="string">'A'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'Z'</span>) || c == <span class="string">'/'</span> || c == <span class="string">'.'</span>) &#123;</span><br><span class="line">			res[res_len++] = c;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> j = (<span class="keyword">short</span> <span class="keyword">int</span>)c;</span><br><span class="line">			<span class="keyword">if</span> (j &lt; <span class="number">0</span>)</span><br><span class="line">				j += <span class="number">256</span>;</span><br><span class="line">			<span class="keyword">int</span> i1, i0;</span><br><span class="line">			i1 = j / <span class="number">16</span>;</span><br><span class="line">			i0 = j - i1 * <span class="number">16</span>;</span><br><span class="line">			res[res_len++] = <span class="string">'%'</span>;</span><br><span class="line">			res[res_len++] = dec2hex(i1);</span><br><span class="line">			res[res_len++] = dec2hex(i0);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	res[res_len] = <span class="string">'\0'</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(url, res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 解码url</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">urldecode</span><span class="params">(<span class="keyword">char</span> url[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(url);</span><br><span class="line">	<span class="keyword">int</span> res_len = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> res[BURSIZE];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">		<span class="keyword">char</span> c = url[i];</span><br><span class="line">		<span class="keyword">if</span> (c != <span class="string">'%'</span>) &#123;</span><br><span class="line">			res[res_len++] = c;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">char</span> c1 = url[++i];</span><br><span class="line">			<span class="keyword">char</span> c0 = url[++i];</span><br><span class="line">			<span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">			num = hex2dec(c1) * <span class="number">16</span> + hex2dec(c0);</span><br><span class="line">			res[res_len++] = num;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	res[res_len] = <span class="string">'\0'</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(url, res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> url[BURSIZE] = <span class="string">"http://'www.baidu.com/a b"</span>;</span><br><span class="line">	urlencode(url);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, url);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1) <a href="https://github.com/BNUACM/bnuoj-vjudge.git" target="_blank" rel="noopener">bnuoj vjudge</a><br>2) <a href="http://abloz.com/2011/09/07/c-language-the-url-to-the-code-submit-content-to-the-site.html" target="_blank" rel="noopener">wudishine的专栏</a></p>
 
 
             
@@ -230,9 +230,9 @@
             <blockquote>
                 <p>
                 本文地址：
-                <a href="http://gwq5210.github.io/2016/01/22/url转码解码-c语言实现/" target="_blank" rel="external">http://gwq5210.github.io/2016/01/22/url转码解码-c语言实现/</a>
+                <a href="https://blog.gwq5210.cn/2016/01/22/url转码解码-c语言实现/" target="_blank" rel="external">https://blog.gwq5210.cn/2016/01/22/url转码解码-c语言实现/</a>
                 </p>
-                <footer><cite><a href="http://gwq5210.github.io">@Rhett's Blog</a></cite></footer>
+                <footer><cite><a href="https://blog.gwq5210.cn">@gwq5210's Blog</a></cite></footer>
             </blockquote>
             </div>
             
@@ -261,7 +261,7 @@
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="url转码解码-c语言实现" data-title="url转码解码-c语言实现" data-url="http://gwq5210.github.io/2016/01/22/url转码解码-c语言实现/index.html"></div>
+	<div class="ds-thread" data-thread-key="url转码解码-c语言实现" data-title="url转码解码-c语言实现" data-url="https://blog.gwq5210.cn/2016/01/22/url转码解码-c语言实现/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -295,7 +295,7 @@ var BLOG_SHARE = {
     title: "url转码解码-c语言实现",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "http://gwq5210.github.io/2016/01/22/url转码解码-c语言实现/index.html"
+    url: "https://blog.gwq5210.cn/2016/01/22/url转码解码-c语言实现/index.html"
 };
 </script>
 <div class="global-share" id="global-share">
