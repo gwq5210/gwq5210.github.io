@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.gwq5210.cn/"/>
-  <updated>2019-03-25T12:31:11.414Z</updated>
+  <updated>2019-03-26T03:38:47.725Z</updated>
   <id>https://blog.gwq5210.cn/</id>
   
   <author>
@@ -16,13 +16,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>git常用命令</title>
-    <link href="https://blog.gwq5210.cn/2019/03/25/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>https://blog.gwq5210.cn/2019/03/25/git常用命令/</id>
+    <title>Git简介及常用命令</title>
+    <link href="https://blog.gwq5210.cn/2019/03/25/Git%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://blog.gwq5210.cn/2019/03/25/Git简介及常用命令/</id>
     <published>2019-03-25T12:31:11.000Z</published>
-    <updated>2019-03-25T12:31:11.414Z</updated>
+    <updated>2019-03-26T03:38:47.725Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近想深入了解一下Git，阅读了一下<a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git</a>的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅</p>
+<h1 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h1><p>Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。</p>
+<p>版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变。<br><a id="more"></a><br>本地版本控制系统无法实现协同工作，集中化的版本控制系统解决了协同工作的问题，但中央服务器的单点故障会影响所有人的工作，分布式版本控制系统采用快照的方式，每个开发者电脑上都有一份代码的完整拷贝，故障恢复起来就比较容易。</p>
+<p>Git是Linux开源社区的杰作，他们开发Git之初就对其有以下目标：</p>
+<ol>
+<li>速度</li>
+<li>简单的设计</li>
+<li>对非线性开发模式的强力支持（允许成千上万个并行开发的分支）</li>
+<li>完全的分布式</li>
+<li>有能力高效管理类似Linux内核一样的超大规模项目（速度和数据量）</li>
+</ol>
+<p>Git和其他版本控制系统（如Subversion）的主要差别在于对待数据的方法。不像其他版本控制系统保存基本文件和基于基本文件的差异，Git直接保存每个文件的快照。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/存储每个文件和基础版本的差异.png" alt="存储每个文件和基础版本的差异" title>
+                </div>
+                <div class="image-caption">存储每个文件和基础版本的差异</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/%E5%AD%98%E5%82%A8%E9%A1%B9%E7%9B%AE%E9%9A%8F%E6%97%B6%E9%97%B4%E5%8F%98%E5%8C%96%E7%9A%84%E5%BF%AB%E7%85%A7.png" alt="存储项目随时间变化的快照" title>
+                </div>
+                <div class="image-caption">存储项目随时间变化的快照</div>
+            </figure>
+]]></content>
     
     <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近想深入了解一下Git，阅读了一下&lt;a href=&quot;https://git-scm.com/book/en/v2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Pro Git&lt;/a&gt;的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅&lt;/p&gt;
+&lt;h1 id=&quot;Git介绍&quot;&gt;&lt;a href=&quot;#Git介绍&quot; class=&quot;headerlink&quot; title=&quot;Git介绍&quot;&gt;&lt;/a&gt;Git介绍&lt;/h1&gt;&lt;p&gt;Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。&lt;/p&gt;
+&lt;p&gt;版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变。&lt;br&gt;
     
     </summary>
     
@@ -34,12 +66,13 @@
     <link href="https://blog.gwq5210.cn/2018/04/12/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
     <id>https://blog.gwq5210.cn/2018/04/12/Cpp-Primer-Plus读书笔记（四）/</id>
     <published>2018-04-12T14:26:26.000Z</published>
-    <updated>2018-04-23T14:29:00.000Z</updated>
+    <updated>2019-03-26T04:16:33.325Z</updated>
     
     <content type="html"><![CDATA[<h1 id="C-中的代码重用"><a href="#C-中的代码重用" class="headerlink" title="C++中的代码重用"></a>C++中的代码重用</h1><p>C++的一个主要目标是促进代码重用。</p>
 <h2 id="包含对象成员的类"><a href="#包含对象成员的类" class="headerlink" title="包含对象成员的类"></a>包含对象成员的类</h2><p>valarray是由头文件valarray定义，其用于处理数值<br>通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类<br>使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现</p>
 <p>对于模板类我们可以使用typedef简化其描述</p>
 <p>使用成员初始化列表来初始化包含的类对象。</p>
+<a id="more"></a>
 <h2 id="私有继承"><a href="#私有继承" class="headerlink" title="私有继承"></a>私有继承</h2><p>C++还有另一种实现has-a关系的途径——私有继承。使用私有继承，基类的公有成员和保护成员都将成为派生类的私有成员。基类方法不会成为派生对象公有接口的一部分，但可以在派生类的成员函数中使用它们。这种关系是has-a关系。</p>
 <p>包含将对象作为一个命名的成员对象添加到类中，而私有继承将对象作为一个未被命名的继承对象添加到类中。我们将使用术语子对象(subobject)来表示通过继承或包含添加的对象。</p>
 <p>使用包含时使用对象名来调用方法，而使用私有继承时，将使用类名和作用域解析运算符来调用方法</p>
@@ -55,7 +88,9 @@
     <summary type="html">
     
       &lt;h1 id=&quot;C-中的代码重用&quot;&gt;&lt;a href=&quot;#C-中的代码重用&quot; class=&quot;headerlink&quot; title=&quot;C++中的代码重用&quot;&gt;&lt;/a&gt;C++中的代码重用&lt;/h1&gt;&lt;p&gt;C++的一个主要目标是促进代码重用。&lt;/p&gt;
-&lt;h2 id=&quot;包含对象成员的类&quot;&gt;&lt;a 
+&lt;h2 id=&quot;包含对象成员的类&quot;&gt;&lt;a href=&quot;#包含对象成员的类&quot; class=&quot;headerlink&quot; title=&quot;包含对象成员的类&quot;&gt;&lt;/a&gt;包含对象成员的类&lt;/h2&gt;&lt;p&gt;valarray是由头文件valarray定义，其用于处理数值&lt;br&gt;通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类&lt;br&gt;使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现&lt;/p&gt;
+&lt;p&gt;对于模板类我们可以使用typedef简化其描述&lt;/p&gt;
+&lt;p&gt;使用成员初始化列表来初始化包含的类对象。&lt;/p&gt;
     
     </summary>
     
@@ -1268,7 +1303,13 @@
 <li>内核为所有打开文件维持一张文件表。每个文件表项包含：文件状态标志(读，写，添写，同步和非阻塞等)、当前文件偏移量、指向该文件的v节点指针。</li>
 <li>每个打开文件(或设备)都有一个v节点结构。v节点包含了文件类型和对此文件进行各种操作的函数指针。对于大多数文件，v节点还包含了该文件的i节点(索引节点)。这些信息是在打开文件时从磁盘读入内存的。对于不同的实现可能不同，例如linux不包含v节点，而是使用了通用的i节点。</li>
 </ul>
-<p>不同实现可能有不同，但是是有必要保存这些信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构"></p>
+<p>不同实现可能有不同，但是是有必要保存这些信息。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构" title>
+                </div>
+                <div class="image-caption">打开文件的内核数据结构</div>
+            </figure></p>
 <p>文件描述符标志和文件状态标志在作用范围方面有区别，前者只用于一个进程的某一个描述符，而后者则应用于指向该给定文件表项的任何进程中所有的描述符。</p>
 <h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>一般而言，原子操作(atomic operation)是由多步操作组成的一个操作。如果该操作原子地执行，则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。</p>
 <p>多个进程对同一个文件追加数据，可以在打开文件时指定O_APPEND标志。这使得每次写操作之前内核都将进程的当前文件偏移量设置到该文件的末尾。对于对于这种write操作在不同进程间是不是原子的，后续有文章来验证。</p>
@@ -1281,7 +1322,13 @@
 <p>pwrite也有类似的问题</p>
 <h2 id="函数dup和dup2"><a href="#函数dup和dup2" class="headerlink" title="函数dup和dup2"></a>函数dup和dup2</h2><p>这两个函数可用来复制一个现有的文件描述符：<br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> fd2)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p> 由dup返回的新文件描述符一定是当前可用文件描述符中的最小数值。对于dup2，可以用fd2参数指定新描述符的值，如果fd2已经打开，则先将其关闭。如若fd等于fd2，则dup2返回fd2而不关闭它。否则，fd2的FD_CLOEXEC文件描述符就被清除，这样fd2在进程调用exec时是打开状态。</p>
-<p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构"></p>
+<p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构" title>
+                </div>
+                <div class="image-caption">dup后的内核数据结构</div>
+            </figure></p>
 <p> 赋值描述符的另一个方法是使用fcntl函数<br> <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> dup<span class="comment">(fd)</span>;	<span class="comment">// fcntl(fd, F_DUPFD, 0);</span></span><br><span class="line"> dup<span class="number">2</span><span class="comment">(fd, fd2)</span>;	<span class="comment">// close(fd2); fcntl(fd, F_DUPFD, fd2);</span></span><br></pre></td></tr></table></figure></p>
 <p> 后一种情况，dup2并不完全等同于close加上fcntl</p>
 <ul>
@@ -1565,8 +1612,20 @@
 <h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><p>有时我们需要在文件尾端处截去一些数据以缩短文件。将一个文件长度截断为0是一个特例，在打开文件时使用O_TRUNC标志可以做到这一点。为了截断文件可以调用函数truncate和ftruncate函数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> length)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> length)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。</p>
 <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。</p>
-<p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统"></p>
-<p>下面是比较详细的i节点和数据块图<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图"><br>在图中，我们注意到：</p>
+<p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统" title>
+                </div>
+                <div class="image-caption">磁盘、分区和文件系统</div>
+            </figure></p>
+<p>下面是比较详细的i节点和数据块图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图" title>
+                </div>
+                <div class="image-caption">详细图</div>
+            </figure><br>在图中，我们注意到：</p>
 <ul>
 <li>有两个目录项指向同一个i节点，每个i节点中都有一个链接计数，其值是指向该i节点的目录项数。只有当链接计数减少到0时，才可删除该文件。这就是为什么解除一个文件的链接操作并不总是意味着释放该文件占用的磁盘块的原因。在stat结构中，链接计数包含在st_nlink成员中，其基本系统数据类型是nlink_t。这种链接类型称为硬链接。LINK_MAX指定了一个文件链接数的最大值。</li>
 <li>另外一种类型链接称为符号链接（symbolic link）。符号链接的实际内容包含了该符号链接所指向的文件的名字。</li>
@@ -1728,7 +1787,13 @@
 </table>
 </div>
 <p>注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的</p>
-<p><img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响" title>
+                </div>
+                <div class="image-caption">各种函数对三种时间的影响</div>
+            </figure>
 <h2 id="函数futimens，utimensat和utimes"><a href="#函数futimens，utimensat和utimes" class="headerlink" title="函数futimens，utimensat和utimes"></a>函数futimens，utimensat和utimes</h2><p>一个文件的访问和修改时间可以通过一下几个函数修改。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">futimens</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimensat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>], <span class="keyword">int</span> flag)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>times数组参数的第一个元素包含访问时间，第二个元素包含修改时间，这两个值是日历时间。</p>
 <p>时间戳可以按下列4中方式之一指定</p>
@@ -1763,7 +1828,13 @@
 <li>系统中与每个文件名关联的st_dev是文件系统的设备号，该文件系统包含了这一文件名以及与其对应的i节点</li>
 <li>只有字符特殊文件和块特殊文件才有st_rdev值，此值包含实际设备的设备号。</li>
 </ul>
-<h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><p><img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结"></p>
+<h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结" title>
+                </div>
+                <div class="image-caption">文件访问权限位小结</div>
+            </figure>
 <h1 id="标准IO库"><a href="#标准IO库" class="headerlink" title="标准IO库"></a>标准IO库</h1>]]></content>
     
     <summary type="html">

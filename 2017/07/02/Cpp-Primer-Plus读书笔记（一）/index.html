@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>Cpp Primer Plus读书笔记（一） | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="theme-color" content="#3F51B5">
-  
-  
-  <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
-  <meta name="description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Cpp Primer Plus读书笔记（一） | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
 <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp Primer Plus读书笔记（一）">
@@ -22,100 +32,89 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp Primer Plus读书笔记（一）">
 <meta name="twitter:description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
-  
-    <link rel="alternative" href="/atom.xml" title="gwq5210&#39;s Blog" type="application/atom+xml">
-  
-  <meta name="summary" content="&lt;h1 id=&quot;第一章-预备知识&quot;&gt;&lt;a href=&quot;#第一章-预备知识&quot; class=&quot;headerlink&quot; title=&quot;第一章 预备知识&quot;&gt;&lt;/a&gt;第一章 预备知识&lt;/h1&gt;&lt;h2 id=&quot;C-简介&quot;&gt;&lt;a href=&quot;#C-简介&quot; class=&quot;headerlink&quot; title=&quot;C++简介&quot;&gt;&lt;/a&gt;C++简介&lt;/h2&gt;&lt;p&gt;C++融合了三种不同的编程方式：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;C语言代表的过程性语言&lt;/li&gt;
-&lt;li&gt;以类为代表的面向对象于艳&lt;/li&gt;
-&lt;li&gt;模板支持的泛型编程&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;面向对象编程&quot;&gt;&lt;a href=&quot;#面向对象编程&quot; class=&quot;headerlink&quot; title=&quot;面向对象编程&quot;&gt;&lt;/a&gt;面向对象编程&lt;/h2&gt;&lt;p&gt;面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。&lt;/p&gt;
-&lt;h2 id=&quot;泛型编程&quot;&gt;&lt;a href=&quot;#泛型编程&quot; class=&quot;headerlink&quot; title=&quot;泛型编程&quot;&gt;&lt;/a&gt;泛型编程&lt;/h2&gt;&lt;p&gt;泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。&lt;/p&gt;
-&lt;h2 id=&quot;C与C&quot;&gt;&lt;a href=&quot;#C与C&quot; class=&quot;headerlink&quot; title=&quot;C与C++&quot;&gt;&lt;/a&gt;C与C++&lt;/h2&gt;&lt;p&gt;C++是C的超集，尽管有一些细微差别，但这种差别很小。&lt;/p&gt;">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
-<body>
-  <div id="loading" class="active"></div>
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">gwq5210</h5>
-        <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
-      </hgroup>
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/read">
+                <i class="icon icon-lg icon-book"></i>
+                读书计划
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-  <div class="scroll-wrap flex-col">
-    <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/">
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/archives">
-              <i class="icon icon-lg icon-archives"></i>
-              文章
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags">
-              <i class="icon icon-lg icon-tags"></i>
-              标签
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/gwq5210" target="_blank">
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/read">
-              <i class="icon icon-lg icon-book"></i>
-              读书计划
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/about">
-              <i class="icon icon-lg icon-link"></i>
-              关于
-            </a>
-          </li>
-      
-    </ul>
+</aside>
 
-    <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC"></a></p>
-  <p>gwq5210&#39;s Blog &copy; 2019</p>
-  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
-  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
-  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-</footer>
-
-  </div>
-</div>
-
-  </nav>
-  <main id="main">
-    <header class="top-header" id="header">
+    <main id="main">
+        <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -126,93 +125,67 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">Cpp Primer Plus读书笔记（一）</h1>
-    <h5 class="subtitle">
-        
-            <time datetime="2017-07-02T13:25:04.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Cpp Primer Plus读书笔记（一）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-02T13:25:04.000Z" itemprop="datePublished" class="page-time">
   2017-07-02
 </time>
 
 
-        
-    </h5>
-  </div>
+            
+        </h5>
+    </div>
+
+    
+
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-Cpp-Primer-Plus读书笔记（一）" class="article article-type-post" itemprop="blogPost">
-    <div class="post-meta flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp-Primer-Plus/">Cpp Primer Plus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第一章-预备知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一章 预备知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-简介"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">C++简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#面向对象编程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">面向对象编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛型编程"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">泛型编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C与C"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">C与C++</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二章-开始学习C"><span class="post-toc-number">2.</span> <span class="post-toc-text">第二章 开始学习C++</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进入C"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">进入C++</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-语句"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">C++语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第三章-处理数据"><span class="post-toc-number">3.</span> <span class="post-toc-text">第三章 处理数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单变量"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">简单变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#变量名"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">变量名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整形"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">整形</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浮点型"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">浮点型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算术运算符"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">算术运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第四章-复合类型"><span class="post-toc-number">4.</span> <span class="post-toc-text">第四章 复合类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#string类简介"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">string类简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构简介"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">结构简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共用体"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">共用体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#枚举"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">枚举</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针和自由存储空间"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">指针和自由存储空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#指针"><span class="post-toc-number">4.7.1.</span> <span class="post-toc-text">指针</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存管理"><span class="post-toc-number">4.7.2.</span> <span class="post-toc-text">内存管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针、数组和指针算术"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">指针、数组和指针算术</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Cpp-Primer-Plus读书笔记（一）" class="post-article article-type-post fade" itemprop="blogPost">
 
-            
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
-        </a>
-      </li>
-    </ul>
- </div>
+    <div class="post-card">
+        <h1 class="post-card-title">Cpp Primer Plus读书笔记（一）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-02 21:25:04" datetime="2017-07-02T13:25:04.000Z" itemprop="datePublished">2017-07-02</time>
 
             
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第一章-预备知识"><span class="post-toc-text">第一章 预备知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-简介"><span class="post-toc-text">C++简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#面向对象编程"><span class="post-toc-text">面向对象编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛型编程"><span class="post-toc-text">泛型编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C与C"><span class="post-toc-text">C与C++</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二章-开始学习C"><span class="post-toc-text">第二章 开始学习C++</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进入C"><span class="post-toc-text">进入C++</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-语句"><span class="post-toc-text">C++语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数"><span class="post-toc-text">函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第三章-处理数据"><span class="post-toc-text">第三章 处理数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单变量"><span class="post-toc-text">简单变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#变量名"><span class="post-toc-text">变量名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整形"><span class="post-toc-text">整形</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浮点型"><span class="post-toc-text">浮点型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算术运算符"><span class="post-toc-text">算术运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第四章-复合类型"><span class="post-toc-text">第四章 复合类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串"><span class="post-toc-text">字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#string类简介"><span class="post-toc-text">string类简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构简介"><span class="post-toc-text">结构简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共用体"><span class="post-toc-text">共用体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#枚举"><span class="post-toc-text">枚举</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针和自由存储空间"><span class="post-toc-text">指针和自由存储空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#指针"><span class="post-toc-text">指针</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存管理"><span class="post-toc-text">内存管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针、数组和指针算术"><span class="post-toc-text">指针、数组和指针算术</span></a></li></ol></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
 
-            <div class="post-content" id="post-content" itemprop="postContent">
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="第一章-预备知识"><a href="#第一章-预备知识" class="headerlink" title="第一章 预备知识"></a>第一章 预备知识</h1><h2 id="C-简介"><a href="#C-简介" class="headerlink" title="C++简介"></a>C++简介</h2><p>C++融合了三种不同的编程方式：</p>
 <ul>
 <li>C语言代表的过程性语言</li>
@@ -531,25 +504,99 @@
 <p>可以像使用普通数组一样使用vector和array，vector和array对象可以使用赋值，但数组不行。</p>
 <p>vector和array可以使用at方法来确保不使用非法索引，这将在运行时捕获错误，程序默认将中断</p>
 
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-30T15:50:27.000Z" itemprop="dateUpdated">2018-01-30 23:50:27</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.cn">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp-Primer-Plus/">Cpp Primer Plus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
 
             
-            <div class="post-reward">
-                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
-            </div>
-            
-            
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" target="_blank" rel="external">https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/</a>
-                </p>
-                <footer><cite><a href="https://blog.gwq5210.cn">@gwq5210's Blog</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&title=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&pic=https://blog.gwq5210.cn/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&title=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&source=第一章 预备知识C++简介C++融合了三种不同的编程方式：
+
+C语言代表的过程性语言
+以类为代表的面向对象于艳
+模板支持的泛型编程
+
+面向对象编程面向对象..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&via=https://blog.gwq5210.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2017/07/09/Cpp-Primer-Plus读书笔记（二）/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Cpp-Primer-Plus读书笔记（二）</h4>
@@ -558,7 +605,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2017/07/02/cpp必读书籍推荐/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">cpp必读书籍推荐</h4>
@@ -568,122 +615,184 @@
 </nav>
 
 
-            
-            
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Cpp-Primer-Plus读书笔记（一）" data-title="Cpp Primer Plus读书笔记（一）" data-url="https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"rhettguo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "51uyUSwRwNogYSuXmEm2E4HJ-gzGzoHsz",
+            appKey: "wT9eM4ttenpKeKEsp9M3SPS6",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
 </div>
 
 
 
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
 
-        </div>
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-</article>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备19019078号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
     </div>
-  </main>
-<div class="mask" id="mask"></div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "Cpp Primer Plus读书笔记（一）",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/index.html"
-};
-</script>
-<div class="global-share" id="global-share">
-    <div class="tit">分享到：</div>
+
+
+<div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&title=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&pic=https://blog.gwq5210.cn/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&title=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&source=第一章 预备知识C++简介C++融合了三种不同的编程方式：
+
+C语言代表的过程性语言
+以类为代表的面向对象于艳
+模板支持的泛型编程
+
+面向对象编程面向对象..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Cpp Primer Plus读书笔记（一）》 — gwq5210's Blog&url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/&via=https://blog.gwq5210.cn" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.cn/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
 
-
-
-<div id="reward" class="reward-lay">
-    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <ul class="reward-items">
-        
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
-        
-
-        
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3awU4rMQwF0P7/T/O2PFUt99pJYXFmhYYykxOk2LX9eMTX17fr+f6rzz//7fNzXt1J3n7swsPDw1ssfbaI/MXvnzlbz6vP4OHh4d3mJUtJjulkI9rAkG8oHh4e3t/ktdlsHhj2oQgPDw/v7/M2wSNPu/Hw8PD+Ji/58p+UZZNSbPu0fA14eHh4n+HNyq+/+/OV/h4eHh7euqueH7jvj+zkjW3BN1otHh4e3gVefuAmjas8mZ6NcM3WiYeHh3eD1z56NpjV3mkD1Q/JNx4eHt5RXl7GnQHaEkNemIjKE3h4eHgXeJs0OmlZtZ/JG2+ztBsPDw9vw7tXVJ2VdGeDWXXEw8PDw1vz2jDQjmFtYlS7xf/9FR4eHt4F3o2sfLNBeZpehAo8PDy8o7w8FU6om5ZVjiw2HQ8PD+8Crx5dGjW9Nr+dpex4eHh493ibgzhfbhIk2oAU3cHDw8O7wJuVUHPAqc06VRTGw8PD2/PyckBObRPi9r3FhuLh4eFd5s2aW+0QVZtez/4NxTcGPDw8vPnJfGyg6kZzK18JHh4e3m1eHgbaZHc2StUWJqKhKzw8PLyjvLzokI9V5TMLM3BdpcbDw8O7xssf2nbS8lR40wB7eQcPDw/vAm+WQCcH9KzxPyuFFLUWPDw8vDVvVpxtCw2nSg9J4eOR7x8eHh7egjdLiNvAkL9l35zDw8PD+wyvbWW1Rdt9GTffJjw8PLwbvK/yOtWgasscefDAw8PDu83bNLE2zbN2QGFYhsDDw8O7xmvHp86ODuQDCnnBAg8PD+8zvFm7KznWZ6MA7fZFtRY8PDy8X+K1JYBNmWO29avAgIeHh3eNNyu5tklzvjXHUmo8PDy8mJenwkk6O0uUN2WLH4au8PDw8I7y2i/8eQB4/7Ic8KH+Hh4eHt7PvH9S1pKXuqw6nwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 
-<script src="/js/main.js"></script>
 
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -693,9 +802,9 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -713,19 +822,36 @@ MathJax.Hub.Config({
 MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
 });
 </script>
 
-<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 
 
-<script src="//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
 
 
 

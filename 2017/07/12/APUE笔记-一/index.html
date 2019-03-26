@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>APUE笔记(一) | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="theme-color" content="#3F51B5">
-  
-  
-  <meta name="keywords" content="读书笔记,unix,linux,APUE">
-  <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>APUE笔记(一) | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="读书笔记,unix,linux,APUE">
+    <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
 <meta name="keywords" content="读书笔记,unix,linux,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
@@ -29,97 +39,89 @@
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
 <meta name="twitter:image" content="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz">
-  
-    <link rel="alternative" href="/atom.xml" title="gwq5210&#39;s Blog" type="application/atom+xml">
-  
-  <meta name="summary" content="&lt;h1 id=&quot;UNIX基础知识&quot;&gt;&lt;a href=&quot;#UNIX基础知识&quot; class=&quot;headerlink&quot; title=&quot;UNIX基础知识&quot;&gt;&lt;/a&gt;UNIX基础知识&lt;/h1&gt;&lt;p&gt;所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。&lt;/p&gt;
-&lt;p&gt;从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。&lt;/p&gt;
-&lt;p&gt;我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环境的核心。&lt;/p&gt;
-&lt;p&gt;内核的接口称之为系统调用（system call）。公共函数库构建在系统调用接口之上，应用程序既可使用公共函数库，也可以使用系统调用。shell是一个特殊的应用程序， 为运行其他应用程序提供了一个接口。&lt;/p&gt;
-&lt;p&gt;系统的口令文件由7个以冒号分割的字段组成，依次是：登录名、加密口令、数字用户ID、数字组ID、注释字段、起始目录以及shell程序。目前所有已知的系统已将加密口令移到另一个文件中。&lt;/p&gt;
-&lt;p&gt;shell是一个命令解释器，它读取用户输入，然后执行命令。&lt;/p&gt;">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
-<body>
-  <div id="loading" class="active"></div>
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">gwq5210</h5>
-        <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
-      </hgroup>
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/read">
+                <i class="icon icon-lg icon-book"></i>
+                读书计划
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-  <div class="scroll-wrap flex-col">
-    <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/">
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/archives">
-              <i class="icon icon-lg icon-archives"></i>
-              文章
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags">
-              <i class="icon icon-lg icon-tags"></i>
-              标签
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/gwq5210" target="_blank">
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/read">
-              <i class="icon icon-lg icon-book"></i>
-              读书计划
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/about">
-              <i class="icon icon-lg icon-link"></i>
-              关于
-            </a>
-          </li>
-      
-    </ul>
+</aside>
 
-    <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC"></a></p>
-  <p>gwq5210&#39;s Blog &copy; 2019</p>
-  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
-  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
-  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-</footer>
-
-  </div>
-</div>
-
-  </nav>
-  <main id="main">
-    <header class="top-header" id="header">
+    <main id="main">
+        <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -130,93 +132,67 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">APUE笔记(一)</h1>
-    <h5 class="subtitle">
-        
-            <time datetime="2017-07-11T17:22:08.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">APUE笔记(一)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-11T17:22:08.000Z" itemprop="datePublished" class="page-time">
   2017-07-12
 </time>
 
 
-        
-    </h5>
-  </div>
+            
+        </h5>
+    </div>
+
+    
+
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-APUE笔记-一" class="article article-type-post" itemprop="blogPost">
-    <div class="post-meta flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APUE/">APUE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/">unix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX基础知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">UNIX基础知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX标准及实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">UNIX标准及实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件IO"><span class="post-toc-number">3.</span> <span class="post-toc-text">文件IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#open函数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">open函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#creat函数"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">creat函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#close函数"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">close函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lseek函数"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">lseek函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#read函数"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">read函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#write函数"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">write函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO的效率"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">IO的效率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件共享"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">文件共享</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子操作"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">原子操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数dup和dup2"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">函数dup和dup2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数sync，fsync和fdatasync"><span class="post-toc-number">3.11.</span> <span class="post-toc-text">函数sync，fsync和fdatasync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fcntl"><span class="post-toc-number">3.12.</span> <span class="post-toc-text">函数fcntl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数ioctl"><span class="post-toc-number">3.13.</span> <span class="post-toc-text">函数ioctl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dev-fd"><span class="post-toc-number">3.14.</span> <span class="post-toc-text">/dev/fd</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件和目录"><span class="post-toc-number">4.</span> <span class="post-toc-text">文件和目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数stat，fstat，fstatat和lstat"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">函数stat，fstat，fstatat和lstat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件类型"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">文件类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置用户ID和设置组ID"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">设置用户ID和设置组ID</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">文件访问权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新文件和目录的所有权"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">新文件和目录的所有权</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数access和faccessat"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">函数access和faccessat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数umask"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">函数umask</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chmod、fchmod和fchmodat"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">函数chmod、fchmod和fchmodat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#粘着位"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">粘着位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chown、fchown、fchownat和lchown"><span class="post-toc-number">4.10.</span> <span class="post-toc-text">chown、fchown、fchownat和lchown</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件长度"><span class="post-toc-number">4.11.</span> <span class="post-toc-text">文件长度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件截断"><span class="post-toc-number">4.12.</span> <span class="post-toc-text">文件截断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统"><span class="post-toc-number">4.13.</span> <span class="post-toc-text">文件系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数link，linkat，unlink，unlinkat和remove"><span class="post-toc-number">4.14.</span> <span class="post-toc-text">函数link，linkat，unlink，unlinkat和remove</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数rename和renameat"><span class="post-toc-number">4.15.</span> <span class="post-toc-text">函数rename和renameat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#符号链接"><span class="post-toc-number">4.16.</span> <span class="post-toc-text">符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建和读取符号链接"><span class="post-toc-number">4.17.</span> <span class="post-toc-text">创建和读取符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的时间"><span class="post-toc-number">4.18.</span> <span class="post-toc-text">文件的时间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数futimens，utimensat和utimes"><span class="post-toc-number">4.19.</span> <span class="post-toc-text">函数futimens，utimensat和utimes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数mkdir，mkdirat和rmdir"><span class="post-toc-number">4.20.</span> <span class="post-toc-text">函数mkdir，mkdirat和rmdir</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#读目录"><span class="post-toc-number">4.21.</span> <span class="post-toc-text">读目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chdir，fchdir和getcwd"><span class="post-toc-number">4.22.</span> <span class="post-toc-text">函数chdir，fchdir和getcwd</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设备特殊文件"><span class="post-toc-number">4.23.</span> <span class="post-toc-text">设备特殊文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限位小结"><span class="post-toc-number">4.24.</span> <span class="post-toc-text">文件访问权限位小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#标准IO库"><span class="post-toc-number">5.</span> <span class="post-toc-text">标准IO库</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-APUE笔记-一" class="post-article article-type-post fade" itemprop="blogPost">
 
-            
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
-        </a>
-      </li>
-    </ul>
- </div>
+    <div class="post-card">
+        <h1 class="post-card-title">APUE笔记(一)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-12 01:22:08" datetime="2017-07-11T17:22:08.000Z" itemprop="datePublished">2017-07-12</time>
 
             
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX基础知识"><span class="post-toc-text">UNIX基础知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UNIX标准及实现"><span class="post-toc-text">UNIX标准及实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件IO"><span class="post-toc-text">文件IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#open函数"><span class="post-toc-text">open函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#creat函数"><span class="post-toc-text">creat函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#close函数"><span class="post-toc-text">close函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lseek函数"><span class="post-toc-text">lseek函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#read函数"><span class="post-toc-text">read函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#write函数"><span class="post-toc-text">write函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO的效率"><span class="post-toc-text">IO的效率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件共享"><span class="post-toc-text">文件共享</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子操作"><span class="post-toc-text">原子操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数dup和dup2"><span class="post-toc-text">函数dup和dup2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数sync，fsync和fdatasync"><span class="post-toc-text">函数sync，fsync和fdatasync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fcntl"><span class="post-toc-text">函数fcntl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数ioctl"><span class="post-toc-text">函数ioctl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dev-fd"><span class="post-toc-text">/dev/fd</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件和目录"><span class="post-toc-text">文件和目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数stat，fstat，fstatat和lstat"><span class="post-toc-text">函数stat，fstat，fstatat和lstat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件类型"><span class="post-toc-text">文件类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置用户ID和设置组ID"><span class="post-toc-text">设置用户ID和设置组ID</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限"><span class="post-toc-text">文件访问权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新文件和目录的所有权"><span class="post-toc-text">新文件和目录的所有权</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数access和faccessat"><span class="post-toc-text">函数access和faccessat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数umask"><span class="post-toc-text">函数umask</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chmod、fchmod和fchmodat"><span class="post-toc-text">函数chmod、fchmod和fchmodat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#粘着位"><span class="post-toc-text">粘着位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chown、fchown、fchownat和lchown"><span class="post-toc-text">chown、fchown、fchownat和lchown</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件长度"><span class="post-toc-text">文件长度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件截断"><span class="post-toc-text">文件截断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件系统"><span class="post-toc-text">文件系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数link，linkat，unlink，unlinkat和remove"><span class="post-toc-text">函数link，linkat，unlink，unlinkat和remove</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数rename和renameat"><span class="post-toc-text">函数rename和renameat</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#符号链接"><span class="post-toc-text">符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建和读取符号链接"><span class="post-toc-text">创建和读取符号链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件的时间"><span class="post-toc-text">文件的时间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数futimens，utimensat和utimes"><span class="post-toc-text">函数futimens，utimensat和utimes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数mkdir，mkdirat和rmdir"><span class="post-toc-text">函数mkdir，mkdirat和rmdir</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#读目录"><span class="post-toc-text">读目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数chdir，fchdir和getcwd"><span class="post-toc-text">函数chdir，fchdir和getcwd</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设备特殊文件"><span class="post-toc-text">设备特殊文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件访问权限位小结"><span class="post-toc-text">文件访问权限位小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#标准IO库"><span class="post-toc-text">标准IO库</span></a></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
 
-            <div class="post-content" id="post-content" itemprop="postContent">
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><p>所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。</p>
 <p>从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。</p>
 <p>我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环境的核心。</p>
@@ -485,7 +461,13 @@
 <li>内核为所有打开文件维持一张文件表。每个文件表项包含：文件状态标志(读，写，添写，同步和非阻塞等)、当前文件偏移量、指向该文件的v节点指针。</li>
 <li>每个打开文件(或设备)都有一个v节点结构。v节点包含了文件类型和对此文件进行各种操作的函数指针。对于大多数文件，v节点还包含了该文件的i节点(索引节点)。这些信息是在打开文件时从磁盘读入内存的。对于不同的实现可能不同，例如linux不包含v节点，而是使用了通用的i节点。</li>
 </ul>
-<p>不同实现可能有不同，但是是有必要保存这些信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构"></p>
+<p>不同实现可能有不同，但是是有必要保存这些信息。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构" title>
+                </div>
+                <div class="image-caption">打开文件的内核数据结构</div>
+            </figure></p>
 <p>文件描述符标志和文件状态标志在作用范围方面有区别，前者只用于一个进程的某一个描述符，而后者则应用于指向该给定文件表项的任何进程中所有的描述符。</p>
 <h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>一般而言，原子操作(atomic operation)是由多步操作组成的一个操作。如果该操作原子地执行，则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。</p>
 <p>多个进程对同一个文件追加数据，可以在打开文件时指定O_APPEND标志。这使得每次写操作之前内核都将进程的当前文件偏移量设置到该文件的末尾。对于对于这种write操作在不同进程间是不是原子的，后续有文章来验证。</p>
@@ -498,7 +480,13 @@
 <p>pwrite也有类似的问题</p>
 <h2 id="函数dup和dup2"><a href="#函数dup和dup2" class="headerlink" title="函数dup和dup2"></a>函数dup和dup2</h2><p>这两个函数可用来复制一个现有的文件描述符：<br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> fd2)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p> 由dup返回的新文件描述符一定是当前可用文件描述符中的最小数值。对于dup2，可以用fd2参数指定新描述符的值，如果fd2已经打开，则先将其关闭。如若fd等于fd2，则dup2返回fd2而不关闭它。否则，fd2的FD_CLOEXEC文件描述符就被清除，这样fd2在进程调用exec时是打开状态。</p>
-<p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构"></p>
+<p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构" title>
+                </div>
+                <div class="image-caption">dup后的内核数据结构</div>
+            </figure></p>
 <p> 赋值描述符的另一个方法是使用fcntl函数<br> <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> dup<span class="comment">(fd)</span>;	<span class="comment">// fcntl(fd, F_DUPFD, 0);</span></span><br><span class="line"> dup<span class="number">2</span><span class="comment">(fd, fd2)</span>;	<span class="comment">// close(fd2); fcntl(fd, F_DUPFD, fd2);</span></span><br></pre></td></tr></table></figure></p>
 <p> 后一种情况，dup2并不完全等同于close加上fcntl</p>
 <ul>
@@ -782,8 +770,20 @@
 <h2 id="文件截断"><a href="#文件截断" class="headerlink" title="文件截断"></a>文件截断</h2><p>有时我们需要在文件尾端处截去一些数据以缩短文件。将一个文件长度截断为0是一个特例，在打开文件时使用O_TRUNC标志可以做到这一点。为了截断文件可以调用函数truncate和ftruncate函数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> length)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> length)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>这两个函数将一个现有文件截断到长度length。要么缩短文件，要么产生一个空洞。</p>
 <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。</p>
-<p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统"></p>
-<p>下面是比较详细的i节点和数据块图<br><img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图"><br>在图中，我们注意到：</p>
+<p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统" title>
+                </div>
+                <div class="image-caption">磁盘、分区和文件系统</div>
+            </figure></p>
+<p>下面是比较详细的i节点和数据块图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图" title>
+                </div>
+                <div class="image-caption">详细图</div>
+            </figure><br>在图中，我们注意到：</p>
 <ul>
 <li>有两个目录项指向同一个i节点，每个i节点中都有一个链接计数，其值是指向该i节点的目录项数。只有当链接计数减少到0时，才可删除该文件。这就是为什么解除一个文件的链接操作并不总是意味着释放该文件占用的磁盘块的原因。在stat结构中，链接计数包含在st_nlink成员中，其基本系统数据类型是nlink_t。这种链接类型称为硬链接。LINK_MAX指定了一个文件链接数的最大值。</li>
 <li>另外一种类型链接称为符号链接（symbolic link）。符号链接的实际内容包含了该符号链接所指向的文件的名字。</li>
@@ -945,7 +945,13 @@
 </table>
 </div>
 <p>注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的</p>
-<p><img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响" title>
+                </div>
+                <div class="image-caption">各种函数对三种时间的影响</div>
+            </figure>
 <h2 id="函数futimens，utimensat和utimes"><a href="#函数futimens，utimensat和utimes" class="headerlink" title="函数futimens，utimensat和utimes"></a>函数futimens，utimensat和utimes</h2><p>一个文件的访问和修改时间可以通过一下几个函数修改。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">futimens</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">utimensat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> struct timespec times[<span class="number">2</span>], <span class="keyword">int</span> flag)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>times数组参数的第一个元素包含访问时间，第二个元素包含修改时间，这两个值是日历时间。</p>
 <p>时间戳可以按下列4中方式之一指定</p>
@@ -980,27 +986,102 @@
 <li>系统中与每个文件名关联的st_dev是文件系统的设备号，该文件系统包含了这一文件名以及与其对应的i节点</li>
 <li>只有字符特殊文件和块特殊文件才有st_rdev值，此值包含实际设备的设备号。</li>
 </ul>
-<h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><p><img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结"></p>
+<h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结" title>
+                </div>
+                <div class="image-caption">文件访问权限位小结</div>
+            </figure>
 <h1 id="标准IO库"><a href="#标准IO库" class="headerlink" title="标准IO库"></a>标准IO库</h1>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-30T15:51:28.000Z" itemprop="dateUpdated">2018-01-30 23:51:28</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.cn">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APUE/">APUE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/">unix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
 
             
-            <div class="post-reward">
-                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
-            </div>
-            
-            
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/" target="_blank" rel="external">https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/</a>
-                </p>
-                <footer><cite><a href="https://blog.gwq5210.cn">@gwq5210's Blog</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.cn/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。
+从严格意义上说，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&via=https://blog.gwq5210.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2017/08/02/Cpp-Primer-Plus读书笔记（三）/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Cpp-Primer-Plus读书笔记（三）</h4>
@@ -1009,7 +1090,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2017/07/09/Cpp-Primer-Plus读书笔记（二）/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Cpp-Primer-Plus读书笔记（二）</h4>
@@ -1019,122 +1100,179 @@
 </nav>
 
 
-            
-            
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="APUE笔记-一" data-title="APUE笔记(一)" data-url="https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"rhettguo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "51uyUSwRwNogYSuXmEm2E4HJ-gzGzoHsz",
+            appKey: "wT9eM4ttenpKeKEsp9M3SPS6",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
 </div>
 
 
 
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
 
-        </div>
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-</article>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备19019078号-1</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
     </div>
-  </main>
-<div class="mask" id="mask"></div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "APUE笔记(一)",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/index.html"
-};
-</script>
-<div class="global-share" id="global-share">
-    <div class="tit">分享到：</div>
+
+
+<div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.cn/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。
+从严格意义上说，..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/&via=https://blog.gwq5210.cn" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
 
-
-
-<div id="reward" class="reward-lay">
-    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <ul class="reward-items">
-        
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
-        
-
-        
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aOXLDMBAEQP3/03KVIwemNLOQVRbQjFg2DzSDFfa43eLj/n201yd3/bwmv2t4YGBgfCzj/vC4elkOeHye/+VqbRgYGOcwZqEwWUTy38fPjH4AMDAwMMogmH+CdSoGBgbG7JWv2vZhYGBgtI97kkZeXPmqj/WyXBwDA+MDGW1j4J3nf9jfwMDA+BDGvTxWSm8to1gVBgbG1oyrAFekjsGmcFbIawtwGBgYuzJWNmp5wE1aArPPioGBcQJjJYFsR8eKX4DyvRgYGCcwZkFz5ZUr4GhVGBgYGzFmTcr29cmnaZNeDAyM0xhtiX9ltGulFXF5joGBcQAjL4HNwuVs25eHXQwMjL0Z67nv+rYvaT9EAx8YGBibMtqxrSTRnbUE8qdhYGBg5BvB2XDGXxT1MDAwzmG0L2jHtvIkuR07w8DAOIExS01Xiv75pjAK9BgYGAcw8iR2NtrVpqZ1iMfAwNiasVKUny1rtkGM2pwYGBibMlbajSuDXO1A2JOkGgMD4wDGbJBr1ipolxgFdwwMjK0ZyXZtVuhvn9COjkUbRAwMjC0Y9/JoN5czZN5IwMDAOIHRPjrfrg0rf/FWcviZMDAwPpYxK58ly5oV0YYhFQMD4wBGnfvG7c9Z2K3r/xgYGBhBuFxpSbZ31TMjGBgYhzFW2gZt8e5xkvxLEouBgbE1Iw95s0bmLDEuklsMDIytGa9tDMzamfkHelMLEwMD478wvgBoeyLgZNNFlQAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 
-<script src="/js/main.js"></script>
 
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -1144,9 +1282,9 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
@@ -1164,19 +1302,36 @@ MathJax.Hub.Config({
 MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
 });
 </script>
 
-<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 
 
-<script src="//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
 
 
 
