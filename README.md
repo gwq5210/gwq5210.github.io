@@ -1,5 +1,5 @@
 # blog
-rhettguo' blog
+gwq5210' blog
 
 # 安装步骤
 * 安装[node.js][https://nodejs.org/en/]
