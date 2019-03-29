@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.gwq5210.cn/2019/03/28/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0)/</loc>
+    
+    <lastmod>2019-03-29T10:13:39.458Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.gwq5210.cn/2019/03/25/Git%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     
-    <lastmod>2019-03-28T03:15:33.387Z</lastmod>
+    <lastmod>2019-03-29T08:37:47.308Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.gwq5210.cn/2017/07/12/APUE%E7%AC%94%E8%AE%B0-%E4%B8%80/</loc>
+    
+    <lastmod>2019-03-28T07:05:18.966Z</lastmod>
     
   </url>
   
@@ -54,13 +68,6 @@
     <loc>https://blog.gwq5210.cn/2018/01/27/hiredis%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2018-01-30T15:53:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.gwq5210.cn/2017/07/12/APUE%E7%AC%94%E8%AE%B0-%E4%B8%80/</loc>
-    
-    <lastmod>2018-01-30T15:51:28.000Z</lastmod>
     
   </url>
   

@@ -34,7 +34,9 @@
 <meta property="og:image" content="https://blogfile.gwq5210.cn/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.png">
 <meta property="og:image" content="https://blogfile.gwq5210.cn/%E4%B8%80%E4%B8%AA%E5%92%8C%E5%B9%B6%E6%8F%90%E4%BA%A4.png">
 <meta property="og:image" content="https://blogfile.gwq5210.cn/%E6%9C%AC%E5%9C%B0%E4%B8%8E%E8%BF%9C%E7%A8%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8F%AF%E4%BB%A5%E5%88%86%E5%8F%89.png">
-<meta property="og:updated_time" content="2019-03-28T03:15:33.387Z">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/%E5%8F%98%E5%9F%BA%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E5%BF%AB%E8%BF%9B%E5%90%88%E5%B9%B6.png">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/%E9%80%9A%E8%BF%87%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%9D%A5%E6%95%B4%E5%90%88%E5%88%86%E5%8F%89%E7%9A%84%E5%8E%86%E5%8F%B2.png">
+<meta property="og:updated_time" content="2019-03-29T08:37:47.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git简介及常用命令">
 <meta name="twitter:description" content="前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅 Git介绍Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变">
@@ -291,6 +293,20 @@
 <h3 id="跟踪分支"><a href="#跟踪分支" class="headerlink" title="跟踪分支"></a>跟踪分支</h3><p>从一个远程仓库检出一个本地分支会自动创建一个做跟踪分支（上游分支），跟踪分支是与远程分支有直接关系的本地分支<br>如果在跟踪分支上输入git pull，则Git能自动识别去哪个服务器抓取、合并到哪个分支<br>克隆仓库时，会自动创建一个跟踪origin/master的master分支<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地创建新的分支，起点为远程分支，该分支跟踪远程分支</span></span><br><span class="line">git checkout -b &lt;branch-<span class="keyword">name</span>&gt; &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line">git checkout --track &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line"><span class="comment">// 当前分支设置跟踪的远程分支</span></span><br><span class="line">git branch -u &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line">git branch --<span class="keyword">set</span>-upstream-<span class="keyword">to</span> &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置好跟踪分支后，可以通过@&#123;u&#125;或@&#123;upstream&#125;快捷方式来引用它</span></span><br><span class="line">git merge origin/master</span><br><span class="line">git merge @<span class="comment">&#123;u&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看分支跟踪的远程分支</span></span><br><span class="line">git branch -vv</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取远程分支，并不会修改本地工作目录中的内容，需要自己合并</span></span><br><span class="line">git fetch origin master</span><br><span class="line">git merge origin/master</span><br><span class="line"></span><br><span class="line"><span class="comment">// git pull会查找当前分支的跟踪分支，从服务器抓取数据然后尝试合并入那个远程分支</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除远程分支</span></span><br><span class="line">git push &lt;remote-<span class="keyword">name</span>&gt; --delete &lt;branch-<span class="keyword">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><p>Git中整合来自不同分支的修改主要有两种方法：merge和rebase<br>合并进行一次三方合并，产生一个新的快照并提交<br>变基首先找到两个分支的共同祖先，对比当前分支的历次提交，提取相应的修改，然后在新的分支上进行重新播放，最后进行一次快速合并<br>一般进行变基的目的是确保向远程分支推送时，保持提交历史的整洁<br>这两种方式整合的最终快照是一样的</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 将当前分支变基到<span class="literal">master</span>分支</span><br><span class="line">git rebase <span class="literal">master</span></span><br><span class="line">// 将在client分支里但不在server分支里的修改，在<span class="literal">master</span>分支里重放</span><br><span class="line">git rebase --onto <span class="keyword">master</span> <span class="title">server</span> client</span><br><span class="line">// 无需切换分支进行变基</span><br><span class="line">git rebase <span class="keyword">master</span> <span class="title">server</span></span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/%E5%8F%98%E5%9F%BA%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E5%BF%AB%E8%BF%9B%E5%90%88%E5%B9%B6.png" alt="变基然后进行快进合并" title>
+                </div>
+                <div class="image-caption">变基然后进行快进合并</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/%E9%80%9A%E8%BF%87%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%9D%A5%E6%95%B4%E5%90%88%E5%88%86%E5%8F%89%E7%9A%84%E5%8E%86%E5%8F%B2.png" alt="通过合并操作来整合分叉的历史" title>
+                </div>
+                <div class="image-caption">通过合并操作来整合分叉的历史</div>
+            </figure>
 <p>变基存在风险，使用变基的准则是不要对在你的仓库外有副本的分支执行变基<br>变基的操作实际上是丢弃一些现有的提交，然后相应的新建一些内容一样的但是实际上不同的提交<br>如果别人在该分支上进行了工作，你对此分支进行了变基，那么就会出现问题<br>出现类似的情况可以使用变基来解决变基<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull <span class="comment">--rebase</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上的命令和知识可以应付大部分Git的使用场景了<br>如果遇到其他的困难问题，可以后续再补充</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git</a></p>
@@ -301,7 +317,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-03-28T03:15:33.387Z" itemprop="dateUpdated">2019-03-28 11:15:33</time>
+    Last updated: <time datetime="2019-03-29T08:37:47.308Z" itemprop="dateUpdated">2019-03-29 16:37:47</time>
 </span><br>
 
 
@@ -380,7 +396,14 @@ Git介绍Git实际上是一..." data-title=" QQ">
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/28/Lambda表达式(匿名函数)/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Lambda表达式</h4>
+      </a>
+    </div>
   
 
   

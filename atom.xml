@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.gwq5210.cn/"/>
-  <updated>2019-03-28T03:15:33.387Z</updated>
+  <updated>2019-03-29T10:13:39.458Z</updated>
   <id>https://blog.gwq5210.cn/</id>
   
   <author>
@@ -16,11 +16,64 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Lambda表达式</title>
+    <link href="https://blog.gwq5210.cn/2019/03/28/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0)/"/>
+    <id>https://blog.gwq5210.cn/2019/03/28/Lambda表达式(匿名函数)/</id>
+    <published>2019-03-28T03:35:53.000Z</published>
+    <updated>2019-03-29T10:13:39.458Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式</p>
+<h1 id="什么是Lambda表达式"><a href="#什么是Lambda表达式" class="headerlink" title="什么是Lambda表达式"></a>什么是Lambda表达式</h1><p>在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数<br>匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值<br>如果函数只使用一次或者有限的次数，则使用匿名函数会比较方便<br>现在越来越多的编程语言支持匿名函数</p>
+<p>闭包常常被用作匿名函数的同义词，严格来说，匿名函数仅仅是没有名字的函数，闭包是任何能够访问自由变量（free variable or non-local variable，不在局部和参数列表里定义的变量）的函数实例</p>
+<h1 id="Java中的Lambda表达式"><a href="#Java中的Lambda表达式" class="headerlink" title="Java中的Lambda表达式"></a>Java中的Lambda表达式</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>Java 中的 Lambda 表达式通常使用 (argument) -&gt; (body) 语法书写，例如：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">(arg1, arg2...)</span> -&gt;</span> &#123; body &#125;</span><br><span class="line"><span class="function"><span class="params">(type1 arg1, type2 arg2...)</span> -&gt;</span> &#123; body &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在Lambda表达式中引用的自由变量，必须是final或者是实际上不会修改的变量</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ol>
+<li>一个 Lambda 表达式可以有零个或多个参数</li>
+<li>参数的类型既可以明确声明，也可以根据上下文来推断。例如：(int a)与(a)效果相同</li>
+<li>所有参数需包含在圆括号内，参数之间用逗号相隔。例如：(a, b) 或 (int a, int b) 或 (String a, int b, float c)</li>
+<li>空圆括号代表参数集为空。例如：() -&gt; 42</li>
+<li>当只有一个参数，且其类型可推导时，圆括号（）可省略。例如：a -&gt; return a*a</li>
+<li>Lambda 表达式的主体可包含零条或多条语句</li>
+<li>如果 Lambda 表达式的主体只有一条语句，花括号{}可省略。匿名函数的返回类型与该主体表达式一致</li>
+<li>如果 Lambda 表达式的主体包含一条以上语句，则表达式必须包含在花括号{}中（形成代码块）。匿名函数的返回类型与代码块的返回类型一致，若没有返回则为空</li>
+</ol>
+<h2 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不需要参数，返回值为int的42</span></span><br><span class="line">() -&gt; <span class="number">42</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要参数，返回值为float的3.1415</span></span><br><span class="line">() -&gt; &#123; <span class="keyword">return</span> <span class="number">3.1415</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受两个int参数，返回值为它们的和</span></span><br><span class="line">(int a, int b) -&gt; &#123;  <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要参数，没有返回值，输出一个字符串</span></span><br><span class="line">() -&gt; System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受一个String参数，没有返回值，打印该字符串</span></span><br><span class="line">(<span class="built_in">String</span> s) -&gt; &#123; System.out.println(s); &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h2><p>Java中只有一个方法声明的接口叫做函数式接口，例如java.lang.Runnable接口只声明了一个void run()方法<br>不指明函数式接口时，编译器可以进行自动转化<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Runnable <span class="function"><span class="title">r</span> = <span class="params">()</span> -&gt;</span> System.out.println(<span class="string">"Hello Java!"</span>);</span><br><span class="line"><span class="keyword">new</span> Thread(r).start();</span><br><span class="line"><span class="keyword">new</span> Thread<span class="function"><span class="params">(() -&gt; System.out.println(<span class="string">"Hello Java!"</span>))</span>.<span class="title">start</span><span class="params">()</span>;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="C-中的Lambda表达式"><a href="#C-中的Lambda表达式" class="headerlink" title="C++中的Lambda表达式"></a>C++中的Lambda表达式</h1><p>在C++ 11中支持Lambda表达式</p>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><p>Lambda表达式的语法如下<br>[]中可以以值或引用捕获变量，来实现闭包<br>不过捕获变量时需要注意，如果调用闭包时，引用了生存周期结束的变量，则发生未定义行为，C++的闭包不会延长被捕获引用的生存周期<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ captures ] ( params ) -&gt; return_type &#123; <span class="selector-tag">body</span> &#125;</span><br><span class="line"><span class="comment">// 忽略返回值，返回值的类型使用自动推断</span></span><br><span class="line">[ captures ] ( params ) &#123; <span class="selector-tag">body</span> &#125;</span><br><span class="line"><span class="comment">// 不接受任何参数</span></span><br><span class="line">[ captures ] &#123; <span class="selector-tag">body</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接受x，y参数，返回它们的和</span></span><br><span class="line">[<span class="meta"></span>](<span class="keyword">int</span> x, <span class="keyword">int</span> y) -&gt; <span class="keyword">int</span> &#123; <span class="keyword">return</span> x + y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面是捕获的例子</span></span><br><span class="line">[<span class="meta"></span>]        <span class="comment">//no variables defined. Attempting to use any external variables in the lambda is an error.</span></span><br><span class="line">[<span class="meta">x, &amp;y</span>]   <span class="comment">//x is captured by value, y is captured by reference</span></span><br><span class="line">[<span class="meta">&amp;</span>]       <span class="comment">//any external variable is implicitly captured by reference if used</span></span><br><span class="line">[<span class="meta">=</span>]       <span class="comment">//any external variable is implicitly captured by value if used</span></span><br><span class="line">[<span class="meta">&amp;, x</span>]    <span class="comment">//x is explicitly captured by value. Other variables will be captured by reference</span></span><br><span class="line">[<span class="meta">=, &amp;z</span>]   <span class="comment">//z is explicitly captured by reference. Other variables will be captured by value</span></span><br></pre></td></tr></table></figure>
+<h1 id="Python中的Lambda表达式"><a href="#Python中的Lambda表达式" class="headerlink" title="Python中的Lambda表达式"></a>Python中的Lambda表达式</h1><p>Python中可以使用lambda关键字定义匿名函数，它能用在任何需要函数的地方，在语法上它被限制只能有单个语句<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> parameter_list: expression</span><br><span class="line"></span><br><span class="line">// 例如参数x，返回x*x</span><br><span class="line"><span class="keyword">lambda</span> x: x * x</span><br><span class="line"></span><br><span class="line">// 以上等价于</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">// 参数x，y，返回它们的和</span><br><span class="line"><span class="keyword">lambda</span> x, y: x + y</span><br><span class="line"></span><br><span class="line">// 可以使用自由变量</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line">    <span class="keyword">return</span> g  <span class="comment"># Return a closure.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> y: x + y  <span class="comment"># Return a closure.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Assigning specific closures to variables.</span></span><br><span class="line">a = f(<span class="number">1</span>)</span><br><span class="line">b = h(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using the closures stored in variables.</span></span><br><span class="line"><span class="keyword">assert</span> a(<span class="number">5</span>) == <span class="number">6</span></span><br><span class="line"><span class="keyword">assert</span> b(<span class="number">5</span>) == <span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Using closures without binding them to variables first.</span></span><br><span class="line"><span class="keyword">assert</span> f(<span class="number">1</span>)(<span class="number">5</span>) == <span class="number">6</span>  <span class="comment"># f(1) is the closure.</span></span><br><span class="line"><span class="keyword">assert</span> h(<span class="number">1</span>)(<span class="number">5</span>) == <span class="number">6</span>  <span class="comment"># h(1) is the closure.</span></span><br><span class="line"></span><br><span class="line">// x是全局的</span><br><span class="line">// 修改x后，会修改函数f的结果</span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">// [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">map(f, nums)</span><br><span class="line">map(<span class="keyword">lambda</span> y: x + y, nums)</span><br><span class="line"></span><br><span class="line">x = <span class="number">3</span></span><br><span class="line">// [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">map(f, nums)</span><br><span class="line">map(<span class="keyword">lambda</span> y: x + y, nums)</span><br></pre></td></tr></table></figure></p>
+<h1 id="Go的匿名函数"><a href="#Go的匿名函数" class="headerlink" title="Go的匿名函数"></a>Go的匿名函数</h1><p>Go的匿名函数是闭包，他们可以引用自由变量<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别打出11，102，111</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	num := <span class="number">10</span></span><br><span class="line">	f := <span class="function"><span class="keyword">func</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">		<span class="keyword">return</span> num + x</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(f(<span class="number">1</span>))</span><br><span class="line">	num = <span class="number">101</span></span><br><span class="line">	fmt.Println(f(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">	fmt.Println(test(f))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(f <span class="keyword">func</span>(<span class="keyword">int</span>)</span> <span class="title">int</span>) <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> f(<span class="number">10</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="闭包的实现"><a href="#闭包的实现" class="headerlink" title="闭包的实现"></a>闭包的实现</h1><p>闭包通常用一个包含函数代码的指针和创建闭包时函数词法环境（一系列可用的变量）的数据结构来实现<br>也就是说闭包引用的自由变量，需要在闭包调用的时候仍然能够访问</p>
+<p>只在栈上分配变量的语言很难容易的实现完全的闭包，这些语言中，自动变量会在函数返回后自动的销毁<br>这也可以解释为什么通常支持闭包的语言也使用垃圾回收机制<br>替代方案是非局部变量的手动内存管理，不过这种方式可能会产生野指针的问题，C++ 11中的Lambda表达式和<a href="https://gcc.gnu.org/onlinedocs/gcc/Nested-Functions.html" target="_blank" rel="noopener">GNU C中的嵌套函数</a>都可能会产生这个问题</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="https://en.wikipedia.org/wiki/Anonymous_function" target="_blank" rel="noopener">Anonymous_function</a><br>2) <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure_(computer_programming)</a><br>3) <a href="https://sylvanassun.github.io/2017/07/30/2017-07-30-JavaClosure/" target="_blank" rel="noopener">Java中的闭包之争</a><br>4) <a href="https://en.wikipedia.org/wiki/Free_variables_and_bound_variables" target="_blank" rel="noopener">Free_variables_and_bound_variables</a><br>5) <a href="http://blog.oneapm.com/apm-tech/226.html" target="_blank" rel="noopener">深入浅出 Java 8 Lambda 表达式</a><br>6) <a href="https://en.cppreference.com/w/cpp/language/lambda" target="_blank" rel="noopener">Lambda expressions</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://blog.gwq5210.cn/tags/Java/"/>
+    
+      <category term="C++" scheme="https://blog.gwq5210.cn/tags/C/"/>
+    
+      <category term="Python" scheme="https://blog.gwq5210.cn/tags/Python/"/>
+    
+      <category term="Lambda表达式" scheme="https://blog.gwq5210.cn/tags/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="匿名函数" scheme="https://blog.gwq5210.cn/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Git简介及常用命令</title>
     <link href="https://blog.gwq5210.cn/2019/03/25/Git%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>https://blog.gwq5210.cn/2019/03/25/Git简介及常用命令/</id>
     <published>2019-03-25T12:31:11.000Z</published>
-    <updated>2019-03-28T03:15:33.387Z</updated>
+    <updated>2019-03-29T08:37:47.308Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近想深入了解一下Git，阅读了一下<a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git</a>的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅</p>
 <h1 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h1><p>Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。</p>
@@ -120,6 +173,20 @@
 <h3 id="跟踪分支"><a href="#跟踪分支" class="headerlink" title="跟踪分支"></a>跟踪分支</h3><p>从一个远程仓库检出一个本地分支会自动创建一个做跟踪分支（上游分支），跟踪分支是与远程分支有直接关系的本地分支<br>如果在跟踪分支上输入git pull，则Git能自动识别去哪个服务器抓取、合并到哪个分支<br>克隆仓库时，会自动创建一个跟踪origin/master的master分支<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地创建新的分支，起点为远程分支，该分支跟踪远程分支</span></span><br><span class="line">git checkout -b &lt;branch-<span class="keyword">name</span>&gt; &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line">git checkout --track &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line"><span class="comment">// 当前分支设置跟踪的远程分支</span></span><br><span class="line">git branch -u &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line">git branch --<span class="keyword">set</span>-upstream-<span class="keyword">to</span> &lt;remote-<span class="keyword">name</span>&gt;/&lt;branch-<span class="keyword">name</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置好跟踪分支后，可以通过@&#123;u&#125;或@&#123;upstream&#125;快捷方式来引用它</span></span><br><span class="line">git merge origin/master</span><br><span class="line">git merge @<span class="comment">&#123;u&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看分支跟踪的远程分支</span></span><br><span class="line">git branch -vv</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取远程分支，并不会修改本地工作目录中的内容，需要自己合并</span></span><br><span class="line">git fetch origin master</span><br><span class="line">git merge origin/master</span><br><span class="line"></span><br><span class="line"><span class="comment">// git pull会查找当前分支的跟踪分支，从服务器抓取数据然后尝试合并入那个远程分支</span></span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除远程分支</span></span><br><span class="line">git push &lt;remote-<span class="keyword">name</span>&gt; --delete &lt;branch-<span class="keyword">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><p>Git中整合来自不同分支的修改主要有两种方法：merge和rebase<br>合并进行一次三方合并，产生一个新的快照并提交<br>变基首先找到两个分支的共同祖先，对比当前分支的历次提交，提取相应的修改，然后在新的分支上进行重新播放，最后进行一次快速合并<br>一般进行变基的目的是确保向远程分支推送时，保持提交历史的整洁<br>这两种方式整合的最终快照是一样的</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 将当前分支变基到<span class="literal">master</span>分支</span><br><span class="line">git rebase <span class="literal">master</span></span><br><span class="line">// 将在client分支里但不在server分支里的修改，在<span class="literal">master</span>分支里重放</span><br><span class="line">git rebase --onto <span class="keyword">master</span> <span class="title">server</span> client</span><br><span class="line">// 无需切换分支进行变基</span><br><span class="line">git rebase <span class="keyword">master</span> <span class="title">server</span></span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/%E5%8F%98%E5%9F%BA%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E5%BF%AB%E8%BF%9B%E5%90%88%E5%B9%B6.png" alt="变基然后进行快进合并" title>
+                </div>
+                <div class="image-caption">变基然后进行快进合并</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://blogfile.gwq5210.cn/%E9%80%9A%E8%BF%87%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%9D%A5%E6%95%B4%E5%90%88%E5%88%86%E5%8F%89%E7%9A%84%E5%8E%86%E5%8F%B2.png" alt="通过合并操作来整合分叉的历史" title>
+                </div>
+                <div class="image-caption">通过合并操作来整合分叉的历史</div>
+            </figure>
 <p>变基存在风险，使用变基的准则是不要对在你的仓库外有副本的分支执行变基<br>变基的操作实际上是丢弃一些现有的提交，然后相应的新建一些内容一样的但是实际上不同的提交<br>如果别人在该分支上进行了工作，你对此分支进行了变基，那么就会出现问题<br>出现类似的情况可以使用变基来解决变基<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull <span class="comment">--rebase</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上的命令和知识可以应付大部分Git的使用场景了<br>如果遇到其他的困难问题，可以后续再补充</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git</a></p>
@@ -1110,7 +1177,7 @@
     <link href="https://blog.gwq5210.cn/2017/07/12/APUE%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
     <id>https://blog.gwq5210.cn/2017/07/12/APUE笔记-一/</id>
     <published>2017-07-11T17:22:08.000Z</published>
-    <updated>2018-01-30T15:51:28.000Z</updated>
+    <updated>2019-03-28T07:05:18.966Z</updated>
     
     <content type="html"><![CDATA[<h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><p>所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。</p>
 <p>从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。</p>
@@ -1383,7 +1450,7 @@
 <p>不同实现可能有不同，但是是有必要保存这些信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构" title>
+                    <img src="https://blogfile.gwq5210.cn/1.png" alt="打开文件的内核数据结构" title>
                 </div>
                 <div class="image-caption">打开文件的内核数据结构</div>
             </figure></p>
@@ -1402,7 +1469,7 @@
 <p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构" title>
+                    <img src="https://blogfile.gwq5210.cn/2.png" alt="dup后的内核数据结构" title>
                 </div>
                 <div class="image-caption">dup后的内核数据结构</div>
             </figure></p>
@@ -1692,14 +1759,14 @@
 <p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统" title>
+                    <img src="https://blogfile.gwq5210.cn/3.jpg" alt="磁盘、分区和文件系统" title>
                 </div>
                 <div class="image-caption">磁盘、分区和文件系统</div>
             </figure></p>
 <p>下面是比较详细的i节点和数据块图<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图" title>
+                    <img src="https://blogfile.gwq5210.cn/4.jpg" alt="详细图" title>
                 </div>
                 <div class="image-caption">详细图</div>
             </figure><br>在图中，我们注意到：</p>
@@ -1867,7 +1934,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响" title>
+                    <img src="https://blogfile.gwq5210.cn/5.png" alt="各种函数对三种时间的影响" title>
                 </div>
                 <div class="image-caption">各种函数对三种时间的影响</div>
             </figure>
@@ -1908,7 +1975,7 @@
 <h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结" title>
+                    <img src="https://blogfile.gwq5210.cn/6.png" alt="文件访问权限位小结" title>
                 </div>
                 <div class="image-caption">文件访问权限位小结</div>
             </figure>

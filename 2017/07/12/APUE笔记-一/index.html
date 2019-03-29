@@ -28,17 +28,17 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz">
-<meta property="og:image" content="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz">
-<meta property="og:updated_time" content="2018-01-30T15:51:28.000Z">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/1.png">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/2.png">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/3.jpg">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/4.jpg">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/5.png">
+<meta property="og:image" content="https://blogfile.gwq5210.cn/6.png">
+<meta property="og:updated_time" content="2019-03-28T07:05:18.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
-<meta name="twitter:image" content="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz">
+<meta name="twitter:image" content="https://blogfile.gwq5210.cn/1.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -464,7 +464,7 @@
 <p>不同实现可能有不同，但是是有必要保存这些信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz" alt="打开文件的内核数据结构" title>
+                    <img src="https://blogfile.gwq5210.cn/1.png" alt="打开文件的内核数据结构" title>
                 </div>
                 <div class="image-caption">打开文件的内核数据结构</div>
             </figure></p>
@@ -483,7 +483,7 @@
 <p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz" alt="dup后的内核数据结构" title>
+                    <img src="https://blogfile.gwq5210.cn/2.png" alt="dup后的内核数据结构" title>
                 </div>
                 <div class="image-caption">dup后的内核数据结构</div>
             </figure></p>
@@ -773,14 +773,14 @@
 <p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=" alt="磁盘、分区和文件系统" title>
+                    <img src="https://blogfile.gwq5210.cn/3.jpg" alt="磁盘、分区和文件系统" title>
                 </div>
                 <div class="image-caption">磁盘、分区和文件系统</div>
             </figure></p>
 <p>下面是比较详细的i节点和数据块图<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz" alt="详细图" title>
+                    <img src="https://blogfile.gwq5210.cn/4.jpg" alt="详细图" title>
                 </div>
                 <div class="image-caption">详细图</div>
             </figure><br>在图中，我们注意到：</p>
@@ -948,7 +948,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz" alt="各种函数对三种时间的影响" title>
+                    <img src="https://blogfile.gwq5210.cn/5.png" alt="各种函数对三种时间的影响" title>
                 </div>
                 <div class="image-caption">各种函数对三种时间的影响</div>
             </figure>
@@ -989,7 +989,7 @@
 <h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz" alt="文件访问权限位小结" title>
+                    <img src="https://blogfile.gwq5210.cn/6.png" alt="文件访问权限位小结" title>
                 </div>
                 <div class="image-caption">文件访问权限位小结</div>
             </figure>
@@ -1000,7 +1000,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-01-30T15:51:28.000Z" itemprop="dateUpdated">2018-01-30 23:51:28</time>
+    Last updated: <time datetime="2019-03-28T07:05:18.966Z" itemprop="dateUpdated">2019-03-28 15:05:18</time>
 </span><br>
 
 
