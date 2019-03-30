@@ -303,7 +303,7 @@ UNIX支持在不同进程间共享打开文件。
 * 每个打开文件(或设备)都有一个v节点结构。v节点包含了文件类型和对此文件进行各种操作的函数指针。对于大多数文件，v节点还包含了该文件的i节点(索引节点)。这些信息是在打开文件时从磁盘读入内存的。对于不同的实现可能不同，例如linux不包含v节点，而是使用了通用的i节点。
 
 不同实现可能有不同，但是是有必要保存这些信息。
-![打开文件的内核数据结构](http://blogfiles-10055310.cossh.myqcloud.com/1.png?sign=ySOhpUdnj/w4D1X/x8Nmuwi8Ij1hPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NDA1NSZ0PTE1MDAyMDIwNTUmcj0xODY0NTczNDE4JmY9LzEucG5nJmI9YmxvZ2ZpbGVz)
+![打开文件的内核数据结构](https://blogfile.gwq5210.cn/1.png)
 
 文件描述符标志和文件状态标志在作用范围方面有区别，前者只用于一个进程的某一个描述符，而后者则应用于指向该给定文件表项的任何进程中所有的描述符。
 
@@ -336,7 +336,7 @@ pwrite也有类似的问题
  由dup返回的新文件描述符一定是当前可用文件描述符中的最小数值。对于dup2，可以用fd2参数指定新描述符的值，如果fd2已经打开，则先将其关闭。如若fd等于fd2，则dup2返回fd2而不关闭它。否则，fd2的FD_CLOEXEC文件描述符就被清除，这样fd2在进程调用exec时是打开状态。
 
  这些函数返回的新描述符与参数fd共享同一个文件表项。
- ![dup后的内核数据结构](http://blogfiles-10055310.cossh.myqcloud.com/2.png?sign=dygXsTP3Dg9p73JTwXKlTIDJ7hRhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMjc5NTg1NiZ0PTE1MDAyMDM4NTYmcj0yMTMyOTUzOTY2JmY9LzIucG5nJmI9YmxvZ2ZpbGVz)
+ ![dup后的内核数据结构](https://blogfile.gwq5210.cn/2.png)
 
  赋值描述符的另一个方法是使用fcntl函数
  ```
@@ -652,10 +652,10 @@ int ftruncate(int fd, off_t length);
 UNIX文件系统有多种不同的实现。每一种文件系统都有它各自的特征。大部分UNIX文件系统支持大小写敏感的文件名。在Mac OS上，HFS是大小写保留的，但是大小写不敏感。
 
 我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。
-![磁盘、分区和文件系统](http://blogfiles-10055310.cossh.myqcloud.com/3.jpg?sign=D17nmeaBTnz0mddxoxivgudbImthPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0Nzc1MCZ0PTE1MDA1NTU3NTAmcj0xNzUyNDY0NzEmZj0vMy5qcGcmYj1ibG9nZmlsZXM=)
+![磁盘、分区和文件系统](https://blogfile.gwq5210.cn/3.jpg)
 
 下面是比较详细的i节点和数据块图
-![详细图](http://blogfiles-10055310.cossh.myqcloud.com/4.jpg?sign=jLEJauWdMdapFRr6EMFrP6xh4ithPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzE0NzkzOSZ0PTE1MDA1NTU5Mzkmcj0yMDIxNDE0NTE2JmY9LzQuanBnJmI9YmxvZ2ZpbGVz)
+![详细图](https://blogfile.gwq5210.cn/4.jpg)
 在图中，我们注意到：
 * 有两个目录项指向同一个i节点，每个i节点中都有一个链接计数，其值是指向该i节点的目录项数。只有当链接计数减少到0时，才可删除该文件。这就是为什么解除一个文件的链接操作并不总是意味着释放该文件占用的磁盘块的原因。在stat结构中，链接计数包含在st_nlink成员中，其基本系统数据类型是nlink_t。这种链接类型称为硬链接。LINK_MAX指定了一个文件链接数的最大值。
 * 另外一种类型链接称为符号链接（symbolic link）。符号链接的实际内容包含了该符号链接所指向的文件的名字。
@@ -786,7 +786,7 @@ ssize_t readlinkat(int fd, const char *restrict pathname, char *restrict buf, si
 
 注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的
 
-![各种函数对三种时间的影响](http://blogfiles-10055310.cossh.myqcloud.com/5.png?sign=n7nlonTRYcbyZ3IxrUfbKmJNxPFhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwMzg4NCZ0PTE1MDA5MTE4ODQmcj0xNTA1NzY1NDQwJmY9LzUucG5nJmI9YmxvZ2ZpbGVz)
+![各种函数对三种时间的影响](https://blogfile.gwq5210.cn/5.png)
 
 ## 函数futimens，utimensat和utimes
 一个文件的访问和修改时间可以通过一下几个函数修改。
@@ -894,6 +894,6 @@ st_dev和st_rdev经常混淆，有关规则很简单
 * 只有字符特殊文件和块特殊文件才有st_rdev值，此值包含实际设备的设备号。
 
 ## 文件访问权限位小结
-![文件访问权限位小结](http://blogfiles-10055310.cossh.myqcloud.com/6.png?sign=j6gAGFDrz1NUFsKwTWHT93lYdUVhPTEwMDU1MzEwJms9QUtJRDZHMTR1emhxOFlRYUIwOFBCZ204OFc5WVdNeHBrcG4zJmU9MTUwMzUwNjY5OSZ0PTE1MDA5MTQ2OTkmcj0xNTc1Mzg5ODc4JmY9LzYucG5nJmI9YmxvZ2ZpbGVz)
+![文件访问权限位小结](https://blogfile.gwq5210.cn/6.png)
 
 # 标准IO库

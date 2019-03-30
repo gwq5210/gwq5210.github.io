@@ -406,6 +406,10 @@ git rebase --onto master server client
 git rebase master server
 ```
 
+![变基然后进行快进合并](https://blogfile.gwq5210.cn/%E5%8F%98%E5%9F%BA%E7%84%B6%E5%90%8E%E8%BF%9B%E8%A1%8C%E5%BF%AB%E8%BF%9B%E5%90%88%E5%B9%B6.png)
+
+![通过合并操作来整合分叉的历史](https://blogfile.gwq5210.cn/%E9%80%9A%E8%BF%87%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E6%9D%A5%E6%95%B4%E5%90%88%E5%88%86%E5%8F%89%E7%9A%84%E5%8E%86%E5%8F%B2.png)
+
 变基存在风险，使用变基的准则是不要对在你的仓库外有副本的分支执行变基
 变基的操作实际上是丢弃一些现有的提交，然后相应的新建一些内容一样的但是实际上不同的提交
 如果别人在该分支上进行了工作，你对此分支进行了变基，那么就会出现问题
