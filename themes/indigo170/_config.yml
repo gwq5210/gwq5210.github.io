@@ -20,9 +20,6 @@ menu:
   github:
     url: https://github.com/gwq5210
     target: _blank
-  book:
-    text: 读书计划
-    url: read
   link:
     text: 关于
     url: /about
@@ -118,9 +115,9 @@ gitment: false
 # Valine Comment system. https://valine.js.org
 valine:
   enable: true # 如果你想使用valine，请将值设置为 true
-  appId:  51uyUSwRwNogYSuXmEm2E4HJ-gzGzoHsz # your leancloud appId
-  appKey: wT9eM4ttenpKeKEsp9M3SPS6 # your leancloud appKey
-  notify: false # Mail notify
+  appId:  IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz # your leancloud appId
+  appKey: cto0PcUNCVqr0zck28XwwDwt # your leancloud appKey
+  notify: true # Mail notify
   verify: false # Verify code
   avatar: mm # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
   placeholder: Just go go # Comment Box placeholder
@@ -158,4 +155,4 @@ cdn: true
 lightbox: true
 
 # icp备案号  ICP_license: 京ICP备1234556号-1
-ICP_license: 粤ICP备19019078号-1
+ICP_license:

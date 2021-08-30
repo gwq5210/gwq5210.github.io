@@ -162,4 +162,4 @@ Redis提供了地理位置相关的命令，我们可以使用这些特性方便
 
 [1]: http://redisdoc.com/
 [2]: http://blog.huangz.me/diary/2015/redis-geo.html
-[3]: https://gwq5210.github.io/2018/02/03/geohash%E7%AE%80%E4%BB%8B/
+[3]: /2018/02/03/geohash简介/
