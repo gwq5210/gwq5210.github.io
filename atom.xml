@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.gwq5210.com/"/>
-  <updated>2021-08-30T09:45:34.462Z</updated>
+  <updated>2021-08-30T09:52:41.947Z</updated>
   <id>https://blog.gwq5210.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://blog.gwq5210.com/2019/03/28/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0)/"/>
     <id>https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/</id>
     <published>2019-03-28T11:35:53.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式</p>
 <h1 id="什么是Lambda表达式"><a href="#什么是Lambda表达式" class="headerlink" title="什么是Lambda表达式"></a>什么是Lambda表达式</h1><p>在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数<br>匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值<br>如果函数只使用一次或者有限的次数，则使用匿名函数会比较方便<br>现在越来越多的编程语言支持匿名函数</p>
@@ -82,7 +82,7 @@
     <link href="https://blog.gwq5210.com/2019/03/25/Git%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>https://blog.gwq5210.com/2019/03/25/Git简介及常用命令/</id>
     <published>2019-03-25T20:31:11.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近想深入了解一下Git，阅读了一下<a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git</a>的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅</p>
 <h1 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h1><p>Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。</p>
@@ -219,7 +219,7 @@
     <link href="https://blog.gwq5210.com/2018/04/12/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
     <id>https://blog.gwq5210.com/2018/04/12/Cpp-Primer-Plus读书笔记（四）/</id>
     <published>2018-04-12T22:26:26.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<h1 id="C-中的代码重用"><a href="#C-中的代码重用" class="headerlink" title="C++中的代码重用"></a>C++中的代码重用</h1><p>C++的一个主要目标是促进代码重用。</p>
 <h2 id="包含对象成员的类"><a href="#包含对象成员的类" class="headerlink" title="包含对象成员的类"></a>包含对象成员的类</h2><p>valarray是由头文件valarray定义，其用于处理数值<br>通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类<br>使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现</p>
@@ -261,7 +261,7 @@
     <link href="https://blog.gwq5210.com/2018/02/04/mathjax%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/"/>
     <id>https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/</id>
     <published>2018-02-04T00:36:22.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="mathjax简单教程（翻译）"><a href="#mathjax简单教程（翻译）" class="headerlink" title="mathjax简单教程（翻译）"></a>mathjax简单教程（翻译）</h1><p>原文地址：<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">mathjax basic tutorial and quick reference</a></p>
 <ol>
@@ -333,7 +333,7 @@
     <link href="https://blog.gwq5210.com/2018/02/03/Redis%E4%B8%AD%E7%9A%84geo%E5%8A%9F%E8%83%BD/"/>
     <id>https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/</id>
     <published>2018-02-03T17:37:12.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。</p>
 <p>从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。</p>
@@ -403,7 +403,7 @@
     <link href="https://blog.gwq5210.com/2018/02/03/geohash%E7%AE%80%E4%BB%8B/"/>
     <id>https://blog.gwq5210.com/2018/02/03/geohash简介/</id>
     <published>2018-02-03T17:35:38.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。</p>
 <h1 id="geohash介绍"><a href="#geohash介绍" class="headerlink" title="geohash介绍"></a>geohash介绍</h1><p>geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geohash的字符串当做key，来存储所有的地理位置坐标。</p>
@@ -890,7 +890,7 @@
     <link href="https://blog.gwq5210.com/2018/01/27/hiredis%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>https://blog.gwq5210.com/2018/01/27/hiredis的使用/</id>
     <published>2018-01-27T16:39:49.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。<br>如果想了解Redis相关的细节，可以看<a href="http://redisbook.com/" target="_blank" rel="noopener">《Redis设计与实现》</a>。<br>想了解Redis相关的命令，可以参考<a href="http://redisdoc.com/" target="_blank" rel="noopener">Redis命令参考</a></p>
 <h1 id="hiredis简介"><a href="#hiredis简介" class="headerlink" title="hiredis简介"></a>hiredis简介</h1><p>hiredis是<a href="https://redis.io/" target="_blank" rel="noopener">Redis</a>的一个极简c客户端库。<br>它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。<br>hiredis提供了多种API，它同时支持同步，异步和回复解析API。在此基础上，能够实现Redis的流水线操作。</p>
@@ -953,7 +953,7 @@
     <link href="https://blog.gwq5210.com/2017/08/02/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>https://blog.gwq5210.com/2017/08/02/Cpp-Primer-Plus读书笔记（三）/</id>
     <published>2017-08-02T22:25:37.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<h1 id="对象和类"><a href="#对象和类" class="headerlink" title="对象和类"></a>对象和类</h1><p>面向对象编程是一种特殊的、设计程序的概念性方法，C++通过一些特性改进了C语言，下边是最重要的OOP特性：</p>
 <ul>
@@ -1186,7 +1186,7 @@
     <link href="https://blog.gwq5210.com/2017/07/12/APUE%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
     <id>https://blog.gwq5210.com/2017/07/12/APUE笔记-一/</id>
     <published>2017-07-12T01:22:08.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><p>所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。</p>
 <p>从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。</p>
@@ -2017,7 +2017,7 @@
     <link href="https://blog.gwq5210.com/2017/07/09/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>https://blog.gwq5210.com/2017/07/09/Cpp-Primer-Plus读书笔记（二）/</id>
     <published>2017-07-09T14:47:52.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<h1 id="循环和关系表达式"><a href="#循环和关系表达式" class="headerlink" title="循环和关系表达式"></a>循环和关系表达式</h1><p>for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：</p>
 <ul>
@@ -2587,7 +2587,7 @@
     <link href="https://blog.gwq5210.com/2017/07/02/Cpp-Primer-Plus%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https://blog.gwq5210.com/2017/07/02/Cpp-Primer-Plus读书笔记（一）/</id>
     <published>2017-07-02T21:25:04.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<h1 id="第一章-预备知识"><a href="#第一章-预备知识" class="headerlink" title="第一章 预备知识"></a>第一章 预备知识</h1><h2 id="C-简介"><a href="#C-简介" class="headerlink" title="C++简介"></a>C++简介</h2><p>C++融合了三种不同的编程方式：</p>
 <ul>
@@ -2936,7 +2936,7 @@
     <link href="https://blog.gwq5210.com/2017/07/02/cpp%E5%BF%85%E8%AF%BB%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90/"/>
     <id>https://blog.gwq5210.com/2017/07/02/cpp必读书籍推荐/</id>
     <published>2017-07-02T20:56:49.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<p>本文内容来自国外著名编程问答网站Stackoverflow评选的C++推荐书单！推荐大家看原版英文，但这些书大部分也都有中文版！</p>
 <h1 id="手册类-–-所有级别"><a href="#手册类-–-所有级别" class="headerlink" title="手册类 – 所有级别"></a>手册类 – 所有级别</h1><ul>
@@ -3000,7 +3000,7 @@
     <link href="https://blog.gwq5210.com/2016/07/30/protobuf%E7%9A%84%E7%BC%96%E7%A0%81/"/>
     <id>https://blog.gwq5210.com/2016/07/30/protobuf的编码/</id>
     <published>2016-07-30T19:35:53.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<p>这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。</p>
 <h2 id="一个简单的消息"><a href="#一个简单的消息" class="headerlink" title="一个简单的消息"></a>一个简单的消息</h2><p>比方说，你有一个非常简单的消息定义：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">	<span class="keyword">required</span> <span class="built_in">int32</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -3148,7 +3148,7 @@
     <link href="https://blog.gwq5210.com/2016/07/30/google%20protobuf%E7%AE%80%E4%BB%8B/"/>
     <id>https://blog.gwq5210.com/2016/07/30/google protobuf简介/</id>
     <published>2016-07-30T14:17:10.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是Google-ProtoBuf？"><a href="#什么是Google-ProtoBuf？" class="headerlink" title="什么是Google ProtoBuf？"></a>什么是Google ProtoBuf？</h2><p>ProtoBuf是一种灵活高效的结构化数据存储机制，像XML一样，但是其更加轻巧、快速、简单。<br>使用ProtoBuf十分简单，只需要在.proto文件中定义数据就好了，然后你可以利用ProtoBuf提供的工具生成不同语言的序列化和反序列化的代码，目前提供C++、Java、Python、C#、GO等语言版本。</p>
 <h2 id="ProtoBuf的优点"><a href="#ProtoBuf的优点" class="headerlink" title="ProtoBuf的优点"></a>ProtoBuf的优点</h2><p>同XML数据相比，ProboBuf有这许多优点：<br>1：简单<br>2：小3-10倍<br>3：快20-100倍<br>4：更少的二义性<br>5：生成的数据访问类更加容易编程</p>
@@ -3475,7 +3475,7 @@
     <link href="https://blog.gwq5210.com/2016/01/23/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>https://blog.gwq5210.com/2016/01/23/c语言中使用数据库/</id>
     <published>2016-01-23T20:21:40.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先，要安装mysql数据库，安装好后，可能还不能使用mysql的c语言库，还要安装mysql的库，命令如下：sudo apt-get install libmysql++-dev。<br>安装好后，就可以包含<mysql mysql.h>头文件，然后使用mysql的c语言api了。</mysql></p>
 <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>1）MYSQL<br>这个结构体代表一个数据库连接的句柄，它被大多数的mysql函数使用。不要尝试拷贝MYSQL结构体，不保证这样的拷贝是可以使用的。<br>MYSQL的定义如下：</p>
@@ -3606,7 +3606,7 @@
     <link href="https://blog.gwq5210.com/2016/01/22/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0/"/>
     <id>https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/</id>
     <published>2016-01-22T22:54:30.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<p>c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。<br>使用方法稍微复杂一些，必须按照如下步骤进行：<br>1.在函数原型中使用省略号。<br>2.在函数定义中创建一个va_list类型的变量。<br>3.用宏将该变量初始化为一个参数列表。<br>4.用宏访问这个参数列表。<br>5.用宏完成清理工作。</p>
 <p>下面详细介绍这些步骤，函数原型中的参数列表中至少有一个后跟省略号的参数，这个参数成为parmN，如：</p>
@@ -3655,7 +3655,7 @@
     <link href="https://blog.gwq5210.com/2016/01/22/url%E8%BD%AC%E7%A0%81%E8%A7%A3%E7%A0%81-c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0/"/>
     <id>https://blog.gwq5210.com/2016/01/22/url转码解码-c语言实现/</id>
     <published>2016-01-22T22:07:10.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<p>url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。</p>
 <p>好像C语言里面没有现成的转码函数。参考<a href="http://blog.csdn.net/wudishine/article/details/39025407" target="_blank" rel="noopener">这里</a>，从php的转码中引出两个函数，进行转码。</p>
@@ -3691,7 +3691,7 @@
     <link href="https://blog.gwq5210.com/2015/11/08/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/"/>
     <id>https://blog.gwq5210.com/2015/11/08/C语言笔记/</id>
     <published>2015-11-08T21:40:48.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.947Z</updated>
     
     <content type="html"><![CDATA[<h2 id="C语言笔记"><a href="#C语言笔记" class="headerlink" title="C语言笔记"></a>C语言笔记</h2><p>变量相关：</p>
 <ul>
@@ -3899,7 +3899,7 @@
     <link href="https://blog.gwq5210.com/2015/11/08/2015%E5%B9%B4%E8%85%BE%E8%AE%AF%E9%98%BF%E9%87%8C%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%8B%9B%E8%81%98%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86/"/>
     <id>https://blog.gwq5210.com/2015/11/08/2015年腾讯阿里实习生招聘面试经历/</id>
     <published>2015-11-08T21:35:07.000Z</published>
-    <updated>2021-08-30T09:45:34.462Z</updated>
+    <updated>2021-08-30T09:52:41.943Z</updated>
     
     <content type="html"><![CDATA[<p>每年毕业生找工作都是一个问题，对于个人来说，无非就是笔试和面试的问题。对于应届生来说，最头疼的或许不是笔试而是面试。对于笔试，只要自身实力过硬，一般都没有问题（退一步讲，万一笔试没过，还可以在面试的时候霸面）；对于面试，就不一样了，应届生没有接触过面试，所以对于面试可能有些害怕，面试之前会在网上搜一些面试注意事项之类的，而这些都是对所有面试的一般概括，没有什么针对性，无非就是提醒面试者注意着装、礼貌、准备一些各种版本的自我介绍之类的，不得不说这些还是有很大帮助的。但在我看来，这些都没有自己实打实的来一次真正的面试有帮助。所以，我鼓励那些想要找工作的同学，可以尝试着真的去准备一场面试，运气好的话，说不定就被录取了呢。下面，我分享一下我的今年（2015年）的面试经历和感想，希望对一些同学有所帮助。</p>
 <a id="more"></a>
