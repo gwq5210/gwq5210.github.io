@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>hiredis的使用 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Redis,hiredis,Redis API">
+    <meta name="description" content="前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考 hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时">
+<meta name="keywords" content="Redis,hiredis,Redis API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiredis的使用">
+<meta property="og:url" content="https://blog.gwq5210.com/2018/01/27/hiredis的使用/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考 hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiredis的使用">
+<meta name="twitter:description" content="前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考 hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">hiredis的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">hiredis的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-27T16:39:49.000Z" itemprop="datePublished" class="page-time">
+  2018-01-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#hiredis简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">hiredis简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据结构"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连接上下文redisContext"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">连接上下文redisContext</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#回复结构体redisReply"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">回复结构体redisReply</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#同步接口"><span class="post-toc-number">4.</span> <span class="post-toc-text">同步接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连接Redis"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">连接Redis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#向Redis发送命令"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">向Redis发送命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获得命令的回复"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">获得命令的回复</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#断开连接"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">断开连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变种的redisCommand"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">变种的redisCommand</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流水线操作"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">流水线操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">错误</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#异步API"><span class="post-toc-number">5.</span> <span class="post-toc-text">异步API</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-hiredis的使用" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">hiredis的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-27 16:39:49" datetime="2018-01-27T16:39:49.000Z" itemprop="datePublished">2018-01-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。<br>如果想了解Redis相关的细节，可以看<a href="http://redisbook.com/" target="_blank" rel="noopener">《Redis设计与实现》</a>。<br>想了解Redis相关的命令，可以参考<a href="http://redisdoc.com/" target="_blank" rel="noopener">Redis命令参考</a></p>
+<h1 id="hiredis简介"><a href="#hiredis简介" class="headerlink" title="hiredis简介"></a>hiredis简介</h1><p>hiredis是<a href="https://redis.io/" target="_blank" rel="noopener">Redis</a>的一个极简c客户端库。<br>它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。<br>hiredis提供了多种API，它同时支持同步，异步和回复解析API。在此基础上，能够实现Redis的流水线操作。</p>
+<a id="more"></a>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>首先来看数据结构，主要分为两部分。保存Redis连接上下文的redisContext和保存Redis命令回复的RedisReply。<br>下边分别介绍：</p>
+<h2 id="连接上下文redisContext"><a href="#连接上下文redisContext" class="headerlink" title="连接上下文redisContext"></a>连接上下文redisContext</h2><p>首先看结构定义：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Context for a connection to Redis */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisContext</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> err; <span class="comment">/* Error flags, 0 when there is no error */</span></span><br><span class="line">    <span class="keyword">char</span> errstr[<span class="number">128</span>]; <span class="comment">/* String representation of error when applicable */</span></span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line">    <span class="keyword">int</span> flags;</span><br><span class="line">    <span class="keyword">char</span> *obuf; <span class="comment">/* Write buffer */</span></span><br><span class="line">    redisReader *reader; <span class="comment">/* Protocol reader */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">enum</span> redisConnectionType connection_type;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> *<span class="title">timeout</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="keyword">char</span> *host;</span><br><span class="line">        <span class="keyword">char</span> *source_addr;</span><br><span class="line">        <span class="keyword">int</span> port;</span><br><span class="line">    &#125; tcp;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="keyword">char</span> *path;</span><br><span class="line">    &#125; unix_sock;</span><br><span class="line"></span><br><span class="line">&#125; redisContext;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到结构体中包含了一些必要的字段。<br>obuf保存的是格式化后的Redis协议字符串，我们可以把这个字段打出来，可以理解Redis协议。<br>后边介绍到具体接口再来看这个结构体。</p>
+<h2 id="回复结构体redisReply"><a href="#回复结构体redisReply" class="headerlink" title="回复结构体redisReply"></a>回复结构体redisReply</h2><p>结构定义如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* This is the reply object returned by redisCommand() */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisReply</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> type; <span class="comment">/* REDIS_REPLY_* */</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> integer; <span class="comment">/* The integer when type is REDIS_REPLY_INTEGER */</span></span><br><span class="line">    <span class="keyword">size_t</span> len; <span class="comment">/* Length of string */</span></span><br><span class="line">    <span class="keyword">char</span> *str; <span class="comment">/* Used for both REDIS_REPLY_ERROR and REDIS_REPLY_STRING */</span></span><br><span class="line">    <span class="keyword">size_t</span> elements; <span class="comment">/* number of elements, for REDIS_REPLY_ARRAY */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">redisReply</span> **<span class="title">element</span>;</span> <span class="comment">/* elements vector for REDIS_REPLY_ARRAY */</span></span><br><span class="line">&#125; redisReply;</span><br></pre></td></tr></table></figure></p>
+<p>从结构体定义可以看出，它可以表示不同类型的消息。<br>最常用的包括：字符串，数组，整数。具体的在后边介绍。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上两个结构体可以帮助我们理解hiredis库的内部实现，我们总会遇到库的一些坑。只有理解库的实现，才能够避免踩到这些坑。</p>
+<h1 id="同步接口"><a href="#同步接口" class="headerlink" title="同步接口"></a>同步接口</h1><p>hiredis提供了如下三个同步API：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">redisContext *<span class="title">redisConnect</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *ip, <span class="keyword">int</span> port)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">redisCommand</span><span class="params">(redisContext *c, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">freeReplyObject</span><span class="params">(<span class="keyword">void</span> *reply)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出使用同步接口分为三个步骤，创建连接，发送Redis命令，得到结果后释放回复类。</p>
+<h2 id="连接Redis"><a href="#连接Redis" class="headerlink" title="连接Redis"></a>连接Redis</h2><p>redisConnect函数使用之前提到的redisContext来保存连接的状态。<br>结构体redisContext的成员err非零表示连接出错，errstr保存具体的错误信息。<br>调用redisConnect函数后，应该检查err来确认连接是否真的建立。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redisContext *<span class="built_in">c</span> = redisConnect(<span class="string">"127.0.0.1"</span>, <span class="number">6379</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">c</span> == <span class="type">NULL</span> || <span class="built_in">c</span>-&gt;err) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">c</span>) &#123;</span><br><span class="line">        printf(<span class="string">"Error: %s\n"</span>, <span class="built_in">c</span>-&gt;errstr);</span><br><span class="line">        <span class="comment">// handle error</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        printf(<span class="string">"Can't allocate redis context\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>值得注意的是redisContext不是线程安全的。</p>
+<h2 id="向Redis发送命令"><a href="#向Redis发送命令" class="headerlink" title="向Redis发送命令"></a>向Redis发送命令</h2><p>redisCommand是类printf的，可以向已经建立连接的Redis发送命令。</p>
+<p>这个函数使用空格来区分Redis的参数。%s指明一个参数，该参数是一个\0结尾的字符串。如果想使用二进制安全的版本，则可以使用%b，其需要两个参数，一个字符指针，一个表明这个字符串长度的size_t参数。</p>
+<p>值得注意的是%s表明一个Redis命令的参数，即使这个字符串中包含空格，回车等字符。仔细阅读hiredis的代码你就会发现这一点。</p>
+<p>下面是一些例子：<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reply = redisCommand(context, <span class="string">"SET foo bar"</span>);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET foo %s"</span>, value);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET foo %b"</span>, value, (size_t) valuelen);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET key:%s %s"</span>, myid, value);</span><br><span class="line"></span><br><span class="line">// 这个将会出错，因为%s被解释为一个参数，所以Redis收到的就是一个参数的命令‘SET foo bar’，这当然会出错</span><br><span class="line">reply = redisCommand(context, <span class="string">"%s"</span>, <span class="string">"SET foo bar"</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="获得命令的回复"><a href="#获得命令的回复" class="headerlink" title="获得命令的回复"></a>获得命令的回复</h2><p>redisCommand返回值是一个redisReply的结构体，保存了命令的回复。<br>如果出错，则返回值为NULL并且redisContext的err字段设置为非0。<br>Once an error is returned the context cannot be reused and you should set up a new connection.</p>
+<p>redisReply结构体中的type字段表明了返回的数据类型。<br>有如下几种枚举<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表明回复是一个状态，状态的具体信息在str和len中</span></span><br><span class="line">REDIS_REPLY_STATUS</span><br><span class="line"><span class="comment">// 表明回复是一个错误，错误信息在str和len中</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_ERROR:</span></span><br><span class="line"><span class="comment">// 表明回复是一个整数，整数保存在interger中，其实long long类型</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_INTEGER:</span></span><br><span class="line"><span class="comment">// 返回一个nil对象，表明没有数据</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_NIL:</span></span><br><span class="line"><span class="comment">// 回复一个字符串，字符串在str和len中</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_STRING:</span></span><br><span class="line"><span class="comment">// 表明回复是一个数组，保存在elements，element表明了数组的大小。可能回复是嵌套数组</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_ARRAY:</span></span><br></pre></td></tr></table></figure></p>
+<p>redisCommand获得的reply应该使用freeReplyObject函数释放内存。</p>
+<p>Important: the current version of hiredis (0.10.0) frees replies when the asynchronous API is used. This means you should not call freeReplyObject when you use this API. The reply is cleaned up by hiredis after the callback returns. This behavior will probably change in future releases, so make sure to keep an eye on the changelog when upgrading (see issue #39).</p>
+<h2 id="断开连接"><a href="#断开连接" class="headerlink" title="断开连接"></a>断开连接</h2><p>使用完Redis后，使用redisFree来断开网络连接和释放对应的内存<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">redisFree</span><span class="params">(redisContext *c)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="变种的redisCommand"><a href="#变种的redisCommand" class="headerlink" title="变种的redisCommand"></a>变种的redisCommand</h2><p>由于redisCommand使用了可变参数技术，其就会有对应的va_list版本。<br>下边是这一系列参数的原型<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Write a command to the output buffer. Use these functions in blocking mode</span></span><br><span class="line"><span class="comment"> * to get a pipeline of commands. */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">redisvAppendCommand</span><span class="params">(redisContext *c, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">redisAppendCommand</span><span class="params">(redisContext *c, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">redisAppendCommandArgv</span><span class="params">(redisContext *c, <span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">size_t</span> *argvlen)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Issue a command to Redis. In a blocking context, it is identical to calling</span></span><br><span class="line"><span class="comment"> * redisAppendCommand, followed by redisGetReply. The function will return</span></span><br><span class="line"><span class="comment"> * NULL if there was an error in performing the request, otherwise it will</span></span><br><span class="line"><span class="comment"> * return the reply. In a non-blocking context, it is identical to calling</span></span><br><span class="line"><span class="comment"> * only redisAppendCommand and will always return NULL. */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">redisvCommand</span><span class="params">(redisContext *c, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">redisCommand</span><span class="params">(redisContext *c, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">redisCommandArgv</span><span class="params">(redisContext *c, <span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">size_t</span> *argvlen)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>我们暂时忽略redisAppendCommand这一系列函数，我们在讲到流水线操作时会讲解它们。</p>
+<p>可以看到这些函数与我们使用的其他可变参数函数没有什么区别。</p>
+<p>另外一个需要介绍的函数是redisCommandArgv。<br>它不再使用类printf的方法来指定参数，而使用argc和argv来指明参数。另外argvlen参数还给该函数提供了使用二进制字符串的方法。如果argvlen是NULL，那么该函数将使用strlen来确定每个参数的长度。再该函数中Redis命令总是第一个参数。</p>
+<h2 id="流水线操作"><a href="#流水线操作" class="headerlink" title="流水线操作"></a>流水线操作</h2><p>我们下边解释hiredis的内部执行流程来理解为什么可以在同步的API中实现流水线操作。</p>
+<p>当我们调用redisCommand等函数时，hiredis首先讲这些命令转化成Redis的协议。然后将转化后的命令写入输出缓冲区中，写入完成后，调用redisGetReply来获取命令的结果。该函数的流程如下：</p>
+<ol>
+<li>输入缓冲区非空，尝试解析单个回复并返回。如果不能解析则进行2</li>
+<li>输入缓冲区是空，将输出缓冲区的所有内容发送到Redis，然后从socket读取单个回复并返回</li>
+</ol>
+<p>为了实现流水线操作，第一步就是使用redisAppendCommand或redisAppendCommandArgv填充输出缓冲区，函数原型参见上小结。</p>
+<p>第二步我们需要调用redisGetReply，当然我们可以调用redisGetReply多次来获取多个命令的回复。我们需要判断redisGetReply的返回值来确定是否调用成功。成功返回REDIS_OK，失败返回REDIS_ERR。</p>
+<p>下面是一个简单的例子：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redisReply *reply<span class="comment">;</span></span><br><span class="line">redisAppendCommand(<span class="name">context</span>,<span class="string">"SET foo bar"</span>)<span class="comment">;</span></span><br><span class="line">redisAppendCommand(<span class="name">context</span>,<span class="string">"GET foo"</span>)<span class="comment">;</span></span><br><span class="line">redisGetReply(<span class="name">context</span>,<span class="symbol">&amp;reply</span>)<span class="comment">; // reply for SET</span></span><br><span class="line">freeReplyObject(<span class="name">reply</span>)<span class="comment">;</span></span><br><span class="line">redisGetReply(<span class="name">context</span>,<span class="symbol">&amp;reply</span>)<span class="comment">; // reply for GET</span></span><br><span class="line">freeReplyObject(<span class="name">reply</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><p>当函数返回NULL或REDIS_ERR的时候，redisContext的err字段将会设置成如下枚举：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">REDIS_ERR_IO: There was an I/O <span class="builtin-name">error</span> <span class="keyword">while</span> creating the connection, trying <span class="keyword">to</span> write <span class="keyword">to</span> the socket <span class="keyword">or</span> read <span class="keyword">from</span> the socket. <span class="keyword">If</span> you included errno.h <span class="keyword">in</span> your application, you can use the global errno variable <span class="keyword">to</span> <span class="builtin-name">find</span> out what is wrong.</span><br><span class="line"></span><br><span class="line">REDIS_ERR_EOF: The<span class="built_in"> server </span>closed the<span class="built_in"> connection </span>which resulted <span class="keyword">in</span> an empty read.</span><br><span class="line"></span><br><span class="line">REDIS_ERR_PROTOCOL: There was an <span class="builtin-name">error</span> <span class="keyword">while</span> parsing the protocol.</span><br><span class="line"></span><br><span class="line">REDIS_ERR_OTHER: Any other error. Currently, it is only used when a specified hostname <span class="keyword">to</span> connect <span class="keyword">to</span> cannot be resolved.</span><br></pre></td></tr></table></figure></p>
+<p>redisContext的errstr字段将会指明具体的错误信息。</p>
+<h1 id="异步API"><a href="#异步API" class="headerlink" title="异步API"></a>异步API</h1><p>TODO</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis-API/">Redis API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hiredis/">hiredis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&title=《hiredis的使用》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&title=《hiredis的使用》 — gwq5210's Blog&source=前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/01/27/hiredis的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hiredis的使用》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/02/03/geohash简介/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">geohash简介</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/02/Cpp-Primer-Plus读书笔记（三）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Cpp-Primer-Plus读书笔记（三）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&title=《hiredis的使用》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&title=《hiredis的使用》 — gwq5210's Blog&source=前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/01/27/hiredis的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hiredis的使用》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/01/27/hiredis的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3ay24CMQwFUP7/p6dSV5Wgw7WTqajnZIUQkJxZmPjxeMTr+F4/Xz+v88//9t3z9zcvDAyMf8s4TtfzZ54PV+XlDyU5GwYGxn0YSZDNN87jYRKIz8+GgYGBkQTc3uGq10oMDAyMKqMXfJMEFQMDA2Mlic23yYNyr7SHgYFxN0avMfA3ry/vb2BgYHw842itvA3QC7vl82BgYIxmVLfZ23rstTmjXBwDA2MoIw9/vaLYhQAMDIzRjCSwXjFCkbcBouIaBgbGDRgrzctqgF5vc17Sg8XAwPh4RjXMVRuQ1WCaJ8MvqoYYGBhDGXnQ7JXvV4p60XkwMDBGM/LEdVcSWw2m5bQWAwNjHCMvzVeDcq+d0GyaYmBgjGbkgJVjVRsGvYeCgYExlfEmIYwHIKpDZr1fKFwNMTAwhjLya1l57mzTuFj55zAwMIYy1kv8eYktT5LfPAIMDIzRjF75rDp+Ub1ubmhhYmBgDGIk4a9aaKuOaPSaqS+SWAwMjKGMfLZqV7l/JXAX/j0wMDAGMRLZelK63kJ4sxcGBsZoRvX61RsXWxk+y8twGBgYUxlHcfWOu9IujdJXDAyM0YxqKb+6cbUAl4d1DAyMuzF6QxLVwJofrlm2w8DAuAGjmtZWC215GW5DFo6BgXF7RrXo1huhKN9tMTAwMBaalPmlMx9Qw8DAuCdj11BF0jDY+2gwMDDuwKjeu9YvfBfOjGBgYExjfAEgs1vRho8v/AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

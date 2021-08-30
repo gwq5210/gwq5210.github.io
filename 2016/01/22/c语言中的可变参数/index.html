@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>c语言中的可变参数 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="c语言,可变参数">
+    <meta name="description" content="c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。 下面详细介绍这些步骤，函数原型中的参数列表中至少有一">
+<meta name="keywords" content="c语言,可变参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言中的可变参数">
+<meta property="og:url" content="https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。 下面详细介绍这些步骤，函数原型中的参数列表中至少有一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言中的可变参数">
+<meta name="twitter:description" content="c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。 下面详细介绍这些步骤，函数原型中的参数列表中至少有一">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">c语言中的可变参数</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">c语言中的可变参数</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-22T22:54:30.000Z" itemprop="datePublished" class="page-time">
+  2016-01-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-c语言中的可变参数" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">c语言中的可变参数</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-22 22:54:30" datetime="2016-01-22T22:54:30.000Z" itemprop="datePublished">2016-01-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。<br>使用方法稍微复杂一些，必须按照如下步骤进行：<br>1.在函数原型中使用省略号。<br>2.在函数定义中创建一个va_list类型的变量。<br>3.用宏将该变量初始化为一个参数列表。<br>4.用宏访问这个参数列表。<br>5.用宏完成清理工作。</p>
+<p>下面详细介绍这些步骤，函数原型中的参数列表中至少有一个后跟省略号的参数，这个参数成为parmN，如：</p>
+<a id="more"></a>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span> n, ...)</span></span>;</span><br><span class="line"><span class="comment">// 合法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">const</span> <span class="keyword">char</span> *s, ...)</span></span>;</span><br><span class="line"><span class="comment">// 无效，省略号不是最后一个参数</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">f3</span><span class="params">(<span class="keyword">char</span> c1, ..., <span class="keyword">char</span> c2)</span></span>;</span><br><span class="line"><span class="comment">// 无效，没有任何参数</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">f4</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>接下来，在头文件stdarg.h中声明的va_list类型代表一种数据对象，该数据对象用于存放参数列表中省略号部分代表的参数。可变参数函数的定义应该像下边这样：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">doube</span></span> <span class="keyword">sum</span>(int lim, ...)</span><br><span class="line">&#123;</span><br><span class="line">        va_list ap;        <span class="comment">// 声明用于存放参数的变量</span></span><br></pre></td></tr></table></figure>
+<p>然后，函数将使用stdargs.h中定义的宏va_start()把参数列表复制到va_list变量中。宏va_start()有两个参数：va_list类型的变量和变量parmN。如前所述，这里两个参数分别为va和lim，所以，va_start()函数的调用如下所示：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">va_start<span class="comment">(vp, lim)</span>;        <span class="comment">// 把vp初始化为参数列表</span></span><br></pre></td></tr></table></figure>
+<p>下一步是访问参数列表中的内容，这涉及宏va_arg()的使用，该宏接受两个参数：一个va_list类型的变量和一个类型名。<br>第一次调用va_arg()时，它返回参数列表的第一项，下次调用返回第二项，一次类推。参数类型制定返回值的类型。例如，如果参数列表中第一个参数为double类型，第二个为int类型，那么可使用下列语句：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> tic;</span><br><span class="line"><span class="keyword">int</span> toc;</span><br><span class="line">...</span><br><span class="line">tic = va_arg(ap, <span class="keyword">double</span>);        <span class="comment">// 取得第一个参数</span></span><br><span class="line">toc = va_arg(ap, <span class="keyword">int</span>);        <span class="comment">// 取得第二个参数</span></span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，实际参数的类型必须与说明的类型相匹配，如果第一个参数为10.0，那么前面的tic部分的代码正常工作；但是如果参数为10，代码就可能无法正常工作。这里不会像赋值过程中那样进行double到int的自动转换。<br>最后，应该使用va_end()完成清理工作。该宏接受一个va_list变量作为参数：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">va_end</span>(ap);        <span class="comment">// 清理工作</span></span><br></pre></td></tr></table></figure>
+<p>此后，只有用va_start()重新对ap初始化后，才能使用变量ap。<br>因为va_arg()不提供后退回先前参数的方法，所以保存va_list变量的副本是有用的，C99为此专门添加了宏va_copy()。该宏的两个参数均为va_list类型变量，它将第二个参数复制到第一个参数中：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">va_list <span class="keyword">ap</span>;</span><br><span class="line">va_list apcopy;</span><br><span class="line">double tic;</span><br><span class="line">int toc;</span><br><span class="line">...</span><br><span class="line">va_start(<span class="keyword">ap</span>, lim);        <span class="comment">// 把ap初始化为参数列表</span></span><br><span class="line">va_copy(apcopy, <span class="keyword">ap</span>);       <span class="comment">// apcopy是ap一个副本</span></span><br><span class="line">tic = va_arg(<span class="keyword">ap</span>, double);        <span class="comment">// 取得第一个参数</span></span><br><span class="line">toc = va_arg(<span class="keyword">ap</span>, int);        <span class="comment">// 取得第二个参数</span></span><br></pre></td></tr></table></figure>
+<p>这时，虽然已从ap中删除了前两项，但是还可以从apcopy中重新获取这两项。<br>下面是一个例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="emphasis">***</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; File Name: varargs.c</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Author: gwq</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Mail: gwq5210@qq.com </span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Created Time: 2015年01月07日 星期三 20时13分16秒</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"> <span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>**/</span></span></span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line"><span class="built_in">double</span> sum(<span class="built_in">int</span> <span class="built_in">num</span>, ...)</span><br><span class="line">&#123;</span><br><span class="line">    va_list ap;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">double</span> res = <span class="number">0.0</span>;</span><br><span class="line">    va_start(ap, <span class="built_in">num</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">num</span>; ++i) &#123;</span><br><span class="line">        res += va_arg(ap, <span class="built_in">double</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">double</span> s = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line">    s = sum(<span class="number">3</span>, <span class="number">1.1</span>, <span class="number">2.5</span>, <span class="number">13.3</span>);</span><br><span class="line">    printf(<span class="string">"sum(3, 1.1, 2.5, 13.3) = %.2f\n"</span>, s);</span><br><span class="line">    <span class="comment">// 如果不对应，会出现错误，这与放的位置有关</span></span><br><span class="line">    <span class="comment">//s = sum(3, 1, 2.5, 13.3);</span></span><br><span class="line">    <span class="comment">//printf("sum(3, 1, 2.5, 13.3) = %.2f\n", s);</span></span><br><span class="line">    s = sum(<span class="number">6</span>, <span class="number">1.1</span>, <span class="number">2.1</span>, <span class="number">13.1</span>, <span class="number">4.1</span>, <span class="number">5.1</span>, <span class="number">6.1</span>);</span><br><span class="line">    printf(<span class="string">"sum(6, 1.1, 2.5, 13.1, 4.1, 5.1, 6.1) = %.2f\n"</span>, s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上边也测试了，传进来的参数不对应的情况，发生了错误。<br>下面是另一个程序，说明了va_arg传入的类型还可以是自定义的类型：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="emphasis">***</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; File Name: testargs.c</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Author: gwq</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Mail: gwq5210@qq.com </span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Created Time: 2015年01月07日 星期三 20时21分44秒</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"> <span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>**/</span></span></span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line">struct point_t &#123;</span><br><span class="line">    <span class="built_in">int</span> x, y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct point_t add(<span class="built_in">int</span> <span class="built_in">num</span>, ...)</span><br><span class="line">&#123;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, <span class="built_in">num</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;</span><br><span class="line">    struct point_t p;</span><br><span class="line">    struct point_t res;</span><br><span class="line">    res.x = <span class="number">0</span>;</span><br><span class="line">    res.y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">num</span>; ++i) &#123;</span><br><span class="line">        p = va_arg(ap, struct point_t);</span><br><span class="line">        res.x += p.x;</span><br><span class="line">        res.y += p.y;</span><br><span class="line">    &#125;</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    struct point_t p;</span><br><span class="line">    struct point_t sum;</span><br><span class="line">    p.x = <span class="number">1</span>;</span><br><span class="line">    p.y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    sum = add(<span class="number">3</span>, p, p, p);</span><br><span class="line"></span><br><span class="line">    printf(<span class="string">"add(3, p, p, p) = &#123;%d, %d&#125;\n"</span>, sum.x, sum.y);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面说说stdio.h中与va_list相关的几个函数：<br>这几个函数有vprintf,vfprintf,vsprintf,vsnprintf。<br>函数原型分别为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vfprintf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsnprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">size_t</span> size, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这几个函数分别与printf,fprintf,sprintf,snprintf类似，不过，他们接受一个va_list类型的变量，而不是参数列表。<br>利用这几个函数可以实现方便的函数如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="emphasis">***</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; File Name: execute_cmd.c</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Author: gwq</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Mail: gwq5210@qq.com </span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Created Time: 2015年01月07日 星期三 20时44分17秒</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"> <span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>**/</span></span></span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line">#define BUFSIZE <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> execute_cmd(<span class="keyword">const</span> char *fmt, ...)</span><br><span class="line">&#123;</span><br><span class="line">    char cmd[BUFSIZE];</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, fmt);</span><br><span class="line">    vsprintf(cmd, fmt, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="keyword">return</span> system(cmd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    execute_cmd(<span class="string">"echo %s"</span>, <span class="string">"dir"</span>);</span><br><span class="line">    execute_cmd(<span class="string">"ls %s"</span>, <span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里边的大部分内容都是从书上摘下来的，程序部分经过了修改。</p>
+<p>参考：<br>1）C Primer Plus（第五版）中文版 16.13<br>2）hustoj项目源代码</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/可变参数/">可变参数</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&title=《c语言中的可变参数》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&title=《c语言中的可变参数》 — gwq5210's Blog&source=c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《c语言中的可变参数》 — gwq5210's Blog&url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/23/c语言中使用数据库/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">c语言中使用数据库</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/22/url转码解码-c语言实现/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">url转码解码-c语言实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&title=《c语言中的可变参数》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&title=《c语言中的可变参数》 — gwq5210's Blog&source=c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《c语言中的可变参数》 — gwq5210's Blog&url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2016/01/22/c语言中的可变参数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aS5LDMAhF0ex/0+4FpO2+D+SuEroepfw/HhBAfD54u26273PuruVn3h1dsMmQIWNbxvW4fT+YHOUwcmfyEWXIkHECgzzsOSA+B1bOSz+EDBkyZKSpIXnFNLjLkCFDRi2B42VnDSxDhgwZtSKWh1pyLT9ncS0uQ4aMDRm86/7/v19Z35AhQ8ZWjGvpln6OVW8lQ4aM2YxascoL185iwPP+X+4pQ4aMoQz+Kv3ClRfJ8VCaDBkyDmDwArKW2KUjX+kgmgwZMmYz+olamvbxYF0bTZMhQ8ZsBjmJh2OCXxWIZciQcQKjU2ry5I/v4alnvJ4gQ4aMbRlpW782JNFPK1OwDBkyZjBIkRnoQRKZLnyizyFDhozRDJLe8aBZKz754uUfn1iGDBlDGZ0WG2+TkZGyztiHDBkyZjNqpeZ7Lbna8oAMGTJmM2ojWf3xiM4Tg9RQhgwZQxlkMCId+SKvztPB2ypchgwZoxlpi7/WXOPLlukeGTJkzGbw5K8/ZlFbfgjabTJkyBjK4K+eBs3aoEa6dCpDhowTGOTV+Y06JS5HorEwGTJkDGLUxiPSo+QqHrKDrqEMGTJGMDrBrtbKTxt8tbJZhgwZ8xhpkOXX8rDbH9GQIUPGCYxak6s28tX5HwiWB2TIkHEkI037SOGalsfx5IgMGTIOY5Agyx9ca8kt+9+QIUPGhoy0iOVjGZ3t9VpchgwZmzBqA1tp2pe27fgAhwwZMkYzfgCJhaOJIEejOAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

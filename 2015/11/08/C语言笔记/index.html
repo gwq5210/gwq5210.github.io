@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>C语言笔记 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="c语言,编程">
+    <meta name="description" content="C语言笔记变量相关：  C99以前的C要求在一个代码块的开始处声明变量。 声明语句为变量创建，标定存储空间并为其制定初始值。 C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。 C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint3">
+<meta name="keywords" content="c语言,编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言笔记">
+<meta property="og:url" content="https://blog.gwq5210.com/2015/11/08/C语言笔记/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="C语言笔记变量相关：  C99以前的C要求在一个代码块的开始处声明变量。 声明语句为变量创建，标定存储空间并为其制定初始值。 C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。 C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint3">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言笔记">
+<meta name="twitter:description" content="C语言笔记变量相关：  C99以前的C要求在一个代码块的开始处声明变量。 声明语句为变量创建，标定存储空间并为其制定初始值。 C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。 C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint3">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C语言笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C语言笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-08T21:40:48.000Z" itemprop="datePublished" class="page-time">
+  2015-11-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C语言笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">C语言笔记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参数传递机制"><span class="post-toc-number">2.</span> <span class="post-toc-text">参数传递机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优先级和求值顺序"><span class="post-toc-number">3.</span> <span class="post-toc-text">优先级和求值顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分支和跳转"><span class="post-toc-number">4.</span> <span class="post-toc-text">分支和跳转</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数"><span class="post-toc-number">5.</span> <span class="post-toc-text">函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-number">6.</span> <span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针"><span class="post-toc-number">7.</span> <span class="post-toc-text">指针</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">8.</span> <span class="post-toc-text">字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#作用域"><span class="post-toc-number">9.</span> <span class="post-toc-text">作用域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类型限定符"><span class="post-toc-number">10.</span> <span class="post-toc-text">类型限定符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件I-O"><span class="post-toc-number">11.</span> <span class="post-toc-text">文件I/O</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构，联合和枚举"><span class="post-toc-number">12.</span> <span class="post-toc-text">结构，联合和枚举</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#奇特的声明"><span class="post-toc-number">13.</span> <span class="post-toc-text">奇特的声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数和指针"><span class="post-toc-number">14.</span> <span class="post-toc-text">函数和指针</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#位操作"><span class="post-toc-number">15.</span> <span class="post-toc-text">位操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C预处理器和库"><span class="post-toc-number">16.</span> <span class="post-toc-text">C预处理器和库</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-C语言笔记" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C语言笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-11-08 21:40:48" datetime="2015-11-08T21:40:48.000Z" itemprop="datePublished">2015-11-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="C语言笔记"><a href="#C语言笔记" class="headerlink" title="C语言笔记"></a>C语言笔记</h2><p>变量相关：</p>
+<ul>
+<li>C99以前的C要求在一个代码块的开始处声明变量。</li>
+<li>声明语句为变量创建，标定存储空间并为其制定初始值。</li>
+<li>C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。</li>
+<li>C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint32_t表示一个32位无符号整数类型。使用这些名字，需要包含头文件inttypes.h。另外，这种确切的长度类型在某些系统上可能不支持。不如，不能保证某些系统上存在一种int8_t类型（8位有符号整数）。为了解决这个问题，C99标准定义了第二组名字集合。这些名字保证所表示的类型至少大于指定长度的最小类型，被称为“最小长度类型”。例如，int_least8_t是可以容纳8位有符号数的那些类型中长度最小的一个别名。因为一些程序员更关心速度而非空间。C99为他们定义了一组可使计算达到最快的类型集合。这组集合被称为“最快最小长度类型”。如，int_fast8_t定义为系统中对8位有符号数而言计算最快的整数类型的别名。为了使用printf输出这些类型，C99还提供了一些串宏来帮助打印这些类型。（注：可能一些编译器并不支持这一特性）<a id="more"></a></li>
+<li>浮点数的上溢和下溢。当一个计算结果是一个大的不能表达的数时，会发生上溢，现在C语言用一个特殊值表示这个太大的数，printf函数显示此值为inf或infinity。如果将浮点数能表示的最小的数除以2，将会得到一个低于正常的值，如果除以一个足够大的数，将使所有位都为0。现在C库提供了用于检查计算是否会产生低于正常的值的函数。有一个特殊的浮点值NaN（Not-a-Number）。例如asin函数返回反正弦值，但是正弦值不能大于1，所以它的输入参数不能大于1，否则函数返回NaN值，printf函数显示此值为nan，NaN或类似形式。</li>
+<li>C99还支持复数和虚数类型。</li>
+<li>在将浮点数转换为整数时，C简单的丢弃小数部分（截尾），而不进行四舍五入。</li>
+<li>sizeof运算符返回一个size_t类型的数，这个类型通常是unsigned或unsigned long。对于某个具体量的大小sizeof的括号是可选的，但对于类型来说，括号是必需的。如sizeof(int)，sizeof(2.0)&lt;=&gt;sizeof 2.0。</li>
+<li>C99标准要求编译器识别局部标识符的前63个字符和外部标识符的前31个字符。在这之前分别为31个和6个字符。</li>
+</ul>
+<hr>
+<h2 id="参数传递机制"><a href="#参数传递机制" class="headerlink" title="参数传递机制"></a>参数传递机制</h2><p>对于下面的代码段：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> n1 = <span class="number">3.0</span>;</span><br><span class="line">double n2 = <span class="number">3.0</span>;</span><br><span class="line">long n3 = <span class="number">300000</span>;</span><br><span class="line">long n4 = <span class="number">123456790</span>;</span><br><span class="line">printf(<span class="string">"%ld %ld %ld %ld<span class="subst">\n</span>"</span>, n1, n2, n3, n4);</span><br></pre></td></tr></table></figure>
+<p>该调用告诉计算机把变量n1,n2,n3,n4的值传递给计算机，计算机把他们放置到被称为堆栈（stack）的一块内存区域中来实现。计算机根据变量的类型而非转换说明符把这些值放到堆栈中。所以，n1,n2,n3,n4四个变量在堆栈中分别占8,8,4,4个字节，其中n1的float被转换成了double。然后，控制交给了printf函数。该函数中堆栈中把值读出来，但是在读取时，它根据转换说明符去读取。%ld说明符指出，printf应该读取4个字节，所以printf在堆栈中读取前4个字节作为它的一个值。这就是n1的前半部分，它被解释成一个long类型。写一个%ld说明符再读取4个字节；这就是n1的后半部分，它也被解释成一个long类型。同样，第三个和第四个%ld说明符分别读取n2的前半部分和后半部分，并解释成一个long类型。所以虽然n3和n4的说明符都正确，但是printf仍然读取了错误的字节。<br>一般来说，栈从高地址向低地址生长，即高地址是栈的底部。而函数的入栈顺序是从右向左。从右向左入栈的原因是，这样可以使得编译器可以支持可变参数，通过第一个参数可以获得参数的个数和每个参数的大小，这样就能取得每个参数。<br>在C中，会发生许多自动类型转换。当char和short类型出现在表达式里或者作为函数的参数时，它们都被提升为int类型。当float类型作为一个函数参数时被提升为double。<br>在包含两种数据类型的任何运算里，两个值都被转换成两种类型里较高的级别。</p>
+<h2 id="优先级和求值顺序"><a href="#优先级和求值顺序" class="headerlink" title="优先级和求值顺序"></a>优先级和求值顺序</h2><ol>
+<li>运算符的优先级为决定表达式里求值的顺序提供了重要的规则，但是它并不决定所有的规则。如：<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">6</span> * <span class="number">12</span> + <span class="number">5</span> * <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当两个运算符共享一个操作数的时候，优先级规定了求值顺序。例如，12既是<em>运算符的操作数，又是+运算符的操作数，根据优先级的规定乘法运算先进行。与之类似，优先级规定了对5进行乘法操作而不是加法操作。总之，两个乘法操作在加法操作之前进行。但是优先级并没有确定的是这两个乘法运算中到底那个先进行。C将这个选择权留给实现者，这是因为可能一种选择在一种硬件上效率更高，而另一种选择在另一种硬件上效率更高。但是不管先执行那个乘法运算，表达式都会简化成72+100。虽然乘法运算符的结合性是从左到右，但因为两个\</em>运算符不共享一个操作数，所以从左到右的规则对它并不适用。也就是说结合规则适用于共享同一操作数的运算符。</p>
+<ol>
+<li>对于参数传递，参数的求值顺序也是不确定的。所以，下边的语句的结果在不同的系统上可能会产生不同的结果。<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"%d %d\n"</span>, num, num * num++);</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"%d\n"</span>, n++ + n++);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是我们可以通过一下原则来避免这些问题。</p>
+<ul>
+<li>如果一个变量出现在同一个函数的多个参数中，不要将增量或减量运算符用于它上边。</li>
+<li>当一个变量多次出现在一个表达式里时，不要将增量或减量运算符用于它上边。</li>
+</ul>
+<p>顺序点是程序执行中的一点，在该点处，所有的副作用都在进入下一步之前被计算。在C中语句里的分号标志了一个顺序点。任何一个完整的表达式结束也是一个顺序点。一个完整的表达式是这样一个表达式——它不是一个更大的表达式的子表达式。逗号运算符是一个顺序点。</p>
+<h2 id="分支和跳转"><a href="#分支和跳转" class="headerlink" title="分支和跳转"></a>分支和跳转</h2><ul>
+<li>C99标准要求编译器最少支持127层else-if嵌套。</li>
+<li>C99标准为逻辑运算符增加了可供选择的拼写方法。它们在iso646.h头文件中定义，包含这个头文件可以使用and，or，not来代替相应的逻辑运算符。同时，C还提供了3元字符扩展。</li>
+<li>switch语句里的case必须是整型（包括char）常量或者整型常量表达式（仅包含整数常量的表达式）。</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>C99标准不再支持函数的int类型的默认设置。类型声明是函数定义的一部分。</li>
+<li>一般来讲，尾递归的空间复杂度是常量。</li>
+<li>所有的C函数地位同等，也就是说，main函数也可以被其本身或者被其他函数递归掉调用——尽管很少这么做。</li>
+</ul>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><ul>
+<li><p>数组制定初始化项目，对数组中指定的项目初始化。如多次对一个元素初始化，则最后一次有效。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统语法</span></span><br><span class="line">int arr1[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">123</span>&#125;;</span><br><span class="line"><span class="comment">// C99语法</span></span><br><span class="line">int arr2[<span class="number">6</span>] = &#123;[<span class="number">5</span>] = <span class="number">123</span>&#125;;</span><br><span class="line">int arr3[<span class="number">3</span>] = &#123;[<span class="number">2</span>] = <span class="number">3</span>, <span class="number">4</span>&#125;; <span class="comment">// 数组内容为0， 3， 4</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C99之前声明数组的方括号内只能使用整数常量表达式（表达式的值必须大于0）。注意，与C++不同，const值不是一个整数常量。</p>
+</li>
+<li><p>C99引入了变长数组，即声明数组的方括号内可以使用变量。变长数组必须是自动存储类型的，这意味着他们必须在函数内部或者作为函数形式参数声明，而且声明时不可以进行初始化。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int sum2d(int, int, int ar[<span class="string">*</span>][<span class="symbol">*</span>]);		// ar是一个边长数组，必须使用*号代替省略的维数</span><br><span class="line">int sum2d(int a, int b, int ar[<span class="string">a</span>][<span class="symbol">b</span>]);	// a和b的声明一定要在ar的前边</span><br><span class="line">int sum2d(int ar[<span class="string">a</span>][<span class="symbol">b</span>], int a, int b);	// 错误</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C99复合文字。可以使用复合文字创建一个无名数组。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个包含两个int值的数组</span></span><br><span class="line">(int [<span class="number">2</span>])&#123;<span class="number">10</span>, <span class="number">20</span>&#125;</span><br><span class="line"><span class="comment">// 可以通过指针来使用他们，也可以将他们用做函数参数</span></span><br><span class="line">int *p = (int [<span class="number">3</span>])&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><ul>
+<li><p>可以使用const来创建指向常量的指针或指针常量，当然也可以创建指向常量的指针常量。如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *pi1;		<span class="comment">// 指向常量的指针，指针指向的值不能改变</span></span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> pi2;	<span class="comment">// 指针常量，指针指向的地址不能改变，但是指针指向地址的值可以改变</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指向多为数组的指针。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">int</span> (*pz)<span class="selector-attr">[2]</span>;		<span class="comment">// pz指向一个包含两个int值的数组</span></span><br><span class="line"><span class="selector-tag">int</span> *<span class="selector-tag">p</span><span class="selector-attr">[2]</span>;			<span class="comment">// p是一个数组，这个数组的每一个元素是一个指向一个int值的指针</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指针兼容性。多维数组指针要求指针的维数是一致的。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int *pt;</span><br><span class="line">int (*pa)[3];</span><br><span class="line">int ar1[<span class="string">2</span>][<span class="symbol">3</span>];</span><br><span class="line">int ar2[<span class="string">3</span>][<span class="symbol">2</span>];</span><br><span class="line">int **p2;		// 指向指针的指针</span><br><span class="line">pt = &amp;ar1[<span class="string">0</span>][<span class="symbol">0</span>];</span><br><span class="line">pt = ar1[0];</span><br><span class="line">pt = ar1;		// 非法</span><br><span class="line">pa = ar1;</span><br><span class="line">pa = ar2;		// 非法</span><br><span class="line">p2 = &amp;pt;</span><br><span class="line">*p2 = ar2[0];</span><br><span class="line">p2 = ar2;		// 非法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>const指针与非const指针。可以把一个非const指针赋值给一个const指针，但是不能把一个const指针赋值给一个非const指针。这个结论有一个前提，值进行一层间接运算。在两层间接运算时，这样的赋值就不再安全。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const<span class="built_in"> int </span>**pp2;</span><br><span class="line">int *p1;</span><br><span class="line">const<span class="built_in"> int </span>n = 13;</span><br><span class="line">pp2 = &amp;p1;		// 不允许，但我们假设允许</span><br><span class="line">*pp2 = &amp;n;		// 合法，二者都是const，这同时会使p1指向n</span><br><span class="line">*p1 = 10;		// 合法，但这会改变const n的值</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>void指针。在C中void指针可以赋给其他类型的指针而不需要强制转换。但在C++中需要。</p>
+</li>
+<li>在C99中同样可以声明一个变长数组指针。</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<li>字符串属于静态存储类。</li>
+<li>ANSI C提供了函数：atoi, atof, atol, strtol, strtoul, strtod来将字符串转换成数值。</li>
+<li>可以使用sprintf来将数值转换成字符串。</li>
+</ul>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><ul>
+<li>一个C变量的作用域可以是代码块作用域，函数原型作用域或者文件作用域。</li>
+<li>一个C变量有静态存储时期和自动存储时期。除非你显示的初始化自动变量，否则他们不会被自动初始化。</li>
+<li>如果一个变量被声明为寄存器变量，你无法获得它的地址。</li>
+<li>一个外部变量只能进行一次初始化，而且一定是在变量被定义时进行。</li>
+</ul>
+<h2 id="类型限定符"><a href="#类型限定符" class="headerlink" title="类型限定符"></a>类型限定符</h2><ul>
+<li>限定词volatile告诉编译器该变量除了可被程序修改外还可以被其他代理改变。因此，这告诉编译器要小心的优化这个变量。</li>
+<li>限定词restrict只可以用于指针，表明该指针是访问一个数据对象的唯一且初始的方式。这样编译器就可以进行合适的优化。一个例子是memcpy的参数使用了restrict，要求两个内存区域不能有重叠，而memmove则不做这个假定。</li>
+</ul>
+<h2 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h2><ul>
+<li>stdout和stderr的一个区别是，当出现输出重定向的时候，stderr仍然将输出打印到屏幕上。即stderr不受重定向的影响。</li>
+<li>在Unix和Linux这样只有一种文件类型的系统，打开文件时使用带b字母的模式和不带b字母的模式是相同的。</li>
+<li>程序中可以同时打开的文件数目是有限制的，这取决于系统和实现，通常为10到20之间。</li>
+</ul>
+<h2 id="结构，联合和枚举"><a href="#结构，联合和枚举" class="headerlink" title="结构，联合和枚举"></a>结构，联合和枚举</h2><ul>
+<li><p>指定项目初始化。与数组的类似。</p>
+<figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> p = </span>&#123;.name = <span class="string">"gwq"</span>&#125;; <span class="comment">// 仅仅指定名字</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在一些系统上，结构的占用空间大小可能会大于他内部各个成员大小之和，这是因为系统对数据的对齐存储要求所致。</p>
+</li>
+<li>和数组名不同，单独的结构名不是该结构地址的同义词。</li>
+<li>可以允许一个结构赋值给另一个结构，但是对数组不能这么做。</li>
+<li><p>C99复合文字和结构。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无名结构对结构赋值</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span></span> p = （<span class="class"><span class="keyword">struct</span> <span class="title">person</span></span>)&#123;<span class="string">"gwq"</span>, <span class="number">21</span>&#125;;</span><br><span class="line"><span class="comment">// 如果需要一个结构的地址，可以使用&amp;获得一个复合结构的地址。</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span></span> *pp = &amp;（<span class="class"><span class="keyword">struct</span> <span class="title">person</span></span>)&#123;<span class="string">"gwq"</span>, <span class="number">21</span>&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C99的伸缩型数组成员。声明一个伸缩型数组成员的规则是：1）伸缩性数组成员必须是最后一个数组成员。2）结构中必须至少有一个其他成员。3）伸缩型数组就像普通数组一样被声明，除了它的方括号内是空的。该数组成员的特殊属性之一是它不存在，至少不立即存在。C99的意图是使用malloc来分配足够的空间来使用这个数组成员。如：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> flex &#123;</span><br><span class="line">	<span class="keyword">int</span> count;</span><br><span class="line">	<span class="keyword">double</span> average;</span><br><span class="line">	<span class="keyword">double</span> scores[];   <span class="comment">// 伸缩型数组成员</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 现在这个pf指向的结构，拥有了5个元素的double类型数组。</span></span><br><span class="line"><span class="keyword">struct</span> flex *pf = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> flex) + <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">double</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>联合是一个能在同一个存储空间里（但不同时）存储不同类型数据的数据类型。</p>
+</li>
+<li>枚举可以声明代表整数常量的符号名称。实际上，枚举常量是int类型的。虽然枚举常量是int类型的，但是枚举变量较为宽松的限定为任一种整数类型，只要该整数类型能保存这些枚举常量。</li>
+<li>C的某些枚举属性不能延伸到C++中，如C允许对枚举变量使用++，但C++不允许。</li>
+<li><p>枚举的默认值是从零开始递增。但可以制定特定的值。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">color</span> &#123;<span class="title">red</span>, <span class="title">green</span>, <span class="title">blue</span>&#125;;</span>/<span class="regexp">/ 分别为0， 1， 2</span></span><br><span class="line"><span class="regexp">enum levels &#123; low, medium = 500; high&#125;;		分别为0， 500， 501</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C使用术语名字空间（namespace）来表示识别一个名字的程序的部分。作用域是这个概念的一部分：名字相同但具有不同作用域的两个变量不会冲突；而名字相同并在相同作用域中的两个变量就会冲突。名字空间是分类别的。在一个特定作用域内的结构标记，联合标记以及枚举标记都共享一个名字空间，并且这个名字空间与普通变量使用的名字空间是不同的。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rect</span> &#123;</span><span class="keyword">double</span> x; <span class="keyword">double</span> y&#125;;</span><br><span class="line"><span class="keyword">int</span> rect;		<span class="comment">// 在C中不会引起冲突</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>但是这种方式会引起混乱；而且，C++不允许在同一个作用域内对一个变量和一个标记使用同一个名字，因为它把标记和变量名放在同一个名字空间中。</p>
+<h2 id="奇特的声明"><a href="#奇特的声明" class="headerlink" title="奇特的声明"></a>奇特的声明</h2><p>如下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">int</span> <span class="selector-tag">board</span><span class="selector-attr">[8]</span><span class="selector-attr">[8]</span>;		<span class="comment">// int数组的数组</span></span><br><span class="line"><span class="selector-tag">int</span> **<span class="selector-tag">ptr</span>;				<span class="comment">// 指向int指针的指针</span></span><br><span class="line"><span class="selector-tag">int</span> *<span class="selector-tag">risks</span><span class="selector-attr">[10]</span>;			<span class="comment">// 具有10个元素的数组，每个元素是一个指向int的指针</span></span><br><span class="line"><span class="selector-tag">int</span> (*rusks)<span class="selector-attr">[10]</span>;		<span class="comment">// 一个指针，指向具有10个元素的int数组</span></span><br><span class="line"><span class="selector-tag">int</span> *<span class="selector-tag">oof</span><span class="selector-attr">[3]</span><span class="selector-attr">[4]</span>;			<span class="comment">// 一个3*4的数组，每个元素是一个指向int的指针</span></span><br><span class="line"><span class="selector-tag">int</span> (*uuf)<span class="selector-attr">[3]</span><span class="selector-attr">[4]</span>;		<span class="comment">// 一个指针，指向3*4的int数组</span></span><br><span class="line"><span class="selector-tag">int</span> (*uof[<span class="number">3</span>])<span class="selector-attr">[4]</span>;		<span class="comment">// 一个具有3个元素的数组，每一个元素是指向具</span></span><br><span class="line">						<span class="comment">// 有四个元素的int数组的指针</span></span><br></pre></td></tr></table></figure></p>
+<p>弄清楚这些声明的诀窍便是理解使用修饰符的顺序。</p>
+<ul>
+<li>表示一个数组的[]和表示一个函数的()具有相同的优先级，这个优先级高于间接运算符<em>的优先级。如：int </em>arr[10]声明一个指针数组，而不是一个指向数组的指针。</li>
+<li>[]和()都是从左到右结合的。声明int goods[10][50]使得goods是一个由12个具有50个int值的数组构成的数组，而不是一个由50个具有12个int值的数组构成的数组。</li>
+<li>[]和()具有相同的优先级，但是由于他们是从左到右结合的，所以声明int (*rusks)[10]在应用方括号之前先将*和rusks组合在一起。这意味着rusks是一个指向具有10个int值的数组的指针。</li>
+</ul>
+<h2 id="函数和指针"><a href="#函数和指针" class="headerlink" title="函数和指针"></a>函数和指针</h2><ul>
+<li>声明一个指向特定函数类型的指针，首先声明一个该类型的函数，然后用(*pf)形式的表达式代替函数名称；pf就成为了指向那种类型函数的指针了。</li>
+<li>使用指针调用函数有两种看起来都合理的方式。如：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ToUpper</span><span class="params">(<span class="keyword">char</span> *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ToLower</span><span class="params">(<span class="keyword">char</span> *)</span></span>;</span><br><span class="line"><span class="keyword">void</span> (*pf)(<span class="keyword">char</span> *);</span><br><span class="line"><span class="keyword">char</span> mis[] = <span class="string">"Nina Metier"</span>;</span><br><span class="line">pf = ToUpper;</span><br><span class="line">(*pf)(mis);		<span class="comment">// 把ToUpper作用于mis</span></span><br><span class="line">pf = ToLower;</span><br><span class="line">pf(mis);		<span class="comment">// 把ToLower作用于mis</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>K&amp;R C不允许第二种形式，但是有的实现却采用第二种形式，为了保持与现有代码的兼容性，ANSI C把这二者作用等价形式全部接受。</p>
+<ul>
+<li>不能拥有一个函数的数组，但是可以拥有一个函数指针的数组。如char (*pf[3])(void);</li>
+</ul>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><ul>
+<li>掩码。使用位与（&amp;）可以获得特定某个位或某些位的值。</li>
+<li>打开位。使用位或（|）可以将某一位置为1而不管这个位原来是多少。</li>
+<li><p>关闭位。使用位与（&amp;）与求反（～）可以将某个位置为0，不管这个位原来是多少。如：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> mask = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">int</span> <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">int</span> m = <span class="built_in">n</span> &amp; ~mask;		// 将最低位关闭</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转置位，因为1与0异或为1，1与1异或为0。而0与0异或为0,0与1异或为1。所以可以使用异或操作（^）来转置某些位。只需要将需要转置的位的掩码置为1，其余置为0就行了。</p>
+</li>
+<li>左移位运算符（&lt;&lt;）将其左侧操作数的值的每位向左移动，移动的位数由其右侧操作数指定。空出的位用0填充，并且丢弃移出左侧操作数末端的位。</li>
+<li>右移位运算符（&gt;&gt;）将其左侧操作数的值的每位向右移动，移动的位数由其右侧操作数指定。丢弃移出左侧操作数右端的位。对于unsigned类型，使用0填充左端空出的位。对于有符号数，结果依赖机器。空出的位可能用0填充，或者使用符号（最左端的）位的副本填充。</li>
+<li>移位运算符能够提供快捷，高效的（依赖于硬件）的对2的幂的乘法和除法。</li>
+<li>可以在结构中使用位字段，即对其的操作仅仅是对这个或这几个位的操作。使用一个宽度为0的未命名字段迫使下一个字段与下一个整数对齐。不允许一个字段跨越两个unsigned int之间的边界，编译器自动的移位这样一个字段定义，使得字段按unsigned int边界对齐。发生这种情况时，会在第一个unsigned int中留下一个未命名的洞。如：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> field1: <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>       : <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> field2: <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>       : <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> field3: <span class="number">1</span>;</span><br><span class="line">&#125;stuff;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上例子中，stuff.field1与stuff.field2之间有一个2位的间隙，stuff.field3存储在下一个int中。</p>
+<ul>
+<li>一个重要的机器依赖性是将字段放置到一个int中的顺序。在有些机器上，这个顺序是从左向右；在另一些机器上顺序是从右向左。另外，不同机器在两个字段间边界的位置上也有区别。由于这些原因，位字段往往难以移植。</li>
+<li>同样也可使用位运算来模仿位字段的功能，但这要稍微复杂一些。</li>
+</ul>
+<h2 id="C预处理器和库"><a href="#C预处理器和库" class="headerlink" title="C预处理器和库"></a>C预处理器和库</h2><ul>
+<li><p>C的预处理只进行字符替换，不会进行算数运算。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TWO 2</span></span><br><span class="line"><span class="keyword">int</span> x = TWO * TWO;    <span class="comment">// 进过预处理后是2 * 2，实际想乘发生在编译阶段</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>预处理器不会替换在字符串中的宏。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TWO 2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OW <span class="meta-string">"nihao"</span></span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"TWO:OW"</span>);<span class="comment">// 打印出来TWO:OW而不是2:nihao</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于重定义宏，ANSI C只允许新定义与旧定义完全相同。相同定义意味着主体具有相同顺序的语言符号。</p>
+</li>
+<li>在宏定义中可以使用参数。但这使用不当可能会带来难以理解的结果。因为宏只进行简单的文本替换，可能一个参数在宏中会出现好多次，这对有副作用的表达式，会产生多次副作用，典型的就是自增和自减运算符。</li>
+<li><p>可以使用#号将一个宏的参数字符串化。如：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#define PR(<span class="name">x</span>) printf(<span class="name">#x</span> <span class="string">" = %d.\n"</span>, x)<span class="comment">;</span></span><br><span class="line">int x = <span class="number">56</span><span class="comment">;</span></span><br><span class="line">PR(<span class="name">x</span>)<span class="comment">;        // 替换为:printf("x" " = %d.\n", x);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用##符号来将一个语言符号组合成一个语言符号，可以理解为生成一个变量的名称。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XNAME(n) x #<span class="meta"># n</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">XNAME</span><span class="params">(<span class="number">1</span>)</span> </span>= <span class="number">4</span>;       <span class="comment">// 替换为int x1 = 4;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用…和__VA_ARGS__来定义一个可变参数的宏。方法是将宏定义中参数列表的最后一个参数写为省略号，然后在被替换部分就可以使用__VA_ARGS__来代替省略的部分。如：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#define</span> <span class="selector-tag">PR</span>(...) <span class="selector-tag">printf</span>(__VA_ARGS__)</span><br><span class="line"><span class="selector-tag">PR</span>(<span class="string">"nihao"</span>);    <span class="comment">// printf("nihao");</span></span><br><span class="line"><span class="selector-tag">PR</span>(<span class="string">"%d"</span>, x);    <span class="comment">// printf("%d", x);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数调用需要一定的开销，这意味着执行调用时花费了时间用于建立调用，传递参数，跳转到函数代码段并返回。使用类函数宏的一个原因就是可以减少执行时间。此外C99还提供了另外一种方法：内敛函数。C99标准这样叙述：“把函数变为内联函数将建议编译器尽可能快速地调用该函数。上述建议的效果由实现来定义”。因此，使函数变为内联函数可能会简化函数的调用机制，但也可能不起作用。</p>
+</li>
+<li>因为内联函数没有预留给它单独代码块，所以无法获得内敛函数的地址（实际上，可以获得地址，但这样会使编译器产生非内联代码）。另外，内联函数不会在调试器中显示。</li>
+<li>内联函数应该比较短小。对于很长的函数，调用函数的时间少于执行函数主体的时间；此时，使用内敛函数不会节省很多时间。</li>
+<li>编译器在优化内联函数时，必须知道函数定义的内容，这意味着内联函数的定义和对该函数的调用必须在同一文件中，正因为这样，内联函数通常具有内部连接。在多文件的程序中，每个调用内联函数的文件，都要对该函数进行定义。</li>
+<li>main函数在结束时会隐式的调用exit()；可以使用atexit函数注册在程序（隐式或显示）调用exit函数前，调用的函数。可以注册多个函数，最后注册的函数最先被调用。ANSI保证这个列表中至少可以放置32个函数。</li>
+</ul>
+<p>注：以上这些文字，大部分抄录自C Primer Plus（第五版）中文版。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程/">编程</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&title=《C语言笔记》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&title=《C语言笔记》 — gwq5210's Blog&source=C语言笔记变量相关：
+
+C99以前的C要求在一个代码块的开始处声明变量。
+声明语句为变量创建，标定存储空间并为其制定初始值。
+C99引入_Bool类型表示..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2015/11/08/C语言笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言笔记》 — gwq5210's Blog&url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/22/url转码解码-c语言实现/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">url转码解码-c语言实现</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/08/2015年腾讯阿里实习生招聘面试经历/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">2015年腾讯阿里实习生招聘面试经历</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&title=《C语言笔记》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&title=《C语言笔记》 — gwq5210's Blog&source=C语言笔记变量相关：
+
+C99以前的C要求在一个代码块的开始处声明变量。
+声明语句为变量创建，标定存储空间并为其制定初始值。
+C99引入_Bool类型表示..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2015/11/08/C语言笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言笔记》 — gwq5210's Blog&url=https://blog.gwq5210.com/2015/11/08/C语言笔记/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2015/11/08/C语言笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3azXKDMAxF4bz/S9OZrtpFnXMlkyny8YohJPCxUPTj1wuv63vxM+vjn2t9fvOSIUPGYxnXcq0fmnx3L/tPqgwZMg5grIPs+poUT14NfzYZMmTIWN+AB8f1d2uvT4YMGTLSgFsrfXmaKEOGDBk8RPICtVMM31iLy5Ah44GMdDDwyeMb5xsyZMh4CONqrNrAIA3T6ElkyJAxmkEKUV6arpEk4asNCWTIkDGb0R8iknZ/2qrjxeqv/w0ZMmQMZfDbd4YHhESGpsFgQIYMGYMYncKVnOFhlDz0m9RQhgwZQxm75gm1X0g3h6F2mwwZMsYx0mKVX0MSTdKeQ5/KkCHjAAZvbKUp4K7RpgwZMmQEzffGzTojzDevT4YMGQcweMu+E5R505//fpDhypAh4+EMEhD3brbgwZccy5AhYzaDF6L9JLLT2kOhWYYMGQcweDGZhlH+ElOwDBkyTmPwpJCXuLysTVNJ1HSTIUPGaAYfOvLBJH+g4l1kyJBxMIOXtXvHBkH5KkOGjMMYaeOe/AJv6nFGMBiQIUPGCAa/cboJgw9H04K5GHZlyJDxQMYVrvvSx5T6ZluYDBkyBjH4Ik3/tNGfpoa1vwQZMmTMYKRBtpbM1a6P220yZMgYzeADA37Nrq1jiCdDhgwZeOtYbYtGrayVIUOGjNpWrTSwpsmoDBkyTmb0Q2RaxHY2mcmQIeM0xoadGqUWW8q4ZYQpQ4aM/874AkOFA/Ed/TQLAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Redis中的geo功能 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Redis,geohash,Redis地理位置功能">
+    <meta name="description" content="Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。 从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。">
+<meta name="keywords" content="Redis,geohash,Redis地理位置功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis中的geo功能">
+<meta property="og:url" content="https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。 从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis中的geo功能">
+<meta name="twitter:description" content="Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。 从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Redis中的geo功能</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Redis中的geo功能</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-03T17:37:12.000Z" itemprop="datePublished" class="page-time">
+  2018-02-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Redis简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">Redis简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#geo相关命令简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">geo相关命令简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#添加和获取地理位置"><span class="post-toc-number">3.</span> <span class="post-toc-text">添加和获取地理位置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加地理位置"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">添加地理位置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取地理位置"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">获取地理位置</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#计算距离和geohash"><span class="post-toc-number">4.</span> <span class="post-toc-text">计算距离和geohash</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算距离"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">计算距离</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算geohash"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">计算geohash</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#获取附近的点"><span class="post-toc-number">5.</span> <span class="post-toc-text">获取附近的点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#小结"><span class="post-toc-number">6.</span> <span class="post-toc-text">小结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">7.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Redis中的geo功能" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Redis中的geo功能</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-03 17:37:12" datetime="2018-02-03T17:37:12.000Z" itemprop="datePublished">2018-02-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。</p>
+<p>从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。</p>
+<a id="more"></a>
+<h1 id="geo相关命令简介"><a href="#geo相关命令简介" class="headerlink" title="geo相关命令简介"></a>geo相关命令简介</h1><p>跟geo相关的命令有六个：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GEOADD key longitude latitude member [longitude latitude member <span class="built_in">..</span>.]</span><br><span class="line"></span><br><span class="line">GEODIST key member1 member2 [unit]</span><br><span class="line"></span><br><span class="line">GEOHASH key member [member <span class="built_in">..</span>.]</span><br><span class="line"></span><br><span class="line">GEOPOS key member [member <span class="built_in">..</span>.]</span><br><span class="line"></span><br><span class="line">GEORADIUS key longitude latitude<span class="built_in"> radius </span>m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br><span class="line"></span><br><span class="line">GEORADIUSBYMEMBER key member<span class="built_in"> radius </span>m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br></pre></td></tr></table></figure></p>
+<p>通过名字我们大概可以知道命令的功能。</p>
+<ul>
+<li>geoadd添加地理位置</li>
+<li>geodist计算地理位置之间的距离</li>
+<li>geohash计算地理位置的geohash(有关geohash的内容可以参考<a href="/2018/02/03/geohash简介/">geohash简介</a>)</li>
+<li>geopos获取地理位置</li>
+<li>georadius和georadiusbymember获取某个地理位置附近的所有位置点</li>
+</ul>
+<p>下面我们分别对其进行介绍。</p>
+<h1 id="添加和获取地理位置"><a href="#添加和获取地理位置" class="headerlink" title="添加和获取地理位置"></a>添加和获取地理位置</h1><h2 id="添加地理位置"><a href="#添加地理位置" class="headerlink" title="添加地理位置"></a>添加地理位置</h2><p>我们通过GEOADD来添加位置。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOADD <span class="built_in">key</span> longitude latitude <span class="built_in">member</span> [longitude latitude <span class="built_in">member</span> ...]</span><br></pre></td></tr></table></figure></p>
+<p>可以看到GEOADD每次可以添加多个位置。key是地理位置的集合。</p>
+<p>下面是例子，首先添加一个地点清远，后边一次添加多个地点。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加一个地点</span></span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2099647</span> <span class="number">23.593675</span> Qingyuan</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加多个地点</span></span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2278442</span> <span class="number">23.1255978</span> Guangzhou <span class="number">113.106308</span> <span class="number">23.0088312</span> Foshan <span class="number">113.7943267</span> <span class="number">22.9761989</span> Dongguan <span class="number">114.0538788</span> <span class="number">22.5551603</span> Shenzhen</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取地理位置"><a href="#获取地理位置" class="headerlink" title="获取地理位置"></a>获取地理位置</h2><p>我们通过GEOPOS来获取对应的地理位置信息。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOPOS <span class="built_in">key</span> <span class="built_in">member</span> [<span class="built_in">member</span> ...]</span><br></pre></td></tr></table></figure></p>
+<p>例如我们通过如下命令来获取刚刚添加进去的地理位置<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GEOPOS Guangdong-cities Qingyuan Guangzhou Foshan</span></span><br></pre></td></tr></table></figure></p>
+<p>其返回是一个数组，每个数组包含两个元素：经度和维度<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>) <span class="number">1</span>) <span class="string">"113.20996731519699"</span>    -- 清远的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.593675019671288"</span>    -- 清远的纬度</span><br><span class="line"><span class="number">2</span>) <span class="number">1</span>) <span class="string">"113.22784155607224"</span>    -- 广州的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.125598202060807"</span>    -- 广州的纬度</span><br><span class="line"><span class="number">3</span>) <span class="number">1</span>) <span class="string">"113.10631066560745"</span>    -- 佛山的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.008831202413539"</span>    -- 佛山的纬度</span><br></pre></td></tr></table></figure></p>
+<h1 id="计算距离和geohash"><a href="#计算距离和geohash" class="headerlink" title="计算距离和geohash"></a>计算距离和geohash</h1><p>针对地理位置的操作，Redis提供了计算两点间距离和获取该地理位置geohash的方法</p>
+<h2 id="计算距离"><a href="#计算距离" class="headerlink" title="计算距离"></a>计算距离</h2><p>我们使用GEODIST获取两个位置之间的距离<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEODIST key member1 member2 <span class="string">[unit]</span></span><br></pre></td></tr></table></figure></p>
+<p>我们需要制定一个地点集合中的两个地理位置<br>unit指定返回的距离单位（默认为m），可用值如下</p>
+<ul>
+<li>m 表示单位为米。</li>
+<li>km 表示单位为千米。</li>
+<li>mi 表示单位为英里。</li>
+<li>ft 表示单位为英尺。</li>
+</ul>
+<p>例如，计算清远和广州之间的距离<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GEODIST Guangdong-cities Qingyuan Guangzhou km</span><br><span class="line"><span class="string">"52.094433840356309"</span>    <span class="comment">-- 两地相距 52 公里</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="计算geohash"><a href="#计算geohash" class="headerlink" title="计算geohash"></a>计算geohash</h2><p>相关geohash的资料可以参考<a href="/2018/02/03/geohash简介/">这里</a></p>
+<p>在Redis中我们使用GEOHASH获取一个地点的geohash值<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOHASH <span class="built_in">key</span> <span class="built_in">member</span> [<span class="built_in">member</span> ...]</span><br></pre></td></tr></table></figure></p>
+<p>geohash返回一个数组，数组中每个元素都是一个geohash字符串，Redis返回的字符串为11个字符。</p>
+<p>例子<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; GEOADD Sicily <span class="number">13.361389</span> <span class="number">38.115556</span> <span class="string">"Palermo"</span> <span class="number">15.087269</span> <span class="number">37.502669</span> <span class="string">"Catania"</span></span><br><span class="line">(<span class="type">integer</span>) <span class="number">2</span></span><br><span class="line">redis&gt; GEOHASH Sicily Palermo Catania</span><br><span class="line"><span class="number">1</span>) <span class="string">"sqc8b49rny0"</span></span><br><span class="line"><span class="number">2</span>) <span class="string">"sqdtr74hyu0"</span></span><br><span class="line">redis&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取附近的点"><a href="#获取附近的点" class="headerlink" title="获取附近的点"></a>获取附近的点</h1><p>在我们使用的许多应用中，都有获取附近美食等的能力，Redis也提供了类似的功能，获取附近范围内的地理位置。<br>有两个命令GEORADIUS和GEORADIUSBYMEMBER，前者用经纬度指定中心点，后者使用存储在Redis中的某个点作为中心点<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GEORADIUS key longitude latitude<span class="built_in"> radius </span>m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br><span class="line"></span><br><span class="line">GEORADIUSBYMEMBER key member<span class="built_in"> radius </span>m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br></pre></td></tr></table></figure></p>
+<p>其中</p>
+<ul>
+<li>m|km|ft|mi 指定的是计算范围时的单位；</li>
+<li>如果给定了可选的 WITHCOORD ， 那么命令在返回匹配的位置时会将位置的经纬度一并返回；</li>
+<li>如果给定了可选的 WITHDIST ， 那么命令在返回匹配的位置时会将位置与中心点之间的距离一并返回；</li>
+<li>在默认情况下， GEORADIUS 和 GEORADIUSBYMEMBER 的结果是未排序的， ASC 可以让查找结果根据距离从近到远排序， 而 DESC 则可以让查找结果根据从远到近排序；</li>
+<li>COUNT 参数指定要返回的结果数量。</li>
+</ul>
+<p>例子<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; GEOADD Sicily <span class="number">13.361389</span> <span class="number">38.115556</span> <span class="string">"Palermo"</span> <span class="number">15.087269</span> <span class="number">37.502669</span> <span class="string">"Catania"</span></span><br><span class="line">(<span class="type">integer</span>) <span class="number">2</span></span><br><span class="line">redis&gt; GEORADIUS Sicily <span class="number">15</span> <span class="number">37</span> <span class="number">200</span> km WITHDIST</span><br><span class="line"><span class="number">1</span>) <span class="number">1</span>) <span class="string">"Palermo"</span></span><br><span class="line">   <span class="number">2</span>) <span class="string">"190.4424"</span></span><br><span class="line"><span class="number">2</span>) <span class="number">1</span>) <span class="string">"Catania"</span></span><br><span class="line">   <span class="number">2</span>) <span class="string">"56.4413"</span></span><br><span class="line">redis&gt; GEORADIUS Sicily <span class="number">15</span> <span class="number">37</span> <span class="number">200</span> km WITHCOORD</span><br><span class="line"><span class="number">1</span>) <span class="number">1</span>) <span class="string">"Palermo"</span></span><br><span class="line">   <span class="number">2</span>) <span class="number">1</span>) <span class="string">"13.36138933897018433"</span></span><br><span class="line">      <span class="number">2</span>) <span class="string">"38.11555639549629859"</span></span><br><span class="line"><span class="number">2</span>) <span class="number">1</span>) <span class="string">"Catania"</span></span><br><span class="line">   <span class="number">2</span>) <span class="number">1</span>) <span class="string">"15.08726745843887329"</span></span><br><span class="line">      <span class="number">2</span>) <span class="string">"37.50266842333162032"</span></span><br><span class="line"></span><br><span class="line">redis&gt; GEOADD Sicily <span class="number">13.583333</span> <span class="number">37.316667</span> <span class="string">"Agrigento"</span></span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis&gt; GEOADD Sicily <span class="number">13.361389</span> <span class="number">38.115556</span> <span class="string">"Palermo"</span> <span class="number">15.087269</span> <span class="number">37.502669</span> <span class="string">"Catania"</span></span><br><span class="line">(<span class="type">integer</span>) <span class="number">2</span></span><br><span class="line">redis&gt; GEORADIUSBYMEMBER Sicily Agrigento <span class="number">100</span> km</span><br><span class="line"><span class="number">1</span>) <span class="string">"Agrigento"</span></span><br><span class="line"><span class="number">2</span>) <span class="string">"Palermo"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Redis提供了地理位置相关的命令，我们可以使用这些特性方便的时间地理位置查找等相关的功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="http://redisdoc.com/" target="_blank" rel="noopener">Redis 命令参考</a><br>2) <a href="http://blog.huangz.me/diary/2015/redis-geo.html" target="_blank" rel="noopener">Redis GEO 特性简介</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis地理位置功能/">Redis地理位置功能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geohash/">geohash</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&title=《Redis中的geo功能》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&title=《Redis中的geo功能》 — gwq5210's Blog&source=Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。
+从Redis 3.2开始..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis中的geo功能》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/02/04/mathjax简单教程（翻译）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mathjax简单教程（翻译）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/03/geohash简介/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">geohash简介</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&title=《Redis中的geo功能》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&title=《Redis中的geo功能》 — gwq5210's Blog&source=Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。
+从Redis 3.2开始..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis中的geo功能》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/02/03/Redis中的geo功能/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLUlEQVR42u3aQY7CMAwFUO5/aUaaFRKa8n9c0JC+rBAqIS8Ly659u8Xr/rsePz+u5Pnn3z4/f7znCQsDA+NrGffDdXysZM/kVwn7BRUDA+MCjHzr4ydbWPJN9I8YGBgYQQhuQ+rk+jAwMDCSdO3c0JykpBgYGBhJEXv8siw/elKmvrEWx8DA+ELGWmPgM5/f3t/AwMD494z7YOWpYd5sWDwJBgbG1oz8Zdkk7q0leW0TFAMDY1fGWsgb3Vlc4hbNBgwMjK0Z7YHyoYq1Rmb+jy+CLwYGxqaMfKjiOKFcG8vI08o6S8XAwNiCkQ83zMcyzkoW/3zdhoGBsSnjrOZiGyLbq4n2x8DA2JrRhtFkaGztKJPEFAMDY1fGWunYYiYDHFHox8DA2JrRHrptWyZHz1sOURGLgYGxHaMdaJh3IfLgW5TTGBgYWzPao+cJXJvkndtgwMDA2IORl52TBC6/mrWkEwMDY29GGyLfV462DQYMDIyrMeYpWh5M21GMepgDAwNjU0YeItvhjLWxibxpOjoiBgbG1zLypLBtbX60iMXAwNiOkTcAXsxrDMrUtaYFBgbGFRj3crVBcNK8LMpgDAyMrRmT8Yt86zbstsklBgbGFRiTQdK1YrVNQ6NrxcDAuABjkuQlpWxRSZeFMQYGBkZbZLYtybYhWndiMTAwLsZIksi8PdDiMTAwMNqhijZ0JkMVa01NDAyMKzAmkxrtq7RjfI45oYWJgYHxHYwfh6sNy0I5k3QAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Lambda表达式 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,C++,Python,Lambda表达式,匿名函数">
+    <meta name="description" content="前言最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式 什么是Lambda表达式在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值如果函数">
+<meta name="keywords" content="Java,C++,Python,Lambda表达式,匿名函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lambda表达式">
+<meta property="og:url" content="https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="前言最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式 什么是Lambda表达式在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值如果函数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lambda表达式">
+<meta name="twitter:description" content="前言最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式 什么是Lambda表达式在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值如果函数">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Lambda表达式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Lambda表达式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-28T11:35:53.000Z" itemprop="datePublished" class="page-time">
+  2019-03-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是Lambda表达式"><span class="post-toc-number">2.</span> <span class="post-toc-text">什么是Lambda表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java中的Lambda表达式"><span class="post-toc-number">3.</span> <span class="post-toc-text">Java中的Lambda表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些例子"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">一些例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数式接口"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">函数式接口</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-中的Lambda表达式"><span class="post-toc-number">4.</span> <span class="post-toc-text">C++中的Lambda表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python中的Lambda表达式"><span class="post-toc-number">5.</span> <span class="post-toc-text">Python中的Lambda表达式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Go的匿名函数"><span class="post-toc-number">6.</span> <span class="post-toc-text">Go的匿名函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#闭包的实现"><span class="post-toc-number">7.</span> <span class="post-toc-text">闭包的实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">8.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Lambda表达式(匿名函数)" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Lambda表达式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-28 11:35:53" datetime="2019-03-28T11:35:53.000Z" itemprop="datePublished">2019-03-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在看Elasticsearch的相关内容，在Java中遇到了Lambda表达式，因此想了解一下Lambda表达式，这里主要了解Java，C++，Python中的Lambda表达式</p>
+<h1 id="什么是Lambda表达式"><a href="#什么是Lambda表达式" class="headerlink" title="什么是Lambda表达式"></a>什么是Lambda表达式</h1><p>在编程中，Lambda表达式就是指匿名函数（anonymous function），它是一类无需定义标识符（函数名）的函数<br>匿名函数通常作为参数传递给高阶函数或者作为高阶函数的返回值<br>如果函数只使用一次或者有限的次数，则使用匿名函数会比较方便<br>现在越来越多的编程语言支持匿名函数</p>
+<p>闭包常常被用作匿名函数的同义词，严格来说，匿名函数仅仅是没有名字的函数，闭包是任何能够访问自由变量（free variable or non-local variable，不在局部和参数列表里定义的变量）的函数实例</p>
+<h1 id="Java中的Lambda表达式"><a href="#Java中的Lambda表达式" class="headerlink" title="Java中的Lambda表达式"></a>Java中的Lambda表达式</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>Java 中的 Lambda 表达式通常使用 (argument) -&gt; (body) 语法书写，例如：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">(arg1, arg2...)</span> -&gt;</span> &#123; body &#125;</span><br><span class="line"><span class="function"><span class="params">(type1 arg1, type2 arg2...)</span> -&gt;</span> &#123; body &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在Lambda表达式中引用的自由变量，必须是final或者是实际上不会修改的变量</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ol>
+<li>一个 Lambda 表达式可以有零个或多个参数</li>
+<li>参数的类型既可以明确声明，也可以根据上下文来推断。例如：(int a)与(a)效果相同</li>
+<li>所有参数需包含在圆括号内，参数之间用逗号相隔。例如：(a, b) 或 (int a, int b) 或 (String a, int b, float c)</li>
+<li>空圆括号代表参数集为空。例如：() -&gt; 42</li>
+<li>当只有一个参数，且其类型可推导时，圆括号（）可省略。例如：a -&gt; return a*a</li>
+<li>Lambda 表达式的主体可包含零条或多条语句</li>
+<li>如果 Lambda 表达式的主体只有一条语句，花括号{}可省略。匿名函数的返回类型与该主体表达式一致</li>
+<li>如果 Lambda 表达式的主体包含一条以上语句，则表达式必须包含在花括号{}中（形成代码块）。匿名函数的返回类型与代码块的返回类型一致，若没有返回则为空</li>
+</ol>
+<h2 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不需要参数，返回值为int的42</span></span><br><span class="line">() -&gt; <span class="number">42</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要参数，返回值为float的3.1415</span></span><br><span class="line">() -&gt; &#123; <span class="keyword">return</span> <span class="number">3.1415</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受两个int参数，返回值为它们的和</span></span><br><span class="line">(int a, int b) -&gt; &#123;  <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要参数，没有返回值，输出一个字符串</span></span><br><span class="line">() -&gt; System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受一个String参数，没有返回值，打印该字符串</span></span><br><span class="line">(<span class="built_in">String</span> s) -&gt; &#123; System.out.println(s); &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h2><p>Java中只有一个方法声明的接口叫做函数式接口，例如java.lang.Runnable接口只声明了一个void run()方法<br>不指明函数式接口时，编译器可以进行自动转化<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Runnable <span class="function"><span class="title">r</span> = <span class="params">()</span> -&gt;</span> System.out.println(<span class="string">"Hello Java!"</span>);</span><br><span class="line"><span class="keyword">new</span> Thread(r).start();</span><br><span class="line"><span class="keyword">new</span> Thread<span class="function"><span class="params">(() -&gt; System.out.println(<span class="string">"Hello Java!"</span>))</span>.<span class="title">start</span><span class="params">()</span>;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="C-中的Lambda表达式"><a href="#C-中的Lambda表达式" class="headerlink" title="C++中的Lambda表达式"></a>C++中的Lambda表达式</h1><p>在C++ 11中支持Lambda表达式</p>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><p>Lambda表达式的语法如下</p>
+<ol>
+<li>[]中可以以值或引用捕获变量，来实现闭包</li>
+<li>捕获变量时需要注意，如果调用闭包时，引用了生存周期结束的变量，则发生未定义行为，C++的闭包不会延长被捕获引用的生存周期</li>
+<li>Lambda表达式是纯右值表达式，其类型是独有的无名非联合非聚合类类型，被称为闭包类型</li>
+<li>this是一个特殊的捕获，必须定义在类的非静态成员函数中，该Lambda具有访问该类的保护和私有成员的权限，在Lambda中访问该类的成员，不需要显式使用this-&gt;，即this-&gt;a和a等价</li>
+<li>不捕获变量的Lambda可以将函数赋值给对应的函数指针</li>
+<li>Lambda表达式可以赋值给std::function</li>
+</ol>
+<p>Boost库提供了自己的Lambda表达式语法，参见<a href="https://www.boost.org/doc/libs/1_62_0/doc/html/lambda.html" target="_blank" rel="noopener">Boost.Lambda</a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ captures ] ( params ) -&gt; return_type &#123; <span class="selector-tag">body</span> &#125;</span><br><span class="line"><span class="comment">// 忽略返回值，返回值的类型使用自动推断</span></span><br><span class="line">[ captures ] ( params ) &#123; <span class="selector-tag">body</span> &#125;</span><br><span class="line"><span class="comment">// 不接受任何参数</span></span><br><span class="line">[ captures ] &#123; <span class="selector-tag">body</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接受x，y参数，返回它们的和</span></span><br><span class="line">[](<span class="keyword">int</span> x, <span class="keyword">int</span> y) -&gt; <span class="keyword">int</span> &#123; <span class="keyword">return</span> x + y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面是捕获的例子</span></span><br><span class="line">[]        <span class="comment">//no variables defined. Attempting to use any external variables in the lambda is an error.</span></span><br><span class="line">[x, &amp;y]   <span class="comment">//x is captured by value, y is captured by reference</span></span><br><span class="line">[&amp;]       <span class="comment">//any external variable is implicitly captured by reference if used</span></span><br><span class="line">[=]       <span class="comment">//any external variable is implicitly captured by value if used</span></span><br><span class="line">[&amp;, x]    <span class="comment">//x is explicitly captured by value. Other variables will be captured by reference</span></span><br><span class="line">[=, &amp;z]   <span class="comment">//z is explicitly captured by reference. Other variables will be captured by value</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Variables captured by value are constant by default. Adding mutable after the parameter list makes them non-constant.</span></span><br><span class="line"><span class="comment">// 按值捕获到的变量不能被改变，需要改变的话要在参数列表后加上mutalbe，按值捕获不会改变原值</span></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">auto</span> f = [=] () <span class="keyword">mutable</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">	a = <span class="number">3</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">f();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按引用捕获可以修改原值，a值会被改变成3</span></span><br><span class="line"><span class="keyword">auto</span> r = [&amp;] &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">	a = <span class="number">3</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line">r();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"a = %d\n"</span>, a);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClosureTest</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ClosureTest() &#123; r = <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">result</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> r; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> r;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 捕获this</span></span><br><span class="line"><span class="keyword">int</span> ClosureTest::test()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> f = [&amp;]&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d, %d\n"</span>, <span class="keyword">this</span>-&gt;r, r);</span><br><span class="line">    &#125;;</span><br><span class="line">    f();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将Lambda赋值给函数指针，不能捕获变量</span></span><br><span class="line"><span class="keyword">void</span> (*p)() = []&#123;<span class="built_in">printf</span>(<span class="string">"test\n"</span>);&#125;;</span><br><span class="line">p();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将Lambda赋值给std::function对象，可以进行捕获，void不能省略</span></span><br><span class="line">a = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">std</span>::function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt; add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b)&#123;<span class="keyword">return</span> a+b;&#125;;</span><br><span class="line"><span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>)&gt; print = [](<span class="keyword">int</span> a)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);&#125;;</span><br><span class="line"><span class="built_in">std</span>::function&lt;<span class="keyword">void</span>()&gt; print = [&amp;]()&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);&#125;;</span><br><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+<h1 id="Python中的Lambda表达式"><a href="#Python中的Lambda表达式" class="headerlink" title="Python中的Lambda表达式"></a>Python中的Lambda表达式</h1><p>Python中可以使用lambda关键字定义匿名函数，它能用在任何需要函数的地方，在语法上它被限制只能有单个语句<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> parameter_list: expression</span><br><span class="line"></span><br><span class="line">// 例如参数x，返回x*x</span><br><span class="line"><span class="keyword">lambda</span> x: x * x</span><br><span class="line"></span><br><span class="line">// 以上等价于</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">// 参数x，y，返回它们的和</span><br><span class="line"><span class="keyword">lambda</span> x, y: x + y</span><br><span class="line"></span><br><span class="line">// 可以使用自由变量</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line">    <span class="keyword">return</span> g  <span class="comment"># Return a closure.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> y: x + y  <span class="comment"># Return a closure.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Assigning specific closures to variables.</span></span><br><span class="line">a = f(<span class="number">1</span>)</span><br><span class="line">b = h(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using the closures stored in variables.</span></span><br><span class="line"><span class="keyword">assert</span> a(<span class="number">5</span>) == <span class="number">6</span></span><br><span class="line"><span class="keyword">assert</span> b(<span class="number">5</span>) == <span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Using closures without binding them to variables first.</span></span><br><span class="line"><span class="keyword">assert</span> f(<span class="number">1</span>)(<span class="number">5</span>) == <span class="number">6</span>  <span class="comment"># f(1) is the closure.</span></span><br><span class="line"><span class="keyword">assert</span> h(<span class="number">1</span>)(<span class="number">5</span>) == <span class="number">6</span>  <span class="comment"># h(1) is the closure.</span></span><br><span class="line"></span><br><span class="line">// x是全局的</span><br><span class="line">// 修改x后，会修改函数f的结果</span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">// [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">map(f, nums)</span><br><span class="line">map(<span class="keyword">lambda</span> y: x + y, nums)</span><br><span class="line"></span><br><span class="line">x = <span class="number">3</span></span><br><span class="line">// [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">map(f, nums)</span><br><span class="line">map(<span class="keyword">lambda</span> y: x + y, nums)</span><br></pre></td></tr></table></figure></p>
+<h1 id="Go的匿名函数"><a href="#Go的匿名函数" class="headerlink" title="Go的匿名函数"></a>Go的匿名函数</h1><p>Go的匿名函数是闭包，他们可以引用自由变量<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别打出11，102，111</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	num := <span class="number">10</span></span><br><span class="line">	f := <span class="function"><span class="keyword">func</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">		<span class="keyword">return</span> num + x</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(f(<span class="number">1</span>))</span><br><span class="line">	num = <span class="number">101</span></span><br><span class="line">	fmt.Println(f(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">	fmt.Println(test(f))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(f <span class="keyword">func</span>(<span class="keyword">int</span>)</span> <span class="title">int</span>) <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> f(<span class="number">10</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="闭包的实现"><a href="#闭包的实现" class="headerlink" title="闭包的实现"></a>闭包的实现</h1><p>闭包通常用一个包含函数代码的指针和创建闭包时函数词法环境（一系列可用的变量）的数据结构来实现<br>也就是说闭包引用的自由变量，需要在闭包调用的时候仍然能够访问</p>
+<p>只在栈上分配变量的语言很难容易的实现完全的闭包，这些语言中，自动变量会在函数返回后自动的销毁<br>这也可以解释为什么通常支持闭包的语言也使用垃圾回收机制<br>替代方案是非局部变量的手动内存管理，不过这种方式可能会产生野指针的问题，C++ 11中的Lambda表达式和<a href="https://gcc.gnu.org/onlinedocs/gcc/Nested-Functions.html" target="_blank" rel="noopener">GNU C中的嵌套函数</a>都可能会产生这个问题</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1) <a href="https://en.wikipedia.org/wiki/Anonymous_function" target="_blank" rel="noopener">Anonymous_function</a><br>2) <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure_(computer_programming)</a><br>3) <a href="https://sylvanassun.github.io/2017/07/30/2017-07-30-JavaClosure/" target="_blank" rel="noopener">Java中的闭包之争</a><br>4) <a href="https://en.wikipedia.org/wiki/Free_variables_and_bound_variables" target="_blank" rel="noopener">Free_variables_and_bound_variables</a><br>5) <a href="http://blog.oneapm.com/apm-tech/226.html" target="_blank" rel="noopener">深入浅出 Java 8 Lambda 表达式</a><br>6) <a href="https://en.cppreference.com/w/cpp/language/lambda" target="_blank" rel="noopener">Lambda expressions</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lambda表达式/">Lambda表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/匿名函数/">匿名函数</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&title=《Lambda表达式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&title=《Lambda表达式》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lambda表达式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/25/Git简介及常用命令/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git简介及常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&title=《Lambda表达式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&title=《Lambda表达式》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lambda表达式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2019/03/28/Lambda表达式(匿名函数)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aMW4DMQwEQP//006bInF2SckwgrnKQC5nzRUiveLjEV/PX67NX/Pr+3MeNy48PDy8Q0vPAfnXJ8tNeMma8fDw8G7z8qXkm/Xr15TcP3s1eHh4eJ/GSx6aPzOn4uHh4f0n3qnF7QsSHh4e3jt5eYT6OhRom+koUHhP1oKHh4cX8/KN/nM+Xznfw8PDw1ufqreb9anRhFkx+GG1eHh4eBd47ZH/rCFug4n22OyPdeLh4eFd4OWAfBM/ezB2oFzh4eHhHeLl0e3rYtAeSuUNcR7RFvk0Hh4e3oLXFoDkGCxqcOOSkCCjqBcPDw/vEK9teds2ty0t+UYfxcd4eHh413h5O5sAZvfkpahYIR4eHt41Xrtlzw77Z0153qDj4eHhvYeXb7i32/Hkmfnzh1+Ph4eHF08inVpQGwS3QUl9aIeHh4d3gdeOQ+Vfsxk4yEcN6ikJPDw8vEO8TbM7G5/K2e39xWwCHh4e3jVe/jVJq5233XnYUVQ8PDw8vDUvX0Qes+5LRRLgRoEIHh4e3jVefsA/G5zaZKqzAoOHh4d3m9fGqe0gVB467JtpPDw8vNu8/FhrtUGXZeMKDA8PD+8ob781t0MDbSSRr+2He/Dw8PAu8JJgNAkj8oGD2Uaff8bDw8O7zcsXkbfOyYtIXlN+9FV05Xh4eHiHePm4VbuVt8NSs6GB+hcDHh4e3pr3GF3tOFQev+5fDR4eHt4N3rO8Ni1ysvQ20o0mI/Dw8PCO8toCkIQUs3Y5jz/athsPDw/vBi8vBqeOyvIC0xaGOsbFw8PDW/DqDKP8vd+Wn9lIa5G14OHh4b2R127QLf5Uq42Hh4f3Obx2c29HAWbhcnFGh4eHh3eI1x56zf5385xZhIGHh4d3g7cZrmoXMWusjzHw8PDwtrwvjdRzqJXCt9oAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

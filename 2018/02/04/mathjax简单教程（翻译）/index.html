@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>mathjax简单教程（翻译） | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="mathjax教程,LaTeX">
+    <meta name="description" content="mathjax简单教程（翻译）原文地址：mathjax basic tutorial and quick reference  在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &amp;gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。 使用$…$来产生行内公式，使用$$…$$来产生多行公式。公式$\sum{i=0}^n i^2 = \frac{(">
+<meta name="keywords" content="mathjax教程,LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mathjax简单教程（翻译）">
+<meta property="og:url" content="https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="mathjax简单教程（翻译）原文地址：mathjax basic tutorial and quick reference  在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &amp;gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。 使用$…$来产生行内公式，使用$$…$$来产生多行公式。公式$\sum{i=0}^n i^2 = \frac{(">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-30T09:45:34.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mathjax简单教程（翻译）">
+<meta name="twitter:description" content="mathjax简单教程（翻译）原文地址：mathjax basic tutorial and quick reference  在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &amp;gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。 使用$…$来产生行内公式，使用$$…$$来产生多行公式。公式$\sum{i=0}^n i^2 = \frac{(">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mathjax简单教程（翻译）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mathjax简单教程（翻译）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-04T00:36:22.000Z" itemprop="datePublished" class="page-time">
+  2018-02-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#mathjax简单教程（翻译）"><span class="post-toc-number">1.</span> <span class="post-toc-text">mathjax简单教程（翻译）</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mathjax简单教程（翻译）" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mathjax简单教程（翻译）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-04 00:36:22" datetime="2018-02-04T00:36:22.000Z" itemprop="datePublished">2018-02-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="mathjax简单教程（翻译）"><a href="#mathjax简单教程（翻译）" class="headerlink" title="mathjax简单教程（翻译）"></a>mathjax简单教程（翻译）</h1><p>原文地址：<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">mathjax basic tutorial and quick reference</a></p>
+<ol>
+<li>在任何的mathjax公式上，都可以使用右键点击公式选择”Show Math As &gt; TeX Commands”来查看公式是怎么写出来的（包括这里）。</li>
+<li>使用$…$来产生行内公式，使用$$…$$来产生多行公式。公式$\sum<em>{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$（行内）和公式$\sum</em>{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\tag{displayed}$是不一样的。</li>
+<li>使用\alpha,\beta,…,\omega来产生希腊字母：$\alpha$,$\beta$,$\omega$。使用\Gamma,\Delta,…,\Omega来产生大写的：$\Gamma$,$\Delta$,…,$\Omega$。</li>
+<li>使用^和_来产生下标和上标。如x_i^2产生：$x_i^2$。</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li>组。下标，上标和其他运算符只能应用到下一个”组”。单个符号或者被大括号{…}包含起来的公式被视为一个组。如10^10产生$10^10$，而不是$10^{10}$，这样写可以得到预期的结果：10^{10}。使用大括号可以界定公式中那些是上标或者下标：x^5^6是错误的，{x^y}^z是${x^y}^z$，x^{y^z}是$x^{y^z}$。显然x<em>i^2：$x_i^2$和x</em>{i^2}：$x_{i^2}$是不同的。</li>
+<li>符号()[]产生对应的符号，如(3+4)[4+4]产生：$(3+4)[4+4]$。但使用{和}来产生大括号：${}$。<br>但上边的不会自动适应公式的大小，所以如果你写下(\frac12)，那么括号会很小：$(\frac12)$，使用\left(…\right)来使括号自动适应公式的大小：\left(\frac12\right)产生$\left(\frac12\right)$。<br>\left和\right可以作用于下边种类的括号：(和)：$\left(x\right)$，[和]：$\left[x\right]$，{和} ：$\left{x\right}$，|：$\left|x\right|$，\langle和\ rangle：$\left\langle{x}\right\rangle$，\lceil和\rceil：$\left\lceil{x}\right\rceil$，\lfloor和\rfloor：$\left\lfloor{x}\right\rfloor$。还有一种不可见的括号，用.来指代：\left.\frac12\right}表示$\left.\frac12\right}$。</li>
+<li>使用\sum和\int来代表求和，积分。下标表示下限，上标表示上限，所以\sum<em>1^n表示$\sum_1^n$。上限和下限超过一个符号不要忘记加上{…}。如\sum</em>{i=0}^\infty i^2表示$\sum_{i=0}^\infty{i^2}$。类似的还有：\prod$表示\prod$，\int表示$\int$，\bigcup表示$\bigcup$，\bigcap表示$\bigcap$，\iint表示$\iint$。</li>
+<li>分数有两种产生方式。\frac作用于下边紧邻的两个组；如\frac ab产生$\frac ab$。可以使用{…}来产生更复杂的表达式；如\frac{a+1}{b+1}产生$\frac{a+1}{b+1}$。如果分子和分母很复杂，你可能更喜欢\over，它分割一个组内的两部分产生分数；如{a+1 \over b+1}产生${a+1 \over b+1}$。</li>
+<li>字体。<ul>
+<li>使用\mathbb或\Bbb产生”blackboard bold”：$\mathbb{CHNQRZ}$</li>
+<li>使用\mathface产生blodface：$\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathbf{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathtt产生”typewriter”字体：$\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathtt{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mattrm产生roman字体：$\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathrm{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathcal产生”calligraphic”字母：<br>$\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathcal{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathsrc产生script字母：<br>$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathscr{abcdefghijklmnopqrstuvwxyz}$</li>
+<li>使用\mathfrak产生”Fraktur”(老式德国风格)字母：<br>$\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$\mathfrak{abcdefghijklmnopqrstuvwxyz}$</li>
+</ul>
+</li>
+<li>使用\sqrt产生根号，它会自动适应公式的大小。如\sqrt{x^3}产生$\sqrt{x^3}$；\sqrt[3]{\frac xy}产生$\sqrt[3]{\frac xy}$。对于复杂的表达式可以使用{…}^{1/2}。</li>
+<li>一些如lim，sin，max，ln的特殊函数可以使用\lim，\sin等产生。如\sin x产生$\sin x$，而不是sin x产生$sin x$。\lim使用下标产生趋近符号：\lim<em>{x\to 0}产生$\lim</em>{x\to 0}$。</li>
+<li>有大量的特殊符号和记号，可以参考<a href="http://pic.plover.com/MISC/symbols.pdf" target="_blank" rel="noopener">this shorter listing</a>或<a href="http://mirror.math.ku.edu/tex-archive/info/symbols/comprehensive/symbols-a4.pdf" target="_blank" rel="noopener">this exhaustive listing</a>。一些常用的列在下边：<ul>
+<li>\lt,\gt,\le,\ge,\neq分别表示$\lt$,$\gt$,$\le$,$\ge$,$\neq$。你可以使用\not来在大多数符号上画上斜线，但通常看起来很差劲，如\not\lt表示$\not\lt$。</li>
+<li>\times,\div,\pm,\mp分别表示$\times$,$\div$,$\pm$,$\mp$。\cdot表示一个居中的点：$x\cdot y$。</li>
+<li>\cup,\cap,\setminus,\subset,\subseteq,\subsetneq,\supset,\in,\notin,\emptyset,\varnothing分别表示$\cup\, \cap\, \setminus\, \subset\, \subseteq \,\subsetneq \,\supset\, \in\, \notin\, \emptyset\, \varnothing$。</li>
+<li>{n+1 \choose 2k}或者\binom{n+1}{2k}表示${n+1 \choose 2k}$。</li>
+<li>\to,\rightarrow,\leftarrow,\Rightarrow,\Leftarrow,\mapsto分别表示$\to\, \rightarrow\, \leftarrow\, \Rightarrow\, \Leftarrow\, \mapsto$。</li>
+<li>\land,\lor,\lnot,\forall,\exists,\top,\bot,\vdash,\vDash分别表示$\land\, \lor\, \lnot\, \forall\, \exists\, \top\, \bot\, \vdash\, \vDash$。</li>
+<li>\star\, \ast\, \oplus\, \circ\, \bullet分别表示$\star\, \ast\, \oplus\, \circ\, \bullet$。</li>
+<li>\approx\, \sim \, \simeq\, \cong\, \equiv\, \prec分别表示$\approx\, \sim \, \simeq\, \cong\, \equiv\, \prec$。</li>
+<li>\infty\, \aleph_0, \nabla\, \partial, \Im\, \Re分别表示$\infty\, \aleph_0, \nabla\, \partial, \Im\, \Re$。</li>
+<li>可以使用\pmod来产生同余式，如a\equiv b\pmod n产生$a\equiv b\pmod n$。</li>
+<li>\ldots可以产生这里的点：$a_1, a_2, \ldots ,a_n$；\cdots产生这里的点：$a_1+a_2+\cdots+a_n$。</li>
+<li>一些希腊字母具有不同的形式：\epsilon\, \varepsilon分别表示$\epsilon\, \varepsilon$，\phi\, \varphi分别表示$\phi\, \varphi$，\ell表示$\ell$等。</li>
+</ul>
+</li>
+<li>在mathjax的公式中加入空格，不会改变公式中空格的数量。如a␣b和a␣␣␣␣b都产生$a b$。可以使用\,加入一个空格$a\,b$，使用\;加入一个宽空格$a\;b$，使用\quad和\qquad产生大量的空格$a\quad b,a\qquad b$。<br>可以使用\text{…}在公式中加入普通文本：${x\in s\mid x\text{ is extra large}}$。还可以在\text{…}中嵌套$…$。</li>
+<li>强调和区别标志。\hat用于单个符号：$\hat x$,\widehat用于一个公式：$\widehat{xy}$。如果将它弄的特别宽，看起来就十分丑。类似的，\bar产生$\bar x$，\overline产生$\overline{xyz}$，\vec产生$\vec x$，\overrightarrow产生$\overrightarrow{xy}$。可以使用\dot和\ddot产生点和双点，如\frac d{dx}x\dot x =  \dot x^2 +  x\ddot x产生$\frac d{dx}x\dot x =  \dot x^2 +  x\ddot x$。</li>
+<li>使用\来转义mathjax中使用的特殊字符，如$表示$$$，{表示${$，_表示$_$等等。<br>教程到此结束。</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-08-30T09:45:34.462Z" itemprop="dateUpdated">2021-08-30 09:45:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/img/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LaTeX/">LaTeX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mathjax教程/">mathjax教程</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&title=《mathjax简单教程（翻译）》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&title=《mathjax简单教程（翻译）》 — gwq5210's Blog&source=mathjax简单教程（翻译）原文地址：mathjax basic tutorial and quick reference
+
+在任何的mathjax公式..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mathjax简单教程（翻译）》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/12/Cpp-Primer-Plus读书笔记（四）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Cpp-Primer-Plus读书笔记（四）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/03/Redis中的geo功能/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Redis中的geo功能</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&title=《mathjax简单教程（翻译）》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&title=《mathjax简单教程（翻译）》 — gwq5210's Blog&source=mathjax简单教程（翻译）原文地址：mathjax basic tutorial and quick reference
+
+在任何的mathjax公式..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mathjax简单教程（翻译）》 — gwq5210's Blog&url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2018/02/04/mathjax简单教程（翻译）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQY7jMAwEwPz/07PXBQZxuklpkEP5FASOrNLBUpp8veLrZ3Tlv31+1v/fv25ceHh4eEen/vue3w97N8X286klw8PDw/sb3rs3av75+c38bpnyxUqei4eHh/f9vOdxEsbzaPs54OHh4X0Db/awFnZqifHw8PDu8ZI//8nQSTjbgtvwAg8PD+82L68ifc/nK/U9PDw8vAsNAW20mk8oj3eL2eLh4eFd4LVFrLylYNN2MDtwv70TDw8P7xqvLWud3TzaDaa4Hw8PD+8CLznatltIApgdo2dHdjw8PLxTvNkrO9kq2rJWUsSqtxA8PDy8C7zk5dvGBPsmg81B/zV7GB4eHt6oGrV/HScNW3m5K1/KorMMDw8Pb83LX76zA3ceQ7SH72izwcPDw7vA2wcEefyaI2fBcXKUx8PDwzvFy/XtRtKu65VmLDw8PLxbfZ6rQ3PblJBvBm2D14cyGB4eHt6a9xNc7Su4HeG5eLaJgPHw8PBu8Npjbn5/G0ycKqQVlT08PDy8NW8z9KnyWDt+FJfg4eHhHeXNotKzce2s6SoqquHh4eFd4J06Oj/j85AiGWdYPMPDw8M7xGun0h6O8xB2E4W8nS0eHh7eBV59U3nwbY/CyazyIz4eHh7e3/DyB9wunrXbTx1G4OHh4S14s4HyyGATWLTBbt3LgIeHh3eIV6S/o4g2f0q7oB/+K+Dh4eFd4OXH2WTqZ9u22sAXDw8P7wbvp7zy82oO2zcrfGgdwMPDwzvKy682JpjFEJt2rtfmwsPDwyt5s/J8vnKnQuF2cfHw8PBu82bRatuAlQcKx36Fh4eH9zW8/XF8UzYr5oaHh4f3BbxT//qTLWcfNOPh4eHd481aB5KQt4052hFWDQR4eHh4I96qYyu+f9aU0IYjq/oeHh4e3mfeP33s5Ck1KqgyAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
