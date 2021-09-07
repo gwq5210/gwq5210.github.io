@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="对象和类面向对象编程是一种特殊的、设计程序的概念性方法，C++通过一些特性改进了C语言，下边是最重要的OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  采用OOP方法时，首先从用户的角度考虑对象，描述对象所需的数据以及描述用户与数据交互所需的操作。完成对接口的描述后，需要确定如何实现接口和数据存储。">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp-Primer-Plus读书笔记（三）">
 <meta property="og:url" content="https://blog.gwq5210.com/2017/08/02/Cpp-Primer-Plus读书笔记（三）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="对象和类面向对象编程是一种特殊的、设计程序的概念性方法，C++通过一些特性改进了C语言，下边是最重要的OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  采用OOP方法时，首先从用户的角度考虑对象，描述对象所需的数据以及描述用户与数据交互所需的操作。完成对接口的描述后，需要确定如何实现接口和数据存储。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（三）">
 <meta name="twitter:description" content="对象和类面向对象编程是一种特殊的、设计程序的概念性方法，C++通过一些特性改进了C语言，下边是最重要的OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  采用OOP方法时，首先从用户的角度考虑对象，描述对象所需的数据以及描述用户与数据交互所需的操作。完成对接口的描述后，需要确定如何实现接口和数据存储。">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -161,18 +161,19 @@
         </nav>
     </aside>
     
-<article id="post-Cpp-Primer-Plus读书笔记（三）" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-Cpp-Primer-Plus读书笔记（三）"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Cpp-Primer-Plus读书笔记（三）</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-08-02 22:25:37" datetime="2017-08-02T22:25:37.000Z" itemprop="datePublished">2017-08-02</time>
+            <time class="post-time" title="2017-08-02 22:25:37" datetime="2017-08-02T22:25:37.000Z"  itemprop="datePublished">2017-08-02</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -239,7 +240,7 @@
 <p>重载运算符op的格式如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">operatorop</span><span class="params">(argument-list)</span></span></span><br></pre></td></tr></table></figure></p>
 <p>op必须是有效的C++运算符。编译器使用重载的运算符op时使用这种格式obj1.operatorop(obj2)</p>
 <p>不要返回局部变量或临时变量的引用，函数执行完毕后，局部变量或临时引用将会消失</p>
-<p>我们可以首先定义一个sum函数，然后将sum换成operator+就可以重载+运算符，其他运算符同理<br>有两种形式可以使用重载运算符<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sum</span> = a.operator+(b);</span><br><span class="line"><span class="attr">sum</span> = a + b</span><br></pre></td></tr></table></figure></p>
+<p>我们可以首先定义一个sum函数，然后将sum换成operator+就可以重载+运算符，其他运算符同理<br>有两种形式可以使用重载运算符<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sum</span> = a.operator+(b)<span class="comment">;</span></span><br><span class="line"><span class="attr">sum</span> = a + b</span><br></pre></td></tr></table></figure></p>
 <p>可以使用重载运算符对多个操作数进行相加</p>
 <h3 id="重载限制"><a href="#重载限制" class="headerlink" title="重载限制"></a>重载限制</h3><ol>
 <li>重载后的运算符必须至少有一个是用户定义的类型，这防止用户为标准类型重载运算符</li>
@@ -253,7 +254,7 @@
 <p>创建友元的第一步是将函数原型放在类声明中，并在函数原型声明前加上关键字friend。<br>它说明虽然其实在函数中声明的，但它不是成员函数，因此不能使用成员运算符来调用<br>虽然它不是成员函数，但是它与成员函数的访问权限相同<br>不要在函数定义中使用关键字friend</p>
 <p>友元和类方法都是表达类接口的两种不同机制。友元必须在类声明中出现，所以类声明仍然控制着哪些函数可以访问私有数据。</p>
 <p>如果要为类重载运算符，并将非类的项作为第一个操作数，则可以用友元函数来反转操作数的顺序。</p>
-<p>常用的友元是重载&lt;&lt;运算符，重载后可以将其与cout结合输出对象的内容。通用格式<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp;operator&lt;&lt;(ostream &amp;<span class="built_in">os</span>, const c_name &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">os</span> &lt;&lt; ...;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">os</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>常用的友元是重载&lt;&lt;运算符，重载后可以将其与cout结合输出对象的内容。通用格式<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp;<span class="keyword">operator</span>&lt;&lt;(ostream &amp;os, <span class="keyword">const</span> c_name &amp;obj)</span><br><span class="line">&#123;</span><br><span class="line">    os &lt;&lt; ...;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>只有在类声明中的原型中才能使用friend关键字，除非函数定义也是原型，否则不能在函数定义中使用该关键字</p>
 <h2 id="重载运算符：作为成员函数还是非成员函数"><a href="#重载运算符：作为成员函数还是非成员函数" class="headerlink" title="重载运算符：作为成员函数还是非成员函数"></a>重载运算符：作为成员函数还是非成员函数</h2><p>非成员函数版本的重载运算符函数所需要的形参数目与运算符使用的操作数数目相同，成员函数版本的参数少一个，因为其中一个操作数是被隐式的传递的调用对象。</p>
 <p>定义运算符时，必须选择其中的一种格式，不能同时选用这两种格式。某些情况下成员函数是唯一的选择，其他情况下，这两种方式没有太大区别。有时使用友元的版本更好一点。</p>
@@ -297,7 +298,7 @@
 <p>带有参数的构造函数也可以是默认构造函数，只要所有参数都有默认值</p>
 <h2 id="复制构造函数"><a href="#复制构造函数" class="headerlink" title="复制构造函数"></a>复制构造函数</h2><p>复制构造函数用于将一个对象复制到新创建的对象中，它用于初始化过程中，包括按值传递参数，而不是常规的赋值过程，其原型如下<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class_name(<span class="name">const</span> class_name <span class="symbol">&amp;c</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
 <p>需要知道何时调用和有何功能</p>
-<h3 id="何时调用复制构造函数"><a href="#何时调用复制构造函数" class="headerlink" title="何时调用复制构造函数"></a>何时调用复制构造函数</h3><p>新建一个对象并将其初始化为同类现有对象时，复制构造函数都将被调用<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> a;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(a)</span></span>;</span><br><span class="line"><span class="built_in">string</span> s = a;</span><br><span class="line"><span class="built_in">string</span> s = <span class="built_in">string</span>(a);</span><br><span class="line"><span class="built_in">string</span> s = <span class="keyword">new</span> <span class="built_in">string</span>(a);</span><br></pre></td></tr></table></figure></p>
+<h3 id="何时调用复制构造函数"><a href="#何时调用复制构造函数" class="headerlink" title="何时调用复制构造函数"></a>何时调用复制构造函数</h3><p>新建一个对象并将其初始化为同类现有对象时，复制构造函数都将被调用<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> a;</span><br><span class="line"><span class="keyword">string</span> <span class="built_in">s</span>(a);</span><br><span class="line"><span class="keyword">string</span> s = a;</span><br><span class="line"><span class="keyword">string</span> s = <span class="keyword">string</span>(a);</span><br><span class="line"><span class="keyword">string</span> s = <span class="keyword">new</span> <span class="keyword">string</span>(a);</span><br></pre></td></tr></table></figure></p>
 <p>中间的两种声明可能会使用复制构造函数直接创建对象，也可能使用复制构造函数生成一个临时对象，然后将临时对象内容赋给变量，这取决于具体实现。</p>
 <p>每当程序生成了对象副本时，编译器都将使用复制构造函数。例如函数按值传递对象，函数返回对象，生成临时对象（如将对象相加）时。</p>
 <p>按引用传递可以节约时间和存储空间。</p>
@@ -387,7 +388,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -548,7 +549,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -567,10 +569,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -702,7 +704,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="安装首先，要安装mysql数据库，安装好后，可能还不能使用mysql的c语言库，还要安装mysql的库，命令如下：sudo apt-get install libmysql++-dev。安装好后，就可以包含头文件，然后使用mysql的c语言api了。 数据结构1）MYSQL这个结构体代表一个数据库连接的句柄，它被大多数的mysql函数使用。不要尝试拷贝MYSQL结构体，不保证这样的拷贝是可以使用的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言中使用数据库">
 <meta name="twitter:description" content="安装首先，要安装mysql数据库，安装好后，可能还不能使用mysql的c语言库，还要安装mysql的库，命令如下：sudo apt-get install libmysql++-dev。安装好后，就可以包含头文件，然后使用mysql的c语言api了。 数据结构1）MYSQL这个结构体代表一个数据库连接的句柄，它被大多数的mysql函数使用。不要尝试拷贝MYSQL结构体，不保证这样的拷贝是可以使用的">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -163,12 +163,13 @@
         </nav>
     </aside>
     
-<article id="post-c语言中使用数据库" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-c语言中使用数据库"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">c语言中使用数据库</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-01-23 20:21:40" datetime="2016-01-23T20:21:40.000Z" itemprop="datePublished">2016-01-23</time>
+            <time class="post-time" title="2016-01-23 20:21:40" datetime="2016-01-23T20:21:40.000Z"  itemprop="datePublished">2016-01-23</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/mysql/">mysql</a></li></ul></li></ul>
@@ -176,7 +177,7 @@
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -277,7 +278,7 @@
 <p>20）mysql_field_seek<br>函数原型为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">MYSQL_FIELD_OFFSET <span class="title">mysql_field_seek</span><span class="params">(MYSQL_RES *result,</span></span></span><br><span class="line"><span class="function"><span class="params">                       MYSQL_FIELD_OFFSET offset)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>这个函数将字段光标移动到给定的偏移量，下一调用mysql_fetch_field将返回该偏移量指定的列。返回当前的偏移量。</p>
 <p>21）mysql_field_tell<br>函数原型为；<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">MYSQL_FIELD_OFFSET <span class="title">mysql_field_tell</span><span class="params">(MYSQL_RES *res)</span></span>;</span><br></pre></td></tr></table></figure></p>
-<p>这个函数用来设置当前连接的字符编码。csname指向一个有效的字符编码名字。函数作用与SET NAMES类似。这个函数会影响mysql_real_escape_string()的行为。<br>执行成功返回0，否则返回非0。一般来说，要显式的指定编码。<br>一个例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MYSQL mysql;</span><br><span class="line"></span><br><span class="line">mysql_init(&amp;mysql);</span><br><span class="line"><span class="keyword">if</span> (!mysql_real_connect(&amp;mysql,<span class="string">"host"</span>,<span class="string">"user"</span>,<span class="string">"passwd"</span>,<span class="string">"database"</span>,<span class="number">0</span>,<span class="literal">NULL</span>,<span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Failed to connect to database: Error: %s\n"</span>,</span><br><span class="line">          mysql_error(&amp;mysql));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!mysql_set_character_set(&amp;mysql, <span class="string">"utf8"</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"New client character set: %s\n"</span>,</span><br><span class="line">           mysql_character_set_name(&amp;mysql));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个函数用来设置当前连接的字符编码。csname指向一个有效的字符编码名字。函数作用与SET NAMES类似。这个函数会影响mysql_real_escape_string()的行为。<br>执行成功返回0，否则返回非0。一般来说，要显式的指定编码。<br>一个例子：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MYSQL mysql;</span><br><span class="line"></span><br><span class="line">mysql_init(<span class="variable">&amp;mysql</span>);</span><br><span class="line">if (!mysql_real_connect(<span class="variable">&amp;mysql</span>,<span class="string">"host"</span>,<span class="string">"user"</span>,<span class="string">"passwd"</span>,<span class="string">"database"</span>,<span class="number">0</span>,NULL,<span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">    fprintf(stderr, <span class="string">"Failed to connect to database: Error: %s\n"</span>,</span><br><span class="line">          mysql_error(<span class="variable">&amp;mysql</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (!mysql_set_character_set(<span class="variable">&amp;mysql</span>, <span class="string">"utf8"</span>))</span><br><span class="line">&#123;</span><br><span class="line">    printf(<span class="string">"New client character set: %s\n"</span>,</span><br><span class="line">           mysql_character_set_name(<span class="variable">&amp;mysql</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>23）mysql_autocommit<br>函数原型为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">my_bool <span class="title">mysql_autocommit</span><span class="params">(MYSQL * mysql, my_bool auto_mode)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>mysql的默认提交操作是自动提交（autocommit），除非显式的开始一个事务，否则，每个查询被当做一个单独的事务自动执行，可以通过这个函数来开始一个事务。<br>MySQL默认的存储引擎是MyISAM，MyISAM存储引擎不支持事务处理，所以改变autocommit没有什么作用，InnoDB存储引擎支持事务处理。InnoDB表引擎下关闭mysql自动事物提交可以大大提高数据插入的效率，这是因为如果需要插入1000条数据，mysql会自动发起（提交）1000次的数据写入请求，如果把autocommit关闭掉，通过程序来控制，只要一次commit就可以搞定。<br>auto_mode参数为0或1。执行成功返回0，否则返回非0。</p>
 <p>24）mysql_commit<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">my_bool <span class="title">mysql_commit</span><span class="params">(MYSQL * mysql)</span></span>;</span><br></pre></td></tr></table></figure></p>
@@ -292,7 +293,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -447,7 +448,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -466,10 +468,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -595,7 +597,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

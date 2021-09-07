@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="protobuf的编码">
 <meta name="twitter:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -163,12 +163,13 @@
         </nav>
     </aside>
     
-<article id="post-protobuf的编码" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-protobuf的编码"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">protobuf的编码</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-07-30 19:35:53" datetime="2016-07-30T19:35:53.000Z" itemprop="datePublished">2016-07-30</time>
+            <time class="post-time" title="2016-07-30 19:35:53" datetime="2016-07-30T19:35:53.000Z"  itemprop="datePublished">2016-07-30</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
@@ -176,7 +177,7 @@
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -293,7 +294,7 @@
 <h2 id="可选和可重复元素"><a href="#可选和可重复元素" class="headerlink" title="可选和可重复元素"></a>可选和可重复元素</h2><p>在proto2中定义的repeated字段（没有[packed=true]选项），编码后的消息是零个或多个拥有相同标签的键值对。这些重复的值不一定连续出现，可能会和其他字段交错出现。解析的时候，各个元素之间的顺序被保留，尽管其他字段的顺序是不确定的。在proto3中，repeated字段使用<a href="https://developers.google.com/protocol-buffers/docs/encoding#packed" target="_blank" rel="noopener">packed encoding</a>，下边将会介绍。</p>
 <p>在proto3中非repeated字段和proto2中的optional字段，编码后的消息中可能有也可能没有包含标签数字的key-value对。</p>
 <p>一般的，编码后的消息不会超过一个非repeated的字段，不过，我们期望解析器能够处理这种情况。对于数值类型和字符串类型，如果相同的数字标签出现了多次，那么解析器会保存最后一个出现的值。对于嵌套消息字段，解析器将多个相同数字标签的值合并，就像调用Message::MergeFrom一样——对于普通字段，用后边实例的值代替前边实例的值，对于嵌套消息字段进行合并，重复字段进行连接。这个规则使得解析连续两个编码后的消息一样和分别解析两个消息然后把它们合并的效果是一样的：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyMessage <span class="keyword">message</span>;</span><br><span class="line"><span class="keyword">message</span>.ParseFromString(str1 + str2);</span><br></pre></td></tr></table></figure></p>
-<p>等价于：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyMessage message, message2<span class="comment">;</span></span><br><span class="line">message.ParseFromString(str1)<span class="comment">;</span></span><br><span class="line">message2.ParseFromString(str2)<span class="comment">;</span></span><br><span class="line">message.MergeFrom(message2)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>等价于：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyMessage <span class="keyword">message</span>, message2;</span><br><span class="line"><span class="keyword">message</span>.ParseFromString(str1);</span><br><span class="line">message2.ParseFromString(str2);</span><br><span class="line"><span class="keyword">message</span>.MergeFrom(message2);</span><br></pre></td></tr></table></figure></p>
 <p>这个属性偶尔会用到，它允许在你不知道他们类型的情况下进行合并消息。</p>
 <h3 id="打包重复字段"><a href="#打包重复字段" class="headerlink" title="打包重复字段"></a>打包重复字段</h3><p>2.1.0版本引入了打包重复字段，在proto2中需要在重复字段中添加[packed=true]选项。在proto3中，重复字段默认就是打包的。它的功能和重复字段类似，但采取了不同的编码。当一个打包的重复字段不包含任何元素时，它不会出现在编码后的消息中。否则，这个字段的全部元素被打包成wrie类型为2的单个键值对。除了没有标签数字前缀外，每个元素被编码成它本来的样子。</p>
 <p>假设你又个消息<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">	<span class="keyword">repeated</span> <span class="built_in">int32</span> d = <span class="number">4</span> [packed=<span class="literal">true</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -311,7 +312,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -466,7 +467,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -485,10 +487,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -614,7 +616,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

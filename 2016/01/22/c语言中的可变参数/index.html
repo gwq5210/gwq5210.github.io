@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。 下面详细介绍这些步骤，函数原型中的参数列表中至少有一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言中的可变参数">
 <meta name="twitter:description" content="c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。 下面详细介绍这些步骤，函数原型中的参数列表中至少有一">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -156,12 +156,13 @@
 
 <div class="container body-wrap">
     
-<article id="post-c语言中的可变参数" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-c语言中的可变参数"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">c语言中的可变参数</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-01-22 22:54:30" datetime="2016-01-22T22:54:30.000Z" itemprop="datePublished">2016-01-22</time>
+            <time class="post-time" title="2016-01-22 22:54:30" datetime="2016-01-22T22:54:30.000Z"  itemprop="datePublished">2016-01-22</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
@@ -169,7 +170,7 @@
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -195,7 +196,7 @@
 <p>上边也测试了，传进来的参数不对应的情况，发生了错误。<br>下面是另一个程序，说明了va_arg传入的类型还可以是自定义的类型：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="emphasis">***</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; File Name: testargs.c</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Author: gwq</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Mail: gwq5210@qq.com </span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Created Time: 2015年01月07日 星期三 20时21分44秒</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"> <span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>**/</span></span></span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line">struct point_t &#123;</span><br><span class="line">    <span class="built_in">int</span> x, y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct point_t add(<span class="built_in">int</span> <span class="built_in">num</span>, ...)</span><br><span class="line">&#123;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, <span class="built_in">num</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;</span><br><span class="line">    struct point_t p;</span><br><span class="line">    struct point_t res;</span><br><span class="line">    res.x = <span class="number">0</span>;</span><br><span class="line">    res.y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">num</span>; ++i) &#123;</span><br><span class="line">        p = va_arg(ap, struct point_t);</span><br><span class="line">        res.x += p.x;</span><br><span class="line">        res.y += p.y;</span><br><span class="line">    &#125;</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    struct point_t p;</span><br><span class="line">    struct point_t sum;</span><br><span class="line">    p.x = <span class="number">1</span>;</span><br><span class="line">    p.y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    sum = add(<span class="number">3</span>, p, p, p);</span><br><span class="line"></span><br><span class="line">    printf(<span class="string">"add(3, p, p, p) = &#123;%d, %d&#125;\n"</span>, sum.x, sum.y);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面说说stdio.h中与va_list相关的几个函数：<br>这几个函数有vprintf,vfprintf,vsprintf,vsnprintf。<br>函数原型分别为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vfprintf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsnprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">size_t</span> size, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vfprintf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vsnprintf</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>这几个函数分别与printf,fprintf,sprintf,snprintf类似，不过，他们接受一个va_list类型的变量，而不是参数列表。<br>利用这几个函数可以实现方便的函数如：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="emphasis">***</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; File Name: execute_cmd.c</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Author: gwq</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Mail: gwq5210@qq.com </span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="code">    &gt; Created Time: 2015年01月07日 星期三 20时44分17秒</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown"> <span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span>**/</span></span></span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;stdarg.h&gt;</span><br><span class="line"></span><br><span class="line">#define BUFSIZE <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> execute_cmd(<span class="keyword">const</span> char *fmt, ...)</span><br><span class="line">&#123;</span><br><span class="line">    char cmd[BUFSIZE];</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, fmt);</span><br><span class="line">    vsprintf(cmd, fmt, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="keyword">return</span> system(cmd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    execute_cmd(<span class="string">"echo %s"</span>, <span class="string">"dir"</span>);</span><br><span class="line">    execute_cmd(<span class="string">"ls %s"</span>, <span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里边的大部分内容都是从书上摘下来的，程序部分经过了修改。</p>
@@ -207,7 +208,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -362,7 +363,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -381,10 +383,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -510,7 +512,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

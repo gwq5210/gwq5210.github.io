@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考 hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hiredis的使用">
 <meta name="twitter:description" content="前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考 hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -161,18 +161,19 @@
         </nav>
     </aside>
     
-<article id="post-hiredis的使用" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-hiredis的使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">hiredis的使用</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-01-27 16:39:49" datetime="2018-01-27T16:39:49.000Z" itemprop="datePublished">2018-01-27</time>
+            <time class="post-time" title="2018-01-27 16:39:49" datetime="2018-01-27T16:39:49.000Z"  itemprop="datePublished">2018-01-27</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -195,7 +196,7 @@
 <h2 id="向Redis发送命令"><a href="#向Redis发送命令" class="headerlink" title="向Redis发送命令"></a>向Redis发送命令</h2><p>redisCommand是类printf的，可以向已经建立连接的Redis发送命令。</p>
 <p>这个函数使用空格来区分Redis的参数。%s指明一个参数，该参数是一个\0结尾的字符串。如果想使用二进制安全的版本，则可以使用%b，其需要两个参数，一个字符指针，一个表明这个字符串长度的size_t参数。</p>
 <p>值得注意的是%s表明一个Redis命令的参数，即使这个字符串中包含空格，回车等字符。仔细阅读hiredis的代码你就会发现这一点。</p>
-<p>下面是一些例子：<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reply = redisCommand(context, <span class="string">"SET foo bar"</span>);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET foo %s"</span>, value);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET foo %b"</span>, value, (size_t) valuelen);</span><br><span class="line">reply = redisCommand(context, <span class="string">"SET key:%s %s"</span>, myid, value);</span><br><span class="line"></span><br><span class="line">// 这个将会出错，因为%s被解释为一个参数，所以Redis收到的就是一个参数的命令‘SET foo bar’，这当然会出错</span><br><span class="line">reply = redisCommand(context, <span class="string">"%s"</span>, <span class="string">"SET foo bar"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>下面是一些例子：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reply = redisCommand(<span class="keyword">context</span>, <span class="string">"SET foo bar"</span>);</span><br><span class="line">reply = redisCommand(<span class="keyword">context</span>, <span class="string">"SET foo %s"</span>, <span class="keyword">value</span>);</span><br><span class="line">reply = redisCommand(<span class="keyword">context</span>, <span class="string">"SET foo %b"</span>, <span class="keyword">value</span>, (size_t) valuelen);</span><br><span class="line">reply = redisCommand(<span class="keyword">context</span>, <span class="string">"SET key:%s %s"</span>, myid, <span class="keyword">value</span>);</span><br><span class="line"></span><br><span class="line">// 这个将会出错，因为<span class="meta">%s</span>被解释为一个参数，所以Redis收到的就是一个参数的命令‘SET foo bar’，这当然会出错</span><br><span class="line">reply = redisCommand(<span class="keyword">context</span>, <span class="string">"%s"</span>, <span class="string">"SET foo bar"</span>);</span><br></pre></td></tr></table></figure></p>
 <h2 id="获得命令的回复"><a href="#获得命令的回复" class="headerlink" title="获得命令的回复"></a>获得命令的回复</h2><p>redisCommand返回值是一个redisReply的结构体，保存了命令的回复。<br>如果出错，则返回值为NULL并且redisContext的err字段设置为非0。<br>Once an error is returned the context cannot be reused and you should set up a new connection.</p>
 <p>redisReply结构体中的type字段表明了返回的数据类型。<br>有如下几种枚举<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表明回复是一个状态，状态的具体信息在str和len中</span></span><br><span class="line">REDIS_REPLY_STATUS</span><br><span class="line"><span class="comment">// 表明回复是一个错误，错误信息在str和len中</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_ERROR:</span></span><br><span class="line"><span class="comment">// 表明回复是一个整数，整数保存在interger中，其实long long类型</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_INTEGER:</span></span><br><span class="line"><span class="comment">// 返回一个nil对象，表明没有数据</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_NIL:</span></span><br><span class="line"><span class="comment">// 回复一个字符串，字符串在str和len中</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_STRING:</span></span><br><span class="line"><span class="comment">// 表明回复是一个数组，保存在elements，element表明了数组的大小。可能回复是嵌套数组</span></span><br><span class="line"><span class="symbol">REDIS_REPLY_ARRAY:</span></span><br></pre></td></tr></table></figure></p>
 <p>redisCommand获得的reply应该使用freeReplyObject函数释放内存。</p>
@@ -224,7 +225,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -379,7 +380,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -398,10 +400,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -527,7 +529,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

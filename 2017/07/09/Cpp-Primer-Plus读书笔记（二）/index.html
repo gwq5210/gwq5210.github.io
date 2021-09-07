@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta property="og:url" content="https://blog.gwq5210.com/2017/07/09/Cpp-Primer-Plus读书笔记（二）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta name="twitter:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -161,18 +161,19 @@
         </nav>
     </aside>
     
-<article id="post-Cpp-Primer-Plus读书笔记（二）" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-Cpp-Primer-Plus读书笔记（二）"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Cpp-Primer-Plus读书笔记（二）</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-07-09 14:47:52" datetime="2017-07-09T14:47:52.000Z" itemprop="datePublished">2017-07-09</time>
+            <time class="post-time" title="2017-07-09 14:47:52" datetime="2017-07-09T14:47:52.000Z"  itemprop="datePublished">2017-07-09</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -196,11 +197,11 @@
 <p>从表达式到语句的转变很容易，只需要加分号即可。因此a=100是表达式，a=100;是语句。更准确的说，这是一条表达式语句。只要加上分号，所有的表达式都可以成为语句，但不一定有编程意义。如a+6;是合法的语句，但它没完成任何有用的工作，智能编译器甚至可能跳过这条语句</p>
 <p>对任何表达式加上分号都可以成为语句，但是这句话反过来说就不对了。也就是说，从语句中删除分号并不一定能将它转换为表达式。对于返回语句，声明语句和for语句都不满足这种情况</p>
 <p>C++在C的基础上添加了一项特性，要求对for循环语句做一些微妙的调整，原来的语法：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">expression</span>; <span class="keyword">expression</span>; <span class="keyword">expression</span>)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure></p>
-<p>但是C++的for循环允许这样做：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	<span class="keyword">printf</span>(<span class="string">"%d\n"</span>, i);</span><br></pre></td></tr></table></figure></p>
+<p>但是C++的for循环允许这样做：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="number">5</span>; <span class="built_in">i</span>++)</span><br><span class="line">	printf(<span class="string">"%d\n"</span>, <span class="built_in">i</span>);</span><br></pre></td></tr></table></figure></p>
 <p>这很方便，但是不符合原来的语法，因为声明不是表达式。现在则使用下边的语句：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">for</span>-init-statement <span class="keyword">condition</span>; <span class="keyword">expression</span>)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure></p>
 <p>在for-init-statement中声明变量其实还有有用的一面，这也是该知道的。这种变量只存在与for循环中，当程序离开循环，这种变量将消失</p>
 <p>在循环中经常使用递增运算符（++）和递减运算符（—）。这两种运算符执行两种极其常用的循环操作：将循环计数器加1或减1。这两个运算符都有两种变体。前缀版本位于操作数前面，如++x；后缀版本位于操作数后面，如x++。两个版本对操作数的影响是一样的，但是影响的时间不同。粗略的讲a++意味着使用a的当前值计算表达式，然后将a的值加1；而++b的意思是先将b的值加1，然后使用新的值来计算表达式。</p>
-<p>递增运算符和递减运算符都是漂亮的小型运算符，不过千万不要失去控制，在同一条语句对同一个值递增或递减多次。问题在于规则使用后修改和修改后使用可能会变得模糊不清。也就是说，下面这条语句在不同的系统上将生成不同的结果：<br><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">x</span> = <span class="number">2</span> * <span class="keyword">x</span>++ * (<span class="number">3</span> - ++<span class="keyword">x</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>递增运算符和递减运算符都是漂亮的小型运算符，不过千万不要失去控制，在同一条语句对同一个值递增或递减多次。问题在于规则使用后修改和修改后使用可能会变得模糊不清。也就是说，下面这条语句在不同的系统上将生成不同的结果：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x</span> = <span class="number">2</span> * x++ * (<span class="number">3</span> - ++x)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
 <p>对于这种语句，C++没有定义正确的行为</p>
 <p>副作用是指在计算表达式时对某些东西进行了修改；顺序点是程序执行过程中的一个点，在这里，进入下一步之前将确保所有的副作用都进行了评估。在C++中语句中的分号就是一个顺序点，这意味着程序在处理下一条语句之前，赋值运算符、递增运算符和递减运算符执行的所有修改都必须完成。本章后边将讨论的有些操作也有顺序点。另外任何完整的表达式末尾都是一个顺序点。完整表达式是这样一个表达式：不是另一个更大表达式的子表达式</p>
 <p>前缀格式和后缀格式的执行速度可能存在细微的差别，对于内置类型和当代的编译器而言，这看似不是什么问题。然而C++允许你针对类定义这些运算符，这种情况下，前缀格式的效率更高</p>
@@ -300,11 +301,11 @@
 <p>do while循环不同于for循环和while循环，它是出口条件循环。这意味着这种循环将首先执行循环体，然后再判定测试表达式，决定是否继续执行循环。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="keyword">body</span></span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">test</span>-expression);</span><br></pre></td></tr></table></figure></p>
 <p>三种循环各有应用场景，需要合适选择</p>
 <p>C++新增了基于范围的for循环。这简化了一种常见的循环任务：对数组或容器的每个元素执行相同的操作，后者提供了修改元素的方法。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> x: v)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> &amp;x: v)</span><br><span class="line">&#123;</span><br><span class="line">  x = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>cin对象支持三种不同模式的单字符输入：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; ch;		<span class="comment">// 忽略空白</span></span><br><span class="line">ch = <span class="built_in">cin</span>.get(); <span class="comment">// return char</span></span><br><span class="line"><span class="built_in">cin</span>.get(ch);	<span class="comment">// return istream</span></span><br></pre></td></tr></table></figure></p>
+<p>cin对象支持三种不同模式的单字符输入：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; ch;		<span class="comment">// 忽略空白</span></span><br><span class="line">ch = <span class="built_in">cin</span>.<span class="built_in">get</span>(); <span class="comment">// return char</span></span><br><span class="line"><span class="built_in">cin</span>.<span class="built_in">get</span>(ch);	<span class="comment">// return istream</span></span><br></pre></td></tr></table></figure></p>
 <p>可以使用文件尾条件（EOF）来表示输入的结束。检测到EOF后，cin将两位（eofbit和failbit）都设置为1，可以通过成员函数eof()来查看eofbit，如果eofbit或failbit被设置，fail函数返回true。eof和fail方法报告最近读取的结果，也就是说它们在事后报告，而不是预先报告。因此应将这两个测试放在读取后</p>
-<p>istream提供了一个可以将istream转换为bool的函数，当cin出现在bool需要的地方时，该转换函数将被调用。如果最后一次读取成功，则转换得到的bool值为true；否则为false。因此输入可以如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin.<span class="builtin-name">get</span>(ch))</span><br><span class="line">&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>istream提供了一个可以将istream转换为bool的函数，当cin出现在bool需要的地方时，该转换函数将被调用。如果最后一次读取成功，则转换得到的bool值为true；否则为false。因此输入可以如下：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">cin</span>.<span class="built_in">get</span>(ch))</span><br><span class="line">&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>二维数组更像是一个表格——既有数据行又有数据列。</p>
-<h1 id="分支语句和逻辑运算符"><a href="#分支语句和逻辑运算符" class="headerlink" title="分支语句和逻辑运算符"></a>分支语句和逻辑运算符</h1><p>if语句让程序能够决定是否执行特定的语句块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">test</span>-condition)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure></p>
+<h1 id="分支语句和逻辑运算符"><a href="#分支语句和逻辑运算符" class="headerlink" title="分支语句和逻辑运算符"></a>分支语句和逻辑运算符</h1><p>if语句让程序能够决定是否执行特定的语句块<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="name">test-condition</span>)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure></p>
 <p>if else语句让程序决定执行两条语句中的哪一个<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">(test-condition)</span></span><br><span class="line">	stateme<span class="symbol">nt1</span></span><br><span class="line">else</span><br><span class="line">	stateme<span class="symbol">nt2</span></span><br></pre></td></tr></table></figure></p>
 <p>if else中的两个操作必须都是一条语句，如果需要多条语句，则需要使用大括号将它们括起来，组成一个语句块</p>
 <p>if else语句可以互相嵌套，组成多种选择</p>
@@ -498,7 +499,7 @@
 <p>另外还必须理解实例化和具体化。在代码中包含函数模板本身并不会生成函数定义，它只是一个用于生成函数定义的方案。编译器使用模板为特定类型生成函数定义时，得到的是模板实例。这种方式被称为隐式实例化，编译器通过函数调用来知道如何进行实例化。</p>
 <p>现在C++还允许显式实例化。这意味着可以直接命令编译器创建特定的实例。声明所需的种类——用&lt;&gt;符号指示类型，并在声明前加上关键字template。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b);</span><br></pre></td></tr></table></figure></p>
 <p>要区别显式具体化和显式实例化，前者并不生成函数定义。试图在同一个文件或抓换单元中使用同一种类型的显式实例和显式具体化将出错。</p>
-<p>可以在程序中使用函数来创建显式实例化：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int x = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">char m = <span class="number">1</span><span class="comment">;</span></span><br><span class="line"><span class="keyword">swap&lt;int&gt;(x, </span>m)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以在程序中使用函数来创建显式实例化：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">char</span> m = <span class="number">1</span>;</span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(x, m);</span><br></pre></td></tr></table></figure></p>
 <p>隐式实例化，显式实例化，显式具体化统称为具体化。它们表示的都是使用具体类型的函数定义，而不是通用描述。</p>
 <p>对于函数重载，函数模板和函数模板重载，C++需要一个定义良好的策略，来决定为函数调用使用哪一个函数定义，尤其是有多个参数时。这个过程称为重载解析。</p>
 <ul>
@@ -578,7 +579,7 @@
 </ul>
 <p>可以结合typedef和decltype<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type decltype(a + b) type;</span><br><span class="line">type c;</span><br></pre></td></tr></table></figure></p>
 <p>另一中函数声明语法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2</span><br><span class="line">? f(T1 a, T2 b)</span><br><span class="line"><span class="comment">// auto f(T1 a, T2 b) -&gt; decltype(a + b)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这种情况，并不能使用decltype解决，x，y并不在作用域内。<br>新增的语法可以用作声明和定义：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> f(<span class="keyword">int</span> a, <span class="keyword">double</span> b) - &gt; <span class="keyword">double</span>;</span><br><span class="line"><span class="keyword">auto</span> func(<span class="keyword">double</span> a) -&gt; <span class="keyword">double</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种情况，并不能使用decltype解决，x，y并不在作用域内。<br>新增的语法可以用作声明和定义：<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">auto</span> f(int a, <span class="built_in">double</span> b) - &gt; <span class="built_in">double</span>;</span><br><span class="line"><span class="built_in">auto</span> func(<span class="built_in">double</span> a) -&gt; <span class="built_in">double</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="内存模型和名称空间"><a href="#内存模型和名称空间" class="headerlink" title="内存模型和名称空间"></a>内存模型和名称空间</h1><p>C++为在内存中存储数据方面提供了多种选择</p>
 <h2 id="单独编译"><a href="#单独编译" class="headerlink" title="单独编译"></a>单独编译</h2><p>和C语言一样，C++也允许甚至鼓励程序员将组件函数放在独立的文件中。我们可以单独编译这些文件，然后将这些文件链接起来。</p>
 <p>我们一般可以将程序分为三部分：</p>
@@ -721,7 +722,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -880,7 +881,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -899,10 +901,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -1032,7 +1034,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="读书笔记,unix,linux,APUE">
+    <meta name="keywords" content="unix,linux,读书笔记,APUE">
     <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
-<meta name="keywords" content="读书笔记,unix,linux,APUE">
+<meta name="keywords" content="unix,linux,读书笔记,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
 <meta property="og:url" content="https://blog.gwq5210.com/2017/07/12/APUE笔记-一/index.html">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://blog.gwq5210.com/img/i节点和数据块详细图.jpg">
 <meta property="og:image" content="https://blog.gwq5210.com/img/各种函数对三种时间的影响.png">
 <meta property="og:image" content="https://blog.gwq5210.com/img/文件访问权限位小结.png">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
@@ -54,7 +54,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -74,35 +74,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -168,18 +168,19 @@
         </nav>
     </aside>
     
-<article id="post-APUE笔记-一" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-APUE笔记-一"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">APUE笔记(一)</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-07-12 01:22:08" datetime="2017-07-12T01:22:08.000Z" itemprop="datePublished">2017-07-12</time>
+            <time class="post-time" title="2017-07-12 01:22:08" datetime="2017-07-12T01:22:08.000Z"  itemprop="datePublished">2017-07-12</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -262,7 +263,7 @@
 <p>不确定的运行时限制：</p>
 <ul>
 <li>路径名，可以通过PATH_MAX来获得，但是结果可能是不确定的</li>
-<li>最大打开文件数，守护进程中一个常见的代码就是关闭所有打开的文件<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/param.h&gt;</span></span></span><br><span class="line"><span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NOFILE; ++i)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">close</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>最大打开文件数，守护进程中一个常见的代码就是关闭所有打开的文件<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/param.h&gt;</span></span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NOFILE; ++i)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">close</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>但这种方式是不可移植的，所以可以通过sysconf来获取，尽可能提高移植性</p>
@@ -414,12 +415,12 @@
 </ul>
 <p>openat函数希望解决两个问题，一是让线程可以使用相对路径名打开目录中的文件，而不再只能打开当前工作目录。二是可以避免time-of-check-to-time-of-use(TOCTTOU)错误，其基本思想是，如果有两个基于文件的函数调用，其中第二个调用依赖于第一个调用的结果，那么程序是脆弱的，因为两个调用并不是原子操作，在两个函数调用之间的文件可能改变了，这样也就造成了第一个调用的结果不再有效，使得最终程序的结果是错误的。</p>
 <p>使用open需要注意文件名截断。现在大多数系统支持的文件名长度可以为255。</p>
-<h2 id="creat函数"><a href="#creat函数" class="headerlink" title="creat函数"></a>creat函数</h2><p>另外，creat函数也可以创建一个文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line">open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);</span><br></pre></td></tr></table></figure></p>
+<h2 id="creat函数"><a href="#creat函数" class="headerlink" title="creat函数"></a>creat函数</h2><p>另外，creat函数也可以创建一个文件：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line"><span class="built_in">open</span>(path, O_WRONLY | O_CREAT | O_TRUNC, mode);</span><br></pre></td></tr></table></figure></p>
 <p>它只以写的方式打开所创建的文件</p>
 <h2 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h2><p>函数close关闭一个打开的文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(fd)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>关闭一个文件时，还会释放该进程加在该文件上的所有记录锁。当一个进程终止，内核自动关闭它所有的打开文件。</p>
 <h2 id="lseek函数"><a href="#lseek函数" class="headerlink" title="lseek函数"></a>lseek函数</h2><p>每个打开的文件都有一个与其相关联的当前文件偏移量(current file offset)。它通常是一个非负整数，用于度量从文件开始处计算的字节数。通常读写操作都从当前文件便宜量开始，并使偏移量增加所读写的字节数。按照系统默认情况，当打开一个文件时，除非指定O_APPEND选项，否则该偏移量被设置为0。</p>
-<p>lseek可以显式的设置偏移量：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">off_t</span> lseek(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset, <span class="keyword">int</span> whence);</span><br></pre></td></tr></table></figure></p>
+<p>lseek可以显式的设置偏移量：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">off_t</span> <span class="title">lseek</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset, <span class="keyword">int</span> whence)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>对offset参数的解释与whence的值有关：</p>
 <ul>
 <li>若whence是SEEK_SET，则将该文件的偏移量设置为距文件开始处offset个字节</li>
@@ -432,7 +433,7 @@
 <p>lseek仅将当前的文件偏移量记录在内核中，它并不引起任何IO操作，该偏移量用于下一次读或写。</p>
 <p>文件的偏移量可以大于当前文件大小，这种情况下，将会引起文件空洞，没被写过的字节都被读为0，文件中的空洞并不要求在磁盘上占用存储区，具体与实现有关。</p>
 <p>lseek使用的偏移量用off_t类型表示，允许具体实现根据各自的平台自行选择合适的数据类型。</p>
-<h2 id="read函数"><a href="#read函数" class="headerlink" title="read函数"></a>read函数</h2><p>read函数从打开的文件中读取数据：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</span><br></pre></td></tr></table></figure></p>
+<h2 id="read函数"><a href="#read函数" class="headerlink" title="read函数"></a>read函数</h2><p>read函数从打开的文件中读取数据：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>如果read成功，返回读取到的字节数。如已到达文件末端，返回0。<br>多种情况使得实际读取到的字节数少于要求读取的字节数：</p>
 <ul>
 <li>读取普通文件时，在读到要求字节数之前已经达到了文件尾端。</li>
@@ -443,7 +444,7 @@
 <li>当一信号造成中断，而已经读了部分数量时。</li>
 </ul>
 <p>读操作从当前文件偏移量开始，在成功返回之前，该偏移量将增加实际读到的字节数。</p>
-<h2 id="write函数"><a href="#write函数" class="headerlink" title="write函数"></a>write函数</h2><p>write函数向打开的文件写入数据。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> write(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</span><br></pre></td></tr></table></figure></p>
+<h2 id="write函数"><a href="#write函数" class="headerlink" title="write函数"></a>write函数</h2><p>write函数向打开的文件写入数据。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>返回值通常与nbytes相同，否则表示出错，write出错的一个常见错误是磁盘已经写满，或者超过了一个给定进程的文件长度限制。</p>
 <p>对于普通文件，写操作从文件的当前偏移量处开始。如果在打开文件时指定了O_APPEND选项，则在每次写操作前，将文件的偏移量设置在文件的结尾处，因此这种方式不能写中间的某个部分。在一次写成功后，文件偏移量增加实际写入的字节数。</p>
 <h2 id="IO的效率"><a href="#IO的效率" class="headerlink" title="IO的效率"></a>IO的效率</h2><p>read函数和write的函数选出合适的buf大小是很重要的。一般来说在4096字节(磁盘块长度)效率比较高。大多数文件系统为改善性能都采取某种预读技术。检测到正在顺序读取时，系统就试图读取比应用所要求更多的数据，并假想应用很快就会读这些数据。</p>
@@ -464,7 +465,7 @@
 <p>文件描述符标志和文件状态标志在作用范围方面有区别，前者只用于一个进程的某一个描述符，而后者则应用于指向该给定文件表项的任何进程中所有的描述符。</p>
 <h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>一般而言，原子操作(atomic operation)是由多步操作组成的一个操作。如果该操作原子地执行，则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。</p>
 <p>多个进程对同一个文件追加数据，可以在打开文件时指定O_APPEND标志。这使得每次写操作之前内核都将进程的当前文件偏移量设置到该文件的末尾。对于对于这种write操作在不同进程间是不是原子的，后续有文章来验证。</p>
-<p>pread和pwrite允许原子性的定位并执行IO。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> pread(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset);</span><br><span class="line"><span class="keyword">size_t</span> pwrite(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset);</span><br></pre></td></tr></table></figure></p>
+<p>pread和pwrite允许原子性的定位并执行IO。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">pread</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">pwrite</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>调用pread相当于调用lseek后调用read，但是pread又与这种顺序调用有如下重要区别：</p>
 <ul>
 <li>调用pread时，无法中断其定位和读操作</li>
@@ -652,7 +653,7 @@
 <p>如果mode设置为F_OK，则测试文件是否存在。否则是三个常量的按位或：R_OK，W_OK、X_OK。</p>
 <p>faccessat函数在下列情况的作用于access函数相同：一种是pathname参数为绝对路径，另一种是fd参数的取值为AT_FDCWD且参数pathname为相对路径。否则，faccessat计算相对于打开目录（fd指定）的pathname。</p>
 <p>flag参数可以改变faccessat的行为，如果flag设置为AT_EACCESS，访问检查用的是调用进程的有效用户ID和有效组ID。</p>
-<h2 id="函数umask"><a href="#函数umask" class="headerlink" title="函数umask"></a>函数umask</h2><p>每个进程都有一个相关联的文件模式创建屏蔽字，umask函数可以为进程设置文件模式创建屏蔽字，返回之前的值<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">mode_t</span> umaks(<span class="keyword">mode_t</span> mode);</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数umask"><a href="#函数umask" class="headerlink" title="函数umask"></a>函数umask</h2><p>每个进程都有一个相关联的文件模式创建屏蔽字，umask函数可以为进程设置文件模式创建屏蔽字，返回之前的值<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">mode_t</span> <span class="title">umaks</span><span class="params">(<span class="keyword">mode_t</span> mode)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>进程创建一个文件或目录时就一定会使用文件模式创建屏蔽字，在其中为1的位，在文件mode中相应的位一定会被关闭。</p>
 <p>在shell中，我们可以使用umask命令来修改这个值。以便修改创建文件的默认权限。</p>
 <h2 id="函数chmod、fchmod和fchmodat"><a href="#函数chmod、fchmod和fchmodat" class="headerlink" title="函数chmod、fchmod和fchmodat"></a>函数chmod、fchmod和fchmodat</h2><p>这三个函数用来修改现有文件的访问权限<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmodat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode, <span class="keyword">int</span> flag)</span></span>;</span><br></pre></td></tr></table></figure></p>
@@ -902,7 +903,7 @@
 <h2 id="创建和读取符号链接"><a href="#创建和读取符号链接" class="headerlink" title="创建和读取符号链接"></a>创建和读取符号链接</h2><p>可以使用symlink或symlinkat函数创建一个符号链接<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>函数创建了一个指向actualpath的新目录项sympath，在创建符号链接时，并不要求actualpath存在，也不需要在同一个文件系统中。</p>
 <p>symlinkat函数类似，sympath根据fd作为相对路径进行计算。</p>
-<p>open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> readlink(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize);</span><br><span class="line"><span class="keyword">ssize_t</span> readlinkat(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, size bufsize);</span><br></pre></td></tr></table></figure></p>
+<p>open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="built_in">size</span> bufsize)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>两个函数组合了open，read，close的所有操作。readlinkat以fd作为相对路径。</p>
 <h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><p>对于每个文件维护三个时间</p>
 <div class="table-container">
@@ -970,7 +971,7 @@
 <p>ftw和nftw实现了目录的遍历</p>
 <h2 id="函数chdir，fchdir和getcwd"><a href="#函数chdir，fchdir和getcwd" class="headerlink" title="函数chdir，fchdir和getcwd"></a>函数chdir，fchdir和getcwd</h2><p>进程都有一个当前工作目录，调用chdir或fchdir可以更改当前工作目录<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchdir</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>当前工作目录与进程相关，在shell中，cd命令是内建的命令，因为需要shell本身来调用chdir。</p>
-<p>我们可以通过chdir一直转到上级目录来获取当前工作路径，getcwd提供了类似的功能<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getcwd</span><span class="params">(<span class="keyword">char</span> *buf, <span class="keyword">size_t</span> size)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过chdir一直转到上级目录来获取当前工作路径，getcwd提供了类似的功能<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getcwd</span><span class="params">(<span class="keyword">char</span> *buf, <span class="keyword">size_t</span> <span class="built_in">size</span>)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>chdir跟随符号链接。</p>
 <h2 id="设备特殊文件"><a href="#设备特殊文件" class="headerlink" title="设备特殊文件"></a>设备特殊文件</h2><p>st_dev和st_rdev经常混淆，有关规则很简单</p>
 <ul>
@@ -993,7 +994,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -1149,7 +1150,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -1168,10 +1170,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -1298,7 +1300,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

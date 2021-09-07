@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp Primer Plus读书笔记（一）">
 <meta property="og:url" content="https://blog.gwq5210.com/2017/07/02/Cpp-Primer-Plus读书笔记（一）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp Primer Plus读书笔记（一）">
 <meta name="twitter:description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -161,18 +161,19 @@
         </nav>
     </aside>
     
-<article id="post-Cpp-Primer-Plus读书笔记（一）" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-Cpp-Primer-Plus读书笔记（一）"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Cpp Primer Plus读书笔记（一）</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-07-02 21:25:04" datetime="2017-07-02T21:25:04.000Z" itemprop="datePublished">2017-07-02</time>
+            <time class="post-time" title="2017-07-02 21:25:04" datetime="2017-07-02T21:25:04.000Z"  itemprop="datePublished">2017-07-02</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -427,14 +428,14 @@
 <p>get()方法提供了另外一种读取行的方式，该方法有几种变体。与getline不同的是get不再读取并丢弃换行符，而是将其保留在输入对列中。使用不带参数的get函数可以读取一个字符</p>
 <p>getline使用起来更简单，get使得错误检查更简单。更多介绍请参考C++手册</p>
 <h2 id="string类简介"><a href="#string类简介" class="headerlink" title="string类简介"></a>string类简介</h2><p>string使用来比数组简单，同时提供了将字符串作为一种数据类型的方法，更多介绍可参考C++手册</p>
-<p>C++新增了另一种类型的原始字符串，原始字符串使用“(和)”来界定边界，并使用前缀R来标识原始字符串<br>在原始字符串中按回车键不仅会移动到下一行，还将在原始字符串中添加回车符<br>还可以在界定符”(或)”的两个字符之间添加相同的其他字符，来标识结尾，这样可以在原始字符串中添加)”这样的字符<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">R"(nihao\n)"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">R"(nihao\n</span></span><br><span class="line"><span class="string">)"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">R"a(nihao\n)a"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>C++新增了另一种类型的原始字符串，原始字符串使用“(和)”来界定边界，并使用前缀R来标识原始字符串<br>在原始字符串中按回车键不仅会移动到下一行，还将在原始字符串中添加回车符<br>还可以在界定符”(或)”的两个字符之间添加相同的其他字符，来标识结尾，这样可以在原始字符串中添加)”这样的字符<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">R"(nihao\n)"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; R<span class="string">"(nihao\n</span></span><br><span class="line"><span class="string">)"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">R"a(nihao\n)a"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
 <h2 id="结构简介"><a href="#结构简介" class="headerlink" title="结构简介"></a>结构简介</h2><p>结构是一种更加灵活的数据格式，同一个结构可以存储多种类型的数据。结构是用户自定义的类型，定义了类型后，便可以创建这种类型的变量</p>
 <p>C++允许在声明结构变量时省略struct关键字</p>
 <p>结构声明的位置很重要，可以将声明放在函数中，这样这个结构只能在本函数中使用。放在函数外的声明称为外部声明，外部声明可以被其后的任何函数使用</p>
 <p>C++支持使用列表初始化的方式初始化结构变量，等号是可选的，如果大括号内为空，则各个成员被初始化为0，且不允许缩窄</p>
 <p>结构变量可以进行赋值</p>
 <p>可以声明结构数组，数组中每个元素都是该结构类型的变量</p>
-<p>与C一样，C++允许指定占用特定位数的结构成员，字段的类型应为整型或枚举，接下来是冒号，后跟着一个数字，表示使用的位数。可以使用没有名字的字段来提供间距<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">torgle_register</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> SN: <span class="number">4</span>;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> : <span class="number">4</span>;</span><br><span class="line">  <span class="keyword">bool</span> flag: <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">bool</span> retry: <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line">torgle_register tr = &#123;<span class="number">14</span>, <span class="literal">true</span>, <span class="literal">true</span>&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>与C一样，C++允许指定占用特定位数的结构成员，字段的类型应为整型或枚举，接下来是冒号，后跟着一个数字，表示使用的位数。可以使用没有名字的字段来提供间距<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">struct</span> <span class="string">torgle_register</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">unsigned int SN:</span> <span class="number">4</span><span class="string">;</span></span><br><span class="line">  <span class="attr">unsigned int :</span> <span class="number">4</span><span class="string">;</span></span><br><span class="line">  <span class="attr">bool flag:</span> <span class="number">1</span><span class="string">;</span></span><br><span class="line">  <span class="attr">bool retry:</span> <span class="number">1</span><span class="string">;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">torgle_register</span> <span class="string">tr</span> <span class="string">=</span> <span class="string">&#123;14,</span> <span class="literal">true</span><span class="string">,</span> <span class="literal">true</span><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="共用体"><a href="#共用体" class="headerlink" title="共用体"></a>共用体</h2><p>共用体是一种数据格式，它能够存储不同的数据类型，但只能同时存储其中的一种类型，共用体的语法与结构类似，但含义不同</p>
 <p>匿名共用体没有名称，其成员将成为位于同地址处的变量，每次只有一个成员是当前的成员<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">widget</span></span></span><br><span class="line">&#123;</span><br><span class="line">  int <span class="keyword">type</span>;</span><br><span class="line">  <span class="class"><span class="keyword">union</span></span></span><br><span class="line">  &#123;</span><br><span class="line">    long id_num;</span><br><span class="line">    char id_char[<span class="number">20</span>];</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">widget price;</span><br><span class="line"><span class="keyword">if</span> (price.<span class="keyword">type</span>)</span><br><span class="line">&#123;</span><br><span class="line">  cin &gt;&gt; price.id_num</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">  cin &gt;&gt; price.id_char</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>enum工具提供了另一种创建符号常量的方式，这种方式可以代替const。<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">color</span> &#123;<span class="title">red</span>, <span class="title">green</span>, <span class="title">yellow</span>&#125;;</span></span><br></pre></td></tr></table></figure></p>
@@ -480,7 +481,7 @@
 <p>不同于整数算术，对指针来说，增加1相当于增加它指向类型的字节数，两个指针相减，得到的是他们之间的间隔（同一个数组中才有意义）</p>
 <p>对于数组表达式arr[i]，编译器将该表达式看做*(arr + i)，如果使用指针，也进行这样的转换</p>
 <p>对数组名使用sizeof得到的是数组的长度，对数组指针应用sizeof得到的是指针的长度</p>
-<p>对数组名取地址得到的是数组的地址，数组名实际上代表数组中第一个元素的地址<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int arr<span class="string">[10]</span>;</span><br><span class="line">int (*p_arr)<span class="string">[10]</span> = &amp;arr;</span><br></pre></td></tr></table></figure></p>
+<p>对数组名取地址得到的是数组的地址，数组名实际上代表数组中第一个元素的地址<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> (*p_arr)[<span class="number">10</span>] = &amp;arr;</span><br></pre></td></tr></table></figure></p>
 <p>在cout和多数C++表达式中，char数组名，char指针，以及用引号括起来的字符串常量都被解释为字符串的第一个字符的地址</p>
 <p>对于字符串常量，不应尝试修改它</p>
 <p>应使用strcpy而不是赋值运算符来将字符串赋给数组</p>
@@ -503,7 +504,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -664,7 +665,8 @@ C语言代表的过程性语言
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -683,10 +685,10 @@ C语言代表的过程性语言
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -818,7 +820,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 

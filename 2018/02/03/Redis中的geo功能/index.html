@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。 从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-30T11:56:21.662Z">
+<meta property="og:updated_time" content="2021-09-07T09:53:03.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中的geo功能">
 <meta name="twitter:description" content="Redis简介Redis是一个开源的（BSD协议），基于内存的kv存储数据库。它支持很多数据结构。目前Redis还支持部署集群。 从Redis 3.2开始，Redis提供了geo的功能，也就是地理位置相关的命令，今天我们主要来了解这个功能。">
@@ -47,7 +47,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -67,35 +67,35 @@
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/">
+              <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives">
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
                 文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/tags">
+              <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://github.com/gwq5210" target="_blank">
+              <a href="https://github.com/gwq5210" target="_blank" >
                 <i class="icon icon-lg icon-github"></i>
                 Github
               </a>
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/about">
+              <a href="/about"  >
                 <i class="icon icon-lg icon-link"></i>
                 关于
               </a>
@@ -161,18 +161,19 @@
         </nav>
     </aside>
     
-<article id="post-Redis中的geo功能" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-Redis中的geo功能"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">Redis中的geo功能</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-02-03 17:37:12" datetime="2018-02-03T17:37:12.000Z" itemprop="datePublished">2018-02-03</time>
+            <time class="post-time" title="2018-02-03 17:37:12" datetime="2018-02-03T17:37:12.000Z"  itemprop="datePublished">2018-02-03</time>
 
             
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
 </span>
 
@@ -194,12 +195,12 @@
 <p>下面我们分别对其进行介绍。</p>
 <h1 id="添加和获取地理位置"><a href="#添加和获取地理位置" class="headerlink" title="添加和获取地理位置"></a>添加和获取地理位置</h1><h2 id="添加地理位置"><a href="#添加地理位置" class="headerlink" title="添加地理位置"></a>添加地理位置</h2><p>我们通过GEOADD来添加位置。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOADD <span class="built_in">key</span> longitude latitude <span class="built_in">member</span> [longitude latitude <span class="built_in">member</span> ...]</span><br></pre></td></tr></table></figure></p>
 <p>可以看到GEOADD每次可以添加多个位置。key是地理位置的集合。</p>
-<p>下面是例子，首先添加一个地点清远，后边一次添加多个地点。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加一个地点</span></span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2099647</span> <span class="number">23.593675</span> Qingyuan</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加多个地点</span></span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2278442</span> <span class="number">23.1255978</span> Guangzhou <span class="number">113.106308</span> <span class="number">23.0088312</span> Foshan <span class="number">113.7943267</span> <span class="number">22.9761989</span> Dongguan <span class="number">114.0538788</span> <span class="number">22.5551603</span> Shenzhen</span><br></pre></td></tr></table></figure></p>
+<p>下面是例子，首先添加一个地点清远，后边一次添加多个地点。<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 添加一个地点</span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2099647</span> <span class="number">23.593675</span> Qingyuan</span><br><span class="line"></span><br><span class="line">// 添加多个地点</span><br><span class="line">GEOADD Guangdong-cities <span class="number">113.2278442</span> <span class="number">23.1255978</span> Guangzhou <span class="number">113.106308 23</span>.<span class="number">0088312</span> Foshan <span class="number">113.7943267</span> <span class="number">22.9761989</span> Dongguan <span class="number">114.0538788</span> <span class="number">22.5551603</span> Shenzhen</span><br></pre></td></tr></table></figure></p>
 <h2 id="获取地理位置"><a href="#获取地理位置" class="headerlink" title="获取地理位置"></a>获取地理位置</h2><p>我们通过GEOPOS来获取对应的地理位置信息。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOPOS <span class="built_in">key</span> <span class="built_in">member</span> [<span class="built_in">member</span> ...]</span><br></pre></td></tr></table></figure></p>
 <p>例如我们通过如下命令来获取刚刚添加进去的地理位置<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GEOPOS Guangdong-cities Qingyuan Guangzhou Foshan</span></span><br></pre></td></tr></table></figure></p>
 <p>其返回是一个数组，每个数组包含两个元素：经度和维度<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>) <span class="number">1</span>) <span class="string">"113.20996731519699"</span>    -- 清远的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.593675019671288"</span>    -- 清远的纬度</span><br><span class="line"><span class="number">2</span>) <span class="number">1</span>) <span class="string">"113.22784155607224"</span>    -- 广州的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.125598202060807"</span>    -- 广州的纬度</span><br><span class="line"><span class="number">3</span>) <span class="number">1</span>) <span class="string">"113.10631066560745"</span>    -- 佛山的经度</span><br><span class="line">   <span class="number">2</span>) <span class="string">"23.008831202413539"</span>    -- 佛山的纬度</span><br></pre></td></tr></table></figure></p>
 <h1 id="计算距离和geohash"><a href="#计算距离和geohash" class="headerlink" title="计算距离和geohash"></a>计算距离和geohash</h1><p>针对地理位置的操作，Redis提供了计算两点间距离和获取该地理位置geohash的方法</p>
-<h2 id="计算距离"><a href="#计算距离" class="headerlink" title="计算距离"></a>计算距离</h2><p>我们使用GEODIST获取两个位置之间的距离<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEODIST key member1 member2 <span class="string">[unit]</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="计算距离"><a href="#计算距离" class="headerlink" title="计算距离"></a>计算距离</h2><p>我们使用GEODIST获取两个位置之间的距离<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GEODIST</span> key member1 member2<span class="meta"> [unit]</span></span><br></pre></td></tr></table></figure></p>
 <p>我们需要制定一个地点集合中的两个地理位置<br>unit指定返回的距离单位（默认为m），可用值如下</p>
 <ul>
 <li>m 表示单位为米。</li>
@@ -231,7 +232,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-08-30T11:56:21.662Z" itemprop="dateUpdated">2021-08-30 11:56:21</time>
+    Last updated: <time datetime="2021-09-07T09:53:03.530Z" itemprop="dateUpdated">2021-09-07 09:53:03</time>
 </span><br>
 
 
@@ -387,7 +388,8 @@
         </div>
         
         <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -406,10 +408,10 @@
     <div class="top">
         
 <p>
-    <span id="busuanzi_container_site_uv" style="display:none">
+    <span id="busuanzi_container_site_uv" style='display:none'>
         站点总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
+    <span id="busuanzi_container_site_pv" style='display:none'>
         站点总访问量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
@@ -536,7 +538,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
