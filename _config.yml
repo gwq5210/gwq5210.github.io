@@ -79,7 +79,7 @@ duoshuo_hotartical: true
 ## https://github.com/EYHN/hexo-helper-live2d
 ## https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
 live2d:
-  enable: true
+  enable: false
   #enable: false
   scriptFrom: local # 默认
   pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
