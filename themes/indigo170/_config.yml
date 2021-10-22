@@ -27,11 +27,11 @@ menu:
 rss: /atom.xml
 
 # 你的头像url
-avatar: /img/logo.jpg
+avatar: /images/logo.jpg
 # avatar link
 avatar_link: /
 # 头像背景图
-brand: /img/brand.jpg
+brand: /images/brand.jpg
 # favicon
 favicon: /favicon.ico
 
@@ -62,14 +62,14 @@ share: true
 # 是否开启打赏，关闭 reward: false
 reward:
   title: 谢谢大爷~
-  wechat: /img/wechat.jpg     #微信，关闭设为 false
-  alipay: /img/alipay.jpg     #支付宝，关闭设为 false
+  wechat: /images/wechat.jpg     #微信，关闭设为 false
+  alipay: /images/alipay.jpg     #支付宝，关闭设为 false
 
 # 是否开启搜索
 search: true
 
 # 是否大屏幕下文章页隐藏导航
-hideMenu: true
+hideMenu: false
 
 # 是否开启toc
 # toc: false
