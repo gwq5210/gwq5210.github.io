@@ -19,26 +19,26 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="unix,linux,读书笔记,APUE">
+    <meta name="keywords" content="读书笔记,unix,linux,APUE">
     <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
-<meta name="keywords" content="unix,linux,读书笔记,APUE">
+<meta name="keywords" content="读书笔记,unix,linux,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
 <meta property="og:url" content="https://blog.gwq5210.com/2017/07/12/APUE笔记-一/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog.gwq5210.com/img/打开文件的内核数据结构.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/dup后的内核数据结构.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/磁盘、分区和文件系统.jpg">
-<meta property="og:image" content="https://blog.gwq5210.com/img/i节点和数据块详细图.jpg">
-<meta property="og:image" content="https://blog.gwq5210.com/img/各种函数对三种时间的影响.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/文件访问权限位小结.png">
-<meta property="og:updated_time" content="2021-09-13T08:00:57.708Z">
+<meta property="og:image" content="https://blog.gwq5210.com/images/打开文件的内核数据结构.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/dup后的内核数据结构.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/磁盘、分区和文件系统.jpg">
+<meta property="og:image" content="https://blog.gwq5210.com/images/i节点和数据块详细图.jpg">
+<meta property="og:image" content="https://blog.gwq5210.com/images/各种函数对三种时间的影响.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/文件访问权限位小结.png">
+<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
-<meta name="twitter:image" content="https://blog.gwq5210.com/img/打开文件的内核数据结构.png">
+<meta name="twitter:image" content="https://blog.gwq5210.com/images/打开文件的内核数据结构.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -54,15 +54,15 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
+    <aside id="menu"  >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/logo.jpg">
+          <img src="/images/logo.jpg">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">gwq5210</h5>
@@ -458,7 +458,7 @@
 <p>不同实现可能有不同，但是是有必要保存这些信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/打开文件的内核数据结构.png" alt="打开文件的内核数据结构" title>
+                    <img src="/images/打开文件的内核数据结构.png" alt="打开文件的内核数据结构" title>
                 </div>
                 <div class="image-caption">打开文件的内核数据结构</div>
             </figure></p>
@@ -477,7 +477,7 @@
 <p> 这些函数返回的新描述符与参数fd共享同一个文件表项。<br> <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/dup后的内核数据结构.png" alt="dup后的内核数据结构" title>
+                    <img src="/images/dup后的内核数据结构.png" alt="dup后的内核数据结构" title>
                 </div>
                 <div class="image-caption">dup后的内核数据结构</div>
             </figure></p>
@@ -767,14 +767,14 @@
 <p>我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/磁盘、分区和文件系统.jpg" alt="磁盘、分区和文件系统" title>
+                    <img src="/images/磁盘、分区和文件系统.jpg" alt="磁盘、分区和文件系统" title>
                 </div>
                 <div class="image-caption">磁盘、分区和文件系统</div>
             </figure></p>
 <p>下面是比较详细的i节点和数据块图<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/i节点和数据块详细图.jpg" alt="i节点和数据块详细图" title>
+                    <img src="/images/i节点和数据块详细图.jpg" alt="i节点和数据块详细图" title>
                 </div>
                 <div class="image-caption">i节点和数据块详细图</div>
             </figure><br>在图中，我们注意到：</p>
@@ -942,7 +942,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/各种函数对三种时间的影响.png" alt="各种函数对三种时间的影响" title>
+                    <img src="/images/各种函数对三种时间的影响.png" alt="各种函数对三种时间的影响" title>
                 </div>
                 <div class="image-caption">各种函数对三种时间的影响</div>
             </figure>
@@ -983,7 +983,7 @@
 <h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/文件访问权限位小结.png" alt="文件访问权限位小结" title>
+                    <img src="/images/文件访问权限位小结.png" alt="文件访问权限位小结" title>
                 </div>
                 <div class="image-caption">文件访问权限位小结</div>
             </figure>
@@ -994,7 +994,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-09-13T08:00:57.708Z" itemprop="dateUpdated">2021-09-13 08:00:57</time>
+    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
 </span><br>
 
 
@@ -1002,7 +1002,7 @@
     </div>
     <footer>
         <a href="https://blog.gwq5210.com">
-            <img src="/img/logo.jpg" alt="gwq5210">
+            <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
     </footer>
@@ -1027,7 +1027,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -1146,12 +1146,12 @@
     <div class="reward-content">
         
         <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
         </div>
         
         <label class="reward-toggle">
             <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -1205,7 +1205,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>

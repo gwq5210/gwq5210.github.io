@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式之状态模式 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式,状态模式">
+    <meta name="description" content="状态模式概述在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态 当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变 对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做状态判">
+<meta name="keywords" content="设计模式,状态模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之状态模式">
+<meta property="og:url" content="https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="状态模式概述在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态 当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变 对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做状态判">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog.gwq5210.com/images/state.gif">
+<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之状态模式">
+<meta name="twitter:description" content="状态模式概述在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态 当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变 对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做状态判">
+<meta name="twitter:image" content="https://blog.gwq5210.com/images/state.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式之状态模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">设计模式之状态模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-10-22T12:04:33.000Z" itemprop="datePublished" class="page-time">
+  2021-10-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/状态模式/">状态模式</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#状态模式概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">状态模式概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#状态模式定义与特点"><span class="post-toc-number">2.</span> <span class="post-toc-text">状态模式定义与特点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缺点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#状态模式的结构"><span class="post-toc-number">3.</span> <span class="post-toc-text">状态模式的结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#状态模式的实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">状态模式的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境和状态处理对象"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">环境和状态处理对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-设计模式之状态模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式之状态模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-10-22 12:04:33" datetime="2021-10-22T12:04:33.000Z"  itemprop="datePublished">2021-10-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/状态模式/">状态模式</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="状态模式概述"><a href="#状态模式概述" class="headerlink" title="状态模式概述"></a>状态模式概述</h1><p>在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态</p>
+<p>当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变</p>
+<p>对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做状态判断，再进行不同情况的处理</p>
+<p>但是显然这种做法对复杂的状态判断存在天然弊端，条件判断语句会过于臃肿，可读性差，且不具备扩展性，维护难度也大。且增加新的状态时要添加新的 if-else 语句，这违背了“开闭原则”，不利于程序的扩展</p>
+<p>以上问题如果采用“状态模式”就能很好地得到解决。</p>
+<p>状态模式的解决思想是：当控制一个对象状态转换的条件表达式过于复杂时，把相关“判断逻辑”提取出来，用各个不同的类进行表示，系统处于哪种情况，直接使用相应的状态类对象进行处理，这样能把原来复杂的逻辑判断简单化，消除了 if-else、switch-case 等冗余语句，代码更有层次性，并且具备良好的扩展力。</p>
+<h1 id="状态模式定义与特点"><a href="#状态模式定义与特点" class="headerlink" title="状态模式定义与特点"></a>状态模式定义与特点</h1><p>状态（State）模式的定义：对有状态的对象，把复杂的“判断逻辑”提取到不同的状态对象中，允许状态对象在其内部状态发生改变时改变其行为。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>结构清晰，状态模式将与特定状态相关的行为局部化到一个状态中，并且将不同状态的行为分割开来，满足“单一职责原则”。</li>
+<li>将状态转换显示化，减少对象间的相互依赖。将不同的状态引入独立的对象中会使得状态转换变得更加明确，且减少对象间的相互依赖。</li>
+<li>状态类职责明确，有利于程序的扩展。通过定义新的子类很容易地增加新的状态和转换。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>状态模式的使用必然会增加系统的类与对象的个数。</li>
+<li>状态模式的结构与实现都较为复杂，如果使用不当会导致程序结构和代码的混乱。</li>
+<li>状态模式对开闭原则的支持并不太好，对于可以切换状态的状态模式，增加新的状态类需要修改那些负责状态转换的源码，否则无法切换到新增状态，而且修改某个状态类的行为也需要修改对应类的源码。</li>
+</ul>
+<h1 id="状态模式的结构"><a href="#状态模式的结构" class="headerlink" title="状态模式的结构"></a>状态模式的结构</h1><p>状态模式涉及的角色如下</p>
+<ul>
+<li>环境类（Context）角色：也称为上下文，它定义了客户端需要的接口，内部维护一个当前状态，并负责具体状态的切换。</li>
+<li>抽象状态（State）角色：定义一个接口，用以封装环境对象中的特定状态所对应的行为，可以有一个或多个行为。</li>
+<li>具体状态（Concrete State）角色：实现抽象状态所对应的行为，并且在需要的情况下进行状态切换。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/state.gif" alt="状态模式结构图" title>
+                </div>
+                <div class="image-caption">状态模式结构图</div>
+            </figure>
+<h1 id="状态模式的实现"><a href="#状态模式的实现" class="headerlink" title="状态模式的实现"></a>状态模式的实现</h1><p>本例子实现了一个投票的简单例子</p>
+<ul>
+<li>同一个用户可以投一次票，初始状态为正常状态(NormalVoteState)</li>
+<li>成功投票之后，状态转换为重复投票状态(RepeatVoteState)，不能再进行投票</li>
+</ul>
+<p>例子十分简单，具体工程上，可以实现很复杂的状态转换</p>
+<p>核心代码如下，具体可参见代码<a href="https://github.com/gwq5210/learning_notes/blob/main/design_pattern/state.cc" target="_blank" rel="noopener">state.cc</a>和<a href="https://github.com/gwq5210/learning_notes/blob/main/design_pattern/state.h" target="_blank" rel="noopener">state.h</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NormalVoteState::vote</span><span class="params">(VoteManager* manager, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; username)</span> </span>&#123;</span><br><span class="line">  manager-&gt;inc_vote(username);</span><br><span class="line">  manager-&gt;set_state(&amp;VoteManager::repeat_vote_state);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s, 投票成功!\n"</span>, username.c_str());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  VoteManager manager;</span><br><span class="line">  manager.vote(<span class="string">"gwq5210"</span>);</span><br><span class="line">  manager.vote(<span class="string">"gwq5210"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="环境和状态处理对象"><a href="#环境和状态处理对象" class="headerlink" title="环境和状态处理对象"></a>环境和状态处理对象</h2><p>在状态模式中，环境(Context)是持有状态的对象，但是环境(Context)自身并不处理跟状态相关的行为，而是把处理状态的功能委托给了状态对应的状态处理类来处理。</p>
+<p>在具体的状态处理类中经常需要获取环境(Context)自身的数据，甚至在必要的时候会回调环境(Context)的方法，因此，通常将环境(Context)自身当作一个参数传递给具体的状态处理类。</p>
+<p>客户端一般只和环境(Context)交互。客户端可以用状态对象来配置一个环境(Context)，一旦配置完毕，就不再需要和状态对象打交道了。客户端通常不负责运行期间状态的维护，也不负责决定后续到底使用哪一个具体的状态处理对象。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://c.biancheng.net/view/1388.html" target="_blank" rel="noopener">状态模式（详解版）</a></li>
+<li><a href="https://www.cnblogs.com/java-my-life/archive/2012/06/08/2538146.html" target="_blank" rel="noopener">《JAVA与模式》之状态模式</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态模式/">状态模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&title=《设计模式之状态模式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&title=《设计模式之状态模式》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之状态模式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/10/22/设计模式之迭代器模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式之迭代器模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/10/22/STL容器之vector/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL容器之vector</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&title=《设计模式之状态模式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&title=《设计模式之状态模式》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之状态模式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/设计模式之状态模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3aQW7dMAwFwH//S7dAVl3UMh9JIQkwXgWxY2u0kJhHfT7l68/Xdb777/V0N/3byhsWLjw8PLzW0J+upw+c754nJR3oeTwvE4SHh4d3jXceRGXRr0zHZOKennmx4OHh4X0rr049L9+Vd9bv4uHh4f0WXhpbpEM8F+h4eHh4P4GXLuJpyduLEurfXcha8PDw8Mq8tAH2E36+2N/Dw8PDG3TVJwtu/Q31IwXxaPHw8PAu8HpNpsoQJ62vSmQcHMzCw8PDu8A7D7EeE1RIaaSbbhVBVo2Hh4c34O2GBb0tIZ244HAYHh4e3mXeVlhQf09QFvemAA8PD2+VNzku0Fv60/K6MvUvAQQeHh7eKq/y6I0iOz2gkAYcL1k1Hh4e3oCXBq/NOCAswdNQOK678fDw8FZ5aVHbm6b6htGLOR43Bjw8PLwxrxcuzMOCynDTmDjo7+Hh4eENeBVGL6hNA9xegvKymeHh4eFd4NWPC6TU9MPpO+t/hYeHh7fL69Xg6VKeHimoF9wvmwQeHh7eBd7uwr3VgUqpcdaCh4eHt8pLjwJUpmByBCENhfHw8PBu83rbQC8g6B1EGF14eHh4F3i9ILXXpkoPJfQKdzw8PLzbvPRf/cnv65NSn6BSHw8PDw9vlZc2nCqvTp+pk5qBBR4eHt4qr/KZeiGbHr1KJygt7vHw8PBu8+pXfXHfOmSQHrTCw8PDu8dLBzHpN20dL+gV8Xh4eHhbvMmWkEYPleH2WmUvh67w8PDwVnnz41nzLaFepk+mGA8PD2+Xl0YPlYV4EkCkLbGgv4eHh4e3ykuj1XqUMNmj0n3scWPAw8PD+yZevZGfLvSTsBgPDw/vd/HqMetuvy4o8fHw8PCu8XphRO/D84kLtiU8PDy8C7xJA+z8mbWyuDwRn63aHA8PD+//z/8FRf8r8J7nNZgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

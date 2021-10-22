@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>STL容器之vector | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="STL,容器库,顺序容器">
+    <meta name="description" content="vector概述vector是动态连续数组，这不仅意味着vector中的元素在逻辑上相邻，而且也意味着它们在物理上也是相邻的 vector的底层是数组，这也说明必要的时候，vector的元素指针可以当做数组指针来使用 一般的实现中，vector的迭代器就是指针本身 vector元素访问复杂度  随机访问——常数 O(1) 在末尾插入或移除元素——均摊常数 O(1) 插入或移除元素——与到 vect">
+<meta name="keywords" content="STL,容器库,顺序容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL容器之vector">
+<meta property="og:url" content="https://blog.gwq5210.com/2021/10/22/STL容器之vector/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="vector概述vector是动态连续数组，这不仅意味着vector中的元素在逻辑上相邻，而且也意味着它们在物理上也是相邻的 vector的底层是数组，这也说明必要的时候，vector的元素指针可以当做数组指针来使用 一般的实现中，vector的迭代器就是指针本身 vector元素访问复杂度  随机访问——常数 O(1) 在末尾插入或移除元素——均摊常数 O(1) 插入或移除元素——与到 vect">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL容器之vector">
+<meta name="twitter:description" content="vector概述vector是动态连续数组，这不仅意味着vector中的元素在逻辑上相邻，而且也意味着它们在物理上也是相邻的 vector的底层是数组，这也说明必要的时候，vector的元素指针可以当做数组指针来使用 一般的实现中，vector的迭代器就是指针本身 vector元素访问复杂度  随机访问——常数 O(1) 在末尾插入或移除元素——均摊常数 O(1) 插入或移除元素——与到 vect">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">STL容器之vector</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">STL容器之vector</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-10-22T12:02:02.000Z" itemprop="datePublished" class="page-time">
+  2021-10-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vector概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">vector概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vector的实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">vector的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空间配置策略"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">空间配置策略</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存的释放"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">内存的释放</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vector的迭代器失效"><span class="post-toc-number">3.</span> <span class="post-toc-text">vector的迭代器失效</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vector原位构造元素"><span class="post-toc-number">4.</span> <span class="post-toc-text">vector原位构造元素</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vector的特化"><span class="post-toc-number">5.</span> <span class="post-toc-text">vector的特化</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-STL容器之vector"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">STL容器之vector</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-10-22 12:02:02" datetime="2021-10-22T12:02:02.000Z"  itemprop="datePublished">2021-10-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>vector是动态连续数组，这不仅意味着vector中的元素在逻辑上相邻，而且也意味着它们在物理上也是相邻的</p>
+<p>vector的底层是数组，这也说明必要的时候，vector的元素指针可以当做数组指针来使用</p>
+<p>一般的实现中，vector的迭代器就是指针本身</p>
+<p>vector元素访问复杂度</p>
+<ul>
+<li>随机访问——常数 O(1)</li>
+<li>在末尾插入或移除元素——均摊常数 O(1)</li>
+<li>插入或移除元素——与到 vector 结尾的距离成线性 O(n)</li>
+</ul>
+<p>vector有两个特点</p>
+<ul>
+<li>数据连续存储</li>
+<li>空间动态分配</li>
+</ul>
+<p>下边主要针对空间动态分配进行介绍</p>
+<h1 id="vector的实现"><a href="#vector的实现" class="headerlink" title="vector的实现"></a>vector的实现</h1><p>vector的空间是动态分配的，随着元素的增加，vector会自动扩充空间以容纳新元素</p>
+<p>当需要扩充空间时，vector内部会进行如下操作</p>
+<ul>
+<li>分配一块更大的空间</li>
+<li>将原有的数据移动到新的位置</li>
+<li>释放原有空间</li>
+</ul>
+<p>可以看到自动扩充空间涉及到内存分配和元素移动，时间成本很高，需要设计一个合理的数据结构和空间配置策略</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>vector需要表示一块连续存储空间，因此我们需要知道内存的位置，内存的大小和已存储元素的个数</p>
+<p>一个简单的结构如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">vector</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T* start_;</span><br><span class="line">    <span class="keyword">size_t</span> size_;</span><br><span class="line">    <span class="keyword">size_t</span> capacity_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>为了降低内存分配的时间成本，vector的实际空间要比使用的空间要大一些，为将来的元素增加做好准备，为此就需要一个容量来表示当前内存的最大大小</p>
+<h2 id="空间配置策略"><a href="#空间配置策略" class="headerlink" title="空间配置策略"></a>空间配置策略</h2><p>当vector空间满时，新添加元素，会触发自动空间分配，这个时候再分配多少合适呢</p>
+<p>选的扩容太小比如新的大小是当前大小的1.1倍，可能会频繁导致空间分配，如果新的大小是当前大小的3或4倍，可能会导致内存的浪费</p>
+<p>我们先看下主流的实现，gcc新的大小是当前空间大小的2倍，vs是新大小是当前空间大小的1.5倍</p>
+<p>如果选择增长因子为2，可能是最坏的可能，因为它不允许vector重用先前分配好的任何内存，因此选择1.5是一个更好的选择</p>
+<p>如果增长因子为k，则每次分配的内存为，当为2的时候每次分配的内存都比先前分配的所有内存和都大，选择1.5时，则可以在4次分配后重用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C, C*k,  C*k^2, C*k^3, ...</span><br><span class="line">1 + 2^1 + 2^2 + 2^3... + 2^n = 2^(n+1) - 1</span><br></pre></td></tr></table></figure>
+<h2 id="内存的释放"><a href="#内存的释放" class="headerlink" title="内存的释放"></a>内存的释放</h2><p>vector删除元素并不会删除已经申请好的内存，即使vector里已经不包含任何元素</p>
+<p>C++11增加公共成员函数shrink_to_fit，允许释放未使用的内存</p>
+<p>或者通过swap临时变量的方式释放内存</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;().swap(v);</span><br></pre></td></tr></table></figure>
+<h1 id="vector的迭代器失效"><a href="#vector的迭代器失效" class="headerlink" title="vector的迭代器失效"></a>vector的迭代器失效</h1><p>对容器的操作影响了元素的存放位置，称为迭代器失效</p>
+<p>由于vector的实现特点，在发生以下情况时，迭代器和引用都会失效</p>
+<ul>
+<li>容量发生改变</li>
+<li>插入或移除元素后的迭代器(插入或移除元素前的迭代器和引用不会失效)</li>
+</ul>
+<h1 id="vector原位构造元素"><a href="#vector原位构造元素" class="headerlink" title="vector原位构造元素"></a>vector原位构造元素</h1><p>C++11提供以下两个函数来原位构造元素</p>
+<ul>
+<li>emplace</li>
+<li>emplace_back</li>
+</ul>
+<p>这两个函数通过完美转发实现原位构造，相比push_back这一类函数，少了一次拷贝的动作</p>
+<p>实际上，当前的push_back实现会使用move语义，不会进行拷贝</p>
+<h1 id="vector的特化"><a href="#vector的特化" class="headerlink" title="vector的特化"></a>vector的特化</h1><p>STL针对vector<bool>进行了特化，可以提供更优的存储空间，实际上它实现了一个动态bitmap</bool></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zh.cppreference.com/w/cpp/container/vector" target="_blank" rel="noopener">容器库</a></li>
+<li><a href="https://item.jd.com/11821611.html" target="_blank" rel="noopener">STL源码剖析</a></li>
+<li><a href="https://github.com/facebook/folly/blob/main/folly/docs/FBVector.md" target="_blank" rel="noopener">fbvector</a></li>
+<li><a href="https://segmentfault.com/a/1190000040103598" target="_blank" rel="noopener">vector实现原理</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://blog.gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/顺序容器/">顺序容器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&title=《STL容器之vector》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&title=《STL容器之vector》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/STL容器之vector/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之vector》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/10/22/设计模式之状态模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式之状态模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/10/22/STL容器概述/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL容器概述</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&title=《STL容器之vector》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&title=《STL容器之vector》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/STL容器之vector/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之vector》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/&via=https://blog.gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/STL容器之vector/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQY7CMAwF0Ln/pZntSED5tstISV5XCEqax8LYjn9+4uvx53p+//med/dfr5l8a3RhYGAsy3hcXsk9ydaTlfOf5sVTMDAwDmC8e3Byz3U4Tj5NSB/2jIGBgRGka0noTFJADAwMjDnjupTNC+BkNQwMDIxqEZs3xb6RLN5Wi2NgYCzIyLvu///6K+cbGBgYSzHuavfnJWu+TmFXGBgYWzPmrbR8YKL30xRSTwwMjK0ZyeOrSVtSrCZpaDlZxMDA2I6RDzfkj0w2VH3/Q8sPAwNja8YkBFdHTuefjjqFGBgYizOqx5a9hK+3ZiE9xcDAOJIx2Vyv6O0dKmBgYOzNyEfBqgG61xNrPhEDA+MwRn5s2StoJ224qGuIgYGxKSNv908OOBNwNfiWt4uBgbEgo5eQTQ4V5geZb/eMgYGxNSNvulVHH3qDrXlw/zDAioGBsQUjD7XJYER1ndsSTQwMjGMY1aGHXoI4/394sU8MDIytGb3GVl589sYsekcLGBgYpzHuTd2q6WB0bPm8BwwMjAMY1YIzD4jVpLMZ0DEwMA5gVI8Ye+VudEbRGtfAwMDYlfEoXtVCNC+Pm4Vr9R8DAwNjQcZdLf5JgZqXypNgjYGBsTojH624K0xXW3VR3YqBgXEAo9oC63W95mlfc9gCAwPjMEZ1qGuOj4I1BgYGxjiZ67XhCu08DAyMAxj5SFa1cZZ3+PLwioGBcRpjkrpVF50fFeRtOwwMjC0Yv2CLvCq6OV1/AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

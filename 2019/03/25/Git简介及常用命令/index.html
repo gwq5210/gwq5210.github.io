@@ -28,19 +28,19 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅 Git介绍Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog.gwq5210.com/img/存储每个文件和基础版本的差异.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/存储项目随时间变化的快照.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/工作目录，暂存区域以及Git仓库.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/文件状态变化生命周期.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/一个和并提交.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/本地与远程的工作可以分叉.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/变基然后进行快进合并.png">
-<meta property="og:image" content="https://blog.gwq5210.com/img/通过合并操作来整合分叉的历史.png">
-<meta property="og:updated_time" content="2021-09-13T08:00:57.712Z">
+<meta property="og:image" content="https://blog.gwq5210.com/images/存储每个文件和基础版本的差异.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/存储项目随时间变化的快照.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/工作目录，暂存区域以及Git仓库.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/文件状态变化生命周期.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/一个和并提交.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/本地与远程的工作可以分叉.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/变基然后进行快进合并.png">
+<meta property="og:image" content="https://blog.gwq5210.com/images/通过合并操作来整合分叉的历史.png">
+<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git简介及常用命令">
 <meta name="twitter:description" content="前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅 Git介绍Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变">
-<meta name="twitter:image" content="https://blog.gwq5210.com/img/存储每个文件和基础版本的差异.png">
+<meta name="twitter:image" content="https://blog.gwq5210.com/images/存储每个文件和基础版本的差异.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -56,15 +56,15 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
+    <aside id="menu"  >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/logo.jpg">
+          <img src="/images/logo.jpg">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">gwq5210</h5>
@@ -204,14 +204,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/存储每个文件和基础版本的差异.png" alt="存储每个文件和基础版本的差异" title>
+                    <img src="/images/存储每个文件和基础版本的差异.png" alt="存储每个文件和基础版本的差异" title>
                 </div>
                 <div class="image-caption">存储每个文件和基础版本的差异</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/存储项目随时间变化的快照.png" alt="存储项目随时间变化的快照" title>
+                    <img src="/images/存储项目随时间变化的快照.png" alt="存储项目随时间变化的快照" title>
                 </div>
                 <div class="image-caption">存储项目随时间变化的快照</div>
             </figure>
@@ -226,7 +226,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/工作目录，暂存区域以及Git仓库.png" alt="Git仓库，工作目录以及暂存区域" title>
+                    <img src="/images/工作目录，暂存区域以及Git仓库.png" alt="Git仓库，工作目录以及暂存区域" title>
                 </div>
                 <div class="image-caption">Git仓库，工作目录以及暂存区域</div>
             </figure>
@@ -250,7 +250,7 @@
 <h2 id="查看当前文件状态、跟踪新文件和暂存已修改的文件"><a href="#查看当前文件状态、跟踪新文件和暂存已修改的文件" class="headerlink" title="查看当前文件状态、跟踪新文件和暂存已修改的文件"></a>查看当前文件状态、跟踪新文件和暂存已修改的文件</h2><p>工作目录的文件状态不外乎：已跟踪和未跟踪。已跟踪是已纳入版本控制的文件，在上一次快照中有他们的记录，工作过一段时候后，他们的状态可能是未修改，已修改，已暂存状态。除此之外其他文件都属于未跟踪文件<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/文件状态变化生命周期.png" alt="文件状态变化生命周期" title>
+                    <img src="/images/文件状态变化生命周期.png" alt="文件状态变化生命周期" title>
                 </div>
                 <div class="image-caption">文件状态变化生命周期</div>
             </figure></p>
@@ -270,7 +270,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/一个和并提交.png" alt="一个和并提交" title>
+                    <img src="/images/一个和并提交.png" alt="一个和并提交" title>
                 </div>
                 <div class="image-caption">一个和并提交</div>
             </figure>
@@ -279,7 +279,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/本地与远程的工作可以分叉.png" alt="本地与远程的工作可以分叉" title>
+                    <img src="/images/本地与远程的工作可以分叉.png" alt="本地与远程的工作可以分叉" title>
                 </div>
                 <div class="image-caption">本地与远程的工作可以分叉</div>
             </figure>
@@ -290,14 +290,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/变基然后进行快进合并.png" alt="变基然后进行快进合并" title>
+                    <img src="/images/变基然后进行快进合并.png" alt="变基然后进行快进合并" title>
                 </div>
                 <div class="image-caption">变基然后进行快进合并</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/img/通过合并操作来整合分叉的历史.png" alt="通过合并操作来整合分叉的历史" title>
+                    <img src="/images/通过合并操作来整合分叉的历史.png" alt="通过合并操作来整合分叉的历史" title>
                 </div>
                 <div class="image-caption">通过合并操作来整合分叉的历史</div>
             </figure>
@@ -311,7 +311,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-09-13T08:00:57.712Z" itemprop="dateUpdated">2021-09-13 08:00:57</time>
+    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
 </span><br>
 
 
@@ -319,7 +319,7 @@
     </div>
     <footer>
         <a href="https://blog.gwq5210.com">
-            <img src="/img/logo.jpg" alt="gwq5210">
+            <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
     </footer>
@@ -344,7 +344,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -463,12 +463,12 @@ Git介绍Git实际上是一..." data-title=" QQ">
     <div class="reward-content">
         
         <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
         </div>
         
         <label class="reward-toggle">
             <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
             <div class="reward-toggle-ctrol">
                 <span class="reward-toggle-item wechat">微信</span>
                 <span class="reward-toggle-label"></span>
@@ -522,7 +522,7 @@ Git介绍Git实际上是一..." data-title=" QQ">
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://blog.gwq5210.com/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
