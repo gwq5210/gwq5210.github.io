@@ -24,16 +24,16 @@
 <meta name="keywords" content="STL,设计模式,迭代器模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式之迭代器模式">
-<meta property="og:url" content="https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/index.html">
+<meta property="og:url" content="https://gwq5210.com/2021/10/22/设计模式之迭代器模式/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="迭代器模式实际编程中，我们经常需要访问容器对象中的各个元素，比如遍历链表中的元素通常的做法是将链表的创建和遍历都放在同一个类中，但这种方式不利于程序的扩展，如果要更换遍历方法就必须修改程序源代码，这违背了 “开闭原则”。 既然将遍历方法封装在容器类中不可取，那么容器类中不提供遍历方法，将遍历方法由用户自己实现是否可行呢？答案是同样不可取，因为这种方式会存在两个缺点：  暴露了容器类的内部表示，使其">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog.gwq5210.com/images/iterator.gif">
-<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
+<meta property="og:image" content="https://gwq5210.com/images/iterator.gif">
+<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之迭代器模式">
 <meta name="twitter:description" content="迭代器模式实际编程中，我们经常需要访问容器对象中的各个元素，比如遍历链表中的元素通常的做法是将链表的创建和遍历都放在同一个类中，但这种方式不利于程序的扩展，如果要更换遍历方法就必须修改程序源代码，这违背了 “开闭原则”。 既然将遍历方法封装在容器类中不可取，那么容器类中不提供遍历方法，将遍历方法由用户自己实现是否可行呢？答案是同样不可取，因为这种方式会存在两个缺点：  暴露了容器类的内部表示，使其">
-<meta name="twitter:image" content="https://blog.gwq5210.com/images/iterator.gif">
+<meta name="twitter:image" content="https://gwq5210.com/images/iterator.gif">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -242,14 +242,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
+    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://blog.gwq5210.com">
+        <a href="https://gwq5210.com">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -275,7 +275,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -285,22 +285,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之迭代器模式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&via=https://blog.gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之迭代器模式》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&via=https://gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -445,7 +445,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -455,22 +455,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&title=《设计模式之迭代器模式》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之迭代器模式》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/&via=https://blog.gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式之迭代器模式》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/&via=https://gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/22/设计模式之迭代器模式/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -481,7 +481,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3a0WrDMAwF0Pz/T3evg7XOlWSHDk6eCsscnxRs90rXFV+v+Pp9f/J5/b9/77xOXHh4eHhbp75+wKf78ydW55Dfj4eHh3ea92kS66HXd67HT9jJfG6ehYeHh/cFvOpRe47Bw8PD+++89fE630iSDSPffvDw8PCe502CgAl7PYf1OJuzFjw8PLzOKXe0QD/5+Uh9Dw8PD29rQ0A1xs0X+l2bwZtx8PDw8A7w8gU3j2UnLQXJaOV54uHh4W3lJZOobhj5COtCVzX8fTMmHh4e3jHerkaBZEuoHr6rs9pQPcPDw8MLePmg86W/99fmK8DDw8M7wKu2BYzi1Di6TSKSQsCBh4eHd4yXTGjDMbfYbDrfNvDw8PD28iaP6W0tzW8gfmV4eHh4p3mToLZX5q8WsXpRSLOBFQ8PD2+wZlaL+kn4W204mLQv3BTD8PDw8Aa8fIGeFMaqMUT1+/n4yvDw8PCO8fJi0q6C1iQITgKO6PyOh4eHN+ZVY9ZqeSyPEnqBSNRThoeHh7eJNylrzctmvXA2CT7w8PDwzvF60W0eEOSw/CnRE/Hw8PAO85pR6fil9FoKCj1leHh4eI/wqkHtPGjoxbg3M8TDw8M7xktihWpE24tfq5vTTdsWHh4e3gFer1Q/aavqxR95MazcJYGHh4fX4lWX+2ohahL+5gFxtPvh4eHhHeDljQK9Y25OSlpmo58EeHh4eMd4k6HziLbaXnDFV/RbAQ8PD2/MexWvZKLJ5KrxcbWR62N9Dw8PD2/Mm+8q1bBgPkIvNMHDw8Pby+sVmaoF/vwl9iKSmxgXDw8P7wCv97Akis1fVm/vuhkNDw8P78t48yatZIuatDvg4eHhfSevutD3Cml5xIyHh4f3DK96LM4P071jcbVt62ZjwMPDw9vK2xWw5g/IWxPmUQUeHh7eVt4PTLPQdTzKZk4AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3awY7DIAxF0f7/T2e2I1XQ+wwdDeayitImcLKwwPbrhcfzNt7v/74zenb05vmdbUOGDBnHMp7pmDPSiQlpPu/wDTJkyLiAMQ+F8+nJe0ZBmfyK5pIhQ4YMEGr5gshWUoYMGTJWGJzHhwwZMmQQBjnEkqc4g4fszWdxGTJkHMjgabK/v/5KfUOGDBlHMZ7S4KXKlUNssB4ZMmS0ZqQNE3xTyN/Mw7oMGTLuZKwfGtNn07Qd+XAyZMi4h5EeHdc3kQQ2LwYMd7gyZMhoxODNqWTiWuhMS5XDp2TIkNGUUSsl1o6+JHDXDskyZMi4gbGrAEACca1p9cPmVYYMGa0ZJEGfBtM0icYbYeO2DBkyZDRlpEVHnpnnJYH0wCxDhowbGGk4e8KRps+KrRsyZMhoyuAp/l3NE+mi0bUMGTJaM4o1z62tqOv3ZciQ0ZvBgylZEA/c6Yf7MJcMGTIuYOwKmrXywEqb7FdivwwZMv4xg4fFlF1ryAhmlyFDRmtGDbn+n1o3V+3jypAh43RG2pjF02Hr5YHgA8mQIaM1o5Y4q6Xy1zd/KOzKkCGjHeMJB3k1X24tnTdMt8mQIaMpYz1BnybX0gPqhnSbDBkyWjDIlPyaNEnsbR2TIUPGPYxagZPEvTTpn8ZVGTJkyEi3a2m4rJU8ZciQIWOlaSz9KGkZ4CtbQxkyZBzCqDVVpCXJtCFjW5VDhgwZhzP40TH9D2/aIMm7DdUPGTJknMf4AXUcnpwBSvSxAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 

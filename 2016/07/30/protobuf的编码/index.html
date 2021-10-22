@@ -24,11 +24,11 @@
 <meta name="keywords" content="protobuf,编码方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="protobuf的编码">
-<meta property="og:url" content="https://blog.gwq5210.com/2016/07/30/protobuf的编码/index.html">
+<meta property="og:url" content="https://gwq5210.com/2016/07/30/protobuf的编码/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:42:43.303Z">
+<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="protobuf的编码">
 <meta name="twitter:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
@@ -312,14 +312,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:42:43.303Z" itemprop="dateUpdated">2021-10-22 06:42:43</time>
+    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://blog.gwq5210.com">
+        <a href="https://gwq5210.com">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -345,7 +345,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -355,22 +355,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&source=这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&source=这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《protobuf的编码》 — gwq5210's Blog&url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&via=https://blog.gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《protobuf的编码》 — gwq5210's Blog&url=https://gwq5210.com/2016/07/30/protobuf的编码/&via=https://gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -522,7 +522,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -532,22 +532,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&source=这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2016/07/30/protobuf的编码/&title=《protobuf的编码》 — gwq5210's Blog&source=这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《protobuf的编码》 — gwq5210's Blog&url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/&via=https://blog.gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《protobuf的编码》 — gwq5210's Blog&url=https://gwq5210.com/2016/07/30/protobuf的编码/&via=https://gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2016/07/30/protobuf的编码/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -558,7 +558,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQY6EMAwFUe5/aUbq7YhQ34ZFTGXVGtEhrxcex/Zx4HX+Fn/y/yI7k+dbS4YMGdsyzuW6etkVb70DIV196+ankSFDxgcYaShcv4x8i/yFnE2GDBkyyDNpSsdhMmTIkFELuDxopiFbhgwZMtYMcoldM8iheYr54l1chgwZGzI6ydzbn1/sb8iQIWMTxhmuWhG/9nMEp5IhQ8ZoBi/Wd16cXo/T1oIMGTK+w6iV/mujFRwZJIsyZMgYyuiPbXWK/nHp/+oMMmTIGM3gR0wLYbWj8/ELGTJkfJNRq72nCSJPItNALEOGjKmMTqmLp27pBThudsqQIWM0I02/+IvTtI8Pit0kiDJkyBjH4C3Jzos7hTy0pwwZMj7J4MkfGYZIW5vpeIcMGTJmM9LUrZ8U8tGxB+ZHZMiQMYjBi2j8IloLta3ALUOGjKGMM1zpwATfh7cBgv6GDBkyhjLSIn7n6LVWAQq4MmTIGMSodTv7AxnpbgQmQ4aMqYw07eOjY2kBLv3Lkf7eMmTI2JyRfuapYfFSmhbsZMiQMZpRa1KmqSTZpxOgZciQMZtRawx0BsJqY2c3e8qQIWM0gy8+hJFeRPlB0YVWhgwZQxk8yKblfg7jARe1MGXIkDGU0WkuPtxTxRfg1v8EGTJkDGW0AiIeIEuvxzJkyJDRGb9Ik8u0LVFMDWXIkLEt4+1rZ+3J4LsyZMgYzahdIB8e6go7GEWMDBky9mP8AaDa+giPPVEqAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3aSW7DMBAEQP//0845MOR0D+UAJounQJAlVQ6D2R6P+Dwvzus9yf2vv716zs0HAwPjaxnPt+f1nvxKwru6J/82DAyMcxjvA1/+mjzg5uwoKGNgYGDEj86DchuIMTAwMFpGkhTm4XX2L8PAwDiN0TbI8lKzTf4+XotjYGB8ISPvuv//3x+Zb2BgYHwV41meZADQDixnX/LrLRgYGFsz1l+TNN2SZ67/FgMD4zTGSqOtXadIWmnJFQwMjDMZ97a9Elhy5fLLMTAwtma0i1/Jo/P07rZlCwwMjK0Zs2RuJaFsC+NodQMDA2NTRr7osIJZeWYUgjEwMLZm3Bv47loCa0tfDAyMkxnFosNCk25WEkcZLgYGxhaMtq3WFqL5/W2j7XKygYGBsTWjhbUfd1cjr97OwMDA2IiRF6JtI6wNwTUPAwNja0a7ZtG23pIPzRt8dZ6LgYGxEWOWOOZhemVI2b4RAwNjV8b6AGBGTQB5qoqBgXEOo23Kt6OFPLEbFrEYGBhbM2ZJW16s5gVwQsLAwDiTMWt+5cXnLIvLm3oYGBi7Mp7lWVmwaFPAgoqBgbE1466R4UrhmowNhutiGBgYGzGScDl79CxEDpcwMDAwDmC0BepshHlv2YyBgYHRrkEkZWcbyousFgMDAyNut7XDgLYl98d8AwMDY2tGUsS2S6UtMi+DMTAwTmPMliqStG8WfD841MTAwPg+xg8RJfAuMl8XpQAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
