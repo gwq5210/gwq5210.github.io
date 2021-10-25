@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="C语言笔记变量相关：  C99以前的C要求在一个代码块的开始处声明变量。 声明语句为变量创建，标定存储空间并为其制定初始值。 C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。 C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint3">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言笔记">
 <meta name="twitter:description" content="C语言笔记变量相关：  C99以前的C要求在一个代码块的开始处声明变量。 声明语句为变量创建，标定存储空间并为其制定初始值。 C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。 C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint3">
@@ -205,7 +205,7 @@
 </li>
 </ol>
 <p>当两个运算符共享一个操作数的时候，优先级规定了求值顺序。例如，12既是<em>运算符的操作数，又是+运算符的操作数，根据优先级的规定乘法运算先进行。与之类似，优先级规定了对5进行乘法操作而不是加法操作。总之，两个乘法操作在加法操作之前进行。但是优先级并没有确定的是这两个乘法运算中到底那个先进行。C将这个选择权留给实现者，这是因为可能一种选择在一种硬件上效率更高，而另一种选择在另一种硬件上效率更高。但是不管先执行那个乘法运算，表达式都会简化成72+100。虽然乘法运算符的结合性是从左到右，但因为两个\</em>运算符不共享一个操作数，所以从左到右的规则对它并不适用。也就是说结合规则适用于共享同一操作数的运算符。</p>
-<ol>
+<ol start="2">
 <li>对于参数传递，参数的求值顺序也是不确定的。所以，下边的语句的结果在不同的系统上可能会产生不同的结果。<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"%d %d\n"</span>, num, num * num++);</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"%d\n"</span>, n++ + n++);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -370,7 +370,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.024Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

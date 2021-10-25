@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="protobuf的编码">
 <meta name="twitter:description" content="这篇文章介绍protobuf消息的二进制格式。你在你的应用中使用protobuf不必了解这些，但是它可以更好的让你知道protobuf的编码格式是怎样影响你编码后消息的大小的。 一个简单的消息比方说，你有一个非常简单的消息定义：123message Test1 &amp;#123;	required int32 a = 1;&amp;#125; 在一个应用中，如果你创建一个Test1的消息，将a设置成150，然后">
@@ -197,7 +197,6 @@
 <h2 id="消息结构"><a href="#消息结构" class="headerlink" title="消息结构"></a>消息结构</h2><p>正如你了解到的，protobuf消息是一系列key-value的组合，二进制格式的消息，仅仅使用字段数字作为key，这个key的名称和声明的类型可以在解码时引用消息类型定义得到，如proto文件。</p>
 <p>当编码消息时，键和值会组合成字节流。解析的时候，解析器需要能够跳过不能解析的字段。这样的话，新的字段加入的时候，较老的程序就不必修改，它可以不使用这些字段。这样，每个键值对编码成二进制的时候就会有两个值，一个是proto文件中的字段数字，另一个是能够提供值长度的二进制类型。</p>
 <p>可用的二进制类型如下表：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -239,13 +238,11 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>在序列化后的消息中，每一个key是类似这样的varint：(field_number &lt;&lt; 3) | wire_type，换句话说，低3位用来存储二进制类型。</p>
 <p>现在让我们来看看开始提到的那个例子，现在知道序列化后的消息中，第一个数字永远是varint，这里是08，丢弃msb之后：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">000 </span><span class="number">1000</span></span><br></pre></td></tr></table></figure></p>
 <p>取出低3位得到二进制类型0，右移3位后得到字段数字1。因此，我们知道了标签为1的值是varint，也就是说接下来的序列是varint，使用varint编码规则我们可以得到接下来的两个字节96 01存储的是150：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">96</span> <span class="number">01</span> = <span class="number">1001</span> <span class="number">0110</span>  <span class="number">0000</span> <span class="number">0001</span></span><br><span class="line">       → <span class="number">000</span> <span class="number">0001</span>  ++  <span class="number">001</span> <span class="number">0110</span> (drop the msb and reverse the groups of <span class="number">7</span> bits)</span><br><span class="line">       → <span class="number">10010110</span></span><br><span class="line">       → <span class="number">2</span> + <span class="number">4</span> + <span class="number">16</span> + <span class="number">128</span> = <span class="number">150</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="更多值得类型"><a href="#更多值得类型" class="headerlink" title="更多值得类型"></a>更多值得类型</h2><h3 id="有符号整数"><a href="#有符号整数" class="headerlink" title="有符号整数"></a>有符号整数</h3><p>正如前面提到的，和wire类型0关联的值都被编码成varint。然而，对于有符号整数（sint32和sint64）与一般整数（int32和int64）的一个很重要的不同点是它们对负数编码的处理。如果你使用int32或int64表示负数，那么这个varint总是10个字节长——它被当做一个非常大的无符号数。如果你使用任意一个有符号数，那么varint将会使用ZigZag编码，它对负数编码更有效率。</p>
 <p>ZigZag编码将有符号整数映射到无符号整数，这样它的绝对值就很小，相应的varint编码长度也比较小。zig-zags在正数和负数之间来回交叉进行编码，-1编码是当做1,1在编码是当做2，-2编码成3，等等：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -280,7 +277,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>换句话说，n在sint32的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 31)，在sint64的时候被编码为(n &lt;&lt; 1) ^ (n &gt;&gt; 63)。</p>
 <p>运算的第二部分，(n&gt;&gt;31)是算术右移，也就是说，如果n是正数，右移补的位为0，否则是1。</p>
 <p>当sint32或sint64解析的时候，会解析成原来得数字。</p>
@@ -312,7 +308,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.028Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

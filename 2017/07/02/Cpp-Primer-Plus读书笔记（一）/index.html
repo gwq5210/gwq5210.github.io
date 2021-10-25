@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp Primer Plus读书笔记（一）">
 <meta property="og:url" content="https://gwq5210.com/2017/07/02/Cpp-Primer-Plus读书笔记（一）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.728Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp Primer Plus读书笔记（一）">
 <meta name="twitter:description" content="第一章 预备知识C++简介C++融合了三种不同的编程方式：  C语言代表的过程性语言 以类为代表的面向对象于艳 模板支持的泛型编程  面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。">
@@ -196,7 +196,6 @@
 <p>C++提供两种注释的方式//(C++)或/**/(C)。C99标准在C语言中加入了//注释。</p>
 <p>#include编译指令会让预处理器添加指定文件内容到程序中。</p>
 <p>不同的头文件名可被不同的程序使用。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -233,7 +232,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>C++中可以使用命名空间来避免名字冲突。可以使用using编译指令来使用命名空间中的函数或类对象。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
 <p>cout中，可以使用endl和”\n”表示换行符。不同的是endl确保程序继续运行前刷新输出，使用”\n”不能提供这样的保证。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!\n"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
 <p>尽量遵循好的C++代码风格，程序会便于阅读。</p>
@@ -273,7 +271,6 @@
 <p>实际上，short是short int的简称，long是long int的简称</p>
 <p>sizeof运算符返回类型或变量的长度，单位为字节<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span> a &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 变量可以这样写，类型必须加括号</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(<span class="keyword">int</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
 <p>头文件climits(limits.h)定义了符号常量来表示类型的限制</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -356,7 +353,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>C++支持类似C的符号常量，其进行简单的字符串替换。C++还提供了const来定义符号常量</p>
 <p>C++提供了不同于C的初始化方式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">b</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> c&#123;<span class="number">2</span>&#125;;		<span class="comment">// C++ 11</span></span><br><span class="line"><span class="keyword">int</span> d = &#123;<span class="number">3</span>&#125;;	<span class="comment">// C++ 11</span></span><br><span class="line"><span class="keyword">int</span> e = &#123;&#125;;		<span class="comment">// set to 0</span></span><br><span class="line"><span class="keyword">int</span> f&#123;&#125;;		<span class="comment">// set to 0</span></span><br></pre></td></tr></table></figure></p>
 <p>无符号类型整数不能存储负数，但可以增大变量能够存储的整数的最大值</p>
@@ -504,7 +500,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.728Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.024Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

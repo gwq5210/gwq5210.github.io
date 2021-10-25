@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="读书笔记,unix,linux,APUE">
+    <meta name="keywords" content="unix,linux,读书笔记,APUE">
     <meta name="description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
-<meta name="keywords" content="读书笔记,unix,linux,APUE">
+<meta name="keywords" content="unix,linux,读书笔记,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
 <meta property="og:url" content="https://gwq5210.com/2017/07/12/APUE笔记-一/index.html">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://gwq5210.com/images/i节点和数据块详细图.jpg">
 <meta property="og:image" content="https://gwq5210.com/images/各种函数对三种时间的影响.png">
 <meta property="og:image" content="https://gwq5210.com/images/文件访问权限位小结.png">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.728Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而且位于环">
@@ -239,7 +239,7 @@
 <li>与文件或目录无关的运行时限制(sysconf函数)</li>
 <li>与文件或目录有关的运行时限制(pathconf或fpathconf函数)</li>
 </ul>
-<p>ISO C定义的所有编译时限制都在头文件<limits.h>中。这些限制在一个给定的系统中并不会改变。我们将会遇到的一个问题是系统是否提供带符号或无符号的字符值，可以通过其中定义的值确定。另一个ISO C的常量是FOPEN_MAX，这是具体实现保证可同时打开的标准IO流的最小个数，其在头文件<stdio.h>中定义，最小值是8。POSIX.1中的STREAM_MAX则应与其相同。头文件stdio.h中还定义了TMP_MAX，这是由tmpnam函数产生的唯一文件名的最大个数。在ISO C中虽然定义了常量FILENAME_MAX，但我们应该避免使用。POSIX.1提供了更好的代替常量NAME_MAX和PATH_MAX。</stdio.h></limits.h></p>
+<p>ISO C定义的所有编译时限制都在头文件&lt;limits.h&gt;中。这些限制在一个给定的系统中并不会改变。我们将会遇到的一个问题是系统是否提供带符号或无符号的字符值，可以通过其中定义的值确定。另一个ISO C的常量是FOPEN_MAX，这是具体实现保证可同时打开的标准IO流的最小个数，其在头文件&lt;stdio.h&gt;中定义，最小值是8。POSIX.1中的STREAM_MAX则应与其相同。头文件stdio.h中还定义了TMP_MAX，这是由tmpnam函数产生的唯一文件名的最大个数。在ISO C中虽然定义了常量FILENAME_MAX，但我们应该避免使用。POSIX.1提供了更好的代替常量NAME_MAX和PATH_MAX。</p>
 <p>POSIX可以分为7类：</p>
 <ul>
 <li>数值限制：LONG_BIT，SSIZE_MAX，WORD_BIT </li>
@@ -282,7 +282,6 @@
 </ul>
 <p>如果在编译程序时，希望它只与POSIX的定义有关，而不与任何实现定义的常量冲突，那么需要定义常量_POSIX_C_SOURCE，一旦定义了该常量，所有POSIX.1的头文件都是用此常量来排除任何实现专有的定义。可以在编译时指定该常量</p>
 <p>头文件sys/types.h中定义了某些与实现有关的数据类型，它们被称为基本系统数据类型(primitive system data type)，它们使用C语言的typedef定义，大多使用_t结尾，用这种方式定义了这些数据类型时，就不需要考虑因系统不同而变化的程序实现细节。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -377,7 +376,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h1 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h1><p>UNIX系统大多数的文件IO只需要5个函数：open，read，write，lseek，close。对于read和write不同缓冲区对读取性能有一定影响。这些函数常被称为不带缓冲的IO。属于不带缓冲指的是每个read和write都调用内核中的一个系统调用。如果在多个进程之间共享资源，我们需要了解原子操作。</p>
 <p>对内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。</p>
 <h2 id="open函数"><a href="#open函数" class="headerlink" title="open函数"></a>open函数</h2><p>调用open或openat可以打开或创建一个文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode */</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">openat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode */</span>)</span></span>;</span><br></pre></td></tr></table></figure></p>
@@ -523,7 +521,6 @@
 <li>符号链接（symbolic link）。这种类型的文件指向另一个文件。</li>
 </ul>
 <p>文件类型信息包含在stat结构的st_mode成员中。可以使用宏来确定文件类型。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -562,7 +559,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>POSIX.1允许将进程间通信的对象说明为文件。例如消息队列，信号量，共享内存对象。</p>
 <p>对于宏的实现，一般是将st_mode与屏蔽字S_IFMT进行&amp;运算，然后与对应常量比较，判断是否为特定文件类型。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define S_ISDIR(<span class="name">mode</span>) (((<span class="name">mode</span>) &amp; SIFMT) == SIFDIR)</span><br></pre></td></tr></table></figure></p>
 <h2 id="设置用户ID和设置组ID"><a href="#设置用户ID和设置组ID" class="headerlink" title="设置用户ID和设置组ID"></a>设置用户ID和设置组ID</h2><p>与一个进程相关的ID有6个或更多：</p>
@@ -577,7 +573,6 @@
 <p>设置用户ID和设置组ID可以使用S_ISUID和S_ISGID测试。</p>
 <h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><p>st_mode也包含了对文件的文件权限位。这里的文件是前面提到的任何类型的文件。所有文件类型都有访问权限。</p>
 <p>每个文件有9个访问权限位，可以分为三组</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -624,7 +619,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>前三行用户指的是文件的所有者。我们可以使用chmod来修改文件的访问权限。</p>
 <p>对于访问权限以各种方式由不同函数使用。</p>
 <ul>
@@ -660,7 +654,6 @@
 <p>fchmodat函数在两种情况下与chmod函数一样：一种是pathname参数为绝对路径；另一种是fd参数取值为AT_FDCWD且pathname参数为相对路径。否则fchmodat相对于fd打开的目录来计算pathname。flag参数可以改变fchmodat的行为，当设置了AT_SYMLINK_NOFOLLOW时，fchmodat不跟随符号链接。</p>
 <p>为了改变一个文件的权限位，进程的有效用户ID必须等于文件所有者ID，或者该进程具有超级用户权限</p>
 <p>参数mode由以下值按位或</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -731,7 +724,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>chmod函数在下列条件下自动清除两个权限位：</p>
 <ul>
 <li>Solaris等系统对于普通文件的粘着位赋予了特殊含义在这些系统上，如果我们尝试设置普通文件的粘着位(S_ISVTX)，而且又没有超级用户权限，那么mode中的粘着位自动被关闭。这意味着只有超级用户才能设置普通文件的粘着位。这样做是防止恶意用户设置粘着位，影响系统性能。</li>
@@ -815,7 +807,6 @@
 </ul>
 <p>对符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可以创建指向目录的符号链接。</p>
 <p>当使用以名字引用文件的函数时，应当了解函数是否处理符号链接。也就是是否跟随符号链接到达它所链接的文件。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -898,7 +889,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>open的一个例外是，如果同时用O_CREAT和O_EXCL两个标志，如果路径引用符号链接，open函数将出错，errno设置为EEXIST，这种处理是意图堵塞一个安全漏洞，以防止具有特权的进程被诱骗编写错误的文件</p>
 <h2 id="创建和读取符号链接"><a href="#创建和读取符号链接" class="headerlink" title="创建和读取符号链接"></a>创建和读取符号链接</h2><p>可以使用symlink或symlinkat函数创建一个符号链接<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>函数创建了一个指向actualpath的新目录项sympath，在创建符号链接时，并不要求actualpath存在，也不需要在同一个文件系统中。</p>
@@ -906,7 +896,6 @@
 <p>open函数跟随符号链接，所以提供了readlink和readlinkat函数来读取符号链接本身<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readlinkat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="built_in">size</span> bufsize)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>两个函数组合了open，read，close的所有操作。readlinkat以fd作为相对路径。</p>
 <h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><p>对于每个文件维护三个时间</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -937,7 +926,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -994,7 +982,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.728Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.024Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta property="og:url" content="https://gwq5210.com/2017/07/09/Cpp-Primer-Plus读书笔记（二）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（二）">
 <meta name="twitter:description" content="循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：  设置初始值 执行测试，看看循环是否应该继续执行 执行循环操作 更新用于测试的值12for (initialization; test-expression; update-expression)	body   C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一">
@@ -200,14 +200,13 @@
 <p>但是C++的for循环允许这样做：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="number">5</span>; <span class="built_in">i</span>++)</span><br><span class="line">	printf(<span class="string">"%d\n"</span>, <span class="built_in">i</span>);</span><br></pre></td></tr></table></figure></p>
 <p>这很方便，但是不符合原来的语法，因为声明不是表达式。现在则使用下边的语句：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">for</span>-init-statement <span class="keyword">condition</span>; <span class="keyword">expression</span>)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure></p>
 <p>在for-init-statement中声明变量其实还有有用的一面，这也是该知道的。这种变量只存在与for循环中，当程序离开循环，这种变量将消失</p>
-<p>在循环中经常使用递增运算符（++）和递减运算符（—）。这两种运算符执行两种极其常用的循环操作：将循环计数器加1或减1。这两个运算符都有两种变体。前缀版本位于操作数前面，如++x；后缀版本位于操作数后面，如x++。两个版本对操作数的影响是一样的，但是影响的时间不同。粗略的讲a++意味着使用a的当前值计算表达式，然后将a的值加1；而++b的意思是先将b的值加1，然后使用新的值来计算表达式。</p>
+<p>在循环中经常使用递增运算符（++）和递减运算符（–）。这两种运算符执行两种极其常用的循环操作：将循环计数器加1或减1。这两个运算符都有两种变体。前缀版本位于操作数前面，如++x；后缀版本位于操作数后面，如x++。两个版本对操作数的影响是一样的，但是影响的时间不同。粗略的讲a++意味着使用a的当前值计算表达式，然后将a的值加1；而++b的意思是先将b的值加1，然后使用新的值来计算表达式。</p>
 <p>递增运算符和递减运算符都是漂亮的小型运算符，不过千万不要失去控制，在同一条语句对同一个值递增或递减多次。问题在于规则使用后修改和修改后使用可能会变得模糊不清。也就是说，下面这条语句在不同的系统上将生成不同的结果：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x</span> = <span class="number">2</span> * x++ * (<span class="number">3</span> - ++x)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
 <p>对于这种语句，C++没有定义正确的行为</p>
 <p>副作用是指在计算表达式时对某些东西进行了修改；顺序点是程序执行过程中的一个点，在这里，进入下一步之前将确保所有的副作用都进行了评估。在C++中语句中的分号就是一个顺序点，这意味着程序在处理下一条语句之前，赋值运算符、递增运算符和递减运算符执行的所有修改都必须完成。本章后边将讨论的有些操作也有顺序点。另外任何完整的表达式末尾都是一个顺序点。完整表达式是这样一个表达式：不是另一个更大表达式的子表达式</p>
 <p>前缀格式和后缀格式的执行速度可能存在细微的差别，对于内置类型和当代的编译器而言，这看似不是什么问题。然而C++允许你针对类定义这些运算符，这种情况下，前缀格式的效率更高</p>
 <p>可以将递增或递减运算符用于指针和基本变量。也可以结合使用这些运算符和*运算符来修改指针指向的值。前缀递增、前缀递减和解除引用运算符的优先级相同，以从右到左的方式结合。后缀递增和后缀递减的优先级相同，但比前缀运算符的优先级高，这两个运算符以从左到右的方式进行结合。*++p的含义如下：先将++应用于pt，然后将*应用于被递增后的pt，另一方面++*pt意味着先取得pt指向的值，然后将这个值加1。(*p)++，圆括号指出首先对指针解除引用，然后再进行递增。*pt++后缀运算符++的优先级更高，这意味着将运算符应用于pt而不是*pt。</p>
 <p>可以使用组合赋值运算符来进行赋值：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -238,7 +237,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>C++使用花括号来构造一条复合语句（代码块）。代码块由一对花括号和它们包含的语句组成，被视为一条语句，从而满足句法的要求</p>
 <p>复合语句还有一个有趣的特性，如果在语句块中定义一个新的变量，则仅当程序执行该语句块中的语句时，该变量才存在。执行完毕该语句块后，变量将被释放。</p>
 <p>在外部语句块中定义的变量在内部语句块中也是被定义了的。</p>
@@ -246,7 +244,6 @@
 <p>逗号表达式允许将两个表达式放到C++句法只允许放一个表达式的地方。逗号并不总是逗号运算符，在声明中的逗号是分隔符</p>
 <p>逗号表达式还有其他特性。首先，它确保先计算第一个表达式，然后计算第二个表达式，即逗号运算符是一个顺序点；其次，C++规定逗号表达式的值是第二部分的值</p>
 <p>C++提供了6种关系运算符来对数字进行比较：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -281,7 +278,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>关系运算符的优先级比算符运算符低</p>
 <p>不要混淆等于运算符（==）与赋值运算符（=）</p>
 <p>C风格字符串比较，不能直接使用等于运算符进行比较，这样比较的是两个字符串的地址。对于string类字符串，可以直接使用等于运算符进行比较</p>
@@ -324,7 +320,6 @@
 <p>C++确保程序从左到右进行计算逻辑表达式，并在知道答案后立刻停止</p>
 <p>并不是所有键盘都提供了用作逻辑运算符的符号，因此C++标准提供了另一种表示方式。标识符and，or，not都是C++保留字，这意味着不能将它们用作变量名等。它们不是关键字，因为它们都是已有语言特性的另一种表示方式。另外它们不是C的保留字。但C语言可以将它们用作运算符，只要包含了iso646.h头文件，C++并不要求头文件</p>
 <p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，可以简化确定字母，数字等的工作。函数原型在cctype中。使用这些函数更加通用，例如在有的系统上，可能字母并不是连续编码的</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -387,7 +382,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>C++有一个常被用来代替if else语句的运算符，这个运算符被称为条件运算符(?:)，它是C++中唯一一个需要3个操作数的运算符<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expressio<span class="symbol">n1</span>?expressio<span class="symbol">n2</span>:expressio<span class="symbol">n3</span>;</span><br></pre></td></tr></table></figure></p>
 <p>如果expression1为true，则整个表达式的值为expression2，否则，表达式的值为expression3</p>
 <p>switch语句提供了分支选择的另一种方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(integer expression)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</span><br><span class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</span><br><span class="line">  <span class="keyword">case</span> <span class="string">label1:</span> statement(s)</span><br><span class="line">  ...</span><br><span class="line"><span class="symbol">  defaule:</span> statement(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -515,7 +509,6 @@
 <li>用户定义的转换，如类声明中定义的转换</li>
 </ul>
 <p>进行完全匹配时，C++允许某些无关紧要的转换。Type本身可以是char &amp;这样的类型。Type(argument-list)意味着用作实参的函数名与用作形参的函数指针只要返回类型和参数列表相同，就是匹配的</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -558,7 +551,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">f(a);</span><br><span class="line"><span class="comment">// 下面都是完全匹配的</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> &amp;)</span></span>;</span><br><span class="line"><span class="keyword">void</span> (<span class="keyword">const</span> <span class="keyword">int</span> &amp;);</span><br></pre></td></tr></table></figure></p>
 <p>有的时候即使两个函数都完全匹配，仍可以完成重载解析。首先，指向非const数据的指针和引用优先与非const指针和引用参数匹配。在上面示例中，如果只定义了函数3和4，则使用函数3。这种区别只适用于指针和引用指向的数据，如果只定义了函数1和2，将出现二义性错误。</p>
 <p>另一种情况是其中一个是非模板函数，而另一个不是。这种情况下非模板函数优先于模板函数(包括显式具体化)。如果两个完全匹配的函数都是模板函数，则较具体的模板函数优先。例如：显式具体化将优于使用模板隐式生成的具体化。</p>
@@ -619,7 +611,6 @@
 </ul>
 <p>这三种链接性都在整个程序执行期间存在。编译器分配固定的内存块来存储所有的静态变量。如果静态变量没有显示的初始化，编译器将把它设置为0。</p>
 <p>所有的静态持续变量都有下述初始化特征：未被初始化的静态变量的所有位都被设置为0，这种变量被称为零初始化的。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -668,7 +659,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>除了默认的零初始化外，还可对静态变量进行常量表达式初始化和动态初始化。零初始化和常量表达式初始化被统称为静态初始化。这意味着在编译器处理文件时初始化变量。动态初始化意味着变量在编译后初始化。</p>
 <p>C++11新增了关键字constexpr，这增加了创建常量表达式的方式。</p>
 <h3 id="静态持续性、外部链接性"><a href="#静态持续性、外部链接性" class="headerlink" title="静态持续性、外部链接性"></a>静态持续性、外部链接性</h3><p>链接性为外部的变量通常简称为外部变量，它们的存储持续性为静态，作用域为整个文件。外部变量是在函数外定义的，因此对所有函数而言都是外部的。</p>
@@ -722,7 +712,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.024Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

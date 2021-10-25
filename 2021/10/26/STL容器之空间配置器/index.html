@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>STL容器之空间配置器 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="STL,空间配置器">
+    <meta name="description" content="空间配置器从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了 allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间 在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器 allocator包含以下类型  value_type：T poin">
+<meta name="keywords" content="STL,空间配置器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL容器之空间配置器">
+<meta property="og:url" content="https://gwq5210.com/2021/10/26/STL容器之空间配置器/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="空间配置器从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了 allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间 在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器 allocator包含以下类型  value_type：T poin">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL容器之空间配置器">
+<meta name="twitter:description" content="空间配置器从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了 allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间 在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器 allocator包含以下类型  value_type：T poin">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">STL容器之空间配置器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">STL容器之空间配置器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-10-26T00:12:46.000Z" itemprop="datePublished" class="page-time">
+  2021-10-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/STL/">STL</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/STL/空间配置器/">空间配置器</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#空间配置器"><span class="post-toc-number">1.</span> <span class="post-toc-text">空间配置器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#空间配置器在STL容器中的应用"><span class="post-toc-number">2.</span> <span class="post-toc-text">空间配置器在STL容器中的应用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#未初始化内存算法的实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">未初始化内存算法的实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-STL容器之空间配置器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">STL容器之空间配置器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-10-26 00:12:46" datetime="2021-10-26T00:12:46.000Z"  itemprop="datePublished">2021-10-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/STL/">STL</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/STL/空间配置器/">空间配置器</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h1><p>从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了</p>
+<p>allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间</p>
+<p>在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器</p>
+<p>allocator包含以下类型</p>
+<ul>
+<li>value_type：T</li>
+<li>pointer (C++17 中弃用)(C++20 中移除)：T*</li>
+<li>const_pointer (C++17 中弃用)(C++20 中移除)：const T*</li>
+<li>reference (C++17 中弃用)(C++20 中移除)：T&amp;</li>
+<li>const_reference (C++17 中弃用)(C++20 中移除)：const T&amp;</li>
+<li>size_type：std::size_t</li>
+<li>difference_type：std::ptrdiff_t</li>
+</ul>
+<p>allocator主要包含以下成员函数</p>
+<ul>
+<li>allocate：分配未初始化的存储</li>
+<li>deallocate：解分配存储</li>
+<li>construct(C++17 中弃用)(C++20 中移除)：在分配的存储构造对象</li>
+<li>destroy (C++17 中弃用)(C++20 中移除)：析构在已分配存储中的对象</li>
+</ul>
+<p>在C++的头文件<code>&lt;memory&gt;</code>中定义了一些与未初始化内存相关的函数，在STL容器的实现中，起到了很大的作用，如construct_at(C++20)，uninitialized_copy，uninitialized_fill等</p>
+<h1 id="空间配置器在STL容器中的应用"><a href="#空间配置器在STL容器中的应用" class="headerlink" title="空间配置器在STL容器中的应用"></a>空间配置器在STL容器中的应用</h1><p>STL容器的实现思想中，实际上将空间的分配/释放和对象的构造/析构进行了拆分：空间配置器负责空间的分配/释放；<code>&lt;memory&gt;</code>中的未初始化内存相关的函数负责对象构造/析构，移动等</p>
+<p>能够实现上述拆分，主要由于C++的以下特性</p>
+<ul>
+<li>operator new只进行内存分配，不进行对象构造</li>
+<li>placement new是operator new的一个特殊版本，在已分配的内存上构造对象</li>
+<li>new关键字的作用是：调用operator new，并调用对象的构造函数</li>
+</ul>
+<p>以下两种代码实际上是等价的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  Test(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name): name_(name) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"construct %s\n"</span>, name_.c_str());</span><br><span class="line">  &#125;</span><br><span class="line">  ~Test() &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"destroy %s\n"</span>, name_.c_str());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> name_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 代码1</span></span><br><span class="line">    <span class="keyword">auto</span>* t = <span class="keyword">new</span> Test(<span class="string">"new_test"</span>);</span><br><span class="line">    <span class="keyword">delete</span> t;</span><br><span class="line">  &#125;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 代码2</span></span><br><span class="line">    <span class="keyword">void</span>* p = ::<span class="keyword">operator</span> <span class="keyword">new</span>(<span class="keyword">sizeof</span>(Test));</span><br><span class="line">    <span class="keyword">auto</span>* t = <span class="keyword">reinterpret_cast</span>&lt;Test*&gt;(p);</span><br><span class="line">    t-&gt;Test::Test(<span class="string">"allocator_test"</span>);</span><br><span class="line">    <span class="comment">// auto* t = new (p) Test("allocator_test"); // placement new</span></span><br><span class="line">    t-&gt;~Test();</span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">construct new_test</span></span><br><span class="line"><span class="comment">destroy new_test</span></span><br><span class="line"><span class="comment">construct allocator_test</span></span><br><span class="line"><span class="comment">destroy allocator_test</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h1 id="未初始化内存算法的实现"><a href="#未初始化内存算法的实现" class="headerlink" title="未初始化内存算法的实现"></a>未初始化内存算法的实现</h1><p>有了上述基础，可以实现简单的未初始化内存的算法，更多实现参见<a href="https://github.com/gwq5210/gtl/blob/main/gtl/algorithm/gtl_memory.h" target="_blank" rel="noopener">gtl_memory.h</a></p>
+<p>construct_at用到了std::forward的完美转发（C++11），两次强制转换是为了除去cv限定符</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 在给定地址 p 创建以参数 args... 初始化的 T 对象</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function">T* <span class="title">construct_at</span><span class="params">(T* p, Args&amp;&amp;... args)</span> </span>&#123;</span><br><span class="line">  ::<span class="keyword">new</span> (<span class="keyword">const_cast</span>&lt;<span class="keyword">void</span>*&gt;(<span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">volatile</span> <span class="keyword">void</span>*&gt;(p))) T(<span class="built_in">std</span>::forward&lt;Args&gt;(args)...);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 销毁指针p指向的对象</span></span><br><span class="line"><span class="comment"> * 若 T 不是数组类型，则调用 p 所指向对象的析构函数，如同用 p-&gt;~T()</span></span><br><span class="line"><span class="comment"> * 若 T 是数组类型，则按顺序递归地销毁 *p 的元素，如同通过调用 std::destroy(std::begin(*p), std::end(*p))</span></span><br><span class="line"><span class="comment"> * C++17 version:</span></span><br><span class="line"><span class="comment"> * template&lt;class T&gt; void destroy_at(T* p) &#123; p-&gt;~T(); &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param p 指向要被销毁的对象的指针</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy_at</span><span class="params">(T* p)</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="built_in">std</span>::is_array_v&lt;T&gt;)</span> </span>&#123;  <span class="comment">// C++ 20</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; v : *p) &#123;</span><br><span class="line">      gtl::destroy_at(gtl::addressof(v));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    p-&gt;~T();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, <span class="keyword">typename</span> ForwardIt&gt;</span><br><span class="line"><span class="function">ForwardIt <span class="title">uninitialized_copy_range</span><span class="params">(InputIt first, InputIt last, ForwardIt d_first, <span class="built_in">std</span>::input_iterator_tag,</span></span></span><br><span class="line"><span class="function"><span class="params">                                   <span class="built_in">std</span>::forward_iterator_tag)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (; first != last; ++first, ++d_first) &#123;</span><br><span class="line">    gtl::construct_at(gtl::addressof(*d_first), *first);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> d_first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, <span class="keyword">typename</span> SizeType, <span class="keyword">typename</span> ForwardIt&gt;</span><br><span class="line"><span class="function">ForwardIt <span class="title">uninitialized_copy_range_n</span><span class="params">(InputIt first, SizeType count, ForwardIt d_first, <span class="built_in">std</span>::input_iterator_tag,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     <span class="built_in">std</span>::forward_iterator_tag)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (; count &gt; <span class="number">0</span>; ++first, ++d_first, --count) &#123;</span><br><span class="line">    gtl::construct_at(gtl::addressof(*d_first), *first);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> d_first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 复制来自范围 [first, last) 的元素到始于 d_first 的未初始化内存</span></span><br><span class="line"><span class="comment"> * 若初始化中抛异常，则以未指定顺序销毁已构造的对象</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return ForwardIt 指向最后复制的元素后一元素的迭代器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">TODO:</span> 处理异常的情况</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, <span class="keyword">typename</span> ForwardIt&gt;</span><br><span class="line"><span class="function">ForwardIt <span class="title">uninitialized_copy</span><span class="params">(InputIt first, InputIt last, ForwardIt d_first)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">using</span> input_iterator_category = <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;InputIt&gt;::iterator_category;</span><br><span class="line">  <span class="keyword">using</span> forward_iterator_category = <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;ForwardIt&gt;::iterator_category;</span><br><span class="line">  <span class="keyword">return</span> gtl::uninitialized_copy_range(first, last, d_first, input_iterator_category(), forward_iterator_category());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://item.jd.com/11821611.html" target="_blank" rel="noopener">STL源码剖析</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/memory/allocator" target="_blank" rel="noopener">std::allocator</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-10-25T16:25:29.028Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/空间配置器/">空间配置器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/10/26/STL容器之list/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">STL容器之list</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/10/26/设计模式之适配器模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设计模式之适配器模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3asXKEMAxF0f3/nyZNisxsDPdJUCBfqswCtg+FIln+fPB1/Lm+f+ncXc31eeKSIUPGaxnH6XXOWI2QPsPfWn4CGTJkbMA4D3zfz/DpyV0+7/J3GTJkyAgDIsHzMC1DhgwZNcZqiaQAJtWoDBkyZPSDIEnvCIAklDfX4jJkyHghoxMEn/77kf6GDBkyXsU4woukhrWitLae39FkyJAxmsEDXJrq1casvStDhox9GJ0DXrWwy7fSSANVhgwZ+zDIRlhacKYfiKeVMmTI2IGRNibTlgAPmrxU/ueuDBkyRjM6Bx04mIzAk0gU7mXIkDGIkR6GqE2ZLitdjwwZMnZgpBv6tTBde/c8GQ0yXBkyZIxgpAGU7+cFO384iVzW4jJkyBjH4JlVujXWGacWfGXIkLEDg09JDnLxYpW3EC4KWhkyZGzASA919bf4SQgOeDJkyBjKSI9qdQ518eI23viTIUPGaEb/kESn2VlbdGu7TYYMGSMYtYKTb43VUs/4yIUMGTKGMvqJ4BMBOhhBhgwZGzBqRyV4Lcnbn7WPIkOGjB0YPPyl78YLSstXGTJkjGZ0jlPww1uExAvgixamDBkyxjE6wS6djDyZJqYyZMjYh5EujqeDtW/Jg3WxMSBDhozXMnjg62+lpekj+l8hQ4YMGaXweldTQYYMGTLuZaRthrR5edEekCFDxmhGmuSRZXWaBPFoMmTIGM1IS0c+Gd9KSzf7Wv0NGTJkvInxA3a7qHYGB5fFAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

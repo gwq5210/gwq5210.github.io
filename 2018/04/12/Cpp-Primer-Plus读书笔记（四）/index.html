@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+    <meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
     <meta name="description" content="C++中的代码重用C++的一个主要目标是促进代码重用。 包含对象成员的类valarray是由头文件valarray定义，其用于处理数值通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现 对于模板类我们可以使用typedef简化其描述 使用成员初始化列表来初始化包含的类对象。">
-<meta name="keywords" content="c++,Cpp Primer Plus,读书笔记">
+<meta name="keywords" content="读书笔记,c++,Cpp Primer Plus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp-Primer-Plus读书笔记（四）">
 <meta property="og:url" content="https://gwq5210.com/2018/04/12/Cpp-Primer-Plus读书笔记（四）/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="C++中的代码重用C++的一个主要目标是促进代码重用。 包含对象成员的类valarray是由头文件valarray定义，其用于处理数值通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现 对于模板类我们可以使用typedef简化其描述 使用成员初始化列表来初始化包含的类对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp-Primer-Plus读书笔记（四）">
 <meta name="twitter:description" content="C++中的代码重用C++的一个主要目标是促进代码重用。 包含对象成员的类valarray是由头文件valarray定义，其用于处理数值通常用于建立has-a关系的C++技术是组合(包含)，即创建一个包含其他类对象的类使用组合可以获得实现，但不获得接口，共有继承可以获得接口，可能还有实现 对于模板类我们可以使用typedef简化其描述 使用成员初始化列表来初始化包含的类对象。">
@@ -192,7 +192,7 @@
 <p>在私有继承中，在不进行显式类型转换的情况下，不能将指向派生类的引用或指针赋给基类引用或指针。在多重继承情况下，不进行强制类型转换也无法确定应转换成哪个类。然而即使公有继承也必须进行强制类型抓换。</p>
 <h3 id="使用包含还是私有继承"><a href="#使用包含还是私有继承" class="headerlink" title="使用包含还是私有继承"></a>使用包含还是私有继承</h3><p>使用包含更容易理解，继承会引起多个问题，尤其是使用多重继承的情况下，另外还可能需要包含类的多个子对象</p>
 <p>通常应使用包含来实现has-a，如果新类要访问原有类的保护成员，或需要重新定义虚函数，则应使用私有继承</p>
-<h3 id="保护继承"><a href="#保护继承" class="headerlink" title="保护继承"></a>保护继承</h3><p>保护继承是私有继承的变体，其使用关键字protected<br>在使用保护继承时，基类的共有成员和保护成员都将成为派生类的保护成员。和私有继承一样，基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的，当从派生类派生出另一个类时，私有继承和保护继承之间的主要区别就呈现出来了，使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的共有方法在派生类中将变成私有方法，使用保护继承时，基类的共有方法在第二代类中将变成受保护的，因此第三代类可以使用它们。隐式向上转换(implicit upcasting)意味着无需进行显式类型转换，就可以将基类指针或引用指向派生类对象。如下表<br>| 特征  | 共有继承 | 保护继承 | 私有继承 |<br>| —— | —— | —— | —— |<br>| 公有成员变成 | 派生类的公有成员 | 派生类的保护成员 | 派生类的私有成员 |<br>| 保护成员变成 | 派生类的保护成员 | 派生类的保护成员 | 派生类的私有成员 |<br>| 私有成员变成 | 只能通过基类接口访问 | 只能通过基类接口访问 | 只能通过基类接口访问 |<br>| 能否隐式向上转换 | 是 | 是(但只能在派生类中) | 否 |</p>
+<h3 id="保护继承"><a href="#保护继承" class="headerlink" title="保护继承"></a>保护继承</h3><p>保护继承是私有继承的变体，其使用关键字protected<br>在使用保护继承时，基类的共有成员和保护成员都将成为派生类的保护成员。和私有继承一样，基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的，当从派生类派生出另一个类时，私有继承和保护继承之间的主要区别就呈现出来了，使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的共有方法在派生类中将变成私有方法，使用保护继承时，基类的共有方法在第二代类中将变成受保护的，因此第三代类可以使用它们。隐式向上转换(implicit upcasting)意味着无需进行显式类型转换，就可以将基类指针或引用指向派生类对象。如下表<br>| 特征  | 共有继承 | 保护继承 | 私有继承 |<br>| —- | —- | —- | —- |<br>| 公有成员变成 | 派生类的公有成员 | 派生类的保护成员 | 派生类的私有成员 |<br>| 保护成员变成 | 派生类的保护成员 | 派生类的保护成员 | 派生类的私有成员 |<br>| 私有成员变成 | 只能通过基类接口访问 | 只能通过基类接口访问 | 只能通过基类接口访问 |<br>| 能否隐式向上转换 | 是 | 是(但只能在派生类中) | 否 |</p>
 <h4 id="使用using重新定义访问权限"><a href="#使用using重新定义访问权限" class="headerlink" title="使用using重新定义访问权限"></a>使用using重新定义访问权限</h4><p>使用保护派生或私有派生时，假设要使基类的方法在派生类外可用，方法之一是定义一个使用该基类方法的派生类方法，如<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> Student::sum() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> std::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>另一种方法是，将函数调用包装在另一个函数调用中，即使用一个using声明来指出派生类可以使用基类特定的基类成员，即使采用的是私有派生，注意，using声明只使用成员名，没有圆括号，函数特征标和返回值，这使得所有成员名的方法都可用，其只适用于继承，不适用于包含。<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span> <span class="keyword">private</span> <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">private</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">min</span>;</span><br><span class="line">    <span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">max</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h2>
@@ -202,7 +202,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.024Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

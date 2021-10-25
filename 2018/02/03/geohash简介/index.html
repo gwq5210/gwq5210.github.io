@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="前言最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。 geohash介绍geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geoha">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-10-22T06:46:41.732Z">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="geohash简介">
 <meta name="twitter:description" content="前言最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。 geohash介绍geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geoha">
@@ -194,7 +194,6 @@
 <p>使用geohash有两个优点：一是用geohash索引的数据表示的是一个矩形区域中所有的点，在数据库中单个索引的效率也比多个索引高；二是我们可以使用geohash来进行快速但不精确的查询：geohash相近的字符串也有相近的距离。</p>
 <h1 id="算法和例子"><a href="#算法和例子" class="headerlink" title="算法和例子"></a>算法和例子</h1><p>geohash的字符串其实是<a href="https://en.wikipedia.org/wiki/Base32" target="_blank" rel="noopener">base32</a>的结果。<br>我们用ws104来作为例子说明如何从geohash解析成经纬度。</p>
 <p>先使用base32对字符串ws104进行解码。<br>下面是base32的字符表：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -289,13 +288,11 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>由此可以得到ws104对应的二进制串是：11100 11000 00001 00000 00100</p>
 <p>从左边开始数从0开始，偶数位是经度(1101 0001 0001 0)，奇数位是维度(1010 0000 0000)</p>
 <p>这些二进制数从左到右对经纬度进行一系列分解，对于维度其范围在-90到90度，对于经度其范围在-180到180度。0表示较小的部分，1表示较大的部分。经度第一位是1，因此经度的范围在0到180度的范围内。我们依次进行此操作，对于维度的操作一样。</p>
 <p>这样我们也可以理解为什么geohash字符串长度越长，表示的数据越准确。</p>
 <p>下面是对维度进行分解的数据：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -419,10 +416,8 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>因此这个位置的维度在范围22.500到22.5439453125之间，误差为0.02197265625。</p>
 <p>同理可以算出经度范围在113.994140625到114.0380859375之间，误差为0.02197265625。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -555,9 +550,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>下面我们给出geohash字符串长度跟精度的关系</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -636,7 +629,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h1 id="使用上的限制"><a href="#使用上的限制" class="headerlink" title="使用上的限制"></a>使用上的限制</h1><h2 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h2><p>前面提到我们可以通过前缀匹配来大致的寻找附近的点。但是，这不是总能够成立的。</p>
 <p>南极和北极的地点相近但是它们的经度差别很大，没有相同的前缀；在180度子午线(经线)两侧的地点，距离很近，但是在不同的区域内，也不会有相同的前缀。同样的，划分的区域边界，也存在类似的情况。</p>
 <h2 id="非线性的距离"><a href="#非线性的距离" class="headerlink" title="非线性的距离"></a>非线性的距离</h2><p>由于geohash是基于经纬度坐标的距离进行计算，两个geohash点映射出来的距离并不是真实的距离。这是因为我们很难将球体上的坐标映射到一个均匀的二维空间。</p>
@@ -649,7 +641,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2021-10-22T06:46:41.732Z" itemprop="dateUpdated">2021-10-22 06:46:41</time>
+    Last updated: <time datetime="2021-10-25T16:25:29.028Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
 </span><br>
 
 

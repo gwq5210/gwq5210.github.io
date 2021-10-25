@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>STL容器之list | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="STL,容器库,链表">
+    <meta name="description" content="list概述不同于vector，list的元素在逻辑上相邻，但是在物理内存上是不相邻的，正因为如此，它们之间通过前后指针进行关联 同时list也不会浪费空间(实际上会多占用前后指针的空间)，有多少个元素就占用多少空间 list的元素插入是常数级别，但无法想vector一样实现随机元素访问 在list内添加，删除或移动元素不会导致已有迭代器失效或引用非法，对应元素被删除时该迭代器失效或引用非法 li">
+<meta name="keywords" content="STL,容器库,链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL容器之list">
+<meta property="og:url" content="https://gwq5210.com/2021/10/26/STL容器之list/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="list概述不同于vector，list的元素在逻辑上相邻，但是在物理内存上是不相邻的，正因为如此，它们之间通过前后指针进行关联 同时list也不会浪费空间(实际上会多占用前后指针的空间)，有多少个元素就占用多少空间 list的元素插入是常数级别，但无法想vector一样实现随机元素访问 在list内添加，删除或移动元素不会导致已有迭代器失效或引用非法，对应元素被删除时该迭代器失效或引用非法 li">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gwq5210.com/images/list.png">
+<meta property="og:updated_time" content="2021-10-25T16:25:29.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL容器之list">
+<meta name="twitter:description" content="list概述不同于vector，list的元素在逻辑上相邻，但是在物理内存上是不相邻的，正因为如此，它们之间通过前后指针进行关联 同时list也不会浪费空间(实际上会多占用前后指针的空间)，有多少个元素就占用多少空间 list的元素插入是常数级别，但无法想vector一样实现随机元素访问 在list内添加，删除或移动元素不会导致已有迭代器失效或引用非法，对应元素被删除时该迭代器失效或引用非法 li">
+<meta name="twitter:image" content="https://gwq5210.com/images/list.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">STL容器之list</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">STL容器之list</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-10-26T00:15:25.000Z" itemprop="datePublished" class="page-time">
+  2021-10-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#list概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">list概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#list的实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">list的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#list节点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">list节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#list结构"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">list结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#list的迭代器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">list的迭代器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-STL容器之list"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">STL容器之list</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-10-26 00:15:25" datetime="2021-10-26T00:15:25.000Z"  itemprop="datePublished">2021-10-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="list概述"><a href="#list概述" class="headerlink" title="list概述"></a>list概述</h1><p>不同于vector，list的元素在逻辑上相邻，但是在物理内存上是不相邻的，正因为如此，它们之间通过前后指针进行关联</p>
+<p>同时list也不会浪费空间(实际上会多占用前后指针的空间)，有多少个元素就占用多少空间</p>
+<p>list的元素插入是常数级别，但无法想vector一样实现随机元素访问</p>
+<p>在list内添加，删除或移动元素不会导致已有迭代器失效或引用非法，对应元素被删除时该迭代器失效或引用非法</p>
+<h1 id="list的实现"><a href="#list的实现" class="headerlink" title="list的实现"></a>list的实现</h1><h2 id="list节点"><a href="#list节点" class="headerlink" title="list节点"></a>list节点</h2><p>list本身和list的节点是不同的结构，常见的list节点如下，包含前后指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要实现一个通用的链表需要使用模板类</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">ListNode</span> &#123;</span></span><br><span class="line">  ListNode* prev;</span><br><span class="line">  ListNode* next;</span><br><span class="line">  T data;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="list结构"><a href="#list结构" class="headerlink" title="list结构"></a>list结构</h2><p>在STL的list实现中，list不仅是一个双向链表，还是一个环形双向链表</p>
+<p>实现list的一个技巧是添加一个虚拟的空白节点，让list的end迭代器指向该空白节点，既符合STL迭代器前闭后开的要求，也方便了编程的实现</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/list.png" alt="list" title>
+                </div>
+                <div class="image-caption">list</div>
+            </figure>
+<p>代码如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  List() &#123;</span><br><span class="line">    dummy_head_ = node_allocator::allocate(); <span class="comment">// 分配一个空间，不设置值</span></span><br><span class="line">    dummy_head_-&gt;prev = dummy_head_; <span class="comment">// 头尾都指向自己</span></span><br><span class="line">    dummy_head_-&gt;next = dummy_head_;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">iterator <span class="title">begin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> dummy_head_-&gt;next; &#125; <span class="comment">// begin是next节点</span></span><br><span class="line">  <span class="function">iterator <span class="title">end</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> dummy_head_; &#125; <span class="comment">// end是虚拟节点自身</span></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  ListNode&lt;T&gt;* dummy_head_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="list的迭代器"><a href="#list的迭代器" class="headerlink" title="list的迭代器"></a>list的迭代器</h2><p>由于list的特殊实现方式，因此我们需要实现一个list的迭代器，允许用户遍历list中保存的元素</p>
+<p>迭代器的表现类似指针，list的迭代器是双向迭代器，支持++和–操作，同时要实现*和-&gt;运算符</p>
+<p>典型的实现如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">ListIteratorBase</span> &#123;</span></span><br><span class="line">  <span class="keyword">using</span> iterator_category = <span class="built_in">std</span>::bidirectional_iterator_tag;</span><br><span class="line">  <span class="keyword">using</span> Self = ListIteratorBase;</span><br><span class="line">  ListNode&lt;T&gt;* node;</span><br><span class="line">  ListIteratorBase() : node(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">  ListIteratorBase(ListNode&lt;T&gt;* n) : node(n) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ++it;</span></span><br><span class="line">  Self&amp; <span class="keyword">operator</span>++() &#123;</span><br><span class="line">    node = node-&gt;next;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// it++;</span></span><br><span class="line">  Self <span class="keyword">operator</span>++(<span class="keyword">int</span>) &#123;</span><br><span class="line">    ListNode&lt;T&gt;* ret = node;</span><br><span class="line">    node = node-&gt;next;</span><br><span class="line">    <span class="keyword">return</span> Self(ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// --it;</span></span><br><span class="line">  Self&amp; <span class="keyword">operator</span>--() &#123;</span><br><span class="line">    node = node-&gt;prev;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// it++;</span></span><br><span class="line">  Self <span class="keyword">operator</span>--(<span class="keyword">int</span>) &#123;</span><br><span class="line">    ListNode&lt;T&gt;* ret = node;</span><br><span class="line">    node = node-&gt;prev;</span><br><span class="line">    <span class="keyword">return</span> Self(ret);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  reference <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> node-&gt;data; &#125;</span><br><span class="line">  <span class="comment">// *(*this) *this即为迭代器本身，则第一个*为调用迭代器的operator*，返回数据的引用</span></span><br><span class="line">  pointer <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123; <span class="keyword">return</span> <span class="built_in">std</span>::pointer_traits&lt;pointer&gt;::pointer_to(**<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> Self&amp; other) <span class="keyword">const</span> &#123; <span class="keyword">return</span> node == other.node; &#125;</span><br><span class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> Self&amp; other) <span class="keyword">const</span> &#123; <span class="keyword">return</span> node != other.node; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zh.cppreference.com/w/cpp/container/list" target="_blank" rel="noopener">容器库</a></li>
+<li><a href="https://item.jd.com/11821611.html" target="_blank" rel="noopener">STL源码剖析</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-10-25T16:25:29.028Z" itemprop="dateUpdated">2021-10-25 16:25:29</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/链表/">链表</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/26/STL容器之list/&title=《STL容器之list》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/26/STL容器之list/&title=《STL容器之list》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/26/STL容器之list/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之list》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/26/STL容器之list/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/26/STL容器之list/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/10/26/STL容器之deque/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">STL容器之deque</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/10/26/STL容器之空间配置器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL容器之空间配置器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/10/26/STL容器之list/&title=《STL容器之list》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/10/26/STL容器之list/&title=《STL容器之list》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/10/26/STL容器之list/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之list》 — gwq5210's Blog&url=https://gwq5210.com/2021/10/26/STL容器之list/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/10/26/STL容器之list/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQY6DMAwF0N7/0sy2ElP0bZcZkbysqhZoHgsr8c/rFY/jNN6/v77+fOX51/O9rzsGBgbGYxnH5civuZ5Q8uTkro//i4GBsQEjmcT1hJJfk5KaF3QMDAyMa0Z10klhxcDAwLij4CYb1+r2FQMDA2Oyia02zpIC+g97cQwMjAcy8q7733++Jd/AwMB4FOMojqRo9paGx2BgYGCszcgLXL5E64Wa+ULz45UYGBgbMPIW2B2rsusXkWx9MTAw9mHkTfleCa620pIlKQYGxtqMapt+0j5Limwz7MTAwNiAkRfN6z/rPa36Cn75jIGBsTSj2mLrRY/5IYnq0Y1mwImBgbEcY3I44xqWICchBAYGxnqMvPnVa6v1XlZ1DhgYGOsx8tjyuy22SQxQOC2CgYGxBGMSNFaXes18NXjdGBgY+zAmf3BfCe7xMDAw1mPMj3nNi2n1cEaUY2BgYCzEqMaHkwizF20W7sLAwFiUMS+p1V+T+GG0C8fAwFiUkTflq0c0egvH8rYWAwNjA0YSA1Q3ltUDHL2nYWBg7MOoHuRKGnO9AAADAwPj/QlHcVTDzjy2TO79OAcMDIylGXfEnJNN7GTTi4GBsTZjMrlqDPCFrHW+Y8bAwHgsIy981bCzGpH2ZouBgYGRl9HeljXnYWBgYFQbann+MFkyRk1ADAyMDRj5kYjqga3ekbJ8DhgYGDswqlvHXjCZt+qSYj3KNzAwMJ7E+AFvJPoIpdHymAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
