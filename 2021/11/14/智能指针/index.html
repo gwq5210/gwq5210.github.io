@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>智能指针 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="智能指针">
+    <meta name="description" content="RAII了解智能指针前，我们先了解下C++编程中常用的RAII的思想 RAII全称为Resource Acquisition is Initialization，直译就是资源获取即初始化。 它的思想是将必须在使用前获取的资源（堆内存，线程，文件，互斥锁等）与一个对象的声明周期绑定，常用做法是在构造函数中请求资源，在析构函数中释放资源 以上由C++的语言机制保证，当对象创建的时候，自动调用构造函数，">
+<meta name="keywords" content="智能指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能指针">
+<meta property="og:url" content="https://gwq5210.com/2021/11/14/智能指针/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="RAII了解智能指针前，我们先了解下C++编程中常用的RAII的思想 RAII全称为Resource Acquisition is Initialization，直译就是资源获取即初始化。 它的思想是将必须在使用前获取的资源（堆内存，线程，文件，互斥锁等）与一个对象的声明周期绑定，常用做法是在构造函数中请求资源，在析构函数中释放资源 以上由C++的语言机制保证，当对象创建的时候，自动调用构造函数，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-11-14T12:25:26.296Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="智能指针">
+<meta name="twitter:description" content="RAII了解智能指针前，我们先了解下C++编程中常用的RAII的思想 RAII全称为Resource Acquisition is Initialization，直译就是资源获取即初始化。 它的思想是将必须在使用前获取的资源（堆内存，线程，文件，互斥锁等）与一个对象的声明周期绑定，常用做法是在构造函数中请求资源，在析构函数中释放资源 以上由C++的语言机制保证，当对象创建的时候，自动调用构造函数，">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">智能指针</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">智能指针</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-14T20:18:54.000Z" itemprop="datePublished" class="page-time">
+  2021-11-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/智能指针/">智能指针</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#RAII"><span class="post-toc-number">1.</span> <span class="post-toc-text">RAII</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#智能指针概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">智能指针概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#auto-ptr使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">auto_ptr使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#auto-ptr实现"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">auto_ptr实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#unique-ptr使用"><span class="post-toc-number">4.</span> <span class="post-toc-text">unique_ptr使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#unique-ptr实现"><span class="post-toc-number">5.</span> <span class="post-toc-text">unique_ptr实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#shared-ptr和weak-ptr使用"><span class="post-toc-number">6.</span> <span class="post-toc-text">shared_ptr和weak_ptr使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#shared-ptr和weak-ptr实现"><span class="post-toc-number">7.</span> <span class="post-toc-text">shared_ptr和weak_ptr实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">8.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-智能指针"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">智能指针</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-14 20:18:54" datetime="2021-11-14T20:18:54.000Z"  itemprop="datePublished">2021-11-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/智能指针/">智能指针</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h1><p>了解智能指针前，我们先了解下C++编程中常用的RAII的思想</p>
+<p>RAII全称为Resource Acquisition is Initialization，直译就是资源获取即初始化。</p>
+<p>它的思想是将必须在使用前获取的资源（堆内存，线程，文件，互斥锁等）与一个对象的声明周期绑定，常用做法是在构造函数中请求资源，在析构函数中释放资源</p>
+<p>以上由C++的语言机制保证，当对象创建的时候，自动调用构造函数，当对象超出作用域的时候会自动调用析构函数</p>
+<p>智能指针就是使用RAII思想的例子</p>
+<h1 id="智能指针概述"><a href="#智能指针概述" class="headerlink" title="智能指针概述"></a>智能指针概述</h1><p>智能指针本质是模板类独享，其行为类似指针。其最主要的功能是帮助管理动态内存，防止发生内存泄漏</p>
+<p>C++提供了四种智能指针</p>
+<ul>
+<li>auto_ptr(C++11废弃，C++17移除)</li>
+<li>unique_ptr(C++11)：独占智能指针</li>
+<li>shared_ptr(C++11)：引用计数智能指针</li>
+<li>weak_ptr(C++11)：弱引用智能指针，解决shared_ptr的循环引用，不能访问直接访问对象</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">10.0</span>))</span></span>;</span><br><span class="line">  <span class="comment">// p析构时自动释放内存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>auto_ptr是C++98提供的，现已废弃，应使用unique_ptr或shared_ptr替代</p>
+<p>考虑如下情况，将p赋值给p2会发生什么？</p>
+<p>按照常规指针的做法，p2和p会指向同一个对象，但是如果这样，p2和p在析构时会释放两次内存，这当然是不可行的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">10.0</span>))</span></span>;</span><br><span class="line">  <span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; p2;</span><br><span class="line">  p2 = p; <span class="comment">// 会发生什么</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>针对以上问题，有如下解决方案</p>
+<ul>
+<li>执行深拷贝，但这会造成两个指针指向不同对象</li>
+<li>建立所有权（ownership）的概念，仅可以让一个智能指针拥有该对象，该智能指针析构时执行内存释放操作。赋值操作将所有权转移。<ul>
+<li>auto_ptr和unique_ptr都采用此策略，unique_ptr的策略更加严格</li>
+</ul>
+</li>
+<li>使用引用计数，记录有多少个智能指针指向该对象，当引用计数变为0时，执行内存释放操作<ul>
+<li>shared_ptr采用此策略</li>
+</ul>
+</li>
+</ul>
+<h1 id="auto-ptr使用"><a href="#auto-ptr使用" class="headerlink" title="auto_ptr使用"></a>auto_ptr使用</h1><ul>
+<li>不要将同一个原生指针赋值给多个智能指针</li>
+<li>auto_ptr对象的复制构造和赋值会转移所有权</li>
+<li>作为参数不要按值传递</li>
+<li>auto_ptr不支持数组</li>
+<li>无法作为STL容器的元素，auto_ptr的复制构造和赋值要求参数左值引用</li>
+<li>仅支持new分配的内存</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">10.0</span>))</span></span>;</span><br><span class="line"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; p2;</span><br><span class="line">p2 = p; <span class="comment">// p的所有权被转移给p2，p不再有效</span></span><br><span class="line">*p = <span class="number">10.0</span>; <span class="comment">// bad</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 按值传递，调用时会将所有权转移给临时对象p3，函数结束时将内存释放</span></span><br><span class="line"><span class="comment">// 这里应采用按引用传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="built_in">auto_ptr</span>&lt;<span class="keyword">double</span>&gt; p3)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%.2f\n"</span>, *p3);</span><br><span class="line">&#125;</span><br><span class="line">test(p2);</span><br><span class="line">*p2 = <span class="number">10.0</span>; <span class="comment">// bad</span></span><br><span class="line"></span><br><span class="line">auto_ptr&lt;double[]&gt; pa(new double[100]()); // bad</span><br></pre></td></tr></table></figure>
+<h2 id="auto-ptr实现"><a href="#auto-ptr实现" class="headerlink" title="auto_ptr实现"></a>auto_ptr实现</h2><ul>
+<li>auto_ptr的复制构造函数和赋值运算符要求左值引用</li>
+<li>需要考虑右值的构造和赋值，通过AutoPtrRef的方式实现</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AutoPtrRef</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">AutoPtrRef</span><span class="params">(T* p)</span> : <span class="title">ptr</span><span class="params">(p)</span> </span>&#123;&#125;</span><br><span class="line">  T* ptr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AutoPtr</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">using</span> element_type = T;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">AutoPtr</span><span class="params">(element_type* data = <span class="literal">nullptr</span>)</span> : <span class="title">data_</span><span class="params">(data)</span> </span>&#123;&#125;</span><br><span class="line">  AutoPtr(AutoPtr&amp; other) : data_(other.release()) &#123;&#125;</span><br><span class="line">  <span class="comment">// 为了实现右值的初始化</span></span><br><span class="line">  AutoPtr(AutoPtrRef&lt;element_type&gt; ref) : data_(ref.ptr) &#123;&#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  AutoPtr(AutoPtr&lt;Y&gt;&amp; other) : data_(other.release()) &#123;&#125;</span><br><span class="line">  ~AutoPtr() &#123; Destroy(); &#125;</span><br><span class="line"></span><br><span class="line">  AutoPtr&amp; <span class="keyword">operator</span>=(AutoPtr&amp; other) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"calling AutoPtr::operator=(AutoPtr&amp; other)\n"</span>);</span><br><span class="line">    reset(other.release());</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  AutoPtr&amp; <span class="keyword">operator</span>=(AutoPtr&lt;Y&gt;&amp; other) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"calling AutoPtr::operator=(AutoPtr&lt;Y&gt;&amp; other)\n"</span>);</span><br><span class="line">    reset(other.release());</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  AutoPtr&amp; <span class="keyword">operator</span>=(AutoPtrRef&lt;Y&gt; other) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"calling AutoPtr::operator=(AutoPtrRef&lt;Y&gt; other)\n"</span>);</span><br><span class="line">    reset(other.ptr);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">element_type* <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data_; &#125;</span><br><span class="line">  element_type* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123; <span class="keyword">return</span> get(); &#125;</span><br><span class="line">  element_type&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *get(); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  <span class="keyword">operator</span> AutoPtrRef&lt;Y&gt;() &#123;</span><br><span class="line">    <span class="keyword">return</span> AutoPtrRef&lt;Y&gt;(release());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  <span class="keyword">operator</span> AutoPtr&lt;Y&gt;() &#123;</span><br><span class="line">    <span class="keyword">return</span> AutoPtr&lt;Y&gt;(release());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(element_type* data = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data != data_) &#123;</span><br><span class="line">      Destroy();</span><br><span class="line">      data_ = data;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">element_type* <span class="title">release</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    element_type* ret = data_;</span><br><span class="line">    data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data_) &#123;</span><br><span class="line">      <span class="keyword">delete</span> data_;</span><br><span class="line">      data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  element_type* data_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="unique-ptr使用"><a href="#unique-ptr使用" class="headerlink" title="unique_ptr使用"></a>unique_ptr使用</h1><p>相比于auto_ptr，unique_ptr有如下优点</p>
+<ul>
+<li>不要将同一个原生指针赋值给多个智能指针</li>
+<li>禁用拷贝构造函数和赋值运算符</li>
+<li>使用移动语义std::move转移所有权</li>
+<li>使用移动语义可以作为STL容器的元素，但某些需要拷贝和赋值的算法操作会受限</li>
+<li>支持数组，并提供operator[]，使用delete[]释放内存</li>
+<li>支持自定义deleter</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> name = <span class="string">"student1"</span>;</span><br><span class="line">  <span class="keyword">double</span> score = <span class="number">100.0</span>;</span><br><span class="line">  <span class="function">gtl::<span class="built_in">unique_ptr</span>&lt;Student&gt; <span class="title">p</span><span class="params">(gtl::make_unique&lt;Student&gt;(name, score))</span></span>;</span><br><span class="line">  <span class="keyword">auto</span>* p_bak = p.get();</span><br><span class="line">  EXPECT_NE(p.get(), <span class="literal">nullptr</span>);</span><br><span class="line">  EXPECT_EQ(name, p-&gt;name());</span><br><span class="line">  EXPECT_EQ(score, p-&gt;score());</span><br><span class="line">  <span class="function">gtl::<span class="built_in">unique_ptr</span>&lt;Person&gt; <span class="title">p2</span><span class="params">(<span class="built_in">std</span>::move(p))</span></span>;</span><br><span class="line">  EXPECT_EQ(p.get(), <span class="literal">nullptr</span>);</span><br><span class="line">  EXPECT_EQ(p2.get(), p_bak);</span><br><span class="line">  EXPECT_EQ(name, p2-&gt;name());</span><br><span class="line">  p2 = <span class="built_in">std</span>::move(p2);</span><br><span class="line">  EXPECT_EQ(p2.get(), p_bak);</span><br><span class="line">  EXPECT_EQ(name, p2-&gt;name());</span><br><span class="line"></span><br><span class="line">  gtl::<span class="built_in">unique_ptr</span>&lt;Person&gt; p3;</span><br><span class="line">  p3 = <span class="built_in">std</span>::move(p2);</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 支持数组指针即使用new[]/delete[]</span></span><br><span class="line">  <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">  gtl::<span class="built_in">unique_ptr</span>&lt;Person[]&gt; p = gtl::make_unique&lt;Person[]&gt;(n);</span><br><span class="line">  Person* p_bak = p.get();</span><br><span class="line">  EXPECT_NE(p.get(), <span class="literal">nullptr</span>);</span><br><span class="line">  EXPECT_EQ(<span class="keyword">bool</span>(p), <span class="literal">true</span>);</span><br><span class="line">  p = <span class="built_in">std</span>::move(p);</span><br><span class="line">  EXPECT_NE(p.get(), <span class="literal">nullptr</span>);</span><br><span class="line">  EXPECT_EQ(<span class="keyword">bool</span>(p), <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    p[i].set_name(<span class="built_in">std</span>::to_string(i));</span><br><span class="line">    EXPECT_EQ(<span class="built_in">std</span>::to_string(i), p[i].name());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="unique-ptr实现"><a href="#unique-ptr实现" class="headerlink" title="unique_ptr实现"></a>unique_ptr实现</h1><ul>
+<li>unique_ptr存在针对对象和数组的两个版本<ul>
+<li>分别使用new/delete和new[]/delete[]</li>
+</ul>
+</li>
+<li>需要支持自定义deleter</li>
+<li>禁用拷贝构造函数和赋值运算符</li>
+<li>定义移动构造函数和移动复制运算符</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter = <span class="built_in">std</span>::default_delete&lt;T&gt;&gt;</span><br><span class="line">class UniquePtr &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">using</span> pointer = T*;</span><br><span class="line">  <span class="keyword">using</span> element_type = T;</span><br><span class="line">  <span class="keyword">using</span> deleter_type = Deleter;</span><br><span class="line"></span><br><span class="line">  explicit UniquePtr(pointer data = nullptr, deleter_type deleter = deleter_type()) : data_(data), deleter_(deleter) &#123;&#125;</span><br><span class="line">  UniquePtr(<span class="keyword">const</span> UniquePtr&amp; other) = <span class="keyword">delete</span>;</span><br><span class="line">  UniquePtr(UniquePtr&amp;&amp; other) : data_(other.release()), deleter_(<span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_)) &#123;&#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  UniquePtr(UniquePtr&lt;Y&gt;&amp;&amp; other) : data_(other.release()), deleter_(<span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.get_deleter())) &#123;&#125;</span><br><span class="line">  ~UniquePtr() &#123; Destroy(); &#125;</span><br><span class="line"></span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> UniquePtr&amp; other) = <span class="keyword">delete</span>;</span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&amp;&amp; other) &#123;</span><br><span class="line">    reset(other.release());</span><br><span class="line">    deleter_ = <span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&lt;Y&gt;&amp;&amp; other) &#123;</span><br><span class="line">    reset(other.release());</span><br><span class="line">    deleter_ = <span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pointer <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123; <span class="keyword">return</span> get(); &#125;</span><br><span class="line">  element_type&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *get(); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data_ != <span class="literal">nullptr</span>; &#125;</span><br><span class="line">  <span class="function">deleter_type&amp; <span class="title">get_deleter</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> deleter_; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> deleter_type&amp; <span class="title">get_deleter</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> deleter_; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">pointer <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data_; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(pointer data = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data != data_) &#123;</span><br><span class="line">      Destroy();</span><br><span class="line">      data_ = data;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">pointer <span class="title">release</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pointer ret = data_;</span><br><span class="line">    data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(UniquePtr&amp; other)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::swap(data_, other.data_);</span><br><span class="line">    <span class="built_in">std</span>::swap(deleter_, other.deleter_);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data_) &#123;</span><br><span class="line">      deleter_(data_);</span><br><span class="line">      data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  pointer data_;</span><br><span class="line">  deleter_type deleter_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Deleter&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UniquePtr</span>&lt;T[], Deleter&gt; &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">using</span> pointer = T*;</span><br><span class="line">  <span class="keyword">using</span> element_type = T;</span><br><span class="line">  <span class="keyword">using</span> deleter_type = Deleter;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">UniquePtr</span><span class="params">(pointer data = <span class="literal">nullptr</span>)</span> : <span class="title">data_</span><span class="params">(data)</span> </span>&#123;&#125;</span><br><span class="line">  UniquePtr(<span class="keyword">const</span> UniquePtr&amp; other) = <span class="keyword">delete</span>;</span><br><span class="line">  UniquePtr(UniquePtr&amp;&amp; other) : data_(other.release()), deleter_(<span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_)) &#123;&#125;</span><br><span class="line">  ~UniquePtr() &#123; Destroy(); &#125;</span><br><span class="line"></span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> UniquePtr&amp; other) = <span class="keyword">delete</span>;</span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&amp;&amp; other) &#123;</span><br><span class="line">    reset(other.release());</span><br><span class="line">    deleter_ = <span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Y&gt;</span><br><span class="line">  UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&lt;Y&gt;&amp;&amp; other) &#123;</span><br><span class="line">    reset(other.release());</span><br><span class="line">    deleter_ = <span class="built_in">std</span>::forward&lt;deleter_type&gt;(other.deleter_);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  element_type&amp; <span class="keyword">operator</span>[](<span class="built_in">std</span>::<span class="keyword">size_t</span> index) <span class="keyword">const</span> &#123; <span class="keyword">return</span> data_[index]; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data_ != <span class="literal">nullptr</span>; &#125;</span><br><span class="line">  <span class="function">deleter_type&amp; <span class="title">get_deleter</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> deleter_; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> deleter_type&amp; <span class="title">get_deleter</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> deleter_; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">pointer <span class="title">get</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data_; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(pointer data = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">    Destroy();</span><br><span class="line">    data_ = data;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">pointer <span class="title">release</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pointer ret = data_;</span><br><span class="line">    data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(UniquePtr&amp; other)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::swap(data_, other.data_);</span><br><span class="line">    <span class="built_in">std</span>::swap(deleter_, other.deleter_);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data_) &#123;</span><br><span class="line">      deleter_(data_);</span><br><span class="line">      data_ = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  pointer data_;</span><br><span class="line">  deleter_type deleter_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="shared-ptr和weak-ptr使用"><a href="#shared-ptr和weak-ptr使用" class="headerlink" title="shared_ptr和weak_ptr使用"></a>shared_ptr和weak_ptr使用</h1><ul>
+<li>不要将同一个原生指针赋值给多个智能指针</li>
+<li>shared_ptr是共享所有权的智能指针，使用上更像普通指针</li>
+<li>支持数组（C++17）</li>
+<li>注意循环引用——将任一shared_ptr替换为weak_ptr打破循环即可</li>
+<li>weak_ptr无法访问其所管理的资源，其是为了解决循环引用的问题，weak_ptr不会增加引用计数<ul>
+<li>weak_ptr可以通过expired函数判断对应的资源是否已经释放</li>
+<li>访问所管理的对象必须通过lock函数返回一个shared_ptr对象（注意判断返回值是否为空，可能其所对应的资源已经释放）</li>
+</ul>
+</li>
+<li>线程安全问题<ul>
+<li>多个线程在不同shared_ptr的实例上调用所有成员函数（包含复制构造和赋值）是安全的，即使他们共享同一个对象的所有权</li>
+<li>多个线程只读方式访问同一个shared_ptr的实例是安全的</li>
+<li>多个线程访问同一个shared_ptr的实例的非const成员函数是不安全的，会出现数据竞争</li>
+<li>所拥有资源的线程安全由资源本身决定</li>
+</ul>
+</li>
+</ul>
+<p>循环引用的例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> Person &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">double</span> score_;</span><br><span class="line">  SharedPtr&lt;Teacher&gt; teacher_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> :</span> <span class="keyword">public</span> Person &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">int</span> id_;</span><br><span class="line">  SharedPtr&lt;Student&gt; student_;</span><br><span class="line">  WeakPtr&lt;Student&gt; student_weak_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// teacher包含student，student包含teacher，会造成循环引用</span></span><br><span class="line">  <span class="comment">// 析构时引用数都不会变为0，造成内存泄漏</span></span><br><span class="line">  <span class="function">gtl::<span class="built_in">shared_ptr</span>&lt;Teacher&gt; <span class="title">teacher</span><span class="params">(gtl::make_shared&lt;Teacher&gt;(<span class="string">"teacher"</span>, <span class="number">10</span>))</span></span>;</span><br><span class="line">  <span class="function">gtl::<span class="built_in">shared_ptr</span>&lt;Student&gt; <span class="title">student</span><span class="params">(gtl::make_shared&lt;Student&gt;(<span class="string">"student"</span>, <span class="number">100.0</span>))</span></span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, teacher-&gt;name().c_str(), teacher.use_count());</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, student-&gt;name().c_str(), student.use_count());</span><br><span class="line">  EXPECT_EQ(teacher.use_count(), <span class="number">1</span>);</span><br><span class="line">  EXPECT_EQ(student.use_count(), <span class="number">1</span>);</span><br><span class="line">  teacher-&gt;set_student(student);</span><br><span class="line">  student-&gt;set_teacher(teacher);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, teacher-&gt;name().c_str(), teacher.use_count());</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, student-&gt;name().c_str(), student.use_count());</span><br><span class="line">  EXPECT_EQ(teacher.use_count(), <span class="number">2</span>);</span><br><span class="line">  EXPECT_EQ(student.use_count(), <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  gtl::WeakPtr&lt;Student&gt; student_weak_bak;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">gtl::<span class="built_in">shared_ptr</span>&lt;Teacher&gt; <span class="title">teacher_weak</span><span class="params">(gtl::make_shared&lt;Teacher&gt;(<span class="string">"teacher_weak"</span>, <span class="number">10</span>))</span></span>;</span><br><span class="line">    <span class="function">gtl::<span class="built_in">shared_ptr</span>&lt;Student&gt; <span class="title">student_weak</span><span class="params">(gtl::make_shared&lt;Student&gt;(<span class="string">"student_weak"</span>, <span class="number">100.0</span>))</span></span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, teacher_weak-&gt;name().c_str(), teacher_weak.use_count());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, student_weak-&gt;name().c_str(), student_weak.use_count());</span><br><span class="line">    EXPECT_EQ(teacher_weak.use_count(), <span class="number">1</span>);</span><br><span class="line">    EXPECT_EQ(student_weak.use_count(), <span class="number">1</span>);</span><br><span class="line">    teacher_weak-&gt;set_student_weak(student_weak);</span><br><span class="line">    student_weak-&gt;set_teacher(teacher_weak);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, teacher_weak-&gt;name().c_str(), teacher_weak.use_count());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s count %zu\n"</span>, student_weak-&gt;name().c_str(), student_weak.use_count());</span><br><span class="line">    EXPECT_EQ(teacher_weak.use_count(), <span class="number">2</span>);</span><br><span class="line">    EXPECT_EQ(student_weak.use_count(), <span class="number">1</span>);</span><br><span class="line">    student_weak_bak = student_weak;</span><br><span class="line">    EXPECT_EQ(student_weak_bak.use_count(), <span class="number">1</span>);</span><br><span class="line">    EXPECT_EQ(student_weak_bak.expired(), <span class="literal">false</span>);</span><br><span class="line">    EXPECT_EQ(<span class="keyword">bool</span>(student_weak_bak.lock()), <span class="literal">true</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"student_weak ptr %p\n"</span>, student_weak.get());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"weak test\n"</span>);</span><br><span class="line">  EXPECT_EQ(student_weak_bak.use_count(), <span class="number">0</span>);</span><br><span class="line">  EXPECT_EQ(student_weak_bak.expired(), <span class="literal">true</span>);</span><br><span class="line">  <span class="keyword">auto</span> stucent_shared_ptr = student_weak_bak.lock();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"student_weak ptr %p\n"</span>, stucent_shared_ptr.get());</span><br><span class="line">  EXPECT_EQ(<span class="keyword">bool</span>(stucent_shared_ptr), <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="shared-ptr和weak-ptr实现"><a href="#shared-ptr和weak-ptr实现" class="headerlink" title="shared_ptr和weak_ptr实现"></a>shared_ptr和weak_ptr实现</h1><ul>
+<li>shared_ptr包含指向对象的指针和引用计数的指针<ul>
+<li>包含对象指针是为了不同的对象共享所有权</li>
+<li>包含引用计数的指针而不是对象，是为了共享所有权的shared_ptr得到的引用计数是相同的</li>
+</ul>
+</li>
+<li>引用计数包含use_count和weak_count<ul>
+<li>由于weak_ptr需要在所有的shared_ptr都释放时也能够判断引用计数的数量是否为0，因此shared_ptr释放时，如果weak_count&gt;1，则仅可以释放所管理对象的资源，引用计数的资源不能释放</li>
+<li>当weak_ptr析构时，需要判断是否需要释放引用计数的资源</li>
+</ul>
+</li>
+<li>shared_ptr的use_count和weak_count如何变化<ul>
+<li>以空指针构造，两个指针都为空</li>
+<li>以非空指针构造，use_count和weak_count都设置为1</li>
+<li>复制构造，若非空则use_count加1</li>
+<li>移动构造use_count不变，资源转移到新构造的shared_ptr，被移动的shared_ptr变为空</li>
+<li>赋值操作，左侧操作数use_count减1，右侧操作数use_count加1，并且赋值给左操作数，左右侧操作数指向同一对象</li>
+<li>移动赋值，左侧操作数use_count减1，右侧操作数use_count不变，并且赋值给左操作数，右侧操作数变为空</li>
+<li>shared_ptr析构，use_count减1</li>
+<li>use_count为0时，释放所管理对象的资源，weak_count减1（为0时释放引用计数的资源）</li>
+</ul>
+</li>
+<li>weak_ptr的use_count和weak_count如何变化<ul>
+<li>默认构造，weak_ptr不管理任何对象</li>
+<li>weak_ptr不接受普通指针构造</li>
+<li>复制构造，若非空则weak_count加1</li>
+<li>以shared_ptr构造，若非空则weak_count加1</li>
+<li>移动构造，weak_count不变，被移动weak_ptr变为空</li>
+<li>赋值操作，左侧操作数weak_count减1，右侧操作数weak_count加1，并且赋值给左操作数，左右侧操作数指向同一对象</li>
+<li>移动赋值，左侧操作数weak_count减1，右侧操作数weak_count不变，并且赋值给左操作数，右侧操作数变为空</li>
+<li>weak_ptr析构，weak_count减1</li>
+<li>weak_count为0时，释放引用计数的资源</li>
+<li>调用lock函数构造shared_ptr，use_count加1</li>
+</ul>
+</li>
+</ul>
+<p>具体实现可参考<a href="https://github.com/gwq5210/gtl/blob/main/gtl/memory/smart_pointers.h" target="_blank" rel="noopener">smart_pointers.h</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RefCount</span> &#123;</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="built_in">std</span>::atomic&lt;<span class="built_in">std</span>::<span class="keyword">size_t</span>&gt; use_count; <span class="comment">// 有多少个shared_ptr指向这个对象</span></span><br><span class="line">  <span class="built_in">std</span>::atomic&lt;<span class="built_in">std</span>::<span class="keyword">size_t</span>&gt; weak_count; <span class="comment">// 有多少个weak_ptr指向这个对象</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SharedPtr</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"> <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  RefCount* ref_count_;</span><br><span class="line">  T* data_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zh.cppreference.com/w/cpp/language/raii" target="_blank" rel="noopener">raii</a></li>
+<li><a href="https://zh.cppreference.com/w/cpp/memory" target="_blank" rel="noopener">memory</a></li>
+<li><a href="https://item.jd.com/11017238.html" target="_blank" rel="noopener">C++ Primer Plus（第6版 中文版）</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-11-14T12:25:26.296Z" itemprop="dateUpdated">2021-11-14 12:25:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/智能指针/">智能指针</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/智能指针/&title=《智能指针》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/智能指针/&title=《智能指针》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/智能指针/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《智能指针》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/智能指针/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/智能指针/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/14/STL之string/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">STL之string</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/14/STL容器之无序关联容器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL容器之无序关联容器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/智能指针/&title=《智能指针》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/智能指针/&title=《智能指针》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/智能指针/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《智能指针》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/智能指针/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/智能指针/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aQZLDIAwFUd//0p5tNuD+Ak+VRbNKTSWY54VGQrouvO6fNfoL+T7/7fXGkiFDxmcZ93TxY9WeMt+NnE2GDBnnMOaBjwMIb34gvoMMGTJk1EJqeuj0NcmQIUMG33oloVxPOmXIkHEmgxeZ5HKNB27+IrbV4jJkyPggg9+6///nV/obMmTI+BTjDlftur/W+AxOJUOGjNaMtxuQJHBz5EMyKkOGjKYMPry1K1CmVPSiZciQcQAjLWLJxdnKdVvc2pQhQ0ZrBkna5g/gySJvLfAGwEM/VoYMGS0YfOhhJZUkYZQ8F1XhMmTIaMrgW9TStXRIgoT4oBaXIUPGxxnpY1ISHxSr8YZhV4YMGY0YfDwivYdP2wAkWA9fugwZMlozakFwPYzWhjbQPwYZMmS0Y9SGtNKRC3IxVxu2CBoDMmTI+CxjZWyCp5JpUyEtmGXIkHEOYx4oa2Utb0byATUZMmScyUgXv0rjV//8WOnTZciQ0ZvBy9raDumlWzFAy5AhowWDb1FrK6ZjZCRhfbhukyFDRlMGPxwJoLXwytuiw0amDBkyWjN4FlkLoPzVFAtdGTJkNGXc4SL4tG7m419DtgwZMloz0mZAiiGP31X0ypAhozdjb6lJQmctfYx/JkOGjHaMN4YqVsJ0sZSVIUOGDNxI4MllWhgPzyxDhgwZm4JvLflDv5UhQ8YBjHRsovbgNPlbmhmRIUNGI0Zt62C0tFTupp9lyJDRlPEHw4oNy1PxtuUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

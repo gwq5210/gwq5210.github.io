@@ -147,6 +147,203 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-geohash简介"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-02-03 17:35:38" datetime="2018-02-03T17:35:38.000Z"  itemprop="datePublished">2018-02-03</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/02/03/geohash简介/">geohash简介</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言最近项目需要使用到通过用户的经纬度查询附近的地理位置，了解到geohash可以快速的查找附近的地点，就找时间了解下是geohash的实现方式。
+geohash介绍geohash能将地理位置编码成字母和数字组成字符串。每个字符串表示一个地图上的矩形区域，举行区域的大小取决于字符串的长度，长度越长，矩形区域越小。每个矩形区域中的位置都共享相同的geohash字符串。正因为如此，我们可以将geohash的字符串当做key，来存储所有的地理位置坐标。
+上边提到字符串越长，表示的区域越小，也就是位置越精确。我们可以从geohash字符串的后边移除字符串来增大矩形区域的位置，当然也降低了经度。
+geohash字符串相近的地点其距离也越近，相似前缀越长，两个地点越近。但也有特殊情况，地理位置近但其geohash字符串差别很大，这种情况在下边介绍。
+    
+
+        <a href="/2018/02/03/geohash简介/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geohash/">geohash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/地理位置hash/"> 地理位置hash</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-hiredis的使用"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-01-27 16:39:49" datetime="2018-01-27T16:39:49.000Z"  itemprop="datePublished">2018-01-27</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/01/27/hiredis的使用/">hiredis的使用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言近期开发的项目使用到了Redis，本文主要记录下使用Redis API遇到的一些问题。如果想了解Redis相关的细节，可以看《Redis设计与实现》。想了解Redis相关的命令，可以参考Redis命令参考
+hiredis简介hiredis是Redis的一个极简c客户端库。它实现了Redis协议的最小集，但同时也提供类printf的API，使用既方便有简介。hiredis提供了多种API，它同时支持同步，异步和回复解析API。在此基础上，能够实现Redis的流水线操作。
+    
+
+        <a href="/2018/01/27/hiredis的使用/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis-API/">Redis API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hiredis/">hiredis</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Cpp-Primer-Plus读书笔记（三）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-08-02 22:25:37" datetime="2017-08-02T22:25:37.000Z"  itemprop="datePublished">2017-08-02</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/08/02/Cpp-Primer-Plus读书笔记（三）/">Cpp-Primer-Plus读书笔记（三）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        第十章 对象和类面向对象编程是一种特殊的、设计程序的概念性方法，C++通过一些特性改进了C语言，下边是最重要的OOP特性：
+
+抽象
+封装和数据隐藏
+多态
+继承
+代码的可重用性
+
+采用OOP方法时，首先从用户的角度考虑对象，描述对象所需的数据以及描述用户与数据交互所需的操作。完成对接口的描述后，需要确定如何实现接口和数据存储。
+抽象和类对于基本类型，编译器需要维护如下内容：
+
+决定数据对象需要...
+    
+
+        <a href="/2017/08/02/Cpp-Primer-Plus读书笔记（三）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp-Primer-Plus/">Cpp Primer Plus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-APUE笔记-一"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-12 01:22:08" datetime="2017-07-12T01:22:08.000Z"  itemprop="datePublished">2017-07-12</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/12/APUE笔记-一/">APUE笔记(一)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        第一章 UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。
+从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。
+我们通常将这种软件成为内核（kernel），因为它相对较...
+    
+
+        <a href="/2017/07/12/APUE笔记-一/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APUE/">APUE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/">unix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Cpp-Primer-Plus读书笔记（二）"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -173,18 +370,15 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        循环和关系表达式for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：
+        第五章 循环和关系表达式for循环for循环为执行重复的操作提供了循序渐进的步骤。for循环的组成部分完成下面这些步骤：
 
 设置初始值
 执行测试，看看循环是否应该继续执行
 执行循环操作
-更新用于测试的值12for (initialization; test-expression; update-expression)	body
+更新用于测试的值
 
-
-C++ 语法将for看做一条语句，——虽然循环体可以包括一条或多条语句。循环只执行一次初始化，测试表达式决定循环体是否被执行，通常，这个表达式是关系表达式，即对两个值进行比较。这里可以使用任何表达式，C++将把结果强制转换为bool类型。
-for循环是入口条件循环，这意味着在每轮循环之前，都将计算测试表达式得值，当测试表达式为false时，将不会执行循环体。
-更新表达式在每轮循环结束时执行，此时循环体已经执行完毕。通常，它用来对跟踪循环次数的变量的值进行递增。
-for循环的控制部分使用了3个表达式，任何值或任何有效的值和运算符的组合都是表达式。赋值也是一个表达式，C++将赋值表达式的值定义为左侧成员的值。
+12for (initialization; test-expression; update-expression)	body
+C++ 语法将for看做一条语句，——虽然循环体可以包括一条...
     
 
         <a href="/2017/07/09/Cpp-Primer-Plus读书笔记（二）/" class="post-more waves-effect waves-button">
@@ -238,6 +432,7 @@ C语言代表的过程性语言
 面向对象编程面向对象编程(OOP)强调的是数据。理念是设计与问题本质特性相对应的数据格式。
 泛型编程泛型编程强调编程要独立于特定数据类型，即创建独立于类型的代码。
 C与C++C++是C的超集，尽管有一些细微差别，但这种差别很小。
+第二章 开始学习C++进入C+...
     
 
         <a href="/2017/07/02/Cpp-Primer-Plus读书笔记（一）/" class="post-more waves-effect waves-button">
@@ -452,210 +647,12 @@ ProtoBuf的优点同XML数据相比，ProboBuf有这许多优点：1：简单2�
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-c语言中的可变参数"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-01-22 22:54:30" datetime="2016-01-22T22:54:30.000Z"  itemprop="datePublished">2016-01-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/01/22/c语言中的可变参数/">c语言中的可变参数</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        c语言中可变参数列表有关的内容在stdarg.h头文件中。这个头文件中的内容可以让函数实现类似scanf函数的功能，接收不确定个数的参数。使用方法稍微复杂一些，必须按照如下步骤进行：1.在函数原型中使用省略号。2.在函数定义中创建一个va_list类型的变量。3.用宏将该变量初始化为一个参数列表。4.用宏访问这个参数列表。5.用宏完成清理工作。
-下面详细介绍这些步骤，函数原型中的参数列表中至少有一个后跟省略号的参数，这个参数成为parmN，如：
-    
-
-        <a href="/2016/01/22/c语言中的可变参数/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/可变参数/">可变参数</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-url转码解码-c语言实现"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-01-22 22:07:10" datetime="2016-01-22T22:07:10.000Z"  itemprop="datePublished">2016-01-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/01/22/url转码解码-c语言实现/">url转码解码-c语言实现</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        url提交信息为何要转码呢？因为url本身会有很多特殊字符。而提交的参数中如果再有特殊字符的话，url就不能区分哪些是参数内容，哪些是分隔符。尤其是unicode，gb18030，big5等多字节的编码，不知道里面会隐藏什么字节，因此必须全部转码。
-好像C语言里面没有现成的转码函数。参考这里，从php的转码中引出两个函数，进行转码。
-字符’a’-‘z’,’A’-‘Z’,’0’-‘9’,’.’,’-‘,’*’和’_’ 都不被编码，维持原值；
-空格’ ‘被转换为加号’+’。
-其他每个字节都被表示成”%XY”的格式，X和Y分别代表一个十六进制位。编码为UTF-8。
-    
-
-        <a href="/2016/01/22/url转码解码-c语言实现/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/url转码/">url转码</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-C语言笔记"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-11-08 21:40:48" datetime="2015-11-08T21:40:48.000Z"  itemprop="datePublished">2015-11-08</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/11/08/C语言笔记/">C语言笔记</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        C语言笔记变量相关：
-
-C99以前的C要求在一个代码块的开始处声明变量。
-声明语句为变量创建，标定存储空间并为其制定初始值。
-C99引入_Bool类型表示布尔值。它还提供stdbool.h头文件，包含这个头文件可以使用bool来代替_Bool，并把true和false定义为1和0的符号常量。
-C99提供一个可选的名字集合，用来描述确定的位数。如int16_t表示一个16位有符号整数类型，uint32_t表示一个32位无符号整数类型。使用这些名字，需要包含头文件inttypes.h。另外，这种确切的长度类型在某些系统上可能不支持。不如，不能保证某些系统上存在一种int8_t类型（8位有符号整数）。为了解决这个问题，C99标准定义了第二组名字集合。这些名字保证所表示的类型至少大于指定长度的最小类型，被称为“最小长度类型”。例如，int_least8_t是可以容纳8位有符号数的那些类型中长度最小的一个别名。因为一些程序员更关心速度而非空间。C99为他们定义了一组可使计算达到最快的类型集合。这组集合被称为“最快最小长度类型”。如，int_fast8_t定义为系统中对8位有符号数而言计算最快的整数类型的别名。为了使用printf输出这些类型，C99还提供了一些串宏来帮助打印这些类型。（注：可能一些编译器并不支持这一特性）
-    
-
-        <a href="/2015/11/08/C语言笔记/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言/">c语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程/">编程</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-2015年腾讯阿里实习生招聘面试经历"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-11-08 21:35:07" datetime="2015-11-08T21:35:07.000Z"  itemprop="datePublished">2015-11-08</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/面试/">面试</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/11/08/2015年腾讯阿里实习生招聘面试经历/">2015年腾讯阿里实习生招聘面试经历</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        每年毕业生找工作都是一个问题，对于个人来说，无非就是笔试和面试的问题。对于应届生来说，最头疼的或许不是笔试而是面试。对于笔试，只要自身实力过硬，一般都没有问题（退一步讲，万一笔试没过，还可以在面试的时候霸面）；对于面试，就不一样了，应届生没有接触过面试，所以对于面试可能有些害怕，面试之前会在网上搜一些面试注意事项之类的，而这些都是对所有面试的一般概括，没有什么针对性，无非就是提醒面试者注意着装、礼貌、准备一些各种版本的自我介绍之类的，不得不说这些还是有很大帮助的。但在我看来，这些都没有自己实打实的来一次真正的面试有帮助。所以，我鼓励那些想要找工作的同学，可以尝试着真的去准备一场面试，运气好的话，说不定就被录取了呢。下面，我分享一下我的今年（2015年）的面试经历和感想，希望对一些同学有所帮助。
-    
-
-        <a href="/2015/11/08/2015年腾讯阿里实习生招聘面试经历/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/腾讯/">腾讯</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里/">阿里</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
     </div>
 </nav>
 

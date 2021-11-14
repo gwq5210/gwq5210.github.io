@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>STL容器之关联容器 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="STL,容器库,关联容器">
+    <meta name="description" content="关联容器关联容器实现能快速查找（ O(log n) 复杂度）的数据结构。 关联容器有以下几种  set：有序集合，键唯一 map：键值对集合，键唯一 multiset：键集合，键不唯一 multimap：键值对集合，键不唯一  关联容器的实现关联容器的内部由红黑树实现，红黑树是一颗平衡的二叉搜索树（BST，Binary Search Tree） 在二叉搜索树中，任何节点的值一定大于左子树每一个节点">
+<meta name="keywords" content="STL,容器库,关联容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL容器之关联容器">
+<meta property="og:url" content="https://gwq5210.com/2021/11/14/STL容器之关联容器/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="关联容器关联容器实现能快速查找（ O(log n) 复杂度）的数据结构。 关联容器有以下几种  set：有序集合，键唯一 map：键值对集合，键唯一 multiset：键集合，键不唯一 multimap：键值对集合，键不唯一  关联容器的实现关联容器的内部由红黑树实现，红黑树是一颗平衡的二叉搜索树（BST，Binary Search Tree） 在二叉搜索树中，任何节点的值一定大于左子树每一个节点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gwq5210.com/images/rbtree.png">
+<meta property="og:updated_time" content="2021-11-14T12:25:26.292Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL容器之关联容器">
+<meta name="twitter:description" content="关联容器关联容器实现能快速查找（ O(log n) 复杂度）的数据结构。 关联容器有以下几种  set：有序集合，键唯一 map：键值对集合，键唯一 multiset：键集合，键不唯一 multimap：键值对集合，键不唯一  关联容器的实现关联容器的内部由红黑树实现，红黑树是一颗平衡的二叉搜索树（BST，Binary Search Tree） 在二叉搜索树中，任何节点的值一定大于左子树每一个节点">
+<meta name="twitter:image" content="https://gwq5210.com/images/rbtree.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">STL容器之关联容器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">STL容器之关联容器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-14T20:16:41.000Z" itemprop="datePublished" class="page-time">
+  2021-11-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关联容器"><span class="post-toc-number">1.</span> <span class="post-toc-text">关联容器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关联容器的实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">关联容器的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么选择红黑树"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">为什么选择红黑树</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#迭代器失效"><span class="post-toc-number">3.</span> <span class="post-toc-text">迭代器失效</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关联式容器的注意事项"><span class="post-toc-number">4.</span> <span class="post-toc-text">关联式容器的注意事项</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-STL容器之关联容器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">STL容器之关联容器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-14 20:16:41" datetime="2021-11-14T20:16:41.000Z"  itemprop="datePublished">2021-11-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h1><p>关联容器实现能快速查找（ O(log n) 复杂度）的数据结构。</p>
+<p>关联容器有以下几种</p>
+<ul>
+<li>set：有序集合，键唯一</li>
+<li>map：键值对集合，键唯一</li>
+<li>multiset：键集合，键不唯一</li>
+<li>multimap：键值对集合，键不唯一</li>
+</ul>
+<h1 id="关联容器的实现"><a href="#关联容器的实现" class="headerlink" title="关联容器的实现"></a>关联容器的实现</h1><p>关联容器的内部由红黑树实现，红黑树是一颗平衡的二叉搜索树（BST，Binary Search Tree）</p>
+<p>在二叉搜索树中，任何节点的值一定大于左子树每一个节点的键值，小于右子树中每一个节点的键值</p>
+<p>但是在极端的情况下，二叉搜索树可能失去平衡，退化为一个链表，造成查找效率低下。因此出现了平衡二叉搜索树，如AVL-tree，红黑树等</p>
+<p>STL的红黑树实现中，会提供两个函数insert_unique和insert_equal分别来实现set/map和multiset/multimap</p>
+<p>由于实现的特性，关联式容器是根据键值有序的，默认从小到大排序（使用std::less<t>进行比较）</t></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/rbtree.png" alt="rbtree" title>
+                </div>
+                <div class="image-caption">rbtree</div>
+            </figure>
+<h2 id="为什么选择红黑树"><a href="#为什么选择红黑树" class="headerlink" title="为什么选择红黑树"></a>为什么选择红黑树</h2><p>AVL树要求每个节点的左右子树高度差不超过1，因此其最坏的查找时间为O(logn)</p>
+<p>但为了严格满足AVL树的高度要求，在每次插入或删除节点时，几乎都会破坏AVL树的平衡，进而我们需要通过旋转来使之平衡</p>
+<p>显然这对插入，删除频繁的场景很不友好，性能大大降低</p>
+<p>而红黑树的高度要求不像AVL树那样严格，频繁插入删除不会频繁破坏平衡，也就不需要频繁调整，这其实是一种折中的方案</p>
+<p>但仅从查找效率来说，AVL树要由于红黑树</p>
+<p>总的来说：平衡树是为了解决二叉查找树退化为链表的情况，而红黑树是为了解决平衡树在插入、删除等操作需要频繁调整的情况</p>
+<h1 id="迭代器失效"><a href="#迭代器失效" class="headerlink" title="迭代器失效"></a>迭代器失效</h1><p>关联容器的迭代器和引用除了元素被删除外不会被非法化（包括end迭代器）</p>
+<h1 id="关联式容器的注意事项"><a href="#关联式容器的注意事项" class="headerlink" title="关联式容器的注意事项"></a>关联式容器的注意事项</h1><ul>
+<li>map的operator[]可能会新增元素</li>
+<li>关联式容器实现了lower_bound，upper_bound和equal_range的成员函数<ul>
+<li>使用通用的lower_bound，upper_bound和equal_range函数会导致查找效率变低（用在非随机存取迭代器上都会导致效率变低）</li>
+</ul>
+</li>
+<li>删除元素时注意迭代器失效的问题；代码<code>map.erase(it); it++;</code>是错误的</li>
+<li>无法通过迭代器修改键值，但可以修改map/multimap的value值</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zh.cppreference.com/w/cpp/container" target="_blank" rel="noopener">容器库</a></li>
+<li><a href="https://item.jd.com/11821611.html" target="_blank" rel="noopener">STL源码剖析</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/72505589" target="_blank" rel="noopener">平衡树和红黑树</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-11-14T12:25:26.292Z" itemprop="dateUpdated">2021-11-14 12:25:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关联容器/">关联容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&title=《STL容器之关联容器》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&title=《STL容器之关联容器》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/STL容器之关联容器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之关联容器》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/14/STL容器之无序关联容器/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">STL容器之无序关联容器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/10/26/STL容器之priority-queue/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL容器之priority_queue</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&title=《STL容器之关联容器》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&title=《STL容器之关联容器》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/STL容器之关联容器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之关联容器》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/STL容器之关联容器/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/STL容器之关联容器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aQW7DMAwF0dz/0inQVReNNJ+0A5garQK7tvy0YEmJrxce799B/ubv+HR3fZ3MVRwyZMh4LOO9HH3GGkB+r79NhgwZ5zDWQXZN2kwQfhBZPhkyZMhIAx8ZVy2ZDBkyZKSBr5/81eaVIUPGmQwSKHlSuE4TSUC/sRaXIUPGAxnpwcA3f994viFDhoyHMPpFaX8D7oIvkSFDxmgGT+M6h5c8cJMr6CNkyJAxiFE7ROQtX7Wn0mAtQ4aMExj84TS88nqT3A0qbBkyZAxi1PasaiG102YRHDzIkCFjNKPzolqxSni1fwkyZMiYxOhv2fOEjy9NXOLKkCFjNINvhKWhlofRdN6P75EhQ8ZoRq0ETTfX+gcJcfkqQ4aMcYw0IasdHnTeGVTkMmTIGMSI2xrCDX2S8KXHA/88JUOGjGMYvC2DhGa+BJ2lSbJFGTJkPJXBjwxrVzi1Bt70jMiQIWMEI2i0AsH3vjC9CcQyZMgYzVhvjZHmibSFgiwNn1GGDBmnMdJXp4VrmoYGpxkyZMg4hpE2gXUaT68Cb/YOZciQMYhBbteCctps8QJjsxAyZMgYx3iHg6eVpPhM08Fgo02GDBmDGHykn9uZuJOAypAhYyqDBNlry1q+6R8snwwZMg5g1MJlJ3GsBeJNnitDhgwZAJAWwJ0Qf0F+KkOGjHEM/uo7DkE3AVqGDBkHMEj44y2tvGEiTTRlyJBxJqPfqZGmcekGX79FQ4YMGY9l/AA8lEup0dCXyAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

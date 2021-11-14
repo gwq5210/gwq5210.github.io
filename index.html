@@ -147,6 +147,218 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-STL之string"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-14 20:20:57" datetime="2021-11-14T20:20:57.000Z"  itemprop="datePublished">2021-11-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/14/STL之string/">STL之string</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        string概述string和vector在本质上都是动态数组，当存储的类型是字符类型（如char）时，通常使用string，否则就使用vector
+string和vector自动管理动态数组，并自动扩充数组的大小，析构时自动释放内存
+string提供了字符串查找，替换等成员函数，方便使用
+string实现string在编程中十分常见，了解字符串的实现很有帮助
+为了提高string的性能，一...
+    
+
+        <a href="/2021/11/14/STL之string/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-智能指针"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-14 20:18:54" datetime="2021-11-14T20:18:54.000Z"  itemprop="datePublished">2021-11-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/智能指针/">智能指针</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/14/智能指针/">智能指针</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        RAII了解智能指针前，我们先了解下C++编程中常用的RAII的思想
+RAII全称为Resource Acquisition is Initialization，直译就是资源获取即初始化。
+它的思想是将必须在使用前获取的资源（堆内存，线程，文件，互斥锁等）与一个对象的声明周期绑定，常用做法是在构造函数中请求资源，在析构函数中释放资源
+以上由C++的语言机制保证，当对象创建的时候，自动调用构造...
+    
+
+        <a href="/2021/11/14/智能指针/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/智能指针/">智能指针</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-STL容器之无序关联容器"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-14 20:17:36" datetime="2021-11-14T20:17:36.000Z"  itemprop="datePublished">2021-11-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/14/STL容器之无序关联容器/">STL容器之无序关联容器</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        无序关联容器无序关联容器提供能快速查找（均摊 O(1) ，最坏情况 O(n) 的复杂度）的无序（哈希）数据结构。
+无序关联容器有以下几种
+
+unordered_set：无序集合，键唯一
+unordered_map：无序键值对集合，键唯一
+unordered_multiset：无序集合，键不唯一
+unordered_multimap：无序键值对集合，键不唯一
+
+无序关联容器底层由哈希表实现，下...
+    
+
+        <a href="/2021/11/14/STL容器之无序关联容器/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无序关联容器/">无序关联容器</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-STL容器之关联容器"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-14 20:16:41" datetime="2021-11-14T20:16:41.000Z"  itemprop="datePublished">2021-11-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/14/STL容器之关联容器/">STL容器之关联容器</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        关联容器关联容器实现能快速查找（ O(log n) 复杂度）的数据结构。
+关联容器有以下几种
+
+set：有序集合，键唯一
+map：键值对集合，键唯一
+multiset：键集合，键不唯一
+multimap：键值对集合，键不唯一
+
+关联容器的实现关联容器的内部由红黑树实现，红黑树是一颗平衡的二叉搜索树（BST，Binary Search Tree）
+在二叉搜索树中，任何节点的值一定大于左子树每一...
+    
+
+        <a href="/2021/11/14/STL容器之关联容器/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关联容器/">关联容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-STL容器之priority-queue"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -458,217 +670,12 @@ p...
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-设计模式之适配器模式"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-10-26 00:08:42" datetime="2021-10-26T00:08:42.000Z"  itemprop="datePublished">2021-10-26</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/迭代器模式/">迭代器模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/迭代器模式/STL/">STL</a></li></ul></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/10/26/设计模式之适配器模式/">设计模式之适配器模式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        适配器模式在STL中，很多地方都用到了适配器，包括容器适配器，迭代器适配器，函数适配器
-适配器模式的定义为：将一个类的接口转换为另一个类的接口，使原本因接口不兼容而不能工作的类可以一起工作
-适配器模式分为类结构型模式和对象结构型模式两种，前者类之间的耦合度比后者高，且要求程序员了解现有组件库中的相关组件的内部结构，所以应用相对较少些。
-优点
-客户端通过适配器可以透明地调用目标接口。
-复用了现...
-    
-
-        <a href="/2021/10/26/设计模式之适配器模式/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/迭代器模式/">迭代器模式</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-设计模式之迭代器模式"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-10-22 12:12:43" datetime="2021-10-22T12:12:43.000Z"  itemprop="datePublished">2021-10-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/迭代器模式/">迭代器模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/迭代器模式/STL/">STL</a></li></ul></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/10/22/设计模式之迭代器模式/">设计模式之迭代器模式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        迭代器模式实际编程中，我们经常需要访问容器对象中的各个元素，比如遍历链表中的元素通常的做法是将链表的创建和遍历都放在同一个类中，但这种方式不利于程序的扩展，如果要更换遍历方法就必须修改程序源代码，这违背了 “开闭原则”。
-既然将遍历方法封装在容器类中不可取，那么容器类中不提供遍历方法，将遍历方法由用户自己实现是否可行呢？答案是同样不可取，因为这种方式会存在两个缺点：
-
-暴露了容器类的内部表示...
-    
-
-        <a href="/2021/10/22/设计模式之迭代器模式/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/迭代器模式/">迭代器模式</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-设计模式之状态模式"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-10-22 12:04:33" datetime="2021-10-22T12:04:33.000Z"  itemprop="datePublished">2021-10-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/状态模式/">状态模式</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/10/22/设计模式之状态模式/">设计模式之状态模式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        状态模式概述在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态
-当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变
-对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做...
-    
-
-        <a href="/2021/10/22/设计模式之状态模式/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态模式/">状态模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-STL容器之vector"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2021-10-22 12:02:02" datetime="2021-10-22T12:02:02.000Z"  itemprop="datePublished">2021-10-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2021/10/22/STL容器之vector/">STL容器之vector</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        vector概述vector是动态连续数组，这不仅意味着vector中的元素在逻辑上相邻，而且也意味着它们在物理上也是相邻的
-vector的底层是数组，这也说明必要的时候，vector的元素指针可以当做数组指针来使用
-一般的实现中，vector的迭代器就是指针本身
-vector元素访问复杂度
-
-随机访问——常数 O(1)
-在末尾插入或移除元素——均摊常数 O(1)
-插入或移除元素——与到 v...
-    
-
-        <a href="/2021/10/22/STL容器之vector/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器库/">容器库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/顺序容器/">顺序容器</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
 <nav id="page-nav">
     <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </div>
 </nav>
 

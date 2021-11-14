@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>STL之string | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="STL,字符串">
+    <meta name="description" content="string概述string和vector在本质上都是动态数组，当存储的类型是字符类型（如char）时，通常使用string，否则就使用vector string和vector自动管理动态数组，并自动扩充数组的大小，析构时自动释放内存 string提供了字符串查找，替换等成员函数，方便使用 string实现string在编程中十分常见，了解字符串的实现很有帮助 为了提高string的性能，一般有三">
+<meta name="keywords" content="STL,字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL之string">
+<meta property="og:url" content="https://gwq5210.com/2021/11/14/STL之string/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="string概述string和vector在本质上都是动态数组，当存储的类型是字符类型（如char）时，通常使用string，否则就使用vector string和vector自动管理动态数组，并自动扩充数组的大小，析构时自动释放内存 string提供了字符串查找，替换等成员函数，方便使用 string实现string在编程中十分常见，了解字符串的实现很有帮助 为了提高string的性能，一般有三">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gwq5210.com/2021/11/14/STL之string/images/sso_string.png">
+<meta property="og:updated_time" content="2021-11-14T12:25:26.292Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL之string">
+<meta name="twitter:description" content="string概述string和vector在本质上都是动态数组，当存储的类型是字符类型（如char）时，通常使用string，否则就使用vector string和vector自动管理动态数组，并自动扩充数组的大小，析构时自动释放内存 string提供了字符串查找，替换等成员函数，方便使用 string实现string在编程中十分常见，了解字符串的实现很有帮助 为了提高string的性能，一般有三">
+<meta name="twitter:image" content="https://gwq5210.com/2021/11/14/STL之string/images/sso_string.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">STL之string</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">STL之string</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-14T20:20:57.000Z" itemprop="datePublished" class="page-time">
+  2021-11-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#string概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">string概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#string实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">string实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#string的结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">string的结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#eager-copy"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">eager copy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSO"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">SSO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#COW"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">COW</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#COW优点"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">COW优点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#COW实现"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">COW实现</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#COW在多线程中的问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">COW在多线程中的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原子操作"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">原子操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作顺序"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">操作顺序</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#COW的失效问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">COW的失效问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代理类区分读写操作"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">代理类区分读写操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#fbstring"><span class="post-toc-number">5.</span> <span class="post-toc-text">fbstring</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-STL之string"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">STL之string</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-14 20:20:57" datetime="2021-11-14T20:20:57.000Z"  itemprop="datePublished">2021-11-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/">编程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程/STL/">STL</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="string概述"><a href="#string概述" class="headerlink" title="string概述"></a>string概述</h1><p>string和vector在本质上都是动态数组，当存储的类型是字符类型（如char）时，通常使用string，否则就使用vector</p>
+<p>string和vector自动管理动态数组，并自动扩充数组的大小，析构时自动释放内存</p>
+<p>string提供了字符串查找，替换等成员函数，方便使用</p>
+<h1 id="string实现"><a href="#string实现" class="headerlink" title="string实现"></a>string实现</h1><p>string在编程中十分常见，了解字符串的实现很有帮助</p>
+<p>为了提高string的性能，一般有三种方式来实现string，有时会对这几种方法相结合</p>
+<ul>
+<li>eager copy，即每次都执行深拷贝</li>
+<li>SSO，即Small String Optimization，较小的字符串在栈中分配内存</li>
+<li>COW，即Copy On Write，写时复制</li>
+</ul>
+<h2 id="string的结构"><a href="#string的结构" class="headerlink" title="string的结构"></a>string的结构</h2><p>介绍三种实现前，先大致介绍下string的结构</p>
+<p>如果按照我们自己的设计，字符串必定包含以下三个数据成员：字符串长度，字符串的容量和字符数组指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">StringStorage</span> &#123;</span></span><br><span class="line">  size_type size;</span><br><span class="line">  size_type capacity;</span><br><span class="line">  pointer data;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="eager-copy"><a href="#eager-copy" class="headerlink" title="eager copy"></a>eager copy</h2><p>直接深拷贝的方式很容易理解，因为string中保存的是指向堆内存的指针，在复制时，需要执行以下步骤执行深拷贝</p>
+<ul>
+<li>分配新的内存</li>
+<li>将字符串的内容复制到新内存</li>
+<li>设置字符串大小和容量</li>
+</ul>
+<p>这种字符串的实现方式，相对简单，比较容易理解，但带来的问题是每次复制都需要分配内存和执行复制的操作，当字符串很大时，会带来性能的问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">StringStorage <span class="title">AllocateMediumStorage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  StringStorage store;</span><br><span class="line">  store.size = <span class="number">0</span>;</span><br><span class="line">  store.capacity = kMaxMediumSize;</span><br><span class="line">  store.data = <span class="keyword">static_cast</span>&lt;pointer&gt;(Allocate(kMaxMediumSize + <span class="number">1</span>));</span><br><span class="line">  <span class="keyword">return</span> store;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UnsafeInitMedium</span><span class="params">(const_pointer str, <span class="keyword">size_t</span> len)</span> </span>&#123;</span><br><span class="line">  assert(len &lt;= kMaxMediumSize);</span><br><span class="line">  store_ = AllocateMediumStorage();</span><br><span class="line">  store_.UnsafeCopyFrom(str, len);</span><br><span class="line">  type_ = StringType::kMedium;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h2><p>短字符串优化是一个很巧妙的优化方法，利用string本身结构的buffer来存储较小的字符串</p>
+<p>上边给出的例子中，至少需要三个变量，因此string的结构本身需要24个字节</p>
+<p>当字符串较小时，如果仍在堆上分配内存，但size和capacity本身的值则很小，高位bit都是0，浪费了许多空间</p>
+<p>因此在SSO的实现，只用一个字节表示字符串大小，容量大小是固定的，不需要存储，则可以有24-1=23个字节存储字符串，除去尾部的’\0’，则实际的容量为22，这便是llvm/clang/libc++采用的实现</p>
+<p>SSO的字符串，复制时只需简单的复制SmallString结构即可，无需在堆上分配内存</p>
+<p>另外，他们的实现，会结合SSO、COW和eager copy的实现，因此需要标记字符串的类型，它用一个bit来区分是长字符还是短字符，然后用位操作和掩码 (mask) 来取重叠部分的数据，因此实现是最复杂的。</p>
+<p>本文的实现，为了简单，使用一个字节来区分字符串类型</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SmallString</span> &#123;</span></span><br><span class="line">  SmallString() &#123; Init(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    size = <span class="number">0</span>;</span><br><span class="line">    data[size] = <span class="string">'\0'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(const_pointer str, size_type len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str) &#123;</span><br><span class="line">      assert(len &lt;= kMaxSmallSize);</span><br><span class="line">      size = len;</span><br><span class="line">      <span class="built_in">memcpy</span>(data, str, <span class="keyword">sizeof</span>(value_type) * len);</span><br><span class="line">      data[len] = <span class="string">'\0'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      Init();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">uint8_t</span> size;</span><br><span class="line">  value_type data[kMaxSmallSize + <span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="images/sso_string.png" alt="sso_string" title>
+                </div>
+                <div class="image-caption">sso_string</div>
+            </figure>
+<h2 id="COW"><a href="#COW" class="headerlink" title="COW"></a>COW</h2><p>写时复制（Copy-on-write，简称COW）是一种很重要的优化手段。核心思想是懒惰处理多个实体的资源请求，在多个实体之间共享资源，当需要修改时，才真正进行资源的分配</p>
+<p>Linux内核在进程fork时对进程地址空间的处理就使用到了COW技术</p>
+<h3 id="COW优点"><a href="#COW优点" class="headerlink" title="COW优点"></a>COW优点</h3><ul>
+<li>减少了分配（和复制）大量资源带来的瞬间延迟（实际上该延迟被分摊到后续的操作中，其累积耗时很可能比一次统一处理的延迟要高，造成throughput下降是有可能的）</li>
+<li>减少了不必要的资源分配。（例如只读的复制没有必要执行深拷贝）</li>
+</ul>
+<p>当然COW不是没有缺点，下文会进行介绍</p>
+<h3 id="COW实现"><a href="#COW实现" class="headerlink" title="COW实现"></a>COW实现</h3><p>基于COW的思想，我们知道，在string复制时，只进行浅拷贝，而在需要修改对象时，则执行深拷贝的动作。</p>
+<p>我们要在什么时候需要执行深拷贝？</p>
+<ul>
+<li>当前字符串没有被共享，则不需要拷贝</li>
+<li>当前字符串被共享，当需要修改时，进行深拷贝的动作</li>
+</ul>
+<p>因此，为了区分是否被共享，我们引入一个引用计数来记录字符串被多少个string共享</p>
+<p>引用计数一般是原子操作，保证线程安全，下文会详细介绍；引用计数需要在堆上分配，保证不同的string对象能够共享</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LargeString</span> &#123;</span></span><br><span class="line">  LargeString() : ref_count(<span class="number">1</span>) &#123; data[<span class="number">0</span>] = <span class="string">'\0'</span>; &#125;</span><br><span class="line">  <span class="built_in">std</span>::atomic&lt;size_type&gt; ref_count;</span><br><span class="line">  value_type data[];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">StringStorage <span class="title">AllocateLargeStorage</span><span class="params">(size_type capacity)</span> </span>&#123;</span><br><span class="line">  assert(capacity &gt; kMaxMediumSize);</span><br><span class="line">  StringStorage store;</span><br><span class="line">  store.size = <span class="number">0</span>;</span><br><span class="line">  store.capacity = capacity;</span><br><span class="line">  store.data = <span class="keyword">static_cast</span>&lt;pointer&gt;(<span class="keyword">static_cast</span>&lt;<span class="keyword">char</span> *&gt;(Allocate(LargeString::GetDataOffset() + capacity + <span class="number">1</span>)) + LargeString::GetDataOffset());</span><br><span class="line">  LargeString::ConstrctAt(store);</span><br><span class="line">  <span class="keyword">return</span> store;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UnsafeInitLarge</span><span class="params">(const_pointer str, size_type len, size_type c = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">  store_ = AllocateLargeStorage(c &gt; <span class="number">0</span> ? c : len);</span><br><span class="line">  store_.UnsafeCopyFrom(str, len);</span><br><span class="line">  type_ = StringType::kLarge;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">pointer <span class="title">MutableData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 引用计数大于1，则执行深拷贝</span></span><br><span class="line">  <span class="keyword">if</span> (type_ == StringType::kLarge &amp;&amp; LargeString::RefCount(store_) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    LargeString::DecRefCount(store_);</span><br><span class="line">    UnsafeInitLarge(store_.data, store_.size);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> store_.data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="COW在多线程中的问题"><a href="#COW在多线程中的问题" class="headerlink" title="COW在多线程中的问题"></a>COW在多线程中的问题</h1><p>像STL的其他容器一样，多线程操作共享的string不是线程安全的。但不同的线程操作不同的字符串是线程安全的。</p>
+<p>聪明的同学立马会想到，在COW的string实现中，不同的string对象，可能共享同一块内存，那不同线程同时修改COW实现的string时，怎么保证线程安全呢？</p>
+<p>这就要求COW的string必须能够正确的处理这种竞争条件：</p>
+<ul>
+<li>对引用计数进行原子操作</li>
+<li>需要修改时，先分配和复制，再将引用计数减1（当引用计数为0时，负责释放内存）</li>
+</ul>
+<h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>比起mutex之类的同步手段，原子操作自然要轻上不少，但比起普通的算术指令，依然算得上完全的重量级</p>
+<p>COW为了保证“线程安全”而使用了原子操作，而原子操作本身的效率并不十分高。而且在多线程环境下，多个CPU对同一个地址的原子操作开销更大。COW中”共享“的实现，反而影响了多线程环境下string”拷贝“的性能。</p>
+<h2 id="操作顺序"><a href="#操作顺序" class="headerlink" title="操作顺序"></a>操作顺序</h2><p>COW中，需要修改时，先分配和复制，再将引用计数减1，这在多线程操作中，会导致不必要的分配和复制</p>
+<p>两个线程同时操作两个string，这两个string共享同一片内存（即引用计数为2），当两个线程都需要对string修改时，他们都需要先分配和复制，再将引用计数减1（最终会有一个线程释放内存）</p>
+<p>这时，COW一共进行了3次内存分配和复制（初始化时1次，修改时2次）和1次内存释放</p>
+<p>但如果没有使用COW技术，从string的初始化到目前为止也只进行了2次内存分配和复制（都是在初始化时进行）</p>
+<h1 id="COW的失效问题"><a href="#COW的失效问题" class="headerlink" title="COW的失效问题"></a>COW的失效问题</h1><p>这个问题其实是字符串接口导致的问题，string类提供了data、operator[]等接口，可以直接修改字符串本身，但由于他们返回的是指针和引用，只读操作也会导致分配和复制</p>
+<p>这可能导致COW不能完全发挥作用，每次都是在深拷贝。</p>
+<p>这当然可以通过重新设计接口，严格区分只读和修改造作来解决。但维护非标准接口，并非是一个简单的工作</p>
+<h2 id="代理类区分读写操作"><a href="#代理类区分读写操作" class="headerlink" title="代理类区分读写操作"></a>代理类区分读写操作</h2><p>区分读写的另一种方式是，定义CharProxy类，operator[]返回CharProxy，在对CharProxy赋值时，才执行分配和复制</p>
+<p>但这也会增加编码的复杂度</p>
+<h1 id="fbstring"><a href="#fbstring" class="headerlink" title="fbstring"></a>fbstring</h1><p>Fackbook的开源库folly中提供了fbstring，它是std::string的替代。其对string类的设计进行了许多优化</p>
+<ul>
+<li>将字符串区分为small/medium/large，针对他们分别采用SSO、eager copy和COW的策略（使用capacity最高位的4个bits来判断string的种类）<ul>
+<li>small：结构体长度为24字节，减去末尾的1字节（用来表示长度）和为结束符’\0’（data()和c_str()方法的需要）预留的1字节，可以放置22字节的有效长度</li>
+<li>medium：不超过255字节</li>
+<li>large：超过255字节</li>
+</ul>
+</li>
+<li>word-wise copy（逐字拷贝）</li>
+<li>直接使用malloc/free，并在使用jemalloc时，使用非标准扩展接口来提高性能</li>
+<li>末尾’\0’的处理：平时预留空间，在调用data或c_str时，才添加’\0’，避免了每次修改字符串时的额外开销</li>
+<li>find使用BM算法</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://book.douban.com/subject/1792179/" target="_blank" rel="noopener">Effective STL中文版</a></li>
+<li><a href="https://www.cnblogs.com/promise6522/archive/2012/03/22/2412686.html" target="_blank" rel="noopener">std::string的Copy-on-Write：不如想象中美好</a></li>
+<li><a href="https://www.cnblogs.com/promise6522/archive/2012/06/05/2535530.html" target="_blank" rel="noopener">漫步Facebook开源C++库folly：string类的设计</a></li>
+<li><a href="https://www.cnblogs.com/cthon/p/9181979.html" target="_blank" rel="noopener">c++再探string之eager-copy、COW和SSO方案</a></li>
+<li><a href="https://github.com/facebook/folly" target="_blank" rel="noopener">folly</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2021-11-14T12:25:26.292Z" itemprop="dateUpdated">2021-11-14 12:25:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/STL之string/&title=《STL之string》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/STL之string/&title=《STL之string》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/STL之string/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL之string》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/STL之string/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/STL之string/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/14/智能指针/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">智能指针</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2021/11/14/STL之string/&title=《STL之string》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2021/11/14/STL之string/&title=《STL之string》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2021/11/14/STL之string/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL之string》 — gwq5210's Blog&url=https://gwq5210.com/2021/11/14/STL之string/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2021/11/14/STL之string/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aQY6EMAxEUe5/aWbbvQB+2c1IcT6rEZqGPBaWncpx4Ov8uK7ukP/nvz3euGTIkLEs47y9+LJqb7l/GlmbDBky9mHcFz5eHPmvrhZUe68MGTJkkMautmjyLhkyZMjoMEj7WLsjQ4YMGbUhloypaYvJh+efzeIyZMhYkMF33f//71fyDRkyZCzFOMOLP6cffAarkiFDxmhGP4BMm8gO8v4whwwZMvZh1MpuWhw5lYy+MmTImM14I1ZMD0/UDqJ93ZEhQ8ZoRjpYphv6vOHrlHgZMmTsxkijylrcSJBx+ZYhQ8ZQBi+U/D6PDdJ0Eh0IkyFDxjhGf0DtRJUEGQ+xMmTIGMfgm/j8ZekxL/4RL9kyZMgYzag1ZOnLaptrPEKQIUPGbEZtsyw9QNZpB9GHkyFDxjaMTmyZhpS8TiKeDBkyRjP4lhk/sMX3+dKAoZUkyJAhY1lG+ghO5aECGVkfWk8ZMmSMZvCRshY0pjEDj0IfmkIZMmSMZvAiyEfZThMZnxmRIUPGlgxe/nh5TcNRVPplyJCxDYMPpfx+69wHf4sMGTKGMs7wSpu2/kYbag1lyJAxmtFJCXljly6lFojKkCFjNqM/asZx4xvtowwZMjZg8ELJWz1eplOkDBkyZHSOUKTNJec9FGIZMmTIKA2i5EPwOOHho8iQIWMDBg8Dalts6UEKgpchQ8Y+jHR0JI97u01s5RsyZMhYifEHI6iyUJegc/kAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
