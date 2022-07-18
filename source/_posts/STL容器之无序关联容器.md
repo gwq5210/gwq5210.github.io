@@ -39,7 +39,7 @@ categories: [编程, STL]
 
 大部分的实现采用链地址法处理冲突
 
-![hashtable](/images/hashtable.png)
+![hashtable](https://gwq5210.com/images/hashtable.png)
 
 ## 哈希表扩容
 
