@@ -34,7 +34,12 @@
 <meta property="og:image" content="https://gwq5210.com/images/waitid的idtype常量.png">
 <meta property="og:image" content="https://gwq5210.com/images/waitid的options常量.png">
 <meta property="og:image" content="https://gwq5210.com/images/7个exec函数之间的区别.png">
-<meta property="og:updated_time" content="2022-07-19T09:04:01.527Z">
+<meta property="og:image" content="https://gwq5210.com/images/7个exec函数之间的关系.png">
+<meta property="og:image" content="https://gwq5210.com/images/更改3个用户ID的不同方法.png">
+<meta property="og:image" content="https://gwq5210.com/images/设置不同用户ID的各函数.png">
+<meta property="og:image" content="https://gwq5210.com/images/会话中的进程组安排.png">
+<meta property="og:image" content="https://gwq5210.com/images/控制终端.png">
+<meta property="og:updated_time" content="2022-07-20T12:46:02.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记-三">
 <meta name="twitter:description" content="第八章 进程控制进程标识每个进程都有一个非负整型表示的唯一进程ID。虽然是唯一的，但是进程ID是可复用的，当一个进程终止后，其进程ID就成为复用的候选者，大多数UNIX系统实现延迟算法，使得赋予新建进程的ID不同于最近终止进程所使用的ID 系统中有一些专用进程，但是具体细节随实现而不同。ID为0的进程通常是调度进程，常常被称为交换进程（swapper），该进程是内核的一部分，它并不执行任何磁盘上的">
@@ -164,7 +169,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第八章-进程控制"><span class="post-toc-number">1.</span> <span class="post-toc-text">第八章 进程控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程标识"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">进程标识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fork"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">函数fork</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件共享"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">文件共享</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数vfork"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">函数vfork</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数exit"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">函数exit</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数wait和waitpid"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">函数wait和waitpid</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数waitid"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">函数waitid</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数wait3和wait4"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">函数wait3和wait4</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#竞争条件"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">竞争条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数exec"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">函数exec</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第八章-进程控制"><span class="post-toc-number">1.</span> <span class="post-toc-text">第八章 进程控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程标识"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">进程标识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数fork"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">函数fork</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件共享"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">文件共享</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数vfork"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">函数vfork</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数exit"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">函数exit</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数wait和waitpid"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">函数wait和waitpid</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数waitid"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">函数waitid</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数wait3和wait4"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">函数wait3和wait4</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#竞争条件"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">竞争条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数exec"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">函数exec</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更改用户ID和更改组ID"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">更改用户ID和更改组ID</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解释器文件"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">解释器文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数system"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">函数system</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#system的安全性漏洞"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">system的安全性漏洞</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程会计"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">进程会计</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户标识"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">用户标识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程调度"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">进程调度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程时间"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">进程时间</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第九章-进程关系"><span class="post-toc-number">2.</span> <span class="post-toc-text">第九章 进程关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#终端登录和网络登录"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">终端登录和网络登录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程组"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">进程组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#会话"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">会话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#控制终端"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">控制终端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数tcgetpgrp、tcsetpgrp和tcgetsid"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">函数tcgetpgrp、tcsetpgrp和tcgetsid</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#作业控制"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">作业控制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#孤儿进程组"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">孤儿进程组</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -394,6 +399,176 @@
 <li>tms_utime、tms_stime、tms_cutime以及tms_cstime值</li>
 </ul>
 <p>对打开文件的处理与每个描述符的执行时关闭（close-on-exec）标志值有关。若设置了该标志，则在执行exec时关闭该描述符；否则该描述符仍打开。除非特地的用fcntl设置了该执行时关闭标志，否则系统的默认操作是在exec后仍保持这种描述符打开</p>
+<p>POSIX.1明确要求再exec时关闭打开目录流（opendir函数）。这通常是由opendir函数实现的，它调用fcntl函数为对应于打开目录流的描述符设置执行时关闭标志</p>
+<p>注意，在exec前后实际用户ID和实际组ID保持不变，而有效ID是否改变则取决于所执行程序文件的设置用户ID位和设置组ID位是否设置。如果新程序的设置用户ID位已设置，则有效用户ID变成程序文件所有者的ID；否则有效用户ID不变。对组ID的处理方式与此相同</p>
+<p>在很多UNIX系统实现中只有execve是内核的系统调用，另外6个只是库函数，它们最终都要调用该系统调用</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/7个exec函数之间的关系.png" alt="7个exec函数之间的关系" title>
+                </div>
+                <div class="image-caption">7个exec函数之间的关系</div>
+            </figure>
+<h2 id="更改用户ID和更改组ID"><a href="#更改用户ID和更改组ID" class="headerlink" title="更改用户ID和更改组ID"></a>更改用户ID和更改组ID</h2><p>在UNIX系统中，特权（如能改变当前日期的表示法）以及访问控制（如能否读、写一个特定文件），是基于用户ID和组ID的。当程序需要增加特权，或需要访问当前并不允许访问的资源时，我们需要更换自己的用户ID或组ID，使得新ID具有合适的特权或访问权限。同样如果需要降低权限，则也需要更换用户ID或组ID</p>
+<p>一般而言，在设计应用时，我们总是视图使用最小特权（least privilege）模型。依照此模型，我们的程序应当只具有为完成给定任务所需的最小特权。这降低了由恶意用户试图哄骗我们的进程以未预料的方式使用特权造成的安全性风险</p>
+<p>可以用setuid函数设置实际用户ID和有效用户ID，与此类似，可以用setgid函数设置实际组ID和有效组ID</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>更改用户ID的规则如下（适用于组ID）</p>
+<ul>
+<li>若进程具有超级用户特权，则setuid函数将实际用户ID、有效用户ID以及保存的设置用户ID（saved set-user-ID）设置为uid</li>
+<li>若进程没有超级用户特权，但是uid等于实际用户ID或保存的设置用户ID，则setuid只将有效用户ID设置为uid，不更改实际用户ID和保存的设置用户ID</li>
+<li>如果上边两个条件都不满足，则errno设置为EPERM，并返回-1</li>
+</ul>
+<p>上述假定_POSIX_SAVED_IDS为真，如果没有提供这种功能，则上边关于保存的设置用户ID部分都无效</p>
+<p>关于内核维护的3个用户ID，还需要注意</p>
+<ul>
+<li>只有超级用户进程可以更改实际用户ID。通常，实际用户ID是在用户登录时，有login程序设置的，而且绝不会改变它。login是一个超级用户进程</li>
+<li>仅当对程序文件设置了设置用户ID位时，exec函数才设置有效用户ID。如果设置用户ID位没有设置，exec函数不会改变有效用户ID，而将维持其现有值。任何时候都可以调用setuid，将有效用户ID设置为实际用户ID或保存的设置用户ID。</li>
+<li>保存的设置用户ID是由exec复制有效用户ID而得到的，如果设置了文件的设置用户ID位则在exec根据文件的用户ID设置了进程的有效用户ID以后，这个副本就被保存起来了</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/更改3个用户ID的不同方法.png" alt="更改3个用户ID的不同方法" title>
+                </div>
+                <div class="image-caption">更改3个用户ID的不同方法</div>
+            </figure>
+<p>历史上BSD支持setreuid函数，其功能是交换实际用户ID和有效用户ID的值，具体用法参考手册</p>
+<p>函数seteuid和setegid只更改有效用户ID和有效组ID，一个非特权用户可以将其有效用户ID设置为其实际用户ID或其保存的设置用户ID。对于一个特权用户则可将有效用户ID设置为uid</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">seteuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setegid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/设置不同用户ID的各函数.png" alt="设置不同用户ID的各函数" title>
+                </div>
+                <div class="image-caption">设置不同用户ID的各函数</div>
+            </figure>
+<p>以上说的一切都以类似方式适用于各个组ID。附属组ID不受setgid、setregid和setegid函数影响</p>
+<h2 id="解释器文件"><a href="#解释器文件" class="headerlink" title="解释器文件"></a>解释器文件</h2><p>现如今的UNIX系统都支持解释器文件（interpreter file）。这种文件是文本文件，其起始行的形式是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">! pathname [optional-argument]</span></span><br></pre></td></tr></table></figure>
+<p>感叹号和pathname之间的空格是可选的，最常见的解释器文件以下列行开始</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">! /bin/sh</span></span><br></pre></td></tr></table></figure>
+<p>pathname通常是绝对路径名，对它不进行什么特殊的处理（不使用PATH进行路径搜索）。对这种文件的识别是由内核作为exec系统调用处理的一部分来完成的。内核使调用exec函数的进程实际执行的文件并不是解释器文件，而是在该解释器文件第一行中pathname所指定的文件，而是在该解释器文件第一行中pathname所指定的文件。注意解释器文件（文本文件，它以#!开头）和解释器（由该解释器文件第一行中的pathname指定）的区别</p>
+<p>解释器文件的第一行一般由长度限制，这包括#!、pathname、可选参数、终止换行符以及空格数。Linux 3.2.0中是128字节</p>
+<p>当内核exec解释器时，argv[0]参数是该解释器的pathname，其后是解释器文件中的可选参数，其余参数是exec的pathname以及调用exec的参数（argv[1]及其后参数），此时调用exec的argv[1]和其后参数已经右移。注意内核取exec调用中的pathname而不是argv[0]，因为一般而言pathname包含了比第一个参数更多的信息</p>
+<p>解释器文件使得用户得到效率方面的好处，其代价是内核的额外开销（因为识别解释器文件的是内核）。</p>
+<ul>
+<li>有些程序是用某种语言写的脚本，解释器文件可以将这一事实隐藏起来。使用somecmd optional-arguments调用即可</li>
+<li>解释器脚本在效率方面也提供了好处。我们可以编写shell脚本来实现相同的功能，但要求做更多动作。首先shell读此命令，然后试图execlp此文件，因为shell脚本是一个可执行文件，但却不是机器可执行的，于是返回一个错误，execlp就认为该文件是一个shell脚本，然后执行/bin/sh，并以该shell脚本的路径名作为其参数。shell正确的执行我们的shell脚本，但是为了运行shell脚本中的程序（如awk程序），它调用fork、exec和wait，于是一个shell脚本代替解释器脚本需要更多的开销</li>
+<li>解释器脚本使我们可以使用除/bin/sh意外的其他shell来编写shell脚本</li>
+</ul>
+<h2 id="函数system"><a href="#函数system" class="headerlink" title="函数system"></a>函数system</h2><p>system函数可以执行给定的命令</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">system</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* cmdstring)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如果cmdstring是一个空指针，则仅当命令处理程序可用时，system返回非0值，这一特征可以确定在一个给定的操作系统上是否支持system函数。在UNIX系统中system总是可用的</p>
+<p>system在其实现中调用了fork、exec和waitpid，因此有3中返回值</p>
+<ul>
+<li>fork失败或者waitpid返回除EINTR之外的出错，则system返回-1，并且设置errno</li>
+<li>如果exec失败（表示不能执行shell），则其返回值如同shell执行了exit(127)一样</li>
+<li>否则所有3个函数都成功，那么system的返回值是shell的终止状态，其格式已在waitpid中说明</li>
+</ul>
+<h3 id="system的安全性漏洞"><a href="#system的安全性漏洞" class="headerlink" title="system的安全性漏洞"></a>system的安全性漏洞</h3><p>如果在一个设置用户ID程序中调用system，会发生什么呢？这是一个安全性方面的漏洞，决不应该这样做</p>
+<p>有些实现通过更改/bin/sh，当有效用户ID与实际用户ID不匹配时，将有效用户ID设置为实际用户ID</p>
+<p>如果一个进程正以特殊的权限运行，它又想生成另一个进程执行另一个程序，则它应该直接使用fork和exec，而且在fork之后，exec之前要更改回普通权限。设置用户ID或设置组ID程序决不应该调用system函数</p>
+<h2 id="进程会计"><a href="#进程会计" class="headerlink" title="进程会计"></a>进程会计</h2><p>大多数UNIX系统提供了一个宣讲以进行进程会计（process accounting）处理，启用该选项后，每当进程结束时内核就写一个会计记录。典型的会计记录包含总量较小的二进制数据，一般包括命令名，所适用的CPU时间总量、用户ID和组ID、启动时间等</p>
+<p>会计记录所需的各个数据都由内核保存在进程表中，并在一个新进程被创建时初始化，进程终止时写一个会计记录。这产生两个后果</p>
+<ul>
+<li>我们不能获取永远不终止的进程的会计记录。如init或内核守护进程</li>
+<li>会计文件中记录的顺序对应于进程终止的顺序，而不是它们启动的顺序。</li>
+</ul>
+<p>会计记录对应进程而不是程序，在fork之后，内核为子进程初始化一个记录，而不是在一个新程序被执行时初始化。虽然exec并不创建一个新的会计记录，但相应记录中的命令名改变了，AFORK则被清除。如果一个程序执行了3个程序（A exec B、B exec C，最后C exit）只会写一个会计记录，命令名对应C，CPU时间是A、B和C之和</p>
+<h2 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h2><p>一个人在口令文件中可以有多个登录项，它们的用户ID相同，但登录shell不同（因此通过getpwuid(getuid())不可行）。可以使用getlogin函数可以获取登录名。如果调用此函数的进程没有连接到用户登录时所用的终端，则函数会失败，通常称这些进程为守护进程（daemon）</p>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><p>UNIX系统历史上对进程提供的只是基于调度优先级的粗粒度的控制。调度策略和调度优先级是由内核确定的。进程可以通过调整nice值选择以更低优先级运行。只有特权进程允许提高调度权限。</p>
+<p>nice值的返回在<code>0~(2*NZERO)-1</code>之间，nice值越小，优先级越高。NZERO是系统默认的nice值。</p>
+<p>进程可以通过nice函数获取或更改它的nice值。使用这个函数，进程只能影响自己的nice值，不能影响任何其他进程的nice值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">nice</span><span class="params">(<span class="keyword">int</span> incr)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回新的nice值NZERO；若出错返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>incr参数会被增加到调用进程的nice值上，如果incr太大，系统直接把它降到最大合法值，不给出提示。类似的如果incr太小，系统会把它提高到最小合法值。由于-1是合法的成功返回值，在调用nice函数之前需要清除errno，在nice函数返回-1时，需要检查errno。如果nice调用成功，并且返回值为-1，那么errno仍然为0。如果errno不为0，说明nice调用失败</p>
+<p>getpriority函数可以向nice函数那样用于获取进程的nice值，但是getpriority还可以获取一组相关进程的nice值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpriority</span><span class="params">(<span class="keyword">int</span> which, <span class="keyword">id_t</span> who)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回-NZERO~NZERO<span class="number">-1</span>之间的nice值；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>which参数可以取以下三个值之一：PRIO_PROCESS表示进程，PRIO_PGRP表示进程组，PRIO_USER表示用户ID。which参数控制who参数是如何解释的，who参数选择感兴趣的一个或多个进程。如果who参数为0，表示调用进程、进程组或用户。当which设置为PRIO_USER并且who为0时，使用调用进程的实际用户ID。如果which参数作用域多个进程，则返回所有作用进程中优先级最高的（最小的nice值）</p>
+<p>setpriority函数可用于为进程，进程组和属于特定用户ID的所有进程设置优先级</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setpriority</span><span class="params">(<span class="keyword">int</span> which, <span class="keyword">id_t</span> who, <span class="keyword">int</span> value)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>参数which和who与getpriority函数中相同。value增加到NZERO上，然后变为新的nice值</p>
+<p>遵循XSI的系统要求进程调用exec后保留nice值。如Linux 3.2.0、MacOS等</p>
+<h2 id="进程时间"><a href="#进程时间" class="headerlink" title="进程时间"></a>进程时间</h2><p>我们可以度量的时间有三个：墙上时钟时间、用户CPU时间和系统CPU时间。任一进程都可以调用times获得它自己以及已终止进程的上述时间</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/times.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">clock_t</span> <span class="title">times</span><span class="params">(struct tms* buf)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回流逝的墙上时钟时间（以时钟滴答数为单位）；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>此函数填写由buf指向的tms结构，定义如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tms</span> &#123;</span></span><br><span class="line">  <span class="keyword">clock_t</span> tms_utime;  <span class="comment">/* user CPU time */</span></span><br><span class="line">  <span class="keyword">clock_t</span> tms_stime;  <span class="comment">/* system CPU time */</span></span><br><span class="line">  <span class="keyword">clock_t</span> tms_cutime; <span class="comment">/* user CPU time of children, all waited-for terminated children*/</span></span><br><span class="line">  <span class="keyword">clock_t</span> tms_cstime; <span class="comment">/* system CPU time of children, all waited-for terminated children */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>times函数返回墙上时钟时间作为其函数值。次值是相对于过去的某一时刻度量的，所以不能用其绝对值而必须使用其相对值。例如，调用times两次，其差值就是墙上时钟时间</p>
+<p>结构中两个针对子进程的字段包含了此进程用wait函数族已等待到的各子进程的值。所有由此函数返回的clock_t值都用_SC_CLK_TCK转换成秒数</p>
+<p>大多数实现提供了getrusage(2)函数，该函数返回CPU时间以及指示资源使用情况的另外14个值</p>
+<h1 id="第九章-进程关系"><a href="#第九章-进程关系" class="headerlink" title="第九章 进程关系"></a>第九章 进程关系</h1><h2 id="终端登录和网络登录"><a href="#终端登录和网络登录" class="headerlink" title="终端登录和网络登录"></a>终端登录和网络登录</h2><p>我们可以经由终端登录至UNIX系统，终端的类型可以是基于字符的终端、图形终端等</p>
+<p>系统使用伪终端（pseudo terminal），来处理终端登录和网络登录</p>
+<h2 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h2><p>每个进程除了有一进程ID外，还属于一个进程组。进程组是一个或多个进程的集合。通常它们是在同一作业中结合起来的，同一进程组中各进程接收来自同一终端的各种信号。每个进程组有一个唯一的进程组ID。进程组ID类似于进程ID，它是一个正整数，并可存放在pid_t数据类型中。函数getpgrp返回调用进程的进程组ID</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">getpgrp</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">返回调用进程的进程组ID</span><br></pre></td></tr></table></figure>
+<p>getpgid返回指定进程的进程组ID</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">getpgid</span><span class="params">(<span class="keyword">pid_t</span> pid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回进程组ID；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>若pid是0，返回调用进程的进程组ID，即<code>getpgid(0)</code>等价于<code>getpgrp()</code></p>
+<p>每个进程组有一个组长进程，组长进程的进程组ID等于其进程ID，进程组组长可以创建一个进程组、创建该组中的进程，然后终止。只要在某个进程组中有一个进程存在，则该进程组就存在，这与其组长进程是否终止无关。从进程组创建开始到其中最后一个进程离开为止的时间区间称为进程组的生命期。某个进程组中的最后一个进程可以终止，也可以转移到另一个进程组</p>
+<p>进程调用setpgid可以加入一个现有的进程组或者创建一个新的进程组</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setpgid</span><span class="params">(<span class="keyword">pid_t</span> pid, <span class="keyword">pid_t</span> pgid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>setpgid将pid进程的进程组ID设置为pgid。如果这两个参数相等，则由pid指定的进程变成进程组组长。如果pid是0，则使用调用者的进程ID。另外，如果pgid是0，则由pid指定的进程ID用作进程组ID</p>
+<p>一个进程只能为它自己或它的子进程设置进程组ID。在它的子进程调用exec之后，它就不再更改该子进程的进程组ID</p>
+<p>大多数作业控制shell中，在fork之后调用此函数，使父进程设置其子进程的进程组ID，并且也使子进程设置其自己的进程组ID，这两个调用有一个是冗余的，但让父进程和子进程都这样可以保证，在父进程和子进程认为子进程已进入了该进程组之前，这确实已经发生了。如果不这样做，在fork之后，由于父子进程运行的先后次序不确定，会导致子进程的组员身份不确定。</p>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>会话（session）是一个或多个进程组的集合。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/会话中的进程组安排.png" alt="会话中的进程组安排" title>
+                </div>
+                <div class="image-caption">会话中的进程组安排</div>
+            </figure>
+<p>进程调用setsid函数建立一个新会话</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">setsid</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回进程组ID；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>如果调用此函数的进程不是一个进程组的组长，则此函数创建一个新会话。会发生以下3件事</p>
+<ul>
+<li>该进程变成新会话的会话首进程（session leader，会话首进程是创建该会话的进程）。此时，该进程是新会话中的唯一进程</li>
+<li>该进程成为一个新进程组的组长进程。新进程组ID是该调用进程的进程ID</li>
+<li>该进程没有控制终端。如果在调用setsid之前该进程有一个控制终端，那么这种联系也被切断</li>
+</ul>
+<p>如果该调用进程已经是一个进程组的组长，则此函数返回出错。为了保证不处于这种情况，通常先调用fork，然后使其父进程终止，而子进程继续，因为子进程继承了父进程的进程组ID，而其进程ID则是新分配的，两者不可能相等，这就保证了子进程不是一个进程组的组长</p>
+<p>getsid函数返回会话首进程的进程组ID。会话首进程总是一个进程组的组长进程，所以可以将“会话首进程的进程组ID”称为会话ID</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">getsid</span><span class="params">(<span class="keyword">pid_t</span> pid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回会话首进程的进程组ID；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>如若pid是0，getsid返回调用进程的会话首进程的进程组ID。出于安全方面的考虑，一些实现有如下限制：如果pid并不属于调用者所在的会话，那么调用进程就不能得到该会话首进程的进程组ID</p>
+<h2 id="控制终端"><a href="#控制终端" class="headerlink" title="控制终端"></a>控制终端</h2><p>会话和进程组还有一些其他特性</p>
+<ul>
+<li>一个会话可以有一个控制终端（controlling terminal）。这通常是终端设备（终端登录）或伪终端设备（网络登录）</li>
+<li>建立与控制终端连接的会话首进程被称为控制进程（controlling process）</li>
+<li>一个会话中的几个进程组可被分成一个前台进程组（foreground process group）以及一个或多个后台进程组（background process group）</li>
+<li>如果一个会话有一个控制终端，则它有一个前台进程组，其他进程组为后台进程组</li>
+<li>无论何时键入终端的中断键（常常是Delete或Ctrl+C），都会将中断信号发送至前台进程组的所有进程</li>
+<li>无论何时键入终端的退出键（常常是Ctrl+\），都会将推出信号发送至前台进程组的所有进程</li>
+<li>如果终端接口检测到调制解调器（或网络）已经断开连接，则将挂断信号发送至控制进程（会话首进程）</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/控制终端.png" alt="控制终端" title>
+                </div>
+                <div class="image-caption">控制终端</div>
+            </figure>
+<p>通常我们不必担心控制终端，登录时，将自动建立控制终端</p>
+<p>可以open文件/dev/tty（在内核中，此设备是控制终端的同义词）来与控制终端对话，如果程序没有终止终端，则对于此设备的open将失败</p>
+<h2 id="函数tcgetpgrp、tcsetpgrp和tcgetsid"><a href="#函数tcgetpgrp、tcsetpgrp和tcgetsid" class="headerlink" title="函数tcgetpgrp、tcsetpgrp和tcgetsid"></a>函数tcgetpgrp、tcsetpgrp和tcgetsid</h2><p>需要有一种方法来通知内核哪一个进程组是前台进程组，这样终端设备驱动程序就能知道将终端输入和终端产生的信号发送到何处</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">tcgetpgrp</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回前台进程组ID；若出错，返回<span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">tcsetpgrp</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">pid_t</span> pgrpid)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>函数tcgetpgrp返回前台进程组ID，它与在fd打开的终端相关联</p>
+<p>如果进程有一个控制终端，则该进程可以调用tcsetpgrp将前台进程组ID设置为pgrpid。pgrpid值应当是在同一会话中的一个进程组的ID。fd必须引用该会话的控制终端</p>
+<p>大多数应用程序并不直接调用这两个函数。它们通常由作业控制shell调用</p>
+<p>给出控制TTY的文件描述符，通过tcgetsid函数，应用程序就能获得会话首进程的进程组ID</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;termios.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">tcgetsid</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回会话首进程的进程组ID；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>需要管理控制终端的应用程序可以调用tcgetsid函数识别出控制终端的会话首进程的会话ID（它等价于会话首进程的进程组ID）</p>
+<h2 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h2><p>作业控制允许在一个终端上启动多个作业（进程组），它控制哪一个作业可以访问控制终端以及哪些作业在后台运行。作业控制要求以下3中形式的支持</p>
+<ul>
+<li>支持作业控制的shell</li>
+<li>内核中的终端驱动程序必须支持作业控制</li>
+<li>内核必须提供对某些作业控制信号的支持</li>
+</ul>
+<p>我们可以在终端上键入影响前台作业的特殊字符</p>
+<ul>
+<li>中断字符（一般采用Delete或Ctrl+C）产生SIGINT</li>
+<li>退出字符（一般采用Ctrl+\）产生SIGQUIT</li>
+<li>挂起字符（一般采用Ctrl+Z）产生SIGTSTP</li>
+</ul>
+<h2 id="孤儿进程组"><a href="#孤儿进程组" class="headerlink" title="孤儿进程组"></a>孤儿进程组</h2><p>一个其父进程已终止的进程称为孤儿进程（orphan process），这种进程由init进程收养。整个进程组也可成为孤儿</p>
 
         </div>
 
@@ -401,7 +576,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-07-19T09:04:01.527Z" itemprop="dateUpdated">2022-07-19 09:04:01</time>
+    Last updated: <time datetime="2022-07-20T12:46:02.865Z" itemprop="dateUpdated">2022-07-20 12:46:02</time>
 </span><br>
 
 
