@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>APUE笔记-五 | gwq5210&#39;s Blog | 凡是过往，皆为序章！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="unix,linux,读书笔记,APUE">
+    <meta name="description" content="第十四章 高级IO非阻塞IO系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括  如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞 如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞 在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先">
+<meta name="keywords" content="unix,linux,读书笔记,APUE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APUE笔记-五">
+<meta property="og:url" content="https://gwq5210.com/2022/07/29/APUE笔记-五/index.html">
+<meta property="og:site_name" content="gwq5210&#39;s Blog">
+<meta property="og:description" content="第十四章 高级IO非阻塞IO系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括  如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞 如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞 在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png">
+<meta property="og:image" content="https://gwq5210.com/images/文件字节范围锁.png">
+<meta property="og:image" content="https://gwq5210.com/images/记录锁的数据结构.png">
+<meta property="og:image" content="https://gwq5210.com/images/poll的标志.png">
+<meta property="og:image" content="https://gwq5210.com/images/iovec的结构.png">
+<meta property="og:image" content="https://gwq5210.com/images/存储映射文件的例子.png">
+<meta property="og:updated_time" content="2022-07-29T07:10:14.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APUE笔记-五">
+<meta name="twitter:description" content="第十四章 高级IO非阻塞IO系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括  如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞 如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞 在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先">
+<meta name="twitter:image" content="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/images/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/images/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">gwq5210</h5>
+          <a href="mailto:gwq5210@qq.com" title="gwq5210@qq.com" class="mail">gwq5210@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/gwq5210" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">APUE笔记-五</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">APUE笔记-五</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-07-29T15:08:47.000Z" itemprop="datePublished" class="page-time">
+  2022-07-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第十四章-高级IO"><span class="post-toc-number">1.</span> <span class="post-toc-text">第十四章 高级IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非阻塞IO"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">非阻塞IO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#记录锁"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">记录锁</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#锁的隐含继承和释放"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">锁的隐含继承和释放</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#记录锁的实现"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">记录锁的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在文件尾端加锁"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">在文件尾端加锁</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建议性锁和强制性锁"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">建议性锁和强制性锁</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO多路复用"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IO多路复用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数select和pselect"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">函数select和pselect</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数poll"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">函数poll</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数readv和writev"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">函数readv和writev</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储映射IO"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">存储映射IO</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-APUE笔记-五"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">APUE笔记-五</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-07-29 15:08:47" datetime="2022-07-29T15:08:47.000Z"  itemprop="datePublished">2022-07-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="第十四章-高级IO"><a href="#第十四章-高级IO" class="headerlink" title="第十四章 高级IO"></a>第十四章 高级IO</h1><h2 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h2><p>系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括</p>
+<ul>
+<li>如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞</li>
+<li>如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞</li>
+<li>在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先等待与之连接的调制解调器应答，又如若以只读模式打开FIFO，那么在没有其他进程已用读模式打开该FIFO时也要等待）</li>
+<li>对已经加上强制性记录锁的文件进行读写</li>
+<li>某些ioctl操作</li>
+<li>某些进程间通信函数</li>
+</ul>
+<p>虽然读写磁盘文件会暂时阻塞调用者，但并不能将与磁盘IO有关的系统调用视为“低速”</p>
+<p>非阻塞IO使我们可以发出open、read和write这样的IO操作，并使这些操作不会永远阻塞。如果这种操作不能完成，则调用立即出错返回，表示该操作如继续执行将阻塞。设置阻塞方法如下</p>
+<ul>
+<li>如果调用open获得描述符，则可指定O_NONBLOCK标志</li>
+<li>对于已经打开的一个描述符，则可调用fcntl，由该函数打开O_NONBLOCK文件状态标志。</li>
+</ul>
+<h2 id="记录锁"><a href="#记录锁" class="headerlink" title="记录锁"></a>记录锁</h2><p>记录锁（record locking）的功能是：当一个进程正在读或修改文件的某个部分时，使用记录锁可以阻止其他进程修改同一文件区。对于UNIX系统而言，“记录”这个词是一个误用，因为UNIX系统内核根本没有使用文件记录这个概念。一个更适合的术语可能是字节范围锁（byte-range locking），因为它锁定的只是文件中的一个区域（也可能是整个文件）</p>
+<p>POSIX.1使用fcntl来创建记录锁</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ...<span class="comment">/* struct flock* flockptr */</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回值依赖于cmd；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>对于记录锁，cmd是F_GETLK、F_SETLK或F_SETLKW。第三个参数（我们将调用flockptr）是一个指向flock结构的指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">flock</span> &#123;</span></span><br><span class="line">  short l_type;  <span class="comment">// F_RDLCK, F_WRLCK or F_UNLCK</span></span><br><span class="line">  short l_whence;  <span class="comment">// SEEK_SET, SEEK_CUR or SEEK_END</span></span><br><span class="line">  <span class="keyword">off_t</span> l_start;  <span class="comment">// offset in bytes, relative to l_whence</span></span><br><span class="line">  <span class="keyword">off_t</span> l_len;  <span class="comment">// length, in bytes; 0 means lock to EOF</span></span><br><span class="line">  <span class="keyword">pid_t</span> l_pid;  <span class="comment">// returned with F_GETLK</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>进程的ID（l_pid）持有的锁能阻塞当前进程（仅有F_GETLK返回）</li>
+<li>锁可以在当前文件尾端处开始或者越过尾端处开始，但是不能在文件起始位置之前开始</li>
+<li>如若l_len为0，则表示锁的范围可以扩展到最大可能偏移量。这意味着不管向该文件中追加写了多少数据，它们都可以处于锁的范围内（不必猜测会有多少字节被追加写到了文件之后），而且起始位置可以是文件中的任意一个位置</li>
+<li>为了对整个文件加锁，我们设置l_start和l_whence指向文件的起始位置，并且指定长度（l_len）为0</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png" alt="不同类型锁彼此之间的兼容性" title>
+                </div>
+                <div class="image-caption">不同类型锁彼此之间的兼容性</div>
+            </figure>
+<p>上述兼容性规则适用于不同进程提出的锁请求，并不适用于单个进程提出的多个锁请求。如果一个进程对一个文件区间已经有了一把锁，后来该进程又企图在同一文件区间再加一把锁，那么新锁将替换已有锁。加读锁时，该描述符必须是读打开的。加写锁时，该描述符必须是写打开的</p>
+<p>fcntl的三个命令如下</p>
+<ul>
+<li>F_GETLK：判断由flockptr所描述的锁是否会被另外一把锁所排斥（阻塞）。如果存在一把锁，它阻止创建由flockptr所描述的锁，则该现有锁的信息将重写flockptr指向的信息。如果不存在这种情况，则除了将l_type设置为F_UNLCK之外，flockptr所指向结构中的其他信息保持不变</li>
+<li>F_SETLK：设置由flockptr所描述的锁。如果我们试图获得一把读锁（l_type为F_RDLCK）或写锁（l_type为F_WRLCK），而兼容性规则阻止系统给我们这把锁，那么fcntl会立即出错返回，此时errno设置为EACCES或EAGAIN。此命令也用来清除由flockptr指定的锁（l_type为F_UNLCK）</li>
+<li>F_SETLKW：这个命令是F_SETLK的阻塞版本，W表示wait。如果锁请求的读锁或写锁因另一个进程当前已经对所请求区域的某部分进行了加锁而不能被授予，那么调用进程会被设置为休眠。如果请求创建的锁已经可用，或者休眠由信号中断，则该进程被唤醒</li>
+</ul>
+<p>应当了解，用F_GETLK测试能否建立一把锁，然后用F_SETLK或F_SETLKW企图建立那把锁，这两者不是一个原子操作。因此不能保证在这两次fcntl调用之间会不会有另一个进程插入并建立一把相同的锁。如果不希望在等待锁变为可用时产生阻塞，就必须处理由F_SETLK返回的可能的出错</p>
+<p>在设置或释放文件上的一把锁时，系统按要求组合或分裂相邻区。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/文件字节范围锁.png" alt="文件字节范围锁" title>
+                </div>
+                <div class="image-caption">文件字节范围锁</div>
+            </figure>
+<p>由于F_GETLK命令返回是否有现有的锁阻止调用进程设置它自己的锁。因为F_SETLK和F_SETLKW命令总是替换调用进程现有的锁（若已存在），所以调用进程决不会阻塞在自己持有的锁上，于是，F_GETLK命令决不会报告调用进程自己持有的锁</p>
+<p>如果两个进程互相等待对方持有并且不释放（锁定）的资源时，则这两个进程就处于死锁状态。检测到死锁时，内核必须选择一个进程接收出错返回。</p>
+<h3 id="锁的隐含继承和释放"><a href="#锁的隐含继承和释放" class="headerlink" title="锁的隐含继承和释放"></a>锁的隐含继承和释放</h3><ul>
+<li>锁与进程和文件两者相关联。第一，当一个进程终止时，它所建立的锁全部释放；第二，无论一个描述符何时关闭，该进程通过这一描述符所引用的文件上的任何一把锁都会释放（这些锁都是该进程设置的）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// close(fd2)之后，在fd1上设置的锁被释放</span></span><br><span class="line">fd1 = open(pathname, ...);</span><br><span class="line">read_lock(fd1, ...);</span><br><span class="line">fd2 = dup(fd1);</span><br><span class="line">close(fd2);</span><br><span class="line"></span><br><span class="line">fd1 = open(pathname, ...)</span><br><span class="line">read_lock(fd1, ...);</span><br><span class="line">fd2 = open(pathname, ...)</span><br><span class="line">close(fd2)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由fork产生的子进程不继承父进程锁设置的锁。这意味着，若一个进程得到一把锁，然后调用fork，那么对于父进程获得的锁而言，子进程被视为另一个进程。对于通过fork从父进程处继承过来的描述符，子进程需要调用fcntl才能获取它自己的锁。这个约束是有道理的，因为锁的作用是阻止多个进程同时写同一个文件。如果子进程通过fork继承父进程的锁，则父进程和子进程就可以同时写同一个文件</li>
+<li>在执行exec后，新程序可以继承原执行程序的锁。但是注意，如果对一个文件描述符设置执行时关闭标志，那么当作为exec的一部分关闭该文件描述符时，将释放相应文件的所有锁</li>
+</ul>
+<h3 id="记录锁的实现"><a href="#记录锁的实现" class="headerlink" title="记录锁的实现"></a>记录锁的实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fd1 = open(pathname, ...);</span><br><span class="line">write_lock(fd1, <span class="number">0</span>, SEEK_SET, <span class="number">1</span>);  <span class="comment">// parent write locks byte 0</span></span><br><span class="line"><span class="keyword">if</span> ((pid = fork()) &gt; <span class="number">0</span>) &#123;  <span class="comment">// parent</span></span><br><span class="line">  fd2 = dup(fd1);</span><br><span class="line">  fd3 = open(pathname, ...);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">  read_lock(fd1, <span class="number">1</span>, SEEK_SET, <span class="number">1</span>);  <span class="comment">// child read locks byte 1</span></span><br><span class="line">&#125;</span><br><span class="line">pause();</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/记录锁的数据结构.png" alt="记录锁的数据结构" title>
+                </div>
+                <div class="image-caption">记录锁的数据结构</div>
+            </figure>
+<p>在v节点上有lockf结构，lockf结构描述了一个给定进程的一个加锁区域。关闭描述符时，内核会从该描述符所关联的i节点开始，逐个检查lockf链表中的各项，并释放由调用进程持有的各把锁。内核并不清楚（也不关心）是又哪一个描述符来设置的这把锁</p>
+<h3 id="在文件尾端加锁"><a href="#在文件尾端加锁" class="headerlink" title="在文件尾端加锁"></a>在文件尾端加锁</h3><p>在对相对于文件尾端的字节范围加锁或解锁时需要特别小心。因为内核必须独立于当前文件偏移量或文件尾端而记住锁。</p>
+<h3 id="建议性锁和强制性锁"><a href="#建议性锁和强制性锁" class="headerlink" title="建议性锁和强制性锁"></a>建议性锁和强制性锁</h3><p>强制性锁会让内核检查每一个open、read和write，验证调用进程是否违背了正在访问的文件上的某一把锁。对一个特定文件打开其设置组ID位，关闭其组执行位便开启了对该文件的强制性锁机制。因为当组执行位关闭时，设置组ID位不再有意义。</p>
+<p>强制性锁对unlink函数没有影响。因此可以删除原文件（已加强制性记录锁），然后将临时文件名改为原文件名。</p>
+<h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><p>IO多路复用，一般是需要构造一张我们感兴趣的描述符（通常都不止一个）的列表，然后调用一个函数，直到这些描述符中的一个已准备好几下IO时，该函数才返回。poll、pselect和select来完成这个工作，从这些函数返回时，进程会被告知哪些描述符已经准备好可以进行IO</p>
+<h3 id="函数select和pselect"><a href="#函数select和pselect" class="headerlink" title="函数select和pselect"></a>函数select和pselect</h3><p>传给select的参数告诉内核</p>
+<ul>
+<li>我们所关心的描述符</li>
+<li>对于每个描述符我们所关心的条件（读、写和异常条件）</li>
+<li>愿意等待多长时间（可以永远等待、等待一个固定的时间或根本不等待）</li>
+</ul>
+<p>从select返回时，内核告诉我们</p>
+<ul>
+<li>已准备好描述符的数量</li>
+<li>对于读、写或异常这3个条件中的每一个，哪些描述符已准备好</li>
+</ul>
+<p>使用这种返回信息，就可以调用相应的IO函数（read或write），并且确知该函数不会阻塞</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/select.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfdp1, fd_set* <span class="keyword">restrict</span> readfds, fd_set* <span class="keyword">restrict</span> writefds, fd_set* <span class="keyword">restrict</span> exceptfds, struct timeval* <span class="keyword">restrict</span> tvptr)</span></span>;</span><br><span class="line"></span><br><span class="line">返回准备就绪的描述符数目；若超时，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>tvptr指定愿意等待的时间长度，单位是秒和微秒。可以指定永远等待、不等待或等待指定的时间</p>
+<p>中间3个参数是指向描述符集的指针。分别指明读、写或异常条件的描述符集合。如果不关心相应条件，可以将参数设置为NULL，如果3个指针都为NULL，则select提供了精度更高的定时器</p>
+<p>fd_set可以认为是一个bitmap。需要通过以下函数来进行操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/select.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FD_ISSET</span><span class="params">(<span class="keyword">int</span> fd, fd_set* fdset)</span></span>;</span><br><span class="line"></span><br><span class="line">若fd在描述符集中，返回非<span class="number">0</span>值；否则，返回<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FD_CLR</span><span class="params">(<span class="keyword">int</span> fd, fd_set* fdset)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FD_SET</span><span class="params">(<span class="keyword">int</span> fd, fd_set* fdset)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FD_ZERO</span><span class="params">(fd_set* fdset)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这些接口可以实现为宏或函数</p>
+<p>maxfdp1的意思是最大文件描述符编号值加1。考虑所有3个描述符集，在3个描述符集中找出最大描述符编号值，然后加1，这就是第一个参数值。也可以将其设置为FD_SETSIZE，这是一个常量，指定最大描述符数，通常是1024。</p>
+<p>返回值</p>
+<ul>
+<li>返回-1表示出错</li>
+<li>返回0表示没有描述符准备好。此时，所有的描述符集都会置0</li>
+<li>一个正返回值说明了已经准备好的描述符数。该值是3个描述符中已准备好的描述符数之和，所以如果同一描述符已准备好读和写，那么在返回值中会对其计数两次。在这种情况下，3个描述符集中仍旧打开的位对应于已准备好的描述符</li>
+</ul>
+<p>准备好含义如下</p>
+<ul>
+<li>对于读，是进行read操作不会阻塞</li>
+<li>对于写，是进行write操作不会阻塞</li>
+<li>对于异常条件，是描述符有一个未决异常条件。包括：在网络连接上到达带外数据，或者在处于数据包模式的伪终端上发生了某些条件</li>
+<li>对于读、写和异常条件，普通文件的文件描述符总是返回准备好</li>
+</ul>
+<p>一个描述符阻塞与否并不影响select是否阻塞。如果在一个描述符上碰到了文件尾端，则select会认为该描述符是可读的。然后调用read，它返回0，这是UNIX系统指示到达文件尾端的方法（很多人错误的认为，到达文件尾端时，select会指示一个异常条件）</p>
+<p>除以下几点外，pselect与select相同</p>
+<ul>
+<li>select的超时值用timeval结构指定，但pselect使用timespec结构</li>
+<li>pselect的超时值被声明为const，这就保证调用pselect不会改变此值，而select可能改变此值（取决于实现，如Linux 3.2.0将用剩余时间值更新该结构）</li>
+<li>pselect可使用可选的信号屏蔽字。若sigmask为NULL，则在信号有关的方面，pselect与select相同。否则sigmask指定信号屏蔽字，在调用pselect时，以原子操作的方式安装该信号屏蔽字。在返回时，恢复以前的信号屏蔽字</li>
+</ul>
+<h2 id="函数poll"><a href="#函数poll" class="headerlink" title="函数poll"></a>函数poll</h2><p>poll函数类似select，但是程序员接口有所不同。poll函数可用于任何类型的文件描述符</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;poll.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd fdarray[], <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line">返回准备就绪的描述符数目；若超时，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>与select不同，poll不是为每个条件构造一个描述符集，而是构造一个pollfd结构的数组，每个数组元素指定一个描述符编号以及我们对该描述符感兴趣的条件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> fd;  <span class="comment">// file descriptor to check, or &lt; 0 to ignore</span></span><br><span class="line">  short events;  <span class="comment">// events of interest on fd</span></span><br><span class="line">  short revents;  <span class="comment">// events that occurred on fd</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>应将每个数组元素的events成员设置为以下值的一个或几个，通过这些值告诉内核我们关心的是每个描述符的哪些事件。返回值revents成员由内核设置，用于说明每个描述符发生了哪些事件。poll不更改events成员</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/poll的标志.png" alt="poll的标志" title>
+                </div>
+                <div class="image-caption">poll的标志</div>
+            </figure>
+<p>当一个描述符被挂断（POLLHUP）后，就不能再写该描述符，但是有可能仍然可以从该描述符读取到数据</p>
+<p>timeout参数指定我们愿意等待多长时间。</p>
+<p>理解文件尾端与挂断之间的区别是很重要的。如果我们正从终端输入数据，并键入文件结束符，那么就会打开POLLIN，于是我们就可以读文件结束指示（read返回0）。revents中的POLLHUP没有打开。如果正在调制解调器，并且电话线已挂断，我们将街道POLLHUP通知</p>
+<p>与select一样，一个描述符是否阻塞不会影响poll是否阻塞</p>
+<h2 id="函数readv和writev"><a href="#函数readv和writev" class="headerlink" title="函数readv和writev"></a>函数readv和writev</h2><p>readv和writev函数用于在一次函数调用中读、写多个非连续缓冲区。有时也将这两个函数称为散布读（scatter read）和聚集写（gather write）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/uio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">readv</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct iovec* iov, <span class="keyword">int</span> iovcnt)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">writev</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> struct iovec* iov, <span class="keyword">int</span> iovcnt)</span></span>;</span><br><span class="line"></span><br><span class="line">返回已读或已写的字节数；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>iovec结构如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iovec</span> &#123;</span></span><br><span class="line">  <span class="keyword">void</span>* iov_base;  <span class="comment">// starting address of buffer</span></span><br><span class="line">  <span class="keyword">size_t</span> iov_len;  <span class="comment">// size of buffer</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>iov数组中的元素数由iovcnt指定，其最大值受限于IOV_MAX。writev函数从缓冲区中聚集输出数据的顺序是：iov[0]、iov[1]直至iov[iovcnt-1]。writev返回输出的总字节数，通常应等于所有缓冲区长度之和</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/iovec的结构.png" alt="iovec的结构" title>
+                </div>
+                <div class="image-caption">iovec的结构</div>
+            </figure>
+<p>readv函数则将读入的数据按上述同样顺序散布到缓冲区中。readv总是先填满一个缓冲区，然后再填写下一个。readv返回读到的字节总数。如果遇到文件尾端，已无数据可读，则返回0</p>
+<p>应当用尽量少的系统调用次数来完成任务。如果我们只写少量的数据，将会发现自己复制数据然后使用一次write会比用writev更合算。但也可能发现，我们管理自己的分段缓冲区会增加程序额外的复杂性成本，所以从性能成本的角度来看不合算</p>
+<h2 id="存储映射IO"><a href="#存储映射IO" class="headerlink" title="存储映射IO"></a>存储映射IO</h2><p>存储映射IO（memory-mapped IO）能将一个磁盘文件映射到存储空间中的一个缓冲区上，于是，当从缓冲区中取数据时，就相当于读文件中的相应字节。与此类似，将数据存入缓冲区时，相应字节就自动写入文件。这样就可以在不使用read和write的情况下执行IO</p>
+<p>为了使用这一功能，应首先告诉内核将一个给定的文件映射到一个存储区域中。这是由mmap函数实现的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mmap.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">mmap</span><span class="params">(<span class="keyword">void</span>* addr, <span class="keyword">size_t</span> len, <span class="keyword">int</span> prot, <span class="keyword">int</span> flag, <span class="keyword">int</span> fd, <span class="keyword">off_t</span> off)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回映射区的起始地址；若出错，返回MAP_FAILED</span><br></pre></td></tr></table></figure>
+<p>addr参数用于指定映射存储区的起始位置。通常将其设置为0，这表示由系统选择该映射区的起始地址。此函数的返回值是该映射区的起始地址</p>
+<p>fd参数是指定要被映射文件的描述符。在文件映射到地址空间之前，必须先打开该文件。len参数是映射的字节数，off是要映射字节在文件中的起始偏移量</p>
+<p>prot参数指定了映射存储区的保护要求</p>
+<ul>
+<li>PROT_READ：映射区可读</li>
+<li>PROT_WRITE：映射区可写</li>
+<li>PROT_EXEC：映射区可执行</li>
+<li>PROT_NONE：映射区不可访问</li>
+</ul>
+<p>可将参数prot指定为PROT_NONE，也可以指定为PROT_READ、PROT_WRITE和PROT_EXEC的任意组合的按位或。对指定映射存储区的保护要求不能超过文件open模式访问权限。例如，若该文件是只读打开的，那么对映射存储区就不能指定PROT_WRITE</p>
+<p>映射存储区一般位于堆和栈之间：这属于实现细节，各种实现之间可能不同</p>
+<p>flag参数如下</p>
+<ul>
+<li>MAP_FIXED：返回值必须等于addr。因为这不利于可移植性，所以不鼓励使用此标志。如果未指定此标志，而且addr非0，则内核只把addr视为在何处设置映射区的一种建议，但是不保证会使用所要求的地址。将addr指定为0可获得最大可移植性</li>
+<li>MAP_SHARED：这一标志描述了本进程对映射区所进行的存储操作的配置。此标志指定存储操作修改映射文件，也就是，存储操作相当于对该文件的write。必须指定本标志或下一个标志（MAP_PRIVATE），但不能同时指定两者</li>
+<li>MAP_PRIVATE：本标志说明，对映射区的存储操作导致创建该映射文件的一个私有副本。所有后来对该映射区的引用都是引用该副本。（此标志的一种用途是用于调试程序，它将程序文件的正文部分映射至存储区，但允许用户修改其中的指令。任何修改值影响程序文件的副本，而不影响原文件）</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/存储映射文件的例子.png" alt="存储映射文件的例子" title>
+                </div>
+                <div class="image-caption">存储映射文件的例子</div>
+            </figure>
+<p>每种实现都可能还有另外一些MAP_XXX标志值，它们是那种实现所特有的。详细情况清参考手册</p>
+<p>off的值和addr的值（如果指定了MAP_FIXED）通常被要求是系统虚拟存储页长度的倍数。虚拟存储页长可用带参数_SC_PAGESIZE或_SC_PAGE_SIZE的sysconf函数得到。因为off和addr常常指定为0，所以这种要求一般并不重要</p>
+<p>既然映射文件的起始偏移量受系统虚拟存储页长度的限制，那么如果映射区的长度不是页长度的整数倍时，会怎么样呢？假定文件长度为12字节，系统页长为512字节，则系统通常提供512字节的映射区，其中后500字节被设置为0。可以修改后面的这500字节，但任何改动都不会在文件中反映出来。于是不能用mmap将数据添加到文件中。我们必须先加长该文件</p>
+<p>与映射区相关的信号有SIGSEGV和SIGBUS。信号SIGSEGV通常用于指示进程试图访问对它不可用的存储区。如果映射存储区被mmap指定成了只读的，那么进程试图将数据存入这个映射存储区的时候，也会产生此信号。如果映射区的某个部分在访问时已不存在，则产生SIGBUS信号。例如，假设用文件长度映射了一个文件，但在引用该映射区之前，另一个进程已将该文件截断。此时，如果进程试图访问对应于该文件已截去部分的映射区，将会接收到SIGBUS信号</p>
+<p>子进程能通过fork继承存储映射区（因为子进程复制父进程地址空间，而存储映射区是该地址空间中的一部分），但是由于同样的原因，新程序则不能通过exec继承存储映射区</p>
+<p>调用mprotect可以更改一个现有映射的权限</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mprotect</span><span class="params">(<span class="keyword">void</span>* addr, <span class="keyword">size_t</span> len, <span class="keyword">int</span> prot)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>prot的合法值与mmap中的prot参数一样。请注意，地址参数addr的值必须是系统页长的整数倍</p>
+<p>如果修改的页是通过MAP_SHARED标志映射到地址空间的，那么修改不会立即写回到文件中。相反，何时写回脏页由内核的守护进程决定，决定的依据是系统负载和用来限制在系统失败事件中的数据损失的配置参数。因此，如果只修改了一页中的一个字节，当修改被写回到文件中时，整个页都会被写回</p>
+<p>如果共享映射中的页已修改，那么可以调用msync将该页冲洗到被映射的文件中。msync函数类似于fsync，但作用于存储映射区</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msync</span><span class="params">(<span class="keyword">void</span>* addr, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>如果映射是私有的，那么不修改被映射的文件。与其他存储映射函数一样，地址必须与页边界对齐</p>
+<p>flags参数使我们对如何冲洗存储区有某种程度的控制。可以指定MS_ASYNC标志来简单的调试要写的页。如果希望在返回之前等待写操作完成，则可指定MS_SYNC标志。一定要指定两个标志中的一个</p>
+<p>MS_INVALIDATE是一个可选标志，允许我们通知操作系统丢弃那些与底层存储器没有同步的页。若使用了此标志，某些实现将丢弃指定范围中的所有页，但这种行为并不是必需的</p>
+<p>当进程终止时，会自动解除存储映射区的映射，或者直接调用munmap函数也可以解除映射区。关闭映射存储区时使用的文件描述符并不解除映射区</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span>* addr, <span class="keyword">size_t</span> len)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>munmap并不影响被映射的对象，也就是说，调用munmap并不会使映射区的内容写到磁盘文件上。对于MAP_SHARED区磁盘文件的更新，会在我们将数据写到存储映射区后的某个时刻，按内核虚拟存储算法自动进行。在存储区解除映射后对MAP_PRIVATE存储区的修改会被丢弃</p>
+<p>可以使用mmap和memcpy来读取或写入文件，与mmap和memcpy相比，read和write执行了更多的系统调用，并做了更多的复制。read和write函数将数据从内核缓存区中复制到应用缓冲区（read），然后再把数据从应用缓冲区复制到内核缓冲区（write）。而mmap和memcpy则直接把数据从映射到地址空间的一个内核缓冲区复制到另一个内核缓冲区。当引用尚不存在的内存页时，这样的复制过程就会作为处理页错误的结果而出现（每次错页读发生一次错误，每次错页写发生一次错误）。如果系统调用和额外的复制操作的开销和页错误的开销不同，那么这两种方法中就会有一种比另一种表现更好</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2022-07-29T07:10:14.219Z" itemprop="dateUpdated">2022-07-29 07:10:14</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://gwq5210.com">
+            <img src="/images/logo.jpg" alt="gwq5210">
+            gwq5210
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APUE/">APUE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/">unix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.com/2022/07/29/APUE笔记-五/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/07/25/APUE笔记-四/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">APUE笔记-四</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "IriDzPGksK3yHDWn9k9LXd7n-gzGzoHsz",
+            appKey: "cto0PcUNCVqr0zck28XwwDwt",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/images/wechat.jpg" data-alipay="/images/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>gwq5210 &copy; 2015 - 2022</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.com/2022/07/29/APUE笔记-五/&via=https://gwq5210.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3awa6jMAwF0P7/T3ekWY00Ku9ehz4p4bCqWqA+LIxj5/WKj/ffI/nm3+////zp1+s733ZgYGBsy3hfHp+CuA40CfoanMeGgYHxHMZ14vvhFkHaTUhLSRkDAwNjdE6eZFfOwcDAwMgDahN0kmQxMDAw2kXsdQnYPoKVhTEGBsbTGO1g4Dc/f3G+gYGBsQnjXR4rSXB2tygqDAyMoxl3NeXza9dTbVHhYmBgHMGYBZRswki2X7T13sdHiYGBcTQjb5+168d2eNCOHKLxAAYGxhGMlaZ8G3RSJg67ZxgYGEcz8r9fCTGhztLxqw0RAwNjQ0beXGvPzIvCvKn3MSoMDIyjGUmJdtevyflt6BgYGE9jtK35WZJd345WjxkwMDAOYuThtily1lxr0zoGBsbZjLzsSxac7aigTeU31LYYGBgbMlYS7l2DgbZAvPm9gYGBsRVjZSSQb5Vom275HTAwMM5jJJclC85820RLWnpXYGBgHMHIL2s3TORTiJUJRrFFDAMDY1vGsKUV97jaRDwsVTEwMB7DSJLgrPXfpuB6FY6BgXE0I0+v7d6N2SawlhR1DTEwMDZnfK99dp2sZwvgaIMFBgbGcYw22dVt+nIzR5vcaxgGBsa2jFmSbRexOS+JoX57YGBgHMFoF67J9zl7vQGHgYGB0S5l22HDLGVjYGBgzMq1pE1Wl33Jg8DAwHgAI1/EJgVinjrbzWQYGBjPZMwGA7NG2/pieAjAwMDYlfEHvgG3PTqTEQQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1260464046&web_id=1260464046')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
