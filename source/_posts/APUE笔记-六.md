@@ -496,3 +496,234 @@ int accept(int sockfd, struct sockaddr* restrict addr, socklen_t* restrict len);
 
 ## 数据传输
 
+既然一个套接字端点表示为一个文件描述符，那么只要建立连接，就可以使用read和write来通过套接字通信。在套接字描述符上使用read和write是非常有意义的，因为这意味着可以将套接字描述符传递给那些原先为处理本地文件而设计的函数。而且还可以安排将套接字描述符传递给子进程，而该子进程执行的程序并不了解套接字
+
+尽管可以通过read和write交换数据，但这就是这两个函数所能做的一些。如果想指定选项，从多个客户端接收数据包，或者发送带外数据，就需要使用6个位数据传递而设计的套接字函数中的一个
+
+3个函数用来发送数据，3个用于接收数据
+
+最简单的是send，它和write很像，但是可以指定标志来改变传输数据的方式
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t send(int sockfd, const void* buf, size_t nbytes, int flags);
+
+若成功，返回发送的字节数；若出错，返回-1
+```
+
+类似write，使用send时套接字必须已经连接。参数buf和nbytes的含义与write中的一致。send支持第4个参数flags。标志如下
+
+![send套接字调用标志](https://gwq5210.com/images/send套接字调用标志.png)
+
+即使send成功返回，也并不表示连接的另一端的进程就一定接收了数据。我们所能保证的只是当send成功返回时，数据已经被无错误的发送到网络驱动程序上
+
+对于支持报文边界的协议，如果尝试发送的单个报文的长度超过协议所支持的最大长度，那么send会失败，并将errno设置为EMSGSIZE。对于字节流协议，send会阻塞直到整个数据传输完成。函数sendto和send很类似。区别在于sendto可以在无连接的套接字上指定一个目标地址
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t sendto(int sockfd, const void* buf, size_t nbytes, int flags, const struct sockaddr* addr, socklen_t destlen);
+
+若成功，返回发送的字节数；若出错，返回-1
+```
+
+对于面向连接的套接字，目标地址是被忽略的，因为连接中隐含了目标地址。对于无连接的套接字，除非先调用connect设置了目标地址，否则不能使用send。sendto提供了发送报文的另一种方式
+
+通过套接字发送数据时，还有一个选择。可以调用带有msghdr结构的sendmsg来指定多重缓冲区传输数据，这和writev函数很相似
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t sendmsg(int sockfd, const struct msghdr* msg, int flags);
+
+若成功，返回发送的字节数；若出错，返回-1
+```
+
+POSIX.1定义了msghdr结构，至少有以下成员
+
+```cpp
+struct msghdr {
+  void* msg_name;  // optional address
+  socklen_t msg_namelen;  // address size in bytes
+  struct iovec* msg_iov;  // array of I/O buffers
+  int msg_iovlen;  // number of elements in array
+  void* msg_control;  // ancillary data
+  socklen_t msg_controllen;  // number of ancillary bytes
+  int msg_flags;  // flags for received message
+};
+```
+
+函数recv和read相似，但是recv可以指定标志来控制如何接收数据
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t recv(int sockfd, void* buf, size_t nbytes, int flags);
+
+若成功，返回数据的字节长度；若无可用数据或对等方已经按序结束，返回0；若出错，返回-1
+```
+
+支持的标志如下
+
+![recv套接字调用标志](https://gwq5210.com/images/recv套接字调用标志.png)
+
+当指定MSG_PEEK标志时，可以查看下一个要读取的数据但不真正取走它。当再次调用read或其中一个recv函数时，会返回刚才查看的数据
+
+对于SOCK_STREAM套接字，接收的数据可以比预期的少。MSG_WAITALL标志会阻止这种行为，直到所请求的数据全部返回，recv函数才会返回。对于SOCK_DGRAM和SOCK_SEQPACKET套接字，MSG_WAITALL标志没有改变什么行为，因为这些基于报文的套接字类型一次读取就返回整个报文
+
+如果发送者已经调用shutdown来结束传输，或者网络协议支持按默认的顺序关闭并且发送端已经关闭，那么当所有的数据接收完毕后，recv会返回0
+
+如果有兴趣定位发送者，可以使用recvfrom来得到数据发送者的源地址
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t recvfrom(int sockfd, void* restrict buf, size_t len, int flags, struct sockaddr* restrict addr, socklen_t* restrict addrlen);
+
+返回数据的字节长度；若无可用数据或对等方已经按序结束，返回0；若出错，返回-1
+```
+
+如果addr非空，它将包含数据发送者的套接字端点地址。当调用recvfrom时，需要设置addrlen参数指向一个整数，该整数包含addr所指向的套接字缓冲区的字节长度。返回时，该整数设置为该地址的实际字节长度
+
+因为可以获得发送者的地址，recvfrom通常用于无连接的套接字。否则，recvfrom等同于recv
+
+为了将接收到的数据送入多个缓冲区，类似于readv，或者想接收辅助数据，可以使用recvmsg
+
+```cpp
+#include <sys/socket.h>
+
+ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags);
+
+返回数据的字节长度；若无可用数据或对等方已经按序结束，返回0；若出错，返回-1
+```
+
+recvmsg用msghdr结构指定接收数据的输入缓冲区。可以设置参数flags来改变recvmsg的默认行为。返回时，msghdr结构中的msg_flags字段被设置为所接收数据的各种特征。进入recvmsg时msg_flags被忽略。recvmsg中返回的各种可能值如下
+
+![从recvmsg中返回的msg_flags标志](https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png)
+
+对于无连接的套接字，数据包到达时可能已经没有次序，因此如果不能将所有的数据放在一个数据包里，则在应用程序中就必须关心数据包的次序。数据包的最大尺寸是通信协议的特征。另外对于无连接的套接字，数据包可能会丢失。如果应用程序不能容忍这种丢失，必须使用面向连接的套接字
+
+容忍数据包丢失意味着两种选择。一种选择是，如果想和对等方可靠通信，就必须对数据包编号，并且在发现数据包丢失时，请求对等应用程序重传，还必须标识重复数据包并丢弃它们，因为数据包可能会延迟或疑似丢失，可能请求重传之后，它们又出现了
+
+另一种选择是，通过让用户再次尝试那个命令来处理错误。对于简单的应用程序，这可能就足够了，但对于复杂的应用程序，这种选择通常不行。因此，一般在这种情况下使用面向连接的套接字比较好
+
+面向连接的套接字的缺陷在于需要更多的时间和工作来建立一个连接，并且每个连接都需要消耗较多的系统资源
+
+## 套接字选项
+
+套接字机制提供了两个套接字选项接口来控制套接字行为。一个接口用来设置选项，另一个接口可以查询选项的状态。可以获取或设置以下3中选项
+
+- 通用选项，工作在所有套接字类型上
+- 在套接字层次管理的选项，但是依赖于下层协议的支持
+- 特定于某协议的选项，每个协议独有的
+
+可以使用setsockopt函数来设置套接字选项
+
+```cpp
+#include <sys/socket.h>
+
+int setsockopt(int sockfd, int level, int option, const void* val, socklen_t len);
+
+若成功，返回0；若出错，返回-1
+```
+
+参数level表示了选项应用的协议。如果选项是通用的套接字层次选项，则level设置成SOL_SOCKET。否则，level设置成控制这个选项的协议编号。对于TCP选项，level是IPPROTO_TCP，对于IP，level是IPPROTO_IP。下图是Single UNIX Specification中定义的通用套接字层次选项
+
+![套接字选项](https://gwq5210.com/images/套接字选项.png)
+
+参数val根据选项的不同指向一个数据结构或一个整数。一些选项是on/off开关。如果整数非0，则启用选项。如果整数为0，则禁止选项。参数len指定了val指向的对象的大小
+
+可以使用getsockopt函数来查看选项的当前值
+
+```cpp
+#include <sys/socket.h>
+
+int getsockopt(int sockfd, int level, int option, void* restrict val, socklen_t* restrict lenp);
+
+若成功，返回0；若出错，返回-1
+```
+
+参数lenp是一个指向整数的指针。在调用getsockopt之前，设置该整数为复制选项缓冲区的长度。如果选项的实际长度大于此值，则选项会被截断。如果实际长度正好小于此值，那么返回时将此值更新为实际长度
+
+## 带外数据
+
+带外数据（out-of-band data）是一些通信协议所支持的可选功能，与普通数据相比，它允许更高优先级的数据传输。带外数据先行传输，即使传输队列已经有数据。TCP支持带外数据，但是UDP不支持。套接字接口对带外数据的支持很大程度上受TCP带外数据具体实现上的影响
+
+TCP将带外数据称为紧急数据（urgent data）。TCP仅支持一个字节的紧急数据，但是允许紧急数据在普通数据传递机制数据流之外传输。为了产生紧急数据，可以在3个send函数中的任何一个里指定MSG_OOB标志。如果带MSG_OOB标志发送的字节数超过一个时，最后一个字节将被视为紧急数据字节
+
+如果通过套接字安排了信号的产生，那么紧急数据被接收时，会发送SIGURG信号。在fcntl中使用F_SETOWN命令来设置一个套接字的所有权。如果fcntl中的第三个参数为正值，那么它指定的就是进程ID。如果为非-1的负值，那么它代表的就是进程组ID。因此，可以通过调用以下函数安排进程接收套接字的信号。
+
+```cpp
+fcntl(sockfd, F_SETOWN, pid);
+```
+
+F_GETOWN命令可以用来获得当前套接字的所有权。对于F_GETOWN命令，负值代表进程组ID，正值代表进程ID。因此调用`owner = fcntl(sockfd, F_GETOWN, 0)`将返回owner，如果owner为正值，则等于配置为接收套接字信号的进程的ID。如果owner为负值，其绝对值为接收套接字信号的进程组ID
+
+TCP支持紧急标记（urgent mark）的概念，即在普通数据流中紧急数据所在的位置。如果采用套接字选项SO_OOBINLINE，那么可以在普通函数中接收紧急数据。为帮助判断是否已经到达紧急标记，可以使用函数sockatmark
+
+```cpp
+#include <sys/socket.h>
+
+int sockatmark(int sockfd);
+
+若在标记处，返回1；若没在标记处，返回0；若出错，返回-1
+```
+
+当下一个要读取的字节在紧急标志处时，sockatmark返回1
+
+当带外数据出现在套接字读取队列时，select函数会返回一个文件描述符并且有一个待处理的异常条件。可以在普通数据流上接收紧急数据，也可以在其中一个recv函数中采用MSG_OOB标志在其他队列数据之前接收紧急数据。TCP队列仅用一个字节的紧急数据。如果在接收当前的紧急数据字节之前又有新的紧急数据到来，那么已有的字节会被丢弃
+
+## 非阻塞和异步IO
+
+通常，recv函数没有数据可用时会阻塞等待。同样的，当套接字输出队列没有足够空间来发送消息时，send函数会阻塞。在套接字非阻塞模式下，行为会改变。在这种情况下，这些函数不会阻塞而是会失败，将errno设置为EWOULDBLOCK或者EAGAIN。当这种情况发生时，可以使用poll或select来判断能否接收或者传输数据
+
+套接字的异步IO机制成为基于信号的IO，通常用的很少。
+
+# 第十七章
+
+## UNIX域套接字
+
+UNIX域套接字用于在同一台计算机上运行的进程之间的通信。虽然因特网域套接字可用于同一目的，但UNIX域套接字的效率更高。UNIX域套接字仅仅复制数据，它们并不执行协议处理，不需要添加或删除网络报头，无需计算校验和，不需要产生顺序号，无需发送确认报文
+
+UNIX域套接字提供流和数据报两种接口。UNIX域数据报服务是可靠的，既不会丢失报文也不会传递出错。UNIX域套接字就像是套接字和管道的混合。可以使用它们面向网络的域套接字接口或者使用socketpair函数来创建一对无命名的，相互连接的UNIX域套接字
+
+```cpp
+#include <sys/socket.h>
+
+int socketpair(int domain, int type, int protocol, int sockfd[2]);
+
+若成功，返回0；若出错，返回-1
+```
+
+虽然接口足够通用，允许socketpair用于其他域，但一般来说操作系统仅对支持UNIX域提供支持
+
+一对相互连接的UNIX域套接字可以起到全双工管道的作用：两端对读和写开放。我盟将其称为fd管道（fd-pipe），以便与普通的半双工管道区分开来
+
+![套接字对](https://gwq5210.com/images/套接字对.png)
+
+## 命名UNIX域套接字
+
+可以命名UNIX域套接字，并可将其用于告示服务。但是要注意，UNIX域套接字使用的地址格式不同于因特网域套接字
+
+UNIX域套接字的地址由sockaddr_un结构表示。一般在<sys/un.h>中定义，在Linux 3.2.0中定义如下
+
+```cpp
+
+// Linux 3.2.0 and Solaris 10
+struct sockaddr_un {
+  sa_family_t sun_family;  // AF_UNIX
+  char sun_path[108];  // pathname
+};
+
+// FreeBSD 8.0 and Mac OS X 10.6.8
+struct sockaddr_un {
+  unsigned char sun_len;  // sockaddr length
+  sa_family_t sun_family;  // AF_UNIX
+  char sun_path[108];  // pathname
+};
+```
+
+sun_path成员包含一个路径名。当我们将一个地址绑定到一个UNIX域套接字时，系统会用该路径名创建一个S_IFSOCK类型的文件。该文件仅用于向客户进程告示套接字名字。该文件无法打开，也不能由应用程序用于通信。
+
+如果我们试图绑定同一地址时，该文件已经存在，那么bind请求会失败。当关闭套接字时，并不会自动删除文件，所以必须确保在应用程序退出前，对该文件执行解除链接操作
