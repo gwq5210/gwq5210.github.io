@@ -30,7 +30,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://gwq5210.com/images/文件描述符函数使用套接字时的行为.png">
 <meta property="og:image" content="https://gwq5210.com/images/getnameinfo函数的标志.png">
-<meta property="og:updated_time" content="2022-08-06T14:15:20.704Z">
+<meta property="og:image" content="https://gwq5210.com/images/send套接字调用标志.png">
+<meta property="og:image" content="https://gwq5210.com/images/recv套接字调用标志.png">
+<meta property="og:image" content="https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png">
+<meta property="og:image" content="https://gwq5210.com/images/套接字选项.png">
+<meta property="og:image" content="https://gwq5210.com/images/套接字对.png">
+<meta property="og:updated_time" content="2022-08-06T14:27:40.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记-六">
 <meta name="twitter:description" content="第十六章 网络IPC：套接字UNIX系统所提供的的经典进程间通信机制（IPC）：管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。网络进程间通信（network IPC）可以让在不同计算机（通过网络相连）上的进程相互通信 套接字网络进程间通信接口，进程用该接口能够和其他进程通信，无论它们是在同一台计算机上还是在不同的计算机上。实际上，这正是套接字接口">
@@ -160,7 +165,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第十六章-网络IPC：套接字"><span class="post-toc-number">1.</span> <span class="post-toc-text">第十六章 网络IPC：套接字</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#套接字描述符"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">套接字描述符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寻址"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">寻址</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字节序"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">字节序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址格式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">地址格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址查询"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">地址查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将套接字与地址关联"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">将套接字与地址关联</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建立连接"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">建立连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据传输"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">数据传输</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第十六章-网络IPC：套接字"><span class="post-toc-number">1.</span> <span class="post-toc-text">第十六章 网络IPC：套接字</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#套接字描述符"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">套接字描述符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寻址"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">寻址</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字节序"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">字节序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址格式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">地址格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址查询"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">地址查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将套接字与地址关联"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">将套接字与地址关联</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建立连接"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">建立连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据传输"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">数据传输</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#套接字选项"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">套接字选项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#带外数据"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">带外数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非阻塞和异步IO"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">非阻塞和异步IO</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第十七章"><span class="post-toc-number">2.</span> <span class="post-toc-text">第十七章</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UNIX域套接字"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">UNIX域套接字</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#命名UNIX域套接字"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">命名UNIX域套接字</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -430,14 +435,114 @@
 <p>如果不关心客户端标识，可以将参数addr和len设置为NULL。否则，在调用accept之前，将addr参数设为足够大的缓冲区来存放地址，并且将len指向的整数设置为这个缓冲区的字节大小。返回时，accept会在缓冲区填充客户端的地址，并且更新指向len的整数来反映改地址的大小</p>
 <p>如果没有连接请求在等待，accept会阻塞直到一个请求到来。如果sockfd处于非阻塞模式，accept会返回-1，并将errno设置为EAGAIN或EWOULDBLOCK。</p>
 <p>如果服务器调用accept，并且当前没有连接请求，服务器会阻塞直到一个请求到来。另外，服务器可以使用poll或select来等待一个请求的到来。在这种情况下，一个带有等待连接请求的套接字会以可读的方式出现</p>
-<h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2>
+<h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>既然一个套接字端点表示为一个文件描述符，那么只要建立连接，就可以使用read和write来通过套接字通信。在套接字描述符上使用read和write是非常有意义的，因为这意味着可以将套接字描述符传递给那些原先为处理本地文件而设计的函数。而且还可以安排将套接字描述符传递给子进程，而该子进程执行的程序并不了解套接字</p>
+<p>尽管可以通过read和write交换数据，但这就是这两个函数所能做的一些。如果想指定选项，从多个客户端接收数据包，或者发送带外数据，就需要使用6个位数据传递而设计的套接字函数中的一个</p>
+<p>3个函数用来发送数据，3个用于接收数据</p>
+<p>最简单的是send，它和write很像，但是可以指定标志来改变传输数据的方式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">send</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> <span class="keyword">void</span>* buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回发送的字节数；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>类似write，使用send时套接字必须已经连接。参数buf和nbytes的含义与write中的一致。send支持第4个参数flags。标志如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/send套接字调用标志.png" alt="send套接字调用标志" title>
+                </div>
+                <div class="image-caption">send套接字调用标志</div>
+            </figure>
+<p>即使send成功返回，也并不表示连接的另一端的进程就一定接收了数据。我们所能保证的只是当send成功返回时，数据已经被无错误的发送到网络驱动程序上</p>
+<p>对于支持报文边界的协议，如果尝试发送的单个报文的长度超过协议所支持的最大长度，那么send会失败，并将errno设置为EMSGSIZE。对于字节流协议，send会阻塞直到整个数据传输完成。函数sendto和send很类似。区别在于sendto可以在无连接的套接字上指定一个目标地址</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">sendto</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> <span class="keyword">void</span>* buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flags, <span class="keyword">const</span> struct sockaddr* addr, <span class="keyword">socklen_t</span> destlen)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回发送的字节数；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>对于面向连接的套接字，目标地址是被忽略的，因为连接中隐含了目标地址。对于无连接的套接字，除非先调用connect设置了目标地址，否则不能使用send。sendto提供了发送报文的另一种方式</p>
+<p>通过套接字发送数据时，还有一个选择。可以调用带有msghdr结构的sendmsg来指定多重缓冲区传输数据，这和writev函数很相似</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">sendmsg</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct msghdr* msg, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回发送的字节数；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>POSIX.1定义了msghdr结构，至少有以下成员</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msghdr</span> &#123;</span></span><br><span class="line">  <span class="keyword">void</span>* msg_name;  <span class="comment">// optional address</span></span><br><span class="line">  <span class="keyword">socklen_t</span> msg_namelen;  <span class="comment">// address size in bytes</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">iovec</span>* <span class="title">msg_iov</span>;</span>  <span class="comment">// array of I/O buffers</span></span><br><span class="line">  <span class="keyword">int</span> msg_iovlen;  <span class="comment">// number of elements in array</span></span><br><span class="line">  <span class="keyword">void</span>* msg_control;  <span class="comment">// ancillary data</span></span><br><span class="line">  <span class="keyword">socklen_t</span> msg_controllen;  <span class="comment">// number of ancillary bytes</span></span><br><span class="line">  <span class="keyword">int</span> msg_flags;  <span class="comment">// flags for received message</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>函数recv和read相似，但是recv可以指定标志来控制如何接收数据</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">recv</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">void</span>* buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回数据的字节长度；若无可用数据或对等方已经按序结束，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>支持的标志如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/recv套接字调用标志.png" alt="recv套接字调用标志" title>
+                </div>
+                <div class="image-caption">recv套接字调用标志</div>
+            </figure>
+<p>当指定MSG_PEEK标志时，可以查看下一个要读取的数据但不真正取走它。当再次调用read或其中一个recv函数时，会返回刚才查看的数据</p>
+<p>对于SOCK_STREAM套接字，接收的数据可以比预期的少。MSG_WAITALL标志会阻止这种行为，直到所请求的数据全部返回，recv函数才会返回。对于SOCK_DGRAM和SOCK_SEQPACKET套接字，MSG_WAITALL标志没有改变什么行为，因为这些基于报文的套接字类型一次读取就返回整个报文</p>
+<p>如果发送者已经调用shutdown来结束传输，或者网络协议支持按默认的顺序关闭并且发送端已经关闭，那么当所有的数据接收完毕后，recv会返回0</p>
+<p>如果有兴趣定位发送者，可以使用recvfrom来得到数据发送者的源地址</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">recvfrom</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">void</span>* <span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags, struct sockaddr* <span class="keyword">restrict</span> addr, <span class="keyword">socklen_t</span>* <span class="keyword">restrict</span> addrlen)</span></span>;</span><br><span class="line"></span><br><span class="line">返回数据的字节长度；若无可用数据或对等方已经按序结束，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>如果addr非空，它将包含数据发送者的套接字端点地址。当调用recvfrom时，需要设置addrlen参数指向一个整数，该整数包含addr所指向的套接字缓冲区的字节长度。返回时，该整数设置为该地址的实际字节长度</p>
+<p>因为可以获得发送者的地址，recvfrom通常用于无连接的套接字。否则，recvfrom等同于recv</p>
+<p>为了将接收到的数据送入多个缓冲区，类似于readv，或者想接收辅助数据，可以使用recvmsg</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">recvmsg</span><span class="params">(<span class="keyword">int</span> sockfd, struct msghdr* msg, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"></span><br><span class="line">返回数据的字节长度；若无可用数据或对等方已经按序结束，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>recvmsg用msghdr结构指定接收数据的输入缓冲区。可以设置参数flags来改变recvmsg的默认行为。返回时，msghdr结构中的msg_flags字段被设置为所接收数据的各种特征。进入recvmsg时msg_flags被忽略。recvmsg中返回的各种可能值如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png" alt="从recvmsg中返回的msg_flags标志" title>
+                </div>
+                <div class="image-caption">从recvmsg中返回的msg_flags标志</div>
+            </figure>
+<p>对于无连接的套接字，数据包到达时可能已经没有次序，因此如果不能将所有的数据放在一个数据包里，则在应用程序中就必须关心数据包的次序。数据包的最大尺寸是通信协议的特征。另外对于无连接的套接字，数据包可能会丢失。如果应用程序不能容忍这种丢失，必须使用面向连接的套接字</p>
+<p>容忍数据包丢失意味着两种选择。一种选择是，如果想和对等方可靠通信，就必须对数据包编号，并且在发现数据包丢失时，请求对等应用程序重传，还必须标识重复数据包并丢弃它们，因为数据包可能会延迟或疑似丢失，可能请求重传之后，它们又出现了</p>
+<p>另一种选择是，通过让用户再次尝试那个命令来处理错误。对于简单的应用程序，这可能就足够了，但对于复杂的应用程序，这种选择通常不行。因此，一般在这种情况下使用面向连接的套接字比较好</p>
+<p>面向连接的套接字的缺陷在于需要更多的时间和工作来建立一个连接，并且每个连接都需要消耗较多的系统资源</p>
+<h2 id="套接字选项"><a href="#套接字选项" class="headerlink" title="套接字选项"></a>套接字选项</h2><p>套接字机制提供了两个套接字选项接口来控制套接字行为。一个接口用来设置选项，另一个接口可以查询选项的状态。可以获取或设置以下3中选项</p>
+<ul>
+<li>通用选项，工作在所有套接字类型上</li>
+<li>在套接字层次管理的选项，但是依赖于下层协议的支持</li>
+<li>特定于某协议的选项，每个协议独有的</li>
+</ul>
+<p>可以使用setsockopt函数来设置套接字选项</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setsockopt</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> level, <span class="keyword">int</span> option, <span class="keyword">const</span> <span class="keyword">void</span>* val, <span class="keyword">socklen_t</span> len)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>参数level表示了选项应用的协议。如果选项是通用的套接字层次选项，则level设置成SOL_SOCKET。否则，level设置成控制这个选项的协议编号。对于TCP选项，level是IPPROTO_TCP，对于IP，level是IPPROTO_IP。下图是Single UNIX Specification中定义的通用套接字层次选项</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/套接字选项.png" alt="套接字选项" title>
+                </div>
+                <div class="image-caption">套接字选项</div>
+            </figure>
+<p>参数val根据选项的不同指向一个数据结构或一个整数。一些选项是on/off开关。如果整数非0，则启用选项。如果整数为0，则禁止选项。参数len指定了val指向的对象的大小</p>
+<p>可以使用getsockopt函数来查看选项的当前值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsockopt</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> level, <span class="keyword">int</span> option, <span class="keyword">void</span>* <span class="keyword">restrict</span> val, <span class="keyword">socklen_t</span>* <span class="keyword">restrict</span> lenp)</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>参数lenp是一个指向整数的指针。在调用getsockopt之前，设置该整数为复制选项缓冲区的长度。如果选项的实际长度大于此值，则选项会被截断。如果实际长度正好小于此值，那么返回时将此值更新为实际长度</p>
+<h2 id="带外数据"><a href="#带外数据" class="headerlink" title="带外数据"></a>带外数据</h2><p>带外数据（out-of-band data）是一些通信协议所支持的可选功能，与普通数据相比，它允许更高优先级的数据传输。带外数据先行传输，即使传输队列已经有数据。TCP支持带外数据，但是UDP不支持。套接字接口对带外数据的支持很大程度上受TCP带外数据具体实现上的影响</p>
+<p>TCP将带外数据称为紧急数据（urgent data）。TCP仅支持一个字节的紧急数据，但是允许紧急数据在普通数据传递机制数据流之外传输。为了产生紧急数据，可以在3个send函数中的任何一个里指定MSG_OOB标志。如果带MSG_OOB标志发送的字节数超过一个时，最后一个字节将被视为紧急数据字节</p>
+<p>如果通过套接字安排了信号的产生，那么紧急数据被接收时，会发送SIGURG信号。在fcntl中使用F_SETOWN命令来设置一个套接字的所有权。如果fcntl中的第三个参数为正值，那么它指定的就是进程ID。如果为非-1的负值，那么它代表的就是进程组ID。因此，可以通过调用以下函数安排进程接收套接字的信号。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcntl(sockfd, F_SETOWN, pid);</span><br></pre></td></tr></table></figure>
+<p>F_GETOWN命令可以用来获得当前套接字的所有权。对于F_GETOWN命令，负值代表进程组ID，正值代表进程ID。因此调用<code>owner = fcntl(sockfd, F_GETOWN, 0)</code>将返回owner，如果owner为正值，则等于配置为接收套接字信号的进程的ID。如果owner为负值，其绝对值为接收套接字信号的进程组ID</p>
+<p>TCP支持紧急标记（urgent mark）的概念，即在普通数据流中紧急数据所在的位置。如果采用套接字选项SO_OOBINLINE，那么可以在普通函数中接收紧急数据。为帮助判断是否已经到达紧急标记，可以使用函数sockatmark</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sockatmark</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br><span class="line"></span><br><span class="line">若在标记处，返回<span class="number">1</span>；若没在标记处，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>当下一个要读取的字节在紧急标志处时，sockatmark返回1</p>
+<p>当带外数据出现在套接字读取队列时，select函数会返回一个文件描述符并且有一个待处理的异常条件。可以在普通数据流上接收紧急数据，也可以在其中一个recv函数中采用MSG_OOB标志在其他队列数据之前接收紧急数据。TCP队列仅用一个字节的紧急数据。如果在接收当前的紧急数据字节之前又有新的紧急数据到来，那么已有的字节会被丢弃</p>
+<h2 id="非阻塞和异步IO"><a href="#非阻塞和异步IO" class="headerlink" title="非阻塞和异步IO"></a>非阻塞和异步IO</h2><p>通常，recv函数没有数据可用时会阻塞等待。同样的，当套接字输出队列没有足够空间来发送消息时，send函数会阻塞。在套接字非阻塞模式下，行为会改变。在这种情况下，这些函数不会阻塞而是会失败，将errno设置为EWOULDBLOCK或者EAGAIN。当这种情况发生时，可以使用poll或select来判断能否接收或者传输数据</p>
+<p>套接字的异步IO机制成为基于信号的IO，通常用的很少。</p>
+<h1 id="第十七章"><a href="#第十七章" class="headerlink" title="第十七章"></a>第十七章</h1><h2 id="UNIX域套接字"><a href="#UNIX域套接字" class="headerlink" title="UNIX域套接字"></a>UNIX域套接字</h2><p>UNIX域套接字用于在同一台计算机上运行的进程之间的通信。虽然因特网域套接字可用于同一目的，但UNIX域套接字的效率更高。UNIX域套接字仅仅复制数据，它们并不执行协议处理，不需要添加或删除网络报头，无需计算校验和，不需要产生顺序号，无需发送确认报文</p>
+<p>UNIX域套接字提供流和数据报两种接口。UNIX域数据报服务是可靠的，既不会丢失报文也不会传递出错。UNIX域套接字就像是套接字和管道的混合。可以使用它们面向网络的域套接字接口或者使用socketpair函数来创建一对无命名的，相互连接的UNIX域套接字</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socketpair</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol, <span class="keyword">int</span> sockfd[<span class="number">2</span>])</span></span>;</span><br><span class="line"></span><br><span class="line">若成功，返回<span class="number">0</span>；若出错，返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>虽然接口足够通用，允许socketpair用于其他域，但一般来说操作系统仅对支持UNIX域提供支持</p>
+<p>一对相互连接的UNIX域套接字可以起到全双工管道的作用：两端对读和写开放。我盟将其称为fd管道（fd-pipe），以便与普通的半双工管道区分开来</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://gwq5210.com/images/套接字对.png" alt="套接字对" title>
+                </div>
+                <div class="image-caption">套接字对</div>
+            </figure>
+<h2 id="命名UNIX域套接字"><a href="#命名UNIX域套接字" class="headerlink" title="命名UNIX域套接字"></a>命名UNIX域套接字</h2><p>可以命名UNIX域套接字，并可将其用于告示服务。但是要注意，UNIX域套接字使用的地址格式不同于因特网域套接字</p>
+<p>UNIX域套接字的地址由sockaddr_un结构表示。一般在&lt;sys/un.h&gt;中定义，在Linux 3.2.0中定义如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Linux 3.2.0 and Solaris 10</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> &#123;</span></span><br><span class="line">  <span class="keyword">sa_family_t</span> sun_family;  <span class="comment">// AF_UNIX</span></span><br><span class="line">  <span class="keyword">char</span> sun_path[<span class="number">108</span>];  <span class="comment">// pathname</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FreeBSD 8.0 and Mac OS X 10.6.8</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> &#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">char</span> sun_len;  <span class="comment">// sockaddr length</span></span><br><span class="line">  <span class="keyword">sa_family_t</span> sun_family;  <span class="comment">// AF_UNIX</span></span><br><span class="line">  <span class="keyword">char</span> sun_path[<span class="number">108</span>];  <span class="comment">// pathname</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>sun_path成员包含一个路径名。当我们将一个地址绑定到一个UNIX域套接字时，系统会用该路径名创建一个S_IFSOCK类型的文件。该文件仅用于向客户进程告示套接字名字。该文件无法打开，也不能由应用程序用于通信。</p>
+<p>如果我们试图绑定同一地址时，该文件已经存在，那么bind请求会失败。当关闭套接字时，并不会自动删除文件，所以必须确保在应用程序退出前，对该文件执行解除链接操作</p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-08-06T14:15:20.704Z" itemprop="dateUpdated">2022-08-06 14:15:20</time>
+    Last updated: <time datetime="2022-08-06T14:27:40.078Z" itemprop="dateUpdated">2022-08-06 14:27:40</time>
 </span><br>
 
 
