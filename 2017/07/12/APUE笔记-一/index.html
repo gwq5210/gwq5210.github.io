@@ -24,23 +24,23 @@
 <meta name="keywords" content="unix,linux,读书笔记,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记(一)">
-<meta property="og:url" content="https://gwq5210.com/2017/07/12/APUE笔记-一/index.html">
+<meta property="og:url" content="https://gwq5210.github.io/2017/07/12/APUE笔记-一/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="第一章 UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gwq5210.com/images/打开文件的内核数据结构.png">
-<meta property="og:image" content="https://gwq5210.com/images/两个独立进程各自打开同一个文件.png">
-<meta property="og:image" content="https://gwq5210.com/images/dup后的内核数据结构.png">
-<meta property="og:image" content="https://gwq5210.com/images/文件状态标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/磁盘、分区和文件系统.jpg">
-<meta property="og:image" content="https://gwq5210.com/images/i节点和数据块详细图.jpg">
-<meta property="og:image" content="https://gwq5210.com/images/各种函数对三种时间的影响.png">
-<meta property="og:image" content="https://gwq5210.com/images/文件访问权限位小结.png">
-<meta property="og:updated_time" content="2022-08-06T14:27:40.074Z">
+<meta property="og:image" content="https://gwq5210.github.io/images/打开文件的内核数据结构.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/两个独立进程各自打开同一个文件.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/dup后的内核数据结构.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/文件状态标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/磁盘、分区和文件系统.jpg">
+<meta property="og:image" content="https://gwq5210.github.io/images/i节点和数据块详细图.jpg">
+<meta property="og:image" content="https://gwq5210.github.io/images/各种函数对三种时间的影响.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/文件访问权限位小结.png">
+<meta property="og:updated_time" content="2022-08-31T10:46:10.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记(一)">
 <meta name="twitter:description" content="第一章 UNIX基础知识所有的操作系统都为它们所运行的程序提供服务。典型的服务包括：执行新程序、打开文件、读文件、分配存储区以及获得当前时间等。 从严格意义上说，可以将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。从广义上说，操作系统包含了内核和一些其他软件，这些软件使得计算机能够发挥作用，并使计算机具有自己的特性。 我们通常将这种软件成为内核（kernel），因为它相对较小，而">
-<meta name="twitter:image" content="https://gwq5210.com/images/打开文件的内核数据结构.png">
+<meta name="twitter:image" content="https://gwq5210.github.io/images/打开文件的内核数据结构.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -467,7 +467,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/打开文件的内核数据结构.png" alt="打开文件的内核数据结构" title>
+                    <img src="https://gwq5210.github.io/images/打开文件的内核数据结构.png" alt="打开文件的内核数据结构" title>
                 </div>
                 <div class="image-caption">打开文件的内核数据结构</div>
             </figure>
@@ -475,7 +475,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/两个独立进程各自打开同一个文件.png" alt="两个独立进程各自打开同一个文件" title>
+                    <img src="https://gwq5210.github.io/images/两个独立进程各自打开同一个文件.png" alt="两个独立进程各自打开同一个文件" title>
                 </div>
                 <div class="image-caption">两个独立进程各自打开同一个文件</div>
             </figure>
@@ -500,7 +500,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/dup后的内核数据结构.png" alt="dup后的内核数据结构" title>
+                    <img src="https://gwq5210.github.io/images/dup后的内核数据结构.png" alt="dup后的内核数据结构" title>
                 </div>
                 <div class="image-caption">dup后的内核数据结构</div>
             </figure>
@@ -530,7 +530,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/文件状态标志.png" alt="文件状态标志" title>
+                    <img src="https://gwq5210.github.io/images/文件状态标志.png" alt="文件状态标志" title>
                 </div>
                 <div class="image-caption">文件状态标志</div>
             </figure>
@@ -806,7 +806,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/磁盘、分区和文件系统.jpg" alt="磁盘、分区和文件系统" title>
+                    <img src="https://gwq5210.github.io/images/磁盘、分区和文件系统.jpg" alt="磁盘、分区和文件系统" title>
                 </div>
                 <div class="image-caption">磁盘、分区和文件系统</div>
             </figure>
@@ -814,7 +814,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/i节点和数据块详细图.jpg" alt="i节点和数据块详细图" title>
+                    <img src="https://gwq5210.github.io/images/i节点和数据块详细图.jpg" alt="i节点和数据块详细图" title>
                 </div>
                 <div class="image-caption">i节点和数据块详细图</div>
             </figure>
@@ -988,7 +988,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/各种函数对三种时间的影响.png" alt="各种函数对三种时间的影响" title>
+                    <img src="https://gwq5210.github.io/images/各种函数对三种时间的影响.png" alt="各种函数对三种时间的影响" title>
                 </div>
                 <div class="image-caption">各种函数对三种时间的影响</div>
             </figure>
@@ -1040,7 +1040,7 @@
 <h2 id="文件访问权限位小结"><a href="#文件访问权限位小结" class="headerlink" title="文件访问权限位小结"></a>文件访问权限位小结</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/文件访问权限位小结.png" alt="文件访问权限位小结" title>
+                    <img src="https://gwq5210.github.io/images/文件访问权限位小结.png" alt="文件访问权限位小结" title>
                 </div>
                 <div class="image-caption">文件访问权限位小结</div>
             </figure>
@@ -1051,14 +1051,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-08-06T14:27:40.074Z" itemprop="dateUpdated">2022-08-06 14:27:40</time>
+    Last updated: <time datetime="2022-08-31T10:46:10.179Z" itemprop="dateUpdated">2022-08-31 10:46:10</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://gwq5210.com">
+        <a href="https://gwq5210.github.io">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -1084,7 +1084,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -1094,22 +1094,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2017/07/12/APUE笔记-一/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2017/07/12/APUE笔记-一/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://gwq5210.com/2017/07/12/APUE笔记-一/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2017/07/12/APUE笔记-一/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -1261,7 +1261,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -1271,22 +1271,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&title=《APUE笔记(一)》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2017/07/12/APUE笔记-一/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2017/07/12/APUE笔记-一/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://gwq5210.com/2017/07/12/APUE笔记-一/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记(一)》 — gwq5210's Blog&url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2017/07/12/APUE笔记-一/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2017/07/12/APUE笔记-一/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -1297,7 +1297,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3ay66rMAwFUP7/p7nTI1XAtk2v1GRlVNEWshhYfuQ44nV+rM/rV7//e+Xz89Wzjm8sDAyMn2WctyvZ7rsv4urbqztgYGDsw7gPfL1wWb1z7w4YGBgYoyAYh9rqK8PAwMDIGUnh2ruCgYGB0Sti7wNlL9VLfv9yLY6BgfGDjLxZ9v8/f2W+gYGB8VOMs7h6Lf7qgKG8KwwMjKUZeYDrJYJJ4E6Q0X4wMDAWZVRbZkn5Ojm6UX01GBgYOzOScFkdGFTHooVWHQYGxgaMQqFYTPLyhG9ygAMDA2MHRrVk7a1qcy0HY2Bg7MDIE7Le0PHdwxmFB2BgYCzEePc8Q3Xr+Rig0G7DwMBYjtFr388PWOTgh+sYGBhLM5JmWfWQRLVZlqSnUZjGwMBYlDEJqfcPy0cF1bL2ITXEwMDYhjEpO/NhQy8NxcDA2JORhM63mmjJ3apNQAwMjLUZk78lIbIXTKsFMwYGxg6MajmaNM6qjblRqMXAwNiAkbe35gcmeq3/JNHEwMDYjVEdXuZl6qQwfkg0MTAwNmDkiVre+k9SySNeD//CwMBYlHEWV57A5dudH9fAwMBYm9ELdpORwORgR6/YxsDAWINRDbL5RnuJYDN9xMDA2IBRPQCRpGj5AbKvzGAxMDA2Zrw1wqwOIR72jIGBgVEcLr6bMo7O4WJgYCzEmBxFnaSPvT1gYGDsxqiWjsmN8k0n7GoTEAMDYyHGP1qQk2E/qvg0AAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3a22rrMBAF0Pz/T6dwngoh8p6ZpBxLy0/BuM4sBdS56PGIr+e/6/fnd3de77++5/X+u+/68IWBgXFbxnN5rQNdvyFZiDU+iQ0DA+McRnWTXW+pa2QSbh4bBgYGRvJMFZls3BgYGBgTxpyXFMMYGBgYvSI230aThtqk3MXAwDiN0RsM/M3nr883MDAw/nvGs3j1WmPVJK8cFQYGxtaMjzXlW8VtXu5GxzUwMDAOY1SPVuRf2Qs3WlAMDIwDGNUCshriZJmiDRoDA2NTRrVkzVty8230K5MNDAyM2zKqJWhvqDkZf14sKwYGxpGMvDXWS/h6i3KRGmJgYGzKyNv61fHkOsQE2YwKAwPjGEZ+Pw+3OqpslsEYGBibMnoHLKoB5YVxNU3EwMA4gTEpUHvJXG88EC0iBgbGdoyklZYkhdVCtDoQLXcNMTAwtmb0DmY1z6MNQsfAwDiTMTnaVW29zdt2hbkEBgbGzRmfCvRTKWAST+FvMTAwtmB8L43rpXrNpcTAwDiSMZkzJPj8P0C00BgYGFszeula3lyrLke1Mn1Msk4MDIybMHoHLNZhJc2y3hb/9j0YGBhbM/IrSc56Dbgk3HzjxsDA2JVRPTAxL1Z7hzMufgEMDIwDGHnrvzcAGM1U8w0XAwPjeEa+BecpYL6lXjyJgYGBMWD0EsTmeAADA2NrRm8wWUjdghQzHw9gYGCcxugNBuZP9g6BNQEYGBh3ZfwArn8UGSKUxpMAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

@@ -24,28 +24,28 @@
 <meta name="keywords" content="unix,linux,读书笔记,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记-五">
-<meta property="og:url" content="https://gwq5210.com/2022/07/29/APUE笔记-五/index.html">
+<meta property="og:url" content="https://gwq5210.github.io/2022/07/29/APUE笔记-五/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="第十四章 高级IO非阻塞IO系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括  如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞 如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞 在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png">
-<meta property="og:image" content="https://gwq5210.com/images/文件字节范围锁.png">
-<meta property="og:image" content="https://gwq5210.com/images/记录锁的数据结构.png">
-<meta property="og:image" content="https://gwq5210.com/images/poll的标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/iovec的结构.png">
-<meta property="og:image" content="https://gwq5210.com/images/存储映射文件的例子.png">
-<meta property="og:image" content="https://gwq5210.com/images/半双工管道.png">
-<meta property="og:image" content="https://gwq5210.com/images/fork之后的半双工管道.png">
-<meta property="og:image" content="https://gwq5210.com/images/从父进程到子进程的管道.png">
-<meta property="og:image" content="https://gwq5210.com/images/popen的状态.png">
-<meta property="og:image" content="https://gwq5210.com/images/IPC之间的比较.png">
-<meta property="og:image" content="https://gwq5210.com/images/消息队列的系统限制.png">
-<meta property="og:image" content="https://gwq5210.com/images/共享存储区布局.png">
-<meta property="og:updated_time" content="2022-08-06T14:27:40.078Z">
+<meta property="og:image" content="https://gwq5210.github.io/images/不同类型锁彼此之间的兼容性.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/文件字节范围锁.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/记录锁的数据结构.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/poll的标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/iovec的结构.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/存储映射文件的例子.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/半双工管道.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/fork之后的半双工管道.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/从父进程到子进程的管道.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/popen的状态.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/IPC之间的比较.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/消息队列的系统限制.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/共享存储区布局.png">
+<meta property="og:updated_time" content="2022-08-31T10:46:10.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记-五">
 <meta name="twitter:description" content="第十四章 高级IO非阻塞IO系统调用可分成两类：“低速”系统调用和其他。低速系统调用是可能会使进程永远阻塞的一类系统调用，包括  如果某些文件类型（如读管道、终端设备和网络设备）的数据并不存在，读操作可能会使调用者永远阻塞 如果数据不能被相同的文件类型立即接受（如管道中无空间，网络流控制），写操作可能会使调用者永远阻塞 在某种条件发生之前打开某些文件类型可能会发生阻塞（如要打开一个终端设备，需要先">
-<meta name="twitter:image" content="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png">
+<meta name="twitter:image" content="https://gwq5210.github.io/images/不同类型锁彼此之间的兼容性.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -223,7 +223,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/不同类型锁彼此之间的兼容性.png" alt="不同类型锁彼此之间的兼容性" title>
+                    <img src="https://gwq5210.github.io/images/不同类型锁彼此之间的兼容性.png" alt="不同类型锁彼此之间的兼容性" title>
                 </div>
                 <div class="image-caption">不同类型锁彼此之间的兼容性</div>
             </figure>
@@ -239,7 +239,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/文件字节范围锁.png" alt="文件字节范围锁" title>
+                    <img src="https://gwq5210.github.io/images/文件字节范围锁.png" alt="文件字节范围锁" title>
                 </div>
                 <div class="image-caption">文件字节范围锁</div>
             </figure>
@@ -257,7 +257,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/记录锁的数据结构.png" alt="记录锁的数据结构" title>
+                    <img src="https://gwq5210.github.io/images/记录锁的数据结构.png" alt="记录锁的数据结构" title>
                 </div>
                 <div class="image-caption">记录锁的数据结构</div>
             </figure>
@@ -313,7 +313,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/poll的标志.png" alt="poll的标志" title>
+                    <img src="https://gwq5210.github.io/images/poll的标志.png" alt="poll的标志" title>
                 </div>
                 <div class="image-caption">poll的标志</div>
             </figure>
@@ -329,7 +329,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/iovec的结构.png" alt="iovec的结构" title>
+                    <img src="https://gwq5210.github.io/images/iovec的结构.png" alt="iovec的结构" title>
                 </div>
                 <div class="image-caption">iovec的结构</div>
             </figure>
@@ -358,7 +358,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/存储映射文件的例子.png" alt="存储映射文件的例子" title>
+                    <img src="https://gwq5210.github.io/images/存储映射文件的例子.png" alt="存储映射文件的例子" title>
                 </div>
                 <div class="image-caption">存储映射文件的例子</div>
             </figure>
@@ -394,7 +394,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/半双工管道.png" alt="半双工管道" title>
+                    <img src="https://gwq5210.github.io/images/半双工管道.png" alt="半双工管道" title>
                 </div>
                 <div class="image-caption">半双工管道</div>
             </figure>
@@ -402,7 +402,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/fork之后的半双工管道.png" alt="fork之后的半双工管道" title>
+                    <img src="https://gwq5210.github.io/images/fork之后的半双工管道.png" alt="fork之后的半双工管道" title>
                 </div>
                 <div class="image-caption">fork之后的半双工管道</div>
             </figure>
@@ -410,7 +410,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/从父进程到子进程的管道.png" alt="从父进程到子进程的管道" title>
+                    <img src="https://gwq5210.github.io/images/从父进程到子进程的管道.png" alt="从父进程到子进程的管道" title>
                 </div>
                 <div class="image-caption">从父进程到子进程的管道</div>
             </figure>
@@ -426,7 +426,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/popen的状态.png" alt="popen的状态" title>
+                    <img src="https://gwq5210.github.io/images/popen的状态.png" alt="popen的状态" title>
                 </div>
                 <div class="image-caption">popen的状态</div>
             </figure>
@@ -464,7 +464,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/IPC之间的比较.png" alt="IPC之间的比较" title>
+                    <img src="https://gwq5210.github.io/images/IPC之间的比较.png" alt="IPC之间的比较" title>
                 </div>
                 <div class="image-caption">IPC之间的比较</div>
             </figure>
@@ -474,7 +474,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/消息队列的系统限制.png" alt="消息队列的系统限制" title>
+                    <img src="https://gwq5210.github.io/images/消息队列的系统限制.png" alt="消息队列的系统限制" title>
                 </div>
                 <div class="image-caption">消息队列的系统限制</div>
             </figure>
@@ -503,7 +503,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/共享存储区布局.png" alt="共享存储区布局" title>
+                    <img src="https://gwq5210.github.io/images/共享存储区布局.png" alt="共享存储区布局" title>
                 </div>
                 <div class="image-caption">共享存储区布局</div>
             </figure>
@@ -522,14 +522,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-08-06T14:27:40.078Z" itemprop="dateUpdated">2022-08-06 14:27:40</time>
+    Last updated: <time datetime="2022-08-31T10:46:10.179Z" itemprop="dateUpdated">2022-08-31 10:46:10</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://gwq5210.com">
+        <a href="https://gwq5210.github.io">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -555,7 +555,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -565,22 +565,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2022/07/29/APUE笔记-五/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.com/2022/07/29/APUE笔记-五/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -732,7 +732,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -742,22 +742,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&title=《APUE笔记-五》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2022/07/29/APUE笔记-五/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.com/2022/07/29/APUE笔记-五/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-五》 — gwq5210's Blog&url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/07/29/APUE笔记-五/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2022/07/29/APUE笔记-五/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -768,7 +768,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3awa6jMAwF0P7/T3ekWY00Ku9ehz4p4bCqWqA+LIxj5/WKj/ffI/nm3+////zp1+s733ZgYGBsy3hfHp+CuA40CfoanMeGgYHxHMZ14vvhFkHaTUhLSRkDAwNjdE6eZFfOwcDAwMgDahN0kmQxMDAw2kXsdQnYPoKVhTEGBsbTGO1g4Dc/f3G+gYGBsQnjXR4rSXB2tygqDAyMoxl3NeXza9dTbVHhYmBgHMGYBZRswki2X7T13sdHiYGBcTQjb5+168d2eNCOHKLxAAYGxhGMlaZ8G3RSJg67ZxgYGEcz8r9fCTGhztLxqw0RAwNjQ0beXGvPzIvCvKn3MSoMDIyjGUmJdtevyflt6BgYGE9jtK35WZJd345WjxkwMDAOYuThtily1lxr0zoGBsbZjLzsSxac7aigTeU31LYYGBgbMlYS7l2DgbZAvPm9gYGBsRVjZSSQb5Vom275HTAwMM5jJJclC85820RLWnpXYGBgHMHIL2s3TORTiJUJRrFFDAMDY1vGsKUV97jaRDwsVTEwMB7DSJLgrPXfpuB6FY6BgXE0I0+v7d6N2SawlhR1DTEwMDZnfK99dp2sZwvgaIMFBgbGcYw22dVt+nIzR5vcaxgGBsa2jFmSbRexOS+JoX57YGBgHMFoF67J9zl7vQGHgYGB0S5l22HDLGVjYGBgzMq1pE1Wl33Jg8DAwHgAI1/EJgVinjrbzWQYGBjPZMwGA7NG2/pieAjAwMDYlfEHvgG3PTqTEQQAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOElEQVR42u3awYrDMAxF0f7/T6cwzKKQSXKflClEvl6V0Do+XqiWpdcLj+1n7J98Pt92Y//b7XQcveu2IUOGjMcyalMTRoqpsWXIkLEO4zzIctLha0AQJ+86fC5DhgwZjbBIeHzLZMiQIYNPff7kPDTzYC1DhgwZaRLLl84TVL5lt+XiMmTIeCAjLQx88/M/1jdkyJDxEMZWGucBl5QzeVEBrUeGDBmjGWRBJMqRK7l+YnyxQhkyZAxlkOSQX3jVvknS4ItNlCFDxgIMHnb59VkfEGyNDBkylmHUpualxzSMBlssQ4aM0Yz0kFcL03cFXFSJlSFDxgIMPjVKL0vHSnKgPCwMyJAhYxyj1nRVC4i8UhEfMWXIkDGaUQusJJiSOTslTFTOlCFDxiBG7biWFgB4KxgpSwQnXBkyZIxjkDBaKy2kR8x0K2XIkDGV0SkJ8CIBLx6krWkyZMhYh5Emk3zwporif4UMGTIWYPAw981SASmR/rEqGTJkjGbw661+wskPiAQgQ4aMdRi85YK0PnSaWTuXdzJkyFiB0Tl+pa+vNcVeZKwyZMgYzeAA8jLSTtEJ0OhXMmTIGMTYwkECaKctNU2ef5/IkCFjNKNWjORT9xvLCFiGDBkrMEiQTZfOL+N4wL3YAhkyZCzA6LRQ9NPdNImVIUOGjNoRjVPT5BYVKmTIkCEDJ6iElF7SocxbhgwZCzDSEMkPfGnA5S0XMmTIWIeRFgbS0MzbJnhifEMJU4YMGc9gvAE1IdsZ+O+kVgAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 

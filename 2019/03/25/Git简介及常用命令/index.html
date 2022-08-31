@@ -24,23 +24,23 @@
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git简介及常用命令">
-<meta property="og:url" content="https://gwq5210.com/2019/03/25/Git简介及常用命令/index.html">
+<meta property="og:url" content="https://gwq5210.github.io/2019/03/25/Git简介及常用命令/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅 Git介绍Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gwq5210.com/images/存储每个文件和基础版本的差异.png">
-<meta property="og:image" content="https://gwq5210.com/images/存储项目随时间变化的快照.png">
-<meta property="og:image" content="https://gwq5210.com/images/工作目录，暂存区域以及Git仓库.png">
-<meta property="og:image" content="https://gwq5210.com/images/文件状态变化生命周期.png">
-<meta property="og:image" content="https://gwq5210.com/images/一个和并提交.png">
-<meta property="og:image" content="https://gwq5210.com/images/本地与远程的工作可以分叉.png">
-<meta property="og:image" content="https://gwq5210.com/images/变基然后进行快进合并.png">
-<meta property="og:image" content="https://gwq5210.com/images/通过合并操作来整合分叉的历史.png">
-<meta property="og:updated_time" content="2022-08-06T14:27:40.078Z">
+<meta property="og:image" content="https://gwq5210.github.io/images/存储每个文件和基础版本的差异.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/存储项目随时间变化的快照.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/工作目录，暂存区域以及Git仓库.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/文件状态变化生命周期.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/一个和并提交.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/本地与远程的工作可以分叉.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/变基然后进行快进合并.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/通过合并操作来整合分叉的历史.png">
+<meta property="og:updated_time" content="2022-08-31T10:46:10.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git简介及常用命令">
 <meta name="twitter:description" content="前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅 Git介绍Git实际上是一个版本控制系统，本质上，版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 版本控制经历了本地版本控制系统（RCS，我没听过），集中化版本控制系统（CVS，Subversion等）和分布式版本控制系统（Git等）的演变">
-<meta name="twitter:image" content="https://gwq5210.com/images/存储每个文件和基础版本的差异.png">
+<meta name="twitter:image" content="https://gwq5210.github.io/images/存储每个文件和基础版本的差异.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -204,14 +204,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/存储每个文件和基础版本的差异.png" alt="存储每个文件和基础版本的差异" title>
+                    <img src="https://gwq5210.github.io/images/存储每个文件和基础版本的差异.png" alt="存储每个文件和基础版本的差异" title>
                 </div>
                 <div class="image-caption">存储每个文件和基础版本的差异</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/存储项目随时间变化的快照.png" alt="存储项目随时间变化的快照" title>
+                    <img src="https://gwq5210.github.io/images/存储项目随时间变化的快照.png" alt="存储项目随时间变化的快照" title>
                 </div>
                 <div class="image-caption">存储项目随时间变化的快照</div>
             </figure>
@@ -226,7 +226,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/工作目录，暂存区域以及Git仓库.png" alt="Git仓库，工作目录以及暂存区域" title>
+                    <img src="https://gwq5210.github.io/images/工作目录，暂存区域以及Git仓库.png" alt="Git仓库，工作目录以及暂存区域" title>
                 </div>
                 <div class="image-caption">Git仓库，工作目录以及暂存区域</div>
             </figure>
@@ -250,7 +250,7 @@
 <h2 id="查看当前文件状态、跟踪新文件和暂存已修改的文件"><a href="#查看当前文件状态、跟踪新文件和暂存已修改的文件" class="headerlink" title="查看当前文件状态、跟踪新文件和暂存已修改的文件"></a>查看当前文件状态、跟踪新文件和暂存已修改的文件</h2><p>工作目录的文件状态不外乎：已跟踪和未跟踪。已跟踪是已纳入版本控制的文件，在上一次快照中有他们的记录，工作过一段时候后，他们的状态可能是未修改，已修改，已暂存状态。除此之外其他文件都属于未跟踪文件<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/文件状态变化生命周期.png" alt="文件状态变化生命周期" title>
+                    <img src="https://gwq5210.github.io/images/文件状态变化生命周期.png" alt="文件状态变化生命周期" title>
                 </div>
                 <div class="image-caption">文件状态变化生命周期</div>
             </figure></p>
@@ -270,7 +270,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/一个和并提交.png" alt="一个和并提交" title>
+                    <img src="https://gwq5210.github.io/images/一个和并提交.png" alt="一个和并提交" title>
                 </div>
                 <div class="image-caption">一个和并提交</div>
             </figure>
@@ -279,7 +279,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/本地与远程的工作可以分叉.png" alt="本地与远程的工作可以分叉" title>
+                    <img src="https://gwq5210.github.io/images/本地与远程的工作可以分叉.png" alt="本地与远程的工作可以分叉" title>
                 </div>
                 <div class="image-caption">本地与远程的工作可以分叉</div>
             </figure>
@@ -290,14 +290,14 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/变基然后进行快进合并.png" alt="变基然后进行快进合并" title>
+                    <img src="https://gwq5210.github.io/images/变基然后进行快进合并.png" alt="变基然后进行快进合并" title>
                 </div>
                 <div class="image-caption">变基然后进行快进合并</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/通过合并操作来整合分叉的历史.png" alt="通过合并操作来整合分叉的历史" title>
+                    <img src="https://gwq5210.github.io/images/通过合并操作来整合分叉的历史.png" alt="通过合并操作来整合分叉的历史" title>
                 </div>
                 <div class="image-caption">通过合并操作来整合分叉的历史</div>
             </figure>
@@ -311,14 +311,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-08-06T14:27:40.078Z" itemprop="dateUpdated">2022-08-06 14:27:40</time>
+    Last updated: <time datetime="2022-08-31T10:46:10.183Z" itemprop="dateUpdated">2022-08-31 10:46:10</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://gwq5210.com">
+        <a href="https://gwq5210.github.io">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -344,7 +344,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -354,23 +354,23 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&source=前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&source=前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅
 Git介绍Git实际上是一..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2019/03/25/Git简介及常用命令/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git简介及常用命令》 — gwq5210's Blog&url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git简介及常用命令》 — gwq5210's Blog&url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -522,7 +522,7 @@ Git介绍Git实际上是一..." data-title=" QQ">
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -532,23 +532,23 @@ Git介绍Git实际上是一..." data-title=" QQ">
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&source=前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&title=《Git简介及常用命令》 — gwq5210's Blog&source=前言最近想深入了解一下Git，阅读了一下Pro Git的前两章，前两章几乎涵盖了Git的大部分功能，在此做个记录，以便后续查阅
 Git介绍Git实际上是一..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2019/03/25/Git简介及常用命令/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git简介及常用命令》 — gwq5210's Blog&url=https://gwq5210.com/2019/03/25/Git简介及常用命令/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git简介及常用命令》 — gwq5210's Blog&url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2019/03/25/Git简介及常用命令/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2019/03/25/Git简介及常用命令/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -559,7 +559,7 @@ Git介绍Git实际上是一..." data-title=" QQ">
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aS27DMAxF0ex/0y7QaWv5PtJuYepqFOQj6XjAiKQ+HzyO73H2znEyfn5//auztW4bMmTIeC3jWI41Ix3rGfgD+oUqQ4aMDRjrIHvDMsutk3Uv9ixDhgwZy4NdekDkPBkyZMjoBNx00+Sg+Q//GzJkyHgVgySx5J2zT3lAfzwXlyFDxgsZaWPgL18/2N+QIUPGSxid4j5PR2vtzGA/MmTIGM3gxzheGuskq+lsn/WzkSFDxiBGv4mYpqzkwllnThkyZExl8NAWFOtxYOXHyhuCrAwZMsYx0sS1Fjo788uQIWMHRhrmau3JdK245CdDhozRjLQQxov7tRJbJwTLkCFjKqNzLYwskBb3iwU+GTJkDGXwixGd1+l1jdtCrQwZMsYx0tp7f+u1NsDF7TYZMmSMY5DyfW2BfiMzblHIkCFjNIOUunhxrdYeSDctQ4aMfRjkq2mqyZsK5FcolZUhQ8YGjFoqm5LSon+AlCFDxmhGJ9UMCmEAVruEIUOGjH0YfGpenqu1FshBMM7CZciQMY7RSiZB4sovs5JHjIpuMmTIGMHoBMp+U7M250U/VoYMGYMYRzg6IfVs6zykXhwKZciQMZRRK/rXSnJpAS5dV4YMGbMZPMjy0Pl0g+GXeWTIkLEBIw2yfEPPpcQyZMiQ0Qmg6cWLTtNUhgwZMmolNrKJWp4tQ4aMnRlpM6CWlKZHz+AoKUOGjNGMtDHA2428SMdbm7f1N2TIkPEOxhc/QpNh8ifqGQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aQXLCMAwFUO5/abpl0bhfUuhM7OcVY0jil4WQLL9e8Xh/jHzmc/5qJvn9bQMDA+OxjPdyzB989W311VytDQMD4xzG+vH5I9fU9VXJfS7nMTAwMFqpYfUzBgYGxpzRKzLzchcDAwNjzUiK2D/KyGIhOvkWAwPjNEYeNP//81f6GxgYGI9ivMejmg7mjYTCGjAwMLZmVIPgpBxNjl/kaeIv98HAwDiGsV50lVptGySF8WWwxsDA2JrRC51rZBKsk4AbhVoMDIytGXnyV2XPE8rC68DAwDiSUd0+691t8lwMDAyMeYmbb+jnxW05NcTAwNiCkR+waG5+Ba9jcrwDAwPjNEZeNFYblr1GafPQBgYGxnaMu0LePJkbtRkwMDC2ZvRic7XsrBa91QYnBgbGCYxqCXpXTjpBYmBgnMnIN/F7ByPylkMv0GNgYOzKyANltT2ZX5svunnYAgMDYwvGJC2rHqeYY6L/CgwMjI0Y1Yt7qV41BWwe78DAwNiUsU4N8/bkZPTaEhgYGOcwJoDqAYu7OhWX12JgYGzK6G2f5YvLZ/KwHm23YWBgbMSYJHD5fG+LrXqIFgMDY29Gb3O/mYfGhWt5DRgYGAcwqkvJN87uun9Ui2NgYBzPSJZ113GKLwZcDAyMrRlJEKzeIXkp0VUYGBgHMPIithqCq9v6+eGzQpcDAwPj4YxR6bhMIqsth2oTtNnfwMDAeBLjB1G3W9HWLQDaAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 

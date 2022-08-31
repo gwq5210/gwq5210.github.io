@@ -24,22 +24,22 @@
 <meta name="keywords" content="unix,linux,读书笔记,APUE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APUE笔记-六">
-<meta property="og:url" content="https://gwq5210.com/2022/08/03/APUE笔记-六/index.html">
+<meta property="og:url" content="https://gwq5210.github.io/2022/08/03/APUE笔记-六/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="第十六章 网络IPC：套接字UNIX系统所提供的的经典进程间通信机制（IPC）：管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。网络进程间通信（network IPC）可以让在不同计算机（通过网络相连）上的进程相互通信 套接字网络进程间通信接口，进程用该接口能够和其他进程通信，无论它们是在同一台计算机上还是在不同的计算机上。实际上，这正是套接字接口">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gwq5210.com/images/文件描述符函数使用套接字时的行为.png">
-<meta property="og:image" content="https://gwq5210.com/images/getnameinfo函数的标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/send套接字调用标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/recv套接字调用标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png">
-<meta property="og:image" content="https://gwq5210.com/images/套接字选项.png">
-<meta property="og:image" content="https://gwq5210.com/images/套接字对.png">
-<meta property="og:updated_time" content="2022-08-06T14:27:40.078Z">
+<meta property="og:image" content="https://gwq5210.github.io/images/文件描述符函数使用套接字时的行为.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/getnameinfo函数的标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/send套接字调用标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/recv套接字调用标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/从recvmsg中返回的msg_flags标志.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/套接字选项.png">
+<meta property="og:image" content="https://gwq5210.github.io/images/套接字对.png">
+<meta property="og:updated_time" content="2022-08-31T10:46:10.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APUE笔记-六">
 <meta name="twitter:description" content="第十六章 网络IPC：套接字UNIX系统所提供的的经典进程间通信机制（IPC）：管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。网络进程间通信（network IPC）可以让在不同计算机（通过网络相连）上的进程相互通信 套接字网络进程间通信接口，进程用该接口能够和其他进程通信，无论它们是在同一台计算机上还是在不同的计算机上。实际上，这正是套接字接口">
-<meta name="twitter:image" content="https://gwq5210.com/images/文件描述符函数使用套接字时的行为.png">
+<meta name="twitter:image" content="https://gwq5210.github.io/images/文件描述符函数使用套接字时的行为.png">
     
         <link rel="alternate" type="application/atom+xml" title="gwq5210&#39;s Blog" href="/atom.xml">
     
@@ -294,7 +294,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/文件描述符函数使用套接字时的行为.png" alt="文件描述符函数使用套接字时的行为" title>
+                    <img src="https://gwq5210.github.io/images/文件描述符函数使用套接字时的行为.png" alt="文件描述符函数使用套接字时的行为" title>
                 </div>
                 <div class="image-caption">文件描述符函数使用套接字时的行为</div>
             </figure>
@@ -398,7 +398,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/getnameinfo函数的标志.png" alt="getnameinfo函数的标志" title>
+                    <img src="https://gwq5210.github.io/images/getnameinfo函数的标志.png" alt="getnameinfo函数的标志" title>
                 </div>
                 <div class="image-caption">getnameinfo函数的标志</div>
             </figure>
@@ -444,7 +444,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/send套接字调用标志.png" alt="send套接字调用标志" title>
+                    <img src="https://gwq5210.github.io/images/send套接字调用标志.png" alt="send套接字调用标志" title>
                 </div>
                 <div class="image-caption">send套接字调用标志</div>
             </figure>
@@ -462,7 +462,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/recv套接字调用标志.png" alt="recv套接字调用标志" title>
+                    <img src="https://gwq5210.github.io/images/recv套接字调用标志.png" alt="recv套接字调用标志" title>
                 </div>
                 <div class="image-caption">recv套接字调用标志</div>
             </figure>
@@ -479,7 +479,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png" alt="从recvmsg中返回的msg_flags标志" title>
+                    <img src="https://gwq5210.github.io/images/从recvmsg中返回的msg_flags标志.png" alt="从recvmsg中返回的msg_flags标志" title>
                 </div>
                 <div class="image-caption">从recvmsg中返回的msg_flags标志</div>
             </figure>
@@ -499,7 +499,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/套接字选项.png" alt="套接字选项" title>
+                    <img src="https://gwq5210.github.io/images/套接字选项.png" alt="套接字选项" title>
                 </div>
                 <div class="image-caption">套接字选项</div>
             </figure>
@@ -526,7 +526,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://gwq5210.com/images/套接字对.png" alt="套接字对" title>
+                    <img src="https://gwq5210.github.io/images/套接字对.png" alt="套接字对" title>
                 </div>
                 <div class="image-caption">套接字对</div>
             </figure>
@@ -542,14 +542,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-08-06T14:27:40.078Z" itemprop="dateUpdated">2022-08-06 14:27:40</time>
+    Last updated: <time datetime="2022-08-31T10:46:10.179Z" itemprop="dateUpdated">2022-08-31 10:46:10</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://gwq5210.com">
+        <a href="https://gwq5210.github.io">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -575,7 +575,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -585,22 +585,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/08/03/APUE笔记-六/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2022/08/03/APUE笔记-六/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-六》 — gwq5210's Blog&url=https://gwq5210.com/2022/08/03/APUE笔记-六/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-六》 — gwq5210's Blog&url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/08/03/APUE笔记-六/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -745,7 +745,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.com/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&pic=https://gwq5210.com/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -755,22 +755,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.com/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&title=《APUE笔记-六》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.com/2022/08/03/APUE笔记-六/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2022/08/03/APUE笔记-六/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-六》 — gwq5210's Blog&url=https://gwq5210.com/2022/08/03/APUE笔记-六/&via=https://gwq5210.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《APUE笔记-六》 — gwq5210's Blog&url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/&via=https://gwq5210.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.com/2022/08/03/APUE笔记-六/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2022/08/03/APUE笔记-六/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -781,7 +781,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aS27DMAwFwNz/0um6aO28RyUBLI9WQT62xgVYkuLjEa/nn3X+zZX3z6+/tDAwMC7LeJ6uc0YLO7rC+afne8PAwLgPY3b7o3B5tNHzzR3dNwrfGBgYGPGmZ7lc/ggwMDAwEkay6eT7548GAwMDY1bEJlvPA2vSbvtILY6BgXFBRp7Gff/1R843MDAwLsV4fmC1yWLejDu8IwYGxtaMtpWfb2uWYiZHmxgYGBjtRtvG3GxoAwMDA2MW8mZFbxK+8zbcYz1yY2BgXIqxPuDVhuP2GLX+O2BgYGzBaMe8ZgVqPsyR3+Wf3BYDA+PGjDZ0rkT9tnmHgYFxB8YnxrxWks62cI1IGBgYF2fMjgzz8Ygk6Uy2/iIZxcDAuAFj5UBxvVmWF8YvAi4GBsbNGDlmNmwxK5hftNswMDA2ZbQpWos5D6zt+8PKGwMDY1PGLGVM2v3t6EZ7BQwMjP0YebhsE7s2BLcHEr9+i4GBcQPGrJX/rkGNtnl3+L8CAwNjU0a7ibbR/64xjmJaBAMDYztGcrP1gDs7EC0eBwYGxtaMYWwetcby8YtZ1oeBgbEr41mu9jCgfShtaY2BgXEHxsoxZBtY8+GMpPXWBmsMDIyrM5LNzUYuVnh1cYuBgXEDxnq61h5PzpK8w19hYGBgvLWYbAva6FMMDAyM0SjYSt3cHqBiYGDcgZGkdN8sdOvhWgwMjK0ZK8ncykDGLOnMjw0wMDC2YPwA9LxLqURcvS4AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aQW7DMAwEwP7/0+m5aOvsUm4BS6NT4NiWJgEIkdTHRzxe30Z+//U9+fUbBgYGxmMZr8uR33O9oN/u/22uel4MDIwDGMkiZhPPYHVQxsDAwAgY1+9JBgYGBsa9jCTFza8k32JgYGDMgmA+8fVPkGwfb8vFMTAwHsjIq+7///lP+hsYGBiPYrzKkT+VNzJnK/nyZgwMjK0ZeYBrF3TX6YhiPRgYGAcz2gQ1X1Z+PbmCgYGxK2OlfZgf8EqOYsxKfj/scDEwMLZjtBu4pIV5V2qaH+DAwMDYm7Gib8PorGkavRMDA2Nrxl2Hw5IonoTs/KhZXe3DwMB4LCNfyiy9zIPvbGP6ZWuIgYGxKWN9uW2IzJ9qC3kYGBh7M1aqdLPAOgO/+R8wMDAOYMzSyyRkt8fI2u0jBgbGOYzr6Yue5yjI5o3SpS4HBgbGFoy2GdAG3PagRl6Gw8DAOI2Rh7y8Cdoe/2obDxgYGCcw8oln5bM2KOezY2BgnMPIp581FdpCW5vWYmBgnMDIw2KysZsV8mYbRAwMjHMY7WR5k7It6g0brhgYGJsyXuW4XlBLzZPYN1QMDIytGe2xidkRrnYpeQO1hmFgYDyWMSzEl8+upL71L42BgbEpYxb4Vkps60ksBgYGRlKyX+G1m783VAwMDIyFNmee7uZpbd2JxcDA2ILRJqJ5GW7WJEhCMwYGxjmMWerYNj4TUrLopaYmBgbG8xifW08ZBtQ5E9AAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
