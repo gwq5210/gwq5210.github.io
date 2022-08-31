@@ -100,7 +100,7 @@ struct SmallString {
 };
 ```
 
-![sso_string](https://gwq5210.com/images/sso_string.png)
+![sso_string](https://gwq5210.github.io/images/sso_string.png)
 
 ## COW
 

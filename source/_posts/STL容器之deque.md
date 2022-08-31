@@ -34,7 +34,7 @@ deque采用的是两层架构，采用map（与STL的map不同），记录有多
 
 map中的节点缓冲区满时，需要重新分配map本身的区域，移动原有的节点缓冲区到新的map区域，但这代价很小，仅仅是移动指针而已
 
-![deque](https://gwq5210.com/images/deque.png)
+![deque](https://gwq5210.github.io/images/deque.png)
 
 deque的数据结构如下
 

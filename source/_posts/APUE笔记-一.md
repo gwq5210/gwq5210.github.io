@@ -365,11 +365,11 @@ UNIX支持在不同进程间共享打开文件。
 
 不同实现可能有不同，但是是有必要保存这些信息。
 
-![打开文件的内核数据结构](https://gwq5210.com/images/打开文件的内核数据结构.png)
+![打开文件的内核数据结构](https://gwq5210.github.io/images/打开文件的内核数据结构.png)
 
 不同进程都有自己的文件表项（使得不同进程可以有不同的当前文件偏移量），两个进程可以打开同一个文件，但同一个文件只有一个v节点表项。
 
-![两个独立进程各自打开同一个文件](https://gwq5210.com/images/两个独立进程各自打开同一个文件.png)
+![两个独立进程各自打开同一个文件](https://gwq5210.github.io/images/两个独立进程各自打开同一个文件.png)
 
 同时也可能有多个文件描述符指向同一个文件表项，例如dup函数和fork函数（fork之后，父进程和子进程各自的每一个打开文件描述符共享同一个文件表项）
 
@@ -423,7 +423,7 @@ int dup2(int fd, int fd2);
 
 这些函数返回的新描述符与参数fd共享同一个文件表项。
 
-![dup后的内核数据结构](https://gwq5210.com/images/dup后的内核数据结构.png)
+![dup后的内核数据结构](https://gwq5210.github.io/images/dup后的内核数据结构.png)
 
 赋值描述符的另一个方法是使用fcntl函数
 
@@ -484,7 +484,7 @@ F_GETFD，对应于fd的文件描述符标志作为函数值返回，当前只�
 F_SETFD，对于fd设置文件描述符标志
 F_GETFL，对应于fd的文件状态标志作为函数值返回。可以参考open函数。5个访问方式标志(O_RDONLY，O_WRONLY，O_RDWR，O_EXEC以及O_SEARCH)并不各占一位，这5个值互斥。因此首先必须使用屏蔽字O_ACCMODE取得访问方式，然后再进行比较。
 
-![文件状态标志](https://gwq5210.com/images/文件状态标志.png)
+![文件状态标志](https://gwq5210.github.io/images/文件状态标志.png)
 
 F_SETFL，将文件状态标志设置为第三个参数的值，可以更改的标志是：O_APPEND，O_NONBLOCK，O_SYNC，O_DSYNC，O_RSYNC，O_FSYNC和O_ASYNC。
 F_GETOWN，获取当前接收SIGIO和SIGURG信号的进程ID或进程组ID。
@@ -814,11 +814,11 @@ UNIX文件系统有多种不同的实现。每一种文件系统都有它各自�
 
 我们可以把磁盘分成一个或多个分区。每个分区可以包含一个文件系统。i节点是固定长度的记录项，它包含有关文件的大部分信息。
 
-![磁盘、分区和文件系统](https://gwq5210.com/images/磁盘、分区和文件系统.jpg)
+![磁盘、分区和文件系统](https://gwq5210.github.io/images/磁盘、分区和文件系统.jpg)
 
 下面是比较详细的i节点和数据块图
 
-![i节点和数据块详细图](https://gwq5210.com/images/i节点和数据块详细图.jpg)
+![i节点和数据块详细图](https://gwq5210.github.io/images/i节点和数据块详细图.jpg)
 
 在图中，我们注意到：
 
@@ -987,7 +987,7 @@ ssize_t readlinkat(int fd, const char *restrict pathname, char *restrict buf, si
 
 注意文件数据修改时间和i节点最后更改时间，i节点信息和文件数据是分开存放的
 
-![各种函数对三种时间的影响](https://gwq5210.com/images/各种函数对三种时间的影响.png)
+![各种函数对三种时间的影响](https://gwq5210.github.io/images/各种函数对三种时间的影响.png)
 
 ## 函数futimens，utimensat和utimes
 
@@ -1145,4 +1145,4 @@ st_dev和st_rdev经常混淆，有关规则很简单
 
 ## 文件访问权限位小结
 
-![文件访问权限位小结](https://gwq5210.com/images/文件访问权限位小结.png)
+![文件访问权限位小结](https://gwq5210.github.io/images/文件访问权限位小结.png)

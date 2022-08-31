@@ -10,7 +10,7 @@ queue是一种先进先出(First In First Out, FIFO)，它有两个入口，但�
 
 queue不允许有遍历行为，所以不提供迭代器
 
-![queue](https://gwq5210.com/images/queue.png)
+![queue](https://gwq5210.github.io/images/queue.png)
 
 通常使用deque来作为queue的底层实现，这种修改接口的方法被称为[适配器模式](/2021/10/26/设计模式之适配器模式/)
 

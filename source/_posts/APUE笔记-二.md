@@ -77,7 +77,7 @@ int setvbuf(FILE* restrict fp, char* restrict buf, int mode, size_t size);
   - 以上可以通过buf和size设置缓冲区和长度；如果buf为NULL，则标准IO库将自动分配合适的缓冲区，适当长度一般由BUFSIZ指定（GNU C使用stat结构中的st_blksize来决定最佳缓冲区长度）
 - _IONBF：不带缓冲，忽略buf和size参数
 
-![setbuf和setvbuf函数](https://gwq5210.com/images/setbuf和setvbuf函数.png)
+![setbuf和setvbuf函数](https://gwq5210.github.io/images/setbuf和setvbuf函数.png)
 
 一般而言我们应该由系统选择缓冲区的长度，并自动分配缓冲区，流关闭时，将自动释放缓冲区
 
@@ -115,7 +115,7 @@ FILE* fdopen(int fd, const char* restrict type);
 
 参数type有如下组合
 
-![fopen的type](https://gwq5210.com/images/fopen的type.png)
+![fopen的type](https://gwq5210.github.io/images/fopen的type.png)
 
 使用字符b可以使得标准IO系统区分二进制和文本文件。UNIX内核并不区分这两种文件，所以在UNIX系统下并无作用
 
@@ -126,7 +126,7 @@ FILE* fdopen(int fd, const char* restrict type);
 - 如果中间没有fflush、fseek、fsetpos或rewind，则在输出后边不能直接跟随输入
 - 如果中间没有fseek、fsetpos或rewind或者一个输入操作没有到达文件尾端，则在输入操作之后不能直接跟随输出
 
-![打开流的不同方式](https://gwq5210.com/images/打开流的不同方式.png)
+![打开流的不同方式](https://gwq5210.github.io/images/打开流的不同方式.png)
 
 在w和a类型创建一个文件时，我们无法指定文件的访问权限位，我们可以通过调整umask值来限制这些权限或创建之后修改权限
 
@@ -237,7 +237,7 @@ int puts(const char* str);  // 等价于fputs(str, stdout); fputs("\n", stdout);
 
 ## 标准IO的效率
 
-![标准IO库的效率](https://gwq5210.com/images/标准IO库的效率.png)
+![标准IO库的效率](https://gwq5210.github.io/images/标准IO库的效率.png)
 
 ## 二进制IO
 
@@ -351,7 +351,7 @@ UNIX系统有很多与系统有关的数据文件，由于历史原因这些数�
 
 UNIX系统口令文件包含如下字段，其定义在<pwd.h>中的passwd结构中
 
-![passwd文件中的字段](https://gwq5210.com/images/passwd文件中的字段.png)
+![passwd文件中的字段](https://gwq5210.github.io/images/passwd文件中的字段.png)
 
 可以通过getpwuid和getpwunam获取uid或name，同时也提供了函数来读取/etc/passwd文件，具体可查看文档
 
@@ -403,7 +403,7 @@ struct tm {
 };
 ```
 
-![时间函数之间的关系](https://gwq5210.com/images/时间函数之间的关系.png)
+![时间函数之间的关系](https://gwq5210.github.io/images/时间函数之间的关系.png)
 
 # 第七章 进程环境
 
@@ -477,7 +477,7 @@ int atexit(void (*func)(void));
 
 exit首先调用各种终止处理程序，然后关闭所有打开的流。若程序调用exec函数族的任一函数，则将清除所有已安装的终止处理程序
 
-![程序的启动和终止](https://gwq5210.com/images/程序的启动和终止.png)
+![程序的启动和终止](https://gwq5210.github.io/images/程序的启动和终止.png)
 
 内核使程序执行的唯一方法是调用一个exec函数。进程自愿终止的唯一方法是显式或隐式的（通过调用exit）调用_exit或_Exit。进程也可非自愿的由一个信号使其终止
 
@@ -501,7 +501,7 @@ environ称为环境指针（environment pointer），指针数组称为环境表
 name=value
 ```
 
-![环境指针](https://gwq5210.com/images/环境指针.png)
+![环境指针](https://gwq5210.github.io/images/环境指针.png)
 
 大多数环境预定义名全部由大写字母组成，这只是一个惯例。历史上UNIX系统支持main函数带3个参数，第三个参数是环境表指针。但通常我们应使用environ全局变量，而不是使用第3个参数。更好的方法是getenv和putenv函数，但如果要查看整个环境，则必须访问environ全局变量
 
@@ -515,7 +515,7 @@ name=value
 - 栈。自动变量以及每次函数调用时所需保存的信息都存放在此段中。每次函数调用时，其返回地址以及调用者的环境信息都存放在栈中。然后最近被调用的函数在栈上为其自动变量和临时变量分配空间。通过此方式使用栈，C递归函数可以工作。一次函数的调用产生一个新的栈帧，因此一次函数的调用不会影响另一次函数调用实例中的变量
 - 堆。通常在堆中进行动态内存分配。由于历史上形成的惯例，堆位于未初始化段和栈之间
 
-![典型的存储空间安排](https://gwq5210.com/images/典型的存储空间安排.png)
+![典型的存储空间安排](https://gwq5210.github.io/images/典型的存储空间安排.png)
 
 程序中还有其他的段，如包含符号表的段、包含调试信息的段，包含动态共享库链接表的段，这些部分并不装载到进程执行的程序映像中
 
@@ -652,6 +652,6 @@ struct rlimit {
 
 常量RLIM_INFINITY指定一个无限量的值
 
-![对资源限制的支持](https://gwq5210.com/images/对资源限制的支持.png)
+![对资源限制的支持](https://gwq5210.github.io/images/对资源限制的支持.png)
 
 资源限制影响到调用进程并由其子进程继承。shell具有内置ulimit命令，用于修改限制值

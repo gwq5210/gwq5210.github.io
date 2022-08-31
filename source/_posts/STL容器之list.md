@@ -36,7 +36,7 @@ struct ListNode {
 
 实现list的一个技巧是添加一个虚拟的空白节点，让list的end迭代器指向该空白节点，既符合STL迭代器前闭后开的要求，也方便了编程的实现
 
-![list](https://gwq5210.com/images/list.png)
+![list](https://gwq5210.github.io/images/list.png)
 
 代码如下
 

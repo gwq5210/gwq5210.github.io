@@ -10,7 +10,7 @@ stack是一种先进后出(First In Last Out, FILO)的结构，它只有一个�
 
 stack不允许有遍历行为，所以不提供迭代器
 
-![stack](https://gwq5210.com/images/stack.png)
+![stack](https://gwq5210.github.io/images/stack.png)
 
 stack是一种很简单的数据接口，只允许在栈顶新增，删除，获取元素
 

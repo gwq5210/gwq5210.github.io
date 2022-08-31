@@ -70,7 +70,7 @@ SOCK_RAW套接字提供一个数据报接口，用于直接访问下面的网络
 
 虽然套接字描述符本质上是一个文件描述符，但不是所有参数为文件描述符的函数都可以接受套接字描述符。未指定和由实现定义的行为通常意味着该函数对套接字描述符无效。
 
-![文件描述符函数使用套接字时的行为](https://gwq5210.com/images/文件描述符函数使用套接字时的行为.png)
+![文件描述符函数使用套接字时的行为](https://gwq5210.github.io/images/文件描述符函数使用套接字时的行为.png)
 
 套接字通信是双向的。可以采用shutdown函数来禁止一个套接字的IO
 
@@ -393,7 +393,7 @@ int getnameinfo(const struct sockaddr* restrict addr, socklen_t alen, char* rest
 
 flags参数提供了一些控制翻译的方式
 
-![getnameinfo函数的标志](https://gwq5210.com/images/getnameinfo函数的标志.png)
+![getnameinfo函数的标志](https://gwq5210.github.io/images/getnameinfo函数的标志.png)
 
 ## 将套接字与地址关联
 
@@ -514,7 +514,7 @@ ssize_t send(int sockfd, const void* buf, size_t nbytes, int flags);
 
 类似write，使用send时套接字必须已经连接。参数buf和nbytes的含义与write中的一致。send支持第4个参数flags。标志如下
 
-![send套接字调用标志](https://gwq5210.com/images/send套接字调用标志.png)
+![send套接字调用标志](https://gwq5210.github.io/images/send套接字调用标志.png)
 
 即使send成功返回，也并不表示连接的另一端的进程就一定接收了数据。我们所能保证的只是当send成功返回时，数据已经被无错误的发送到网络驱动程序上
 
@@ -566,7 +566,7 @@ ssize_t recv(int sockfd, void* buf, size_t nbytes, int flags);
 
 支持的标志如下
 
-![recv套接字调用标志](https://gwq5210.com/images/recv套接字调用标志.png)
+![recv套接字调用标志](https://gwq5210.github.io/images/recv套接字调用标志.png)
 
 当指定MSG_PEEK标志时，可以查看下一个要读取的数据但不真正取走它。当再次调用read或其中一个recv函数时，会返回刚才查看的数据
 
@@ -600,7 +600,7 @@ ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags);
 
 recvmsg用msghdr结构指定接收数据的输入缓冲区。可以设置参数flags来改变recvmsg的默认行为。返回时，msghdr结构中的msg_flags字段被设置为所接收数据的各种特征。进入recvmsg时msg_flags被忽略。recvmsg中返回的各种可能值如下
 
-![从recvmsg中返回的msg_flags标志](https://gwq5210.com/images/从recvmsg中返回的msg_flags标志.png)
+![从recvmsg中返回的msg_flags标志](https://gwq5210.github.io/images/从recvmsg中返回的msg_flags标志.png)
 
 对于无连接的套接字，数据包到达时可能已经没有次序，因此如果不能将所有的数据放在一个数据包里，则在应用程序中就必须关心数据包的次序。数据包的最大尺寸是通信协议的特征。另外对于无连接的套接字，数据包可能会丢失。如果应用程序不能容忍这种丢失，必须使用面向连接的套接字
 
@@ -630,7 +630,7 @@ int setsockopt(int sockfd, int level, int option, const void* val, socklen_t len
 
 参数level表示了选项应用的协议。如果选项是通用的套接字层次选项，则level设置成SOL_SOCKET。否则，level设置成控制这个选项的协议编号。对于TCP选项，level是IPPROTO_TCP，对于IP，level是IPPROTO_IP。下图是Single UNIX Specification中定义的通用套接字层次选项
 
-![套接字选项](https://gwq5210.com/images/套接字选项.png)
+![套接字选项](https://gwq5210.github.io/images/套接字选项.png)
 
 参数val根据选项的不同指向一个数据结构或一个整数。一些选项是on/off开关。如果整数非0，则启用选项。如果整数为0，则禁止选项。参数len指定了val指向的对象的大小
 
@@ -700,7 +700,7 @@ int socketpair(int domain, int type, int protocol, int sockfd[2]);
 
 一对相互连接的UNIX域套接字可以起到全双工管道的作用：两端对读和写开放。我盟将其称为fd管道（fd-pipe），以便与普通的半双工管道区分开来
 
-![套接字对](https://gwq5210.com/images/套接字对.png)
+![套接字对](https://gwq5210.github.io/images/套接字对.png)
 
 ## 命名UNIX域套接字
 

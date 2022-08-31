@@ -27,7 +27,7 @@ STL的红黑树实现中，会提供两个函数insert_unique和insert_equal分�
 
 由于实现的特性，关联式容器是根据键值有序的，默认从小到大排序（使用std::less<T>进行比较）
 
-![rbtree](https://gwq5210.com/images/rbtree.png)
+![rbtree](https://gwq5210.github.io/images/rbtree.png)
 
 ## 为什么选择红黑树
 

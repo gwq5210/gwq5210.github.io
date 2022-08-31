@@ -56,7 +56,7 @@ fork之后标准IO库的缓存区也被复制，如果缓冲区中存在数据�
 
 重要的一点是父进程和子进程共享同一个文件偏移量。如果不共享，则要实现父子进程都写到同一个文件则要困难的多。但如果父进程和子进程写同一描述符指向的文件，但又没有任何形式的同步，那么它们的输出就会相互混合（假定所用的描述符是在fork之前打开的），但这并不是常用的操作模式
 
-![fork之后父进程和子进程之间对打开文件的共享](https://gwq5210.com/images/fork之后父进程和子进程之间对打开文件的共享.png)
+![fork之后父进程和子进程之间对打开文件的共享](https://gwq5210.github.io/images/fork之后父进程和子进程之间对打开文件的共享.png)
 
 在fork之后，处理文件描述符有以下两种常见的情况
 
@@ -170,7 +170,7 @@ statloc是一个整型指针。如果statloc不是一个空指针，则终止进
 
 依据传统，这两个函数返回的整型状态字是由实现定义的，终止状态使用如下宏来查看
 
-![终止状态的宏](https://gwq5210.com/images/终止状态的宏.png)
+![终止状态的宏](https://gwq5210.github.io/images/终止状态的宏.png)
 
 如果需要等待一个指定进程终止，在早期的UNIX系统中，必须调用wait，然后将其返回的进程ID和所期望的进程ID相比较。如果终止进程不是所期望的，则该进程ID和终止状态保存起来，然后再次调用wait，反复调用直到指定进程终止，下一次又想等待一个特定进程时，先查看已终止的进程列表或继续调用wait。
 
@@ -185,7 +185,7 @@ waitpid可以实现这一功能及其他功能，根据pid参数，作用如下
 
 参数options可以进一步控制waitpid的操作，此参数或者是0或者是如下常量按位或运算的结果
 
-![waitpid的options参数](https://gwq5210.com/images/waitpid的options参数.png)
+![waitpid的options参数](https://gwq5210.github.io/images/waitpid的options参数.png)
 
 waitpid提供了wait函数没有的3个功能
 
@@ -211,11 +211,11 @@ int waitid(idtype_t idtype, id_t id, siginfo_t* infop, int options);
 
 idtype类型如下
 
-![waitid的idtype常量](https://gwq5210.com/images/waitid的idtype常量.png)
+![waitid的idtype常量](https://gwq5210.github.io/images/waitid的idtype常量.png)
 
 options是以下各标志的按位或运算，这些标志指示调用者关注哪些状态变化
 
-![waitid的options常量](https://gwq5210.com/images/waitid的options常量.png)
+![waitid的options常量](https://gwq5210.github.io/images/waitid的options常量.png)
 
 WCONTINUED、WEXITED或WSTOPPED这三个常量之一必须在options参数中指定
 
@@ -292,7 +292,7 @@ fexecve函数避免了寻找正确的可执行文件，而是依赖调用进程�
 
 函数名中的字符会给我们一些记忆的帮助。字母p表示该函数取filename作为参数，并且用PATH环境变量寻找可执行文件。字母l表示该函数取一个参数表，它与字母v互斥。v表示该函数取一个`argv[]`矢量。最后字母e表示该函数取`envp[]`数组，而不使用当前环境变量
 
-![7个exec函数之间的区别](https://gwq5210.com/images/7个exec函数之间的区别.png)
+![7个exec函数之间的区别](https://gwq5210.github.io/images/7个exec函数之间的区别.png)
 
 每个系统对参数表和环境表的总长度都有一个限制。这种限制是由ARG_MAX给出的，此值至少是4096字节
 
@@ -322,7 +322,7 @@ POSIX.1明确要求再exec时关闭打开目录流（opendir函数）。这通�
 
 在很多UNIX系统实现中只有execve是内核的系统调用，另外6个只是库函数，它们最终都要调用该系统调用
 
-![7个exec函数之间的关系](https://gwq5210.com/images/7个exec函数之间的关系.png)
+![7个exec函数之间的关系](https://gwq5210.github.io/images/7个exec函数之间的关系.png)
 
 ## 更改用户ID和更改组ID
 
@@ -355,7 +355,7 @@ int setgid(gid_t gid);
 - 仅当对程序文件设置了设置用户ID位时，exec函数才设置有效用户ID。如果设置用户ID位没有设置，exec函数不会改变有效用户ID，而将维持其现有值。任何时候都可以调用setuid，将有效用户ID设置为实际用户ID或保存的设置用户ID。
 - 保存的设置用户ID是由exec复制有效用户ID而得到的，如果设置了文件的设置用户ID位则在exec根据文件的用户ID设置了进程的有效用户ID以后，这个副本就被保存起来了
 
-![更改3个用户ID的不同方法](https://gwq5210.com/images/更改3个用户ID的不同方法.png)
+![更改3个用户ID的不同方法](https://gwq5210.github.io/images/更改3个用户ID的不同方法.png)
 
 历史上BSD支持setreuid函数，其功能是交换实际用户ID和有效用户ID的值，具体用法参考手册
 
@@ -370,7 +370,7 @@ int setegid(gid_t gid);
 若成功，返回0；若出错，返回-1
 ```
 
-![设置不同用户ID的各函数](https://gwq5210.com/images/设置不同用户ID的各函数.png)
+![设置不同用户ID的各函数](https://gwq5210.github.io/images/设置不同用户ID的各函数.png)
 
 以上说的一切都以类似方式适用于各个组ID。附属组ID不受setgid、setregid和setegid函数影响
 
@@ -568,7 +568,7 @@ setpgid将pid进程的进程组ID设置为pgid。如果这两个参数相等，�
 
 会话（session）是一个或多个进程组的集合。
 
-![会话中的进程组安排](https://gwq5210.com/images/会话中的进程组安排.png)
+![会话中的进程组安排](https://gwq5210.github.io/images/会话中的进程组安排.png)
 
 进程调用setsid函数建立一个新会话
 
@@ -612,7 +612,7 @@ pid_t getsid(pid_t pid);
 - 无论何时键入终端的退出键（常常是Ctrl+\），都会将推出信号发送至前台进程组的所有进程
 - 如果终端接口检测到调制解调器（或网络）已经断开连接，则将挂断信号发送至控制进程（会话首进程）
 
-![控制终端](https://gwq5210.com/images/控制终端.png)
+![控制终端](https://gwq5210.github.io/images/控制终端.png)
 
 通常我们不必担心控制终端，登录时，将自动建立控制终端
 
