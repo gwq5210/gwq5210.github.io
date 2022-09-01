@@ -157,7 +157,7 @@ class HashTable {
   SListNode head_;
   float max_load_factor_;
   BucketStorage buckets_;
-  CompressedPair<size_type, NodeAllocator> size_alloc_;
+  size_type size_;
 };
 ```
 
