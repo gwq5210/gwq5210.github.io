@@ -24,11 +24,11 @@
 <meta name="keywords" content="STL,空间配置器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STL容器之空间配置器">
-<meta property="og:url" content="https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/index.html">
+<meta property="og:url" content="https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/index.html">
 <meta property="og:site_name" content="gwq5210&#39;s Blog">
 <meta property="og:description" content="空间配置器从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了 allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间 在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器 allocator包含以下类型  value_type：T poin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-09-01T09:19:01.601Z">
+<meta property="og:updated_time" content="2022-09-02T09:41:26.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL容器之空间配置器">
 <meta name="twitter:description" content="空间配置器从STL使用的角度，我们一般不需要了解空间配置器（allocator）；但是从STL实现的角度，空间配置器就很重要了 allocator为什么叫做空间配置器，不叫内存配置器？因为allocator的实现不仅可以从内存分配空间，也可以从磁盘分配空间 在STL容器的实现中，每个容器都有一个模板参数，可以指定使用的空间配置器 allocator包含以下类型  value_type：T poin">
@@ -228,14 +228,14 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2022-09-01T09:19:01.601Z" itemprop="dateUpdated">2022-09-01 09:19:01</time>
+    Last updated: <time datetime="2022-09-02T09:41:26.868Z" itemprop="dateUpdated">2022-09-02 09:41:26</time>
 </span><br>
 
 
         
     </div>
     <footer>
-        <a href="https://gwq5210.github.io">
+        <a href="https://blog.gwq5210.com">
             <img src="/images/logo.jpg" alt="gwq5210">
             gwq5210
         </a>
@@ -261,7 +261,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -271,22 +271,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&via=https://gwq5210.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&via=https://blog.gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -438,7 +438,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://gwq5210.github.io/images/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&pic=https://blog.gwq5210.com/images/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -448,22 +448,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&title=《STL容器之空间配置器》 — gwq5210's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/&via=https://gwq5210.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《STL容器之空间配置器》 — gwq5210's Blog&url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/&via=https://blog.gwq5210.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gwq5210.github.io/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.gwq5210.com/2021/10/26/STL容器之空间配置器/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -474,7 +474,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3a0W7CMAwF0P7/T7PXSRvpdRx3TDp9QqWUnCLFxvZ1xcfr2/HzzM93v1/z7sy71+tvvCYOPDw8vMbS3y03wVRh6zPJ44hWhYeHhzfGWy9xfU3ybv44qtQbCx4eHt4H8KppcZ7l5g8IDw8P73/xOmWLZNF5io+Hh4f3t7zq7V7FI4d1ish4eHh4z/Dy7f5zXo/09/Dw8PDaXfVOEXbi/uW74eHh4Q3w8g23WnjtD07lCfdNQw4PDw/vKK/6975aRDiwrW9R8fDw8OZ4ebtrb2tOFpqHh85QFx4eHt4p3l6bKkmX809VH2Ke0OPh4eFN8/JyQL7EfnK8FzDw8PDw5nidJLgfVKoPNL8GDw8P7xle9c9/vtB1GKjesxyQ8PDw8I7y+pjO+FSeKCeh66bphYeHh3eI18F02lR76XU1kODh4eFN89ZL6bTBOil4J/zg4eHhTfCqjKtx5KOxhUmx9S+Gh4eHN8Zbb+KdAkQ1RnWacL8g8fDw8AZ4Zzf6fjutWtjduyceHh5enzeR1O6Vg/Picn4eDw8Pb4K3tynnI6RnQ0i1YYaHh4d3lpd/caf0sDcsdWCQCw8PD2+YN1F4rabOeWCICrt4eHh4A7zkFsmf/2oinpcqqgULPDw8vGd4SVGgWpbdG0RIEvpyaMHDw8Mb5uWFiXwp1QDTwuDh4eE9yOsMnuakzmhCdWQBDw8Pb4LXWUR1Q88T972xqrejA3h4eHhHedXNdy9drrbKqkNa1XQcDw8Pr8/L2139LTgPM9Wqwk0DDA8PD2+At9f0qpYqTpVx8zI0Hh4e3ifwOuWJTiCpjjjg4eHhfQ5vs1TaKG1Ur8HDw8N7htdpPq0fQX/sYO8nwcPDw5vjtQab4nfzFLxTCL46kQoPDw/vnvcFKWemSx1G6dcAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awWojQQwEUP//Tyewp0CwXSV1r3fhzSk4zrhfB6blkh6P+Pr6c/1+5ef1+/Vnr+T3Se5w4MLDw8MbLf3Z1WJeb8rr1/MtTtaMh4eHd5uX3+7Z1pw9SPJj440FDw8P76O8BDBb4ua3eHh4eP8LLw8sZkvMtw8PDw/vU7wkjMiX1RbK+1L7QNaCh4eHF/NmEepnf77Y38PDw8NbdNWTB+6+8f960V+LCw8PD+8Gb9Zk2i8xH8/KC+XiGwMeHh7egjcLRpMxgteHymwr2/vj4eHh3ea1JfKpjUiCj7ZAx8PDw7vHmxXBLWb26L8xlICHh4e3550KXtuBqn15HR0DeHh4eNd4eXBwdnAqP5CGv8XDw8O7zGsf4qf+Ni+1H+2Fh4eHd4GXRKV52Dprku23482XATw8PLyjvCQwzePUNpZNmljJVff38PDw8Na8zQGwb2K141l5DI2Hh4d3jzcbGsjj2rwxlsTERTsNDw8P7xrv1EKT4YNZXpLf+em5h4eHh3eBl7ej2qgi37LD4194eHh4f5GXD1dtOm/Rw30TCuPh4eFd4OVFc/5obkcEZvccnld4eHh4h3ht87590LcHT7JNsxIcDw8Pb8/LY4hkQbPgNf/0+pjBw8PDu8Brx6fawYI8Prg3xICHh4d3lteWqskHz97ZFuJ1SY2Hh4d3gZcHBHnLah8lJ4MCxdAVHh4e3pqXtJ3aCKMdMni96P168PDw8M7yNgNVh3c3CDLasTA8PDy8G7xTg1nJw30WXrQNtuG/AQ8PD6/ktaNReeF7NsjII92isMbDw8Nb8DaHQf5hs4bWrHzHw8PD+xd4eTE9e+cm5qhbX3h4eHgf4s1K3lmM27bZ8PDw8G7z2uZTPjSQtK82La43W4+Hh4d3gdc2wGahan5UtO/cFOV4eHh4Je8bFPNzqPrlQfQAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
